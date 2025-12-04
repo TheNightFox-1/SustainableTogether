@@ -1,4 +1,4 @@
-# SustainableTogether
+# SustainableTogether Project
 _Transforming a Conventional Entreprise, Business Model and Product into a Sustainable One_
 
 A Vision for **SustainaSun**: Lighting the Way to a Brighter Future
