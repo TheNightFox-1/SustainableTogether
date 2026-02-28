@@ -1,0 +1,50 @@
+site_name: SustainableTogether
+site_description: Transforming a conventional enterprise, business model, and product into a sustainable one.
+site_url: https://thenightfox-1.github.io/SustainableTogether/
+repo_url: https://github.com/TheNightFox-1/SustainableTogether
+repo_name: TheNightFox-1/SustainableTogether
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Vision: vision.md
+  - Project Structure: project-structure.md
+  - System Model: system-model.md
+  - Presentations: presentations.md
+  - Webinar Series: webinar-series.md
+  - Roadmap: roadmap.md
+  - Contributing: contributing.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true

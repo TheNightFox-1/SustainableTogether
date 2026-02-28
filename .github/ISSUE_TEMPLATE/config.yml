@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a Question / Start a Discussion
+    url: https://github.com/TheNightFox-1/SustainableTogether/discussions
+    about: Use GitHub Discussions for questions, ideas, and open-ended conversations.
+  - name: Contact the Team
+    url: mailto:sustainability@incose.net
+    about: Reach out directly to the SustainableTogether team.
