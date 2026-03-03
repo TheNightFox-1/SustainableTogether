@@ -1,0 +1,104 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix sysml: <http://sysmlv2.org/ontology#> .
+@prefix lca:   <http://lca.org/ontology#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+
+# ─────────────────────────────────────────
+# SYSML V2 SIDE
+# ─────────────────────────────────────────
+
+sysml:PartDefinition a owl:Class ;
+    rdfs:label "Part Definition" ;
+    rdfs:comment "A type of physical component in SysML v2" .
+
+sysml:Attribute a owl:Class ;
+    rdfs:label "Attribute" ;
+    rdfs:comment "A named property of a part" .
+
+sysml:MaterialAttribute a owl:Class ;
+    rdfs:subClassOf sysml:Attribute ;
+    rdfs:label "Material Attribute" ;
+    rdfs:comment "An attribute that references a physical material" .
+
+sysml:MassAttribute a owl:Class ;
+    rdfs:subClassOf sysml:Attribute ;
+    rdfs:label "Mass Attribute" ;
+    rdfs:comment "An attribute representing the mass of a material" .
+
+# Properties
+sysml:hasAttribute a owl:ObjectProperty ;
+    rdfs:domain sysml:PartDefinition ;
+    rdfs:range  sysml:Attribute .
+
+sysml:materialName a owl:DatatypeProperty ;
+    rdfs:domain sysml:MaterialAttribute ;
+    rdfs:range  xsd:string ;
+    rdfs:label  "material name" .
+
+sysml:massValue a owl:DatatypeProperty ;
+    rdfs:domain sysml:MassAttribute ;
+    rdfs:range  xsd:decimal ;
+    rdfs:label  "mass value in kg" .
+
+# ─────────────────────────────────────────
+# LCA / ELCD SIDE
+# ─────────────────────────────────────────
+
+lca:Process a owl:Class ;
+    rdfs:label "LCA Process" ;
+    rdfs:comment "A unit process that consumes and produces flows" .
+
+lca:Flow a owl:Class ;
+    rdfs:label "Material Flow" ;
+    rdfs:comment "A material, product or waste flow in ELCD" .
+
+lca:Exchange a owl:Class ;
+    rdfs:label "Exchange" ;
+    rdfs:comment "A flow entering or leaving a process with a quantity" .
+
+# Properties
+lca:hasExchange a owl:ObjectProperty ;
+    rdfs:domain lca:Process ;
+    rdfs:range  lca:Exchange .
+
+lca:exchangeFlow a owl:ObjectProperty ;
+    rdfs:domain lca:Exchange ;
+    rdfs:range  lca:Flow .
+
+lca:quantity a owl:DatatypeProperty ;
+    rdfs:domain lca:Exchange ;
+    rdfs:range  xsd:decimal .
+
+lca:flowName a owl:DatatypeProperty ;
+    rdfs:domain lca:Flow ;
+    rdfs:range  xsd:string .
+
+lca:flowCategory a owl:DatatypeProperty ;
+    rdfs:domain lca:Flow ;
+    rdfs:range  xsd:string ;
+    rdfs:comment "ELCD category path, e.g. Materials / Metals" .
+
+lca:elcdUUID a owl:DatatypeProperty ;
+    rdfs:domain lca:Flow ;
+    rdfs:range  xsd:string ;
+    rdfs:comment "Resolved UUID in ELCD — populated after semantic matching" .
+
+# ─────────────────────────────────────────
+# THE BRIDGE — Semantic Mapping Rules
+# ─────────────────────────────────────────
+
+# Rule 1: A PartDefinition IS semantically equivalent to an LCA Process
+sysml:PartDefinition owl:equivalentClass lca:Process .
+
+# Rule 2: A MaterialAttribute + MassAttribute together ARE an Exchange
+sysml:MaterialAttribute rdfs:seeAlso lca:Exchange ;
+    skos:mappingRelation lca:Exchange .
+
+# Rule 3: materialName maps to flowName (for SPARQL matching)
+sysml:materialName owl:equivalentProperty lca:flowName .
+
+# Rule 4: massValue maps to quantity
+sysml:massValue owl:equivalentProperty lca:quantity .

@@ -1,0 +1,28 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix sysml: <http://sysmlv2.org/ontology#> .
+@prefix ex:    <http://sysmlv2club.org/example#> .
+
+# ─────────────────────────────────────────
+# Motor instance — SysML v2 model as RDF
+# Source: Motor part with 5 kg steel attribute
+# ─────────────────────────────────────────
+
+# The Motor part definition
+ex:Motor a sysml:PartDefinition ;
+    rdfs:label "Motor" ;
+    rdfs:comment "Simple motor part from SysML v2 model" ;
+    sysml:hasAttribute ex:MotorMaterialAttr ;
+    sysml:hasAttribute ex:MotorMassAttr .
+
+# Its material attribute — what the part is made of
+ex:MotorMaterialAttr a sysml:MaterialAttribute ;
+    rdfs:label "Motor material" ;
+    sysml:materialName "steel hot rolled coil" .
+
+# Its mass attribute — how much of the material
+ex:MotorMassAttr a sysml:MassAttribute ;
+    rdfs:label "Motor mass" ;
+    sysml:massValue "5.0"^^xsd:decimal .
