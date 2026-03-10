@@ -46,6 +46,10 @@ LCA = Namespace("http://lca.org/ontology#")
 
 OLCA_PORT = 8080
 
+# ── LCIA constants (EF 3.0 Method (adapted), confirmed from active database) ──
+EF30_METHOD_ID        = "b4571628-4b7b-3e4f-81b1-9a8cca6cb3f8"
+CLIMATE_CHANGE_CAT_ID = "3bc1c67f-d3e3-3891-9fea-4512107d88ef"
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE 1 — Load RDF files
@@ -144,44 +148,57 @@ def run_sparql_match(g: Graph, sparql_query: str) -> list:
 def calculate_gwp(client: ipc.Client, flow_uuid: str, mass_kg: float,
                   part_name: str, flow_name: str) -> None:
     """
-    Walk through impact methods on the active database, find the first
-    climate-change / GWP category that has a characterization factor for
-    flow_uuid, then compute total GWP = factor * mass_kg.
+    Calculate GWP using EF 3.0 Method (adapted):
+      1. Find the provider process for the matched ELCD product flow.
+      2. Auto-build a product system from that process via IPC.
+      3. Run a full LCA calculation (EF 3.0).
+      4. Extract the 'Climate change' total impact and scale by mass_kg.
 
-    openLCA stores factors on ImpactCategory objects (not on ImpactMethod
-    directly), so we fetch each category individually once we find a
-    candidate method.
+    Note: EF 3.0 characterises elementary flows, not product flows directly,
+    so a characterisation-factor lookup on the product flow UUID would never
+    yield a result — a full LCA calculation is required.
     """
-    print("STAGE 5 — Calculating GWP via openLCA IPC...")
+    print("STAGE 5 — Calculating GWP via openLCA IPC (EF 3.0 Method)...")
 
-    gwp_factor  : float | None = None
-    gwp_unit    : str          = "kg CO₂-eq"
-    method_name : str          = ""
-    cat_name    : str          = ""
+    # -- Find the provider process for the matched ELCD flow ------------------
+    flow_ref  = schema.Ref(id=flow_uuid, ref_type=schema.RefType.Flow)
+    providers = client.get_providers(flow_ref)
+    if not providers:
+        print(f"  ERROR: no provider process found for flow UUID {flow_uuid}.")
+        return
+    process_ref = providers[0].provider
+    print(f"  Provider process : {process_ref.name}")
 
-    for method in client.get_all(schema.ImpactMethod):
-        for cat_ref in (method.impact_categories or []):
-            label = (cat_ref.name or "").lower()
-            if not ("climate" in label or "gwp" in label or "global warming" in label):
-                continue
+    # -- Create a product system (auto-link upstream processes) ---------------
+    print("  Creating product system (this may take a moment)...")
+    ps_ref = client.create_product_system(process_ref)
+    if ps_ref is None:
+        print("  ERROR: create_product_system returned None.")
+        return
+    print(f"  Product system   : {ps_ref.id}")
 
-            full_cat = client.get(schema.ImpactCategory, cat_ref.id)
-            if full_cat is None:
-                continue
+    # -- Run LCA calculation for 1 kg reference flow --------------------------
+    print("  Running LCA calculation...")
+    setup = schema.CalculationSetup(
+        target=ps_ref,
+        impact_method=schema.Ref(
+            id=EF30_METHOD_ID,
+            ref_type=schema.RefType.ImpactMethod,
+        ),
+        amount=1.0,
+    )
+    result = client.calculate(setup)
+    result.wait_until_ready()
 
-            for factor in (full_cat.impact_factors or []):
-                if factor.flow and factor.flow.id == flow_uuid:
-                    gwp_factor  = factor.value
-                    gwp_unit    = factor.unit.name if factor.unit else gwp_unit
-                    method_name = method.name or ""
-                    cat_name    = cat_ref.name or ""
-                    break
-
-            if gwp_factor is not None:
-                break
-        if gwp_factor is not None:
+    # -- Extract Climate change total -----------------------------------------
+    gwp_per_kg: float | None = None
+    for impact in result.get_total_impacts():
+        if impact.impact_category.id == CLIMATE_CHANGE_CAT_ID:
+            gwp_per_kg = impact.amount
             break
+    result.dispose()
 
+    # -- Report ---------------------------------------------------------------
     print()
     print("=" * 62)
     print("  RESULT")
@@ -190,19 +207,17 @@ def calculate_gwp(client: ipc.Client, flow_uuid: str, mass_kg: float,
     print(f"  Matched ELCD flow : {flow_name}")
     print(f"  Flow UUID         : {flow_uuid}")
     print(f"  Mass              : {mass_kg} kg")
+    print(f"  LCIA method       : EF 3.0 Method (adapted)")
+    print(f"  Impact category   : Climate change")
 
-    if gwp_factor is None:
+    if gwp_per_kg is None:
         print()
         print("  GWP               : not calculated")
-        print("  Reason: no characterization factor found for this flow.")
-        print("  Hint: ensure an impact method with a GWP / climate-change")
-        print("        category is imported into the active openLCA database.")
+        print("  Reason: Climate change category missing from result.")
     else:
-        gwp_total = gwp_factor * mass_kg
-        print(f"  Impact method     : {method_name}")
-        print(f"  Impact category   : {cat_name}")
-        print(f"  GWP factor        : {gwp_factor:.6f} {gwp_unit} / kg")
-        print(f"  Total GWP         : {gwp_total:.4f} {gwp_unit}")
+        gwp_total = gwp_per_kg * mass_kg
+        print(f"  GWP per kg        : {gwp_per_kg:.6f} kg CO2-eq / kg")
+        print(f"  Total GWP         : {gwp_total:.4f} kg CO2-eq")
 
     print("=" * 62)
 
