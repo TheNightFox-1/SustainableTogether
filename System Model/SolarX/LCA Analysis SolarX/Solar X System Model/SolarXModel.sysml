@@ -326,8 +326,10 @@ package SolarXModel {
         package SolarX_UseCases {
             private import SolarX_Context::*;
             private import SolarX_Requirements::*;
+            private import SolarX_FunctionalArchitecture::*;
 
-            use case <'UC-1'> 'supply household electricity' {
+            // ── UC-1 ─────────────────────────────────────────────────────────
+            use case def 'supply household electricity' {
                 subject theSubject = solarXContext::solarX;
                 actor theSun = solarXContext::sun;
                 actor theHousehold = solarXContext::household;
@@ -347,7 +349,26 @@ package SolarXModel {
                 }
             }
 
-            use case <'UC-2'> 'feed surplus solar electricity to public grid' {
+            use case <'UC-1'> supplyHouseholdElectricity : 'supply household electricity' {
+                // Controller selects source: solar first, then battery, then grid.
+                first start then 'assess available energy sources';
+                first 'assess available energy sources' then 'select and convert energy to AC';
+                first 'select and convert energy to AC' then 'route AC electricity to household';
+                first 'route AC electricity to household' then 'monitor and record energy flow';
+                first 'monitor and record energy flow' then done;
+
+                flow
+                    from 'select and convert energy to AC'.acPower
+                    to 'route AC electricity to household'.acPower;
+
+                action 'assess available energy sources' : AssessAvailableEnergySources {}
+                action 'select and convert energy to AC' : SelectAndConvertEnergyToAC {}
+                action 'route AC electricity to household' : RouteACElectricityToHousehold {}
+                action 'monitor and record energy flow' : MonitorAndRecordEnergyFlow {}
+            }
+
+            // ── UC-2 ─────────────────────────────────────────────────────────
+            use case def 'feed surplus solar electricity to public grid' {
                 subject theSubject = solarXContext::solarX;
                 actor theGrid = solarXContext::publicGrid;
                 objective {
@@ -361,7 +382,27 @@ package SolarXModel {
                 }
             }
 
-            use case <'UC-3'> 'monitor energy generation and consumption' {
+            use case <'UC-2'> feedSurplusSolarElectricityToPublicGrid : 'feed surplus solar electricity to public grid' {
+                first start then 'detect surplus condition';
+                first 'detect surplus condition' then 'prepare AC electricity for export';
+                first 'prepare AC electricity for export' then 'open grid feed-in';
+                first 'open grid feed-in' then 'export surplus electricity';
+                first 'export surplus electricity' then 'monitor feed-in and record';
+                first 'monitor feed-in and record' then done;
+
+                flow
+                    from 'prepare AC electricity for export'.acPower
+                    to 'export surplus electricity'.acPower;
+
+                action 'detect surplus condition' : DetectSurplusCondition {}
+                action 'prepare AC electricity for export' : PrepareACElectricityForExport {}
+                action 'open grid feed-in' : OpenGridFeedIn {}
+                action 'export surplus electricity' : ExportSurplusElectricity {}
+                action 'monitor feed-in and record' : MonitorFeedInAndRecord {}
+            }
+
+            // ── UC-3 ─────────────────────────────────────────────────────────
+            use case def 'monitor energy generation and consumption' {
                 subject theSubject = solarXContext::solarX;
                 actor theHomeowner = solarXContext::homeownerActor;
                 objective {
@@ -375,75 +416,7 @@ package SolarXModel {
                 }
             }
 
-            use case <'UC-4'> 'install and commission PV system' {
-                subject theSubject = solarXContext::solarX;
-                actor theInstaller = solarXContext::installerActor;
-                objective {
-                    doc
-                    /* The installer physically mounts, connects, configures,
-                     * and activates the SolarX system at the household site.
-                     * Trigger: new system installation request.
-                     */
-                    satisfy 'Support installation and commissioning';
-                }
-            }
-
-            use case <'UC-5'> 'repair system component' {
-                subject theSubject = solarXContext::solarX;
-                actor theTechnician = solarXContext::maintenanceTechnicianActor;
-                objective {
-                    doc
-                    /* A maintenance technician diagnoses a fault, replaces or
-                     * repairs the affected component, and restores normal system
-                     * operation.
-                     * Trigger: fault detected by system controller or scheduled
-                     * maintenance visit.
-                     */
-                }
-            }
-        }
-
-        // ── Step 6b — Use Case Action Flows ─────────────────────────────────
-        package SolarX_ActionFlows {
-            action def 'supply household electricity flow' {
-                // Controller selects source: solar first, then battery, then grid.
-                // Decision logic is described in UC-1 objective; modeled here as sequential steps.
-                first start then 'assess available energy sources';
-                first 'assess available energy sources' then 'select and convert energy to AC';
-                first 'select and convert energy to AC' then 'route AC electricity to household';
-                first 'route AC electricity to household' then 'monitor and record energy flow';
-                first 'monitor and record energy flow' then done;
-
-                flow
-                    from 'select and convert energy to AC'.acPower
-                    to 'route AC electricity to household'.acPower;
-
-                action 'assess available energy sources' {}
-                action 'select and convert energy to AC' { out item acPower; }
-                action 'route AC electricity to household' { in item acPower; }
-                action 'monitor and record energy flow' {}
-            }
-
-            action def 'feed surplus solar electricity to public grid flow' {
-                first start then 'detect surplus condition';
-                first 'detect surplus condition' then 'prepare AC electricity for export';
-                first 'prepare AC electricity for export' then 'open grid feed-in';
-                first 'open grid feed-in' then 'export surplus electricity';
-                first 'export surplus electricity' then 'monitor feed-in and record';
-                first 'monitor feed-in and record' then done;
-
-                flow
-                    from 'prepare AC electricity for export'.acPower
-                    to 'export surplus electricity'.acPower;
-
-                action 'detect surplus condition' {}
-                action 'prepare AC electricity for export' { out item acPower; }
-                action 'open grid feed-in' {}
-                action 'export surplus electricity' { in item acPower; }
-                action 'monitor feed-in and record' {}
-            }
-
-            action def 'monitor energy generation and consumption flow' {
+            use case <'UC-3'> monitorEnergyGenerationAndConsumption : 'monitor energy generation and consumption' {
                 // Continuous use case — triggered at system start, loops indefinitely.
                 merge continuousLoop;
                 first start then continuousLoop;
@@ -456,12 +429,26 @@ package SolarXModel {
                     from 'aggregate and format data'.monitoringData
                     to 'transmit monitoring data'.monitoringData;
 
-                action 'collect sensor data' {}
-                action 'aggregate and format data' { out item monitoringData; }
-                action 'transmit monitoring data' { in item monitoringData; }
+                action 'collect sensor data' : CollectSensorData {}
+                action 'aggregate and format data' : AggregateAndFormatData {}
+                action 'transmit monitoring data' : TransmitMonitoringData {}
             }
 
-            action def 'install and commission PV system flow' {
+            // ── UC-4 ─────────────────────────────────────────────────────────
+            use case def 'install and commission PV system' {
+                subject theSubject = solarXContext::solarX;
+                actor theInstaller = solarXContext::installerActor;
+                objective {
+                    doc
+                    /* The installer physically mounts, connects, configures,
+                     * and activates the SolarX system at the household site.
+                     * Trigger: new system installation request.
+                     */
+                    satisfy 'Support installation and commissioning';
+                }
+            }
+
+            use case <'UC-4'> installAndCommissionPVSystem : 'install and commission PV system' {
                 first start then 'receive installation request';
                 first 'receive installation request' then 'configure system parameters';
                 first 'configure system parameters' then 'run self-test';
@@ -477,15 +464,30 @@ package SolarXModel {
                     from 'generate commissioning report'.commissioningReport
                     to 'transmit report to installer'.commissioningReport;
 
-                action 'receive installation request' { out item configurationData; }
-                action 'configure system parameters' { in item configurationData; }
-                action 'run self-test' {}
-                action 'activate system' {}
-                action 'generate commissioning report' { out item commissioningReport; }
-                action 'transmit report to installer' { in item commissioningReport; }
+                action 'receive installation request' : ReceiveInstallationRequest {}
+                action 'configure system parameters' : ConfigureSystemParameters {}
+                action 'run self-test' : RunSelfTest {}
+                action 'activate system' : ActivateSystem {}
+                action 'generate commissioning report' : GenerateCommissioningReport {}
+                action 'transmit report to installer' : TransmitReportToInstaller {}
             }
 
-            action def 'repair system component flow' {
+            // ── UC-5 ─────────────────────────────────────────────────────────
+            use case def 'repair system component' {
+                subject theSubject = solarXContext::solarX;
+                actor theTechnician = solarXContext::maintenanceTechnicianActor;
+                objective {
+                    doc
+                    /* A maintenance technician diagnoses a fault, replaces or
+                     * repairs the affected component, and restores normal system
+                     * operation.
+                     * Trigger: fault detected by system controller or scheduled
+                     * maintenance visit.
+                     */
+                }
+            }
+
+            use case <'UC-5'> repairSystemComponent : 'repair system component' {
                 first start then 'detect fault or receive maintenance request';
                 first 'detect fault or receive maintenance request' then 'run diagnostics';
                 first 'run diagnostics' then 'transmit diagnostics to technician';
@@ -501,23 +503,18 @@ package SolarXModel {
                     from 'run diagnostics'.diagnosticsData
                     to 'transmit diagnostics to technician'.diagnosticsData;
 
-                action 'detect fault or receive maintenance request' {
-                    out item maintenanceRequest;
-                }
-                action 'run diagnostics' {
-                    in item maintenanceRequest;
-                    out item diagnosticsData;
-                }
-                action 'transmit diagnostics to technician' { in item diagnosticsData; }
-                action 'repair or replace component' {}
-                action 'verify system recovery' {}
-                action 'resume normal operation' {}
+                action 'detect fault or receive maintenance request' : DetectFaultOrReceiveMaintenanceRequest {}
+                action 'run diagnostics' : RunDiagnostics {}
+                action 'transmit diagnostics to technician' : TransmitDiagnosticsToTechnician {}
+                action 'repair or replace component' : RepairOrReplaceComponent {}
+                action 'verify system recovery' : VerifySystemRecovery {}
+                action 'resume normal operation' : ResumeNormalOperation {}
             }
 
-            view functionalTreeView {
-                expose SolarXModel::SolarXProject::SolarX_ActionFlows;
+            view useCaseView {
+                expose SolarXModel::SolarXProject::SolarX_UseCases;
                 attribute depth = 2;
-                attribute fileName = "functional_tree";
+                attribute fileName = "step6_use_cases";
                 attribute fileType = "PNG";
                 attribute zoomLevel = 3.0;
                 render asTreeDiagram;
@@ -527,83 +524,130 @@ package SolarXModel {
         // ── Step 7 — Functional Architecture ─────────────────────────────────
         package SolarX_FunctionalArchitecture {
 
-            // Individual function definitions
-            action def CollectSolarEnergy {
-                doc
-                /* Captures solar irradiation via the PV array
-                 * and outputs DC electricity.
-                 */
+            // ── UC-1 functions ────────────────────────────────────────────────
+            action def AssessAvailableEnergySources {
+                doc /* Determines which energy sources (PV, battery, grid) are currently available. */
+            }
+            action def SelectAndConvertEnergyToAC {
+                doc /* Selects the best available source and converts its output to AC electricity. */
+                out item acPower;
+            }
+            action def RouteACElectricityToHousehold {
+                doc /* Routes converted AC electricity to the household load. */
+                in item acPower;
+            }
+            action def MonitorAndRecordEnergyFlow {
+                doc /* Monitors and records the active energy flow during household supply. */
             }
 
-            action def ConvertToAC {
-                doc
-                /* Converts DC power from PV collection into AC electricity
-                 * for household supply and grid export.
-                 */
+            // ── UC-2 functions ────────────────────────────────────────────────
+            action def DetectSurplusCondition {
+                doc /* Detects when local generation exceeds demand and battery is full. */
+            }
+            action def PrepareACElectricityForExport {
+                doc /* Prepares the surplus AC electricity for export to the public grid. */
+                out item acPower;
+            }
+            action def OpenGridFeedIn {
+                doc /* Opens the grid feed-in connection to allow surplus export. */
+            }
+            action def ExportSurplusElectricity {
+                doc /* Exports surplus AC electricity to the public grid. */
+                in item acPower;
+            }
+            action def MonitorFeedInAndRecord {
+                doc /* Monitors the feed-in session and records export data. */
             }
 
-            action def StoreEnergy {
-                doc
-                /* Stores excess electricity in the battery and discharges
-                 * when local generation is insufficient to meet demand.
-                 */
+            // ── UC-3 functions ────────────────────────────────────────────────
+            action def CollectSensorData {
+                doc /* Continuously reads sensor data from all subsystems. */
+            }
+            action def AggregateAndFormatData {
+                doc /* Aggregates generation, storage and consumption metrics into a report. */
+                out item monitoringData;
+            }
+            action def TransmitMonitoringData {
+                doc /* Transmits the formatted monitoring report to the homeowner interface. */
+                in item monitoringData;
             }
 
-            action def RouteElectricity {
-                doc
-                /* Routes AC electricity to the household, battery, or grid
-                 * based on energy management control decisions.
-                 */
+            // ── UC-4 functions ────────────────────────────────────────────────
+            action def ReceiveInstallationRequest {
+                doc /* Receives and parses the installer's installation request and configuration data. */
+                out item configurationData;
+            }
+            action def ConfigureSystemParameters {
+                doc /* Applies configuration data to system parameters. */
+                in item configurationData;
+            }
+            action def RunSelfTest {
+                doc /* Executes a self-test sequence to verify system integrity before activation. */
+            }
+            action def ActivateSystem {
+                doc /* Activates the system and begins normal energy management operation. */
+            }
+            action def GenerateCommissioningReport {
+                doc /* Generates a commissioning report summarising installation results. */
+                out item commissioningReport;
+            }
+            action def TransmitReportToInstaller {
+                doc /* Transmits the commissioning report to the installer interface. */
+                in item commissioningReport;
             }
 
-            action def ControlEnergyFlow {
-                doc
-                /* Applies solar → battery → grid priority logic to determine
-                 * the routing of available electricity at any given moment.
-                 */
+            // ── UC-5 functions ────────────────────────────────────────────────
+            action def DetectFaultOrReceiveMaintenanceRequest {
+                doc /* Detects a system fault or receives an incoming maintenance request. */
+                out item maintenanceRequest;
             }
-
-            action def MonitorEnergyFlow {
-                doc
-                /* Continuously reads sensor data from all subsystems and
-                 * aggregates generation, storage and consumption metrics.
-                 */
+            action def RunDiagnostics {
+                doc /* Runs diagnostic routines to identify the fault and its location. */
+                in item maintenanceRequest;
+                out item diagnosticsData;
             }
-
-            action def InterfaceWithGrid {
-                doc
-                /* Manages the bidirectional grid connection:
-                 * surplus feed-in to the public grid and backup draw from it.
-                 */
+            action def TransmitDiagnosticsToTechnician {
+                doc /* Transmits diagnostics data to the maintenance technician interface. */
+                in item diagnosticsData;
             }
-
-            action def CommissionSystem {
-                doc
-                /* Handles installer-driven configuration, self-test and
-                 * system activation at installation time.
-                 */
+            action def RepairOrReplaceComponent {
+                doc /* Coordinates repair or replacement of the affected component. */
             }
-
-            action def DiagnoseAndRepair {
-                doc
-                /* Detects faults, generates diagnostics and coordinates
-                 * component repair with the maintenance technician.
-                 */
+            action def VerifySystemRecovery {
+                doc /* Verifies that the system has recovered and operates correctly after repair. */
+            }
+            action def ResumeNormalOperation {
+                doc /* Resumes normal energy management operation after maintenance. */
             }
 
             // ── Functional tree — top-level composition ───────────────────────
             action def SolarX_Functions {
-                doc /* Functional decomposition of SolarX — all system functions. */
+                doc /* Functional decomposition of SolarX — one usage per action def. */
 
-                action collectSolarEnergy : CollectSolarEnergy;
-                action convertToAC : ConvertToAC;
-                action storeEnergy : StoreEnergy;
-                action routeElectricity : RouteElectricity;
-                action controlEnergyFlow : ControlEnergyFlow;
-                action monitorEnergyFlow : MonitorEnergyFlow;
-                action interfaceWithGrid : InterfaceWithGrid;
-                action commissionSystem : CommissionSystem;
-                action diagnoseAndRepair : DiagnoseAndRepair;
+                action assessAvailableEnergySources : AssessAvailableEnergySources;
+                action selectAndConvertEnergyToAC : SelectAndConvertEnergyToAC;
+                action routeACElectricityToHousehold : RouteACElectricityToHousehold;
+                action monitorAndRecordEnergyFlow : MonitorAndRecordEnergyFlow;
+                action detectSurplusCondition : DetectSurplusCondition;
+                action prepareACElectricityForExport : PrepareACElectricityForExport;
+                action openGridFeedIn : OpenGridFeedIn;
+                action exportSurplusElectricity : ExportSurplusElectricity;
+                action monitorFeedInAndRecord : MonitorFeedInAndRecord;
+                action collectSensorData : CollectSensorData;
+                action aggregateAndFormatData : AggregateAndFormatData;
+                action transmitMonitoringData : TransmitMonitoringData;
+                action receiveInstallationRequest : ReceiveInstallationRequest;
+                action configureSystemParameters : ConfigureSystemParameters;
+                action runSelfTest : RunSelfTest;
+                action activateSystem : ActivateSystem;
+                action generateCommissioningReport : GenerateCommissioningReport;
+                action transmitReportToInstaller : TransmitReportToInstaller;
+                action detectFaultOrReceiveMaintenanceRequest : DetectFaultOrReceiveMaintenanceRequest;
+                action runDiagnostics : RunDiagnostics;
+                action transmitDiagnosticsToTechnician : TransmitDiagnosticsToTechnician;
+                action repairOrReplaceComponent : RepairOrReplaceComponent;
+                action verifySystemRecovery : VerifySystemRecovery;
+                action resumeNormalOperation : ResumeNormalOperation;
             }
 
             view functionalArchitectureView {
@@ -619,11 +663,18 @@ package SolarXModel {
         // ── Step 8 — Logical Architecture ────────────────────────────────────
         package SolarX_LogicalArchitecture {
             private import SolarX_PortDefinitions::*;
+            private import SolarX_FunctionalArchitecture::*;
+            private import SysML::*;
 
             part def PVCollectionSubsystem {
                 doc
                 /* Captures solar irradiation via PV panels and outputs DC electricity.
-                 * UC-1: assess available energy sources, select and convert energy to AC.
+                 * No explicit perform action: PV collection is a continuous passive
+                 * energy conversion (solar irradiation → DC electricity) that happens
+                 * without a discrete trigger. It is a physical prerequisite that enables
+                 * AssessAvailableEnergySources and SelectAndConvertEnergyToAC but is not
+                 * itself a named action step in the UC flows — it runs as long as sunlight
+                 * is available.
                  */
                 port sunPort : SunPort;
                 port dcOutPort : DCPort;              // DC out → PowerConversion
@@ -639,13 +690,21 @@ package SolarXModel {
                 port dcInPort : ~DCPort;              // DC in ← PVCollection
                 port acOutPort : ACPort;              // AC out → EnergyManagement
                 port controlInPort : ~ControlPort;    // control in ← EnergyManagement
+
+                perform action selectAndConvertEnergyToAC : SelectAndConvertEnergyToAC;
+                perform action prepareACElectricityForExport : PrepareACElectricityForExport;
             }
 
             part def EnergyStorageSubsystem {
                 doc
                 /* Stores excess AC electricity in battery and discharges
                  * when local generation is insufficient to meet demand.
-                 * UC-1: assess available energy sources.
+                 * No explicit perform action: charging and discharging are commanded
+                 * by EnergyManagementSubsystem — storage reacts to control signals
+                 * rather than autonomously executing a named action step. Its function
+                 * is to hold state (stored energy level) that AssessAvailableEnergySources
+                 * reads; the decision of when to charge or discharge belongs to
+                 * EnergyManagementSubsystem, not to storage itself.
                  */
                 port acInPort : ~ACPort;              // AC in ← EnergyManagement (charge)
                 port acOutPort : ACPort;              // AC out → EnergyManagement (discharge)
@@ -669,20 +728,29 @@ package SolarXModel {
                 port controlToConversionPort : ControlPort; // control out → PowerConversion
                 port controlToStoragePort : ControlPort;    // control out → EnergyStorage
                 port controlToGridPort : ControlPort;       // control out → GridInterface
+
+                perform action assessAvailableEnergySources : AssessAvailableEnergySources;
+                perform action routeACElectricityToHousehold : RouteACElectricityToHousehold;
+                perform action monitorAndRecordEnergyFlow : MonitorAndRecordEnergyFlow;
+                perform action detectSurplusCondition : DetectSurplusCondition;
+                perform action openGridFeedIn : OpenGridFeedIn;
             }
 
             part def GridInterfaceSubsystem {
                 doc
                 /* Manages the bidirectional grid connection:
                  * surplus feed-in to grid and backup draw from grid.
-                 * UC-2: export surplus electricity.
-                 * UC-1: draw from grid as backup.
+                 * UC-2: export surplus electricity, monitor feed-in and record.
+                 * UC-1: draw from grid as backup (implicit via bidirectional port).
                  */
                 port acFromMgmtPort : ~ACPort;        // AC in ← EnergyManagement (feed-in path)
                 port acToMgmtPort : ACPort;           // AC out → EnergyManagement (draw path)
                 port gridFeedInPort : GridPort;        // AC out → public grid
                 port gridDrawPort : ~GridPort;         // AC in ← public grid
                 port controlInPort : ~ControlPort;    // control in ← EnergyManagement
+
+                perform action exportSurplusElectricity : ExportSurplusElectricity;
+                perform action monitorFeedInAndRecord : MonitorFeedInAndRecord;
             }
 
             part def MonitoringSubsystem {
@@ -694,6 +762,10 @@ package SolarXModel {
                  */
                 port monitoringInPort : ~MonitoringDataPort; // data in ← EnergyManagement
                 port homeownerPort : HomeownerPort;          // data out → homeowner boundary
+
+                perform action collectSensorData : CollectSensorData;
+                perform action aggregateAndFormatData : AggregateAndFormatData;
+                perform action transmitMonitoringData : TransmitMonitoringData;
             }
 
             part def CommissioningSubsystem {
@@ -704,6 +776,13 @@ package SolarXModel {
                  *        generate and transmit commissioning report.
                  */
                 port installerPort : InstallerPort;
+
+                perform action receiveInstallationRequest : ReceiveInstallationRequest;
+                perform action configureSystemParameters : ConfigureSystemParameters;
+                perform action runSelfTest : RunSelfTest;
+                perform action activateSystem : ActivateSystem;
+                perform action generateCommissioningReport : GenerateCommissioningReport;
+                perform action transmitReportToInstaller : TransmitReportToInstaller;
             }
 
             part def MaintenanceSubsystem {
@@ -714,6 +793,13 @@ package SolarXModel {
                  *        verify system recovery.
                  */
                 port maintenancePort : MaintenancePort;
+
+                perform action detectFaultOrReceiveMaintenanceRequest : DetectFaultOrReceiveMaintenanceRequest;
+                perform action runDiagnostics : RunDiagnostics;
+                perform action transmitDiagnosticsToTechnician : TransmitDiagnosticsToTechnician;
+                perform action repairOrReplaceComponent : RepairOrReplaceComponent;
+                perform action verifySystemRecovery : VerifySystemRecovery;
+                perform action resumeNormalOperation : ResumeNormalOperation;
             }
 
             // ── Top-level logical decomposition ──────────────────────────────
@@ -770,32 +856,35 @@ package SolarXModel {
                 bind gridDrawPort = gridInterface.gridDrawPort;
             }
 
-            view logicalArchitectureView {
-                expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture::SolarX_Logical;
+            view def StructureBreakDown {
+                filter hastype PartUsage | hastype PartDefinition;
+            }
+
+            view logicalArchitectureView : StructureBreakDown {
+                expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture::SolarX_Logical::**;
                 attribute depth = 2;
                 attribute fileName = "step8_logical_architecture";
                 attribute fileType = "PNG";
                 attribute zoomLevel = 3.0;
-                render asTreeDiagram;
+                render Views::asTreeDiagram;
             }
 
-            view logicalInterconnectionView {
-                expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture::SolarX_Logical;
+            view logicalInterconnectionView : StructureBreakDown {
+                expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture::SolarX_Logical::**;
                 attribute depth = 2;
                 attribute fileName = "step8_logical_interconnection";
                 attribute fileType = "PNG";
                 attribute zoomLevel = 3.0;
-                render asInterconnectionDiagram;
+                render Views::asInterconnectionDiagram;
             }
         }
 
         // ── Step 8b — Logical Behavior ───────────────────────────────────────
-       package SolarX_LogicalBehavior {
+        package SolarX_LogicalBehavior {
 
-            // ── Lifecycle Stages ──────────────────────────────────────────────
-            package SolarX_LifecycleStages {
+            package SolarXStates {
 
-                // Trigger event definitions
+                // ── Top-level state triggers ──────────────────────────────────
                 item def InstallerInitiatesCommissioning;
                 item def CommissioningComplete;
                 item def FaultDetected;
@@ -803,33 +892,62 @@ package SolarXModel {
                 item def RepairComplete;
                 item def SystemShutdown;
 
-                // Operational mode trigger signals (attribute def — used with bare accept syntax)
-                attribute def IrradiationAvailable;
-                attribute def IrradiationUnavailable;
-                attribute def ChargingRequired;
-                attribute def StorageFull;
-                attribute def DischargingRequired;
-                attribute def StorageEmpty;
-                attribute def SurplusAvailable;
-                attribute def NoSurplus;
-                attribute def GridDrawRequired;
-                attribute def GridDrawSatisfied;
+                // ── Operational sub-state triggers ────────────────────────────
+                item def IrradiationAvailable;
+                item def IrradiationUnavailable;
+                item def ChargingRequired;
+                item def StorageFull;
+                item def DischargingRequired;
+                item def StorageEmpty;
+                item def SurplusAvailable;
+                item def NoSurplus;
+                item def GridDrawRequired;
+                item def GridDrawSatisfied;
 
-                state solarXLifecycleStages {
+                state solarXStates {
 
                     first start then off;
 
                     state off;
+
                     state commissioning {
                         entry action 'initialize installer interface';
                         do action 'configure and activate system';
                         exit action 'hand over to homeowner';
                     }
 
-                    state operational {
-                        doc /* Three concurrent sub-machines are active in this state:
-                             * generationModes, storageModes, gridModes — defined below.
-                             */
+                    state operational
+                    parallel {
+                        // Generation: tracks whether PV panels are actively producing
+                        state generationModes {
+                            entry; then standby;
+                            state standby { do action 'await solar irradiation'; }
+                            transition standby accept IrradiationAvailable then generating;
+                            state generating { do action 'convert solar irradiation to DC'; }
+                            transition generating accept IrradiationUnavailable then standby;
+                        }
+                        // Storage: tracks battery charge/discharge activity
+                        state storageModes {
+                            entry; then idle;
+                            state idle;
+                            transition idle accept ChargingRequired then charging;
+                            transition idle accept DischargingRequired then discharging;
+                            state charging { do action 'charge battery from AC bus'; }
+                            transition charging accept StorageFull then idle;
+                            state discharging { do action 'discharge battery to AC bus'; }
+                            transition discharging accept StorageEmpty then idle;
+                        }
+                        // Grid: tracks whether SolarX is feeding to or drawing from grid
+                        state gridModes {
+                            entry; then disconnected;
+                            state disconnected;
+                            transition disconnected accept SurplusAvailable then feedingIn;
+                            transition disconnected accept GridDrawRequired then drawingFromGrid;
+                            state feedingIn { do action 'feed surplus AC to public grid'; }
+                            transition feedingIn accept NoSurplus then disconnected;
+                            state drawingFromGrid { do action 'draw AC from public grid'; }
+                            transition drawingFromGrid accept GridDrawSatisfied then disconnected;
+                        }
                     }
 
                     state fault {
@@ -843,51 +961,12 @@ package SolarXModel {
                         exit action 'verify system recovery';
                     }
 
-                    entry; then off;
                     transition off accept InstallerInitiatesCommissioning then commissioning;
                     transition commissioning accept CommissioningComplete then operational;
                     transition operational accept FaultDetected then fault;
                     transition fault accept MaintenanceStarted then maintenance;
                     transition maintenance accept RepairComplete then operational;
                     transition operational accept SystemShutdown then off;
-                }
-
-                // ── Operational sub-machines (concurrent during 'operational') ───
-
-                // Generation: tracks whether PV panels are actively producing power
-                state generationModes {
-                    doc /* Active while solarXLifecycleStages is in 'operational'. */
-                    entry; then standby;
-                    state standby { do action 'await solar irradiation'; }
-                    accept IrradiationAvailable then generating;
-                    state generating { do action 'convert solar irradiation to DC'; }
-                    accept IrradiationUnavailable then standby;
-                }
-
-                // Storage: tracks battery charge/discharge activity
-                state storageModes {
-                    doc /* Active while solarXLifecycleStages is in 'operational'. */
-                    entry; then idle;
-                    state idle;
-                    accept ChargingRequired then charging;
-                    accept DischargingRequired then discharging;
-                    state charging { do action 'charge battery from AC bus'; }
-                    accept StorageFull then idle;
-                    state discharging { do action 'discharge battery to AC bus'; }
-                    accept StorageEmpty then idle;
-                }
-
-                // Grid: tracks whether SolarX is feeding to or drawing from the grid
-                state gridModes {
-                    doc /* Active while solarXLifecycleStages is in 'operational'. */
-                    entry; then disconnected;
-                    state disconnected;
-                    accept SurplusAvailable then feedingIn;
-                    accept GridDrawRequired then drawingFromGrid;
-                    state feedingIn { do action 'feed surplus AC to public grid'; }
-                    accept NoSurplus then disconnected;
-                    state drawingFromGrid { do action 'draw AC from public grid'; }
-                    accept GridDrawSatisfied then disconnected;
                 }
             }
         }
@@ -896,6 +975,7 @@ package SolarXModel {
         package SolarX_PhysicalArchitecture {
             private import SolarX_PortDefinitions::*;
             private import SolarX_LogicalArchitecture::*;
+            private import SysML::*;
 
             // ── Physical component definitions ────────────────────────────────
 
@@ -977,28 +1057,34 @@ package SolarXModel {
                 part maintenanceDiagnosticsUnit : MaintenanceDiagnosticsUnit :>> maintenance;
             }
 
-            view physicalArchitectureView {
-                expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX;
-                attribute depth = 2;
-                attribute fileName = "step9_physical_architecture";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render asTreeDiagram;
+            view def StructureBreakDown {
+                filter hastype PartUsage | hastype PartDefinition;
             }
 
-            view physicalInterconnectionView {
-                expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX;
+            view solarXBreakdown : StructureBreakDown {
+                expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX::**;
+                attribute depth = 3;
+                attribute fileName = "step9_physical_breakdown";
+                attribute fileType = "PNG";
+                attribute zoomLevel = 3.0;
+                render Views::asTreeDiagram;
+            }
+
+            view solarXInterconnection : StructureBreakDown {
+                expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX::**;
                 attribute depth = 2;
                 attribute fileName = "step9_physical_interconnection";
                 attribute fileType = "PNG";
                 attribute zoomLevel = 3.0;
-                render asInterconnectionDiagram;
+                render Views::asInterconnectionDiagram;
             }
         }
 
         
     }
 }
+
+
 
 // ── Methodology Library (reusable, not SolarX-specific) ──────────────────────
 package SYSMODLibrary {
