@@ -1,0 +1,50 @@
+{
+  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+  "@type": "Process",
+  "@id": "f86b8c6e-394e-4321-b730-24106dbc07fd",
+  "name": "NMC Battery Module",
+  "description": "Auto-generated from MBSE-LCA knowledge graph.  SysML URI: http://mbse-lca.org/instance/solarx#batteryModule.  ELCD material flow: Lithium, ion.  Nominal voltage: 48.0 V.  Capacity: 15.0 Ah.",
+  "processType": "UNIT_PROCESS",
+  "location": {
+    "@type": "Location",
+    "name": "DE"
+  },
+  "exchanges": [
+    {
+      "@type": "Exchange",
+      "avoidedProduct": false,
+      "isInput": false,
+      "isQuantitativeReference": true,
+      "amount": 1.0,
+      "flow": {
+        "@type": "Flow",
+        "@id": "79512cc4-ebde-4adb-b039-21deed6fa45c",
+        "name": "NMC Battery Module",
+        "flowType": "PRODUCT_FLOW"
+      },
+      "unit": {
+        "@type": "Unit",
+        "@id": "c394f489-8a69-44b0-b815-c83e2d53b966",
+        "name": "Item(s)"
+      }
+    },
+    {
+      "@type": "Exchange",
+      "avoidedProduct": false,
+      "isInput": true,
+      "isQuantitativeReference": false,
+      "amount": 4.2,
+      "description": "Mass-based material input mapped to ELCD flow 'Lithium, ion'. Geography: DE.",
+      "flow": {
+        "@type": "Flow",
+        "@id": "5542e458-d057-484c-a393-f216aa8ab782",
+        "name": "Lithium, ion",
+        "flowType": "PRODUCT_FLOW"
+      },
+      "unit": {
+        "@type": "Unit",
+        "name": "kg"
+      }
+    }
+  ]
+}

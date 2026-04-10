@@ -32,12 +32,19 @@ Never overwrite prior content; always extend.
 | UC-4 | install and commission PV system            | was UC-6                     |
 | UC-5 | repair system component                     | new — maintenance technician |
 
-## Step 6b Status — all done
-- UC-1: `'supply household electricity flow'` — sequential, source selection deferred to Step 7
-- UC-2: `'feed surplus solar electricity to public grid flow'` — sequential
-- UC-3: `'monitor energy generation and consumption flow'` — **continuous loop** using `merge continuousLoop`, no `done`, triggered at system start
-- UC-4: `'install and commission PV system flow'` — sequential, ConfigurationData in / CommissioningReport out
-- UC-5: `'repair system component flow'` — sequential, MaintenanceRequest in / DiagnosticsData out
+## Step 6 Pattern — def + usage
+Each use case is modeled as a **def + usage pair** inside `SolarX_UseCases`:
+- `use case def 'name'` — holds `subject`, `actor`, `objective` (the specification)
+- `use case <'UC-x'> camelCaseName : 'name'` — the usage typed to the def, holds the action flow (`first/then`, `action` usages, `flow` statements)
+
+Action flows live in the usage, not in a separate package. The former `SolarX_ActionFlows` package has been removed.
+
+## Step 6b Status — all done (flows now in UC usages)
+- UC-1 (`supplyHouseholdElectricity`) — sequential, source selection deferred to Step 7
+- UC-2 (`feedSurplusSolarElectricityToPublicGrid`) — sequential
+- UC-3 (`monitorEnergyGenerationAndConsumption`) — **continuous loop** using `merge continuousLoop`, no `done`, triggered at system start
+- UC-4 (`installAndCommissionPVSystem`) — sequential, ConfigurationData in / CommissioningReport out
+- UC-5 (`repairSystemComponent`) — sequential, MaintenanceRequest in / DiagnosticsData out
 
 ## Step Order Note
 Requirements (Step 4) must come BEFORE System Context (Step 5).

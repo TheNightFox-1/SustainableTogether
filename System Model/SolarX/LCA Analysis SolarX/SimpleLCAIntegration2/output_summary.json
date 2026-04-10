@@ -1,0 +1,11 @@
+[
+  {
+    "name": "NMC Battery Module",
+    "mass_kg": 4.2,
+    "voltage_V": 48.0,
+    "capacity_Ah": 15.0,
+    "geography": "DE",
+    "elcd_flow": "Lithium, ion",
+    "gwp100_kg_co2_eq": null
+  }
+]

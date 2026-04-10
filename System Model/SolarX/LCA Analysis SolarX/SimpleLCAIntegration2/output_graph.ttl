@@ -1,0 +1,138 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <http://mbse-lca.org/instance/solarx#> .
+@prefix lca: <http://mbse-lca.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sysml: <http://www.omg.org/spec/SysML/20230201/SysML#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:batteryModule a lca:UnitProcess,
+        sysml:PartDefinition ;
+    rdfs:label "NMC Battery Module" ;
+    lca:hasCapacity [ a qudt:QuantityValue ;
+            qudt:numericValue 15.0 ;
+            qudt:unit unit:A-HR ] ;
+    lca:hasElcdFlowName "Lithium, ion" ;
+    lca:hasGeography "DE" ;
+    lca:hasMass [ a qudt:QuantityValue ;
+            qudt:numericValue 4.2 ;
+            qudt:unit unit:KiloGM ] ;
+    lca:hasNominalVoltage [ a qudt:QuantityValue ;
+            qudt:numericValue 48.0 ;
+            qudt:unit unit:V ] ;
+    dcterms:description "48 V / 15 Ah NMC battery module for the SolarX home energy storage system." ;
+    sysml:partOf ex:solarXSystem .
+
+<http://mbse-lca.org/ontology> a owl:Ontology ;
+    rdfs:label "MBSE-LCA Alignment Ontology" ;
+    dcterms:creator "SolarX / SustainableTogether" ;
+    dcterms:version "0.1.0" ;
+    rdfs:comment "Aligns SysML v2 PartDefinition with LCA UnitProcess, using QUDT for physical quantities." .
+
+lca:ImpactCategory a owl:Class ;
+    rdfs:label "ImpactCategory" ;
+    rdfs:comment "An environmental impact category (e.g., GWP100, AP, EP)." .
+
+lca:ProductSystem a owl:Class ;
+    rdfs:label "ProductSystem" ;
+    rdfs:comment "An LCA product system composed of linked unit processes." .
+
+lca:gwpMethod a owl:DatatypeProperty ;
+    rdfs:label "gwpMethod" ;
+    rdfs:comment "Name of the LCIA method used to calculate the GWP100 result." ;
+    rdfs:domain lca:UnitProcess ;
+    rdfs:range xsd:string .
+
+lca:hasCapacity a owl:ObjectProperty ;
+    rdfs:label "hasCapacity" ;
+    rdfs:comment "Electrical energy capacity as a QUDT QuantityValue (unit: A·h)." ;
+    rdfs:domain sysml:PartDefinition ;
+    rdfs:range qudt:QuantityValue .
+
+lca:hasElcdFlowName a owl:DatatypeProperty ;
+    rdfs:label "hasElcdFlowName" ;
+    rdfs:comment "Name of the matching flow in the ELCD (European Life Cycle Database) as it appears in openLCA." ;
+    rdfs:domain lca:UnitProcess ;
+    rdfs:range xsd:string .
+
+lca:hasGWP100 a owl:DatatypeProperty ;
+    rdfs:label "hasGWP100" ;
+    rdfs:comment "Global Warming Potential over 100 years in kg CO₂-eq, as computed by the linked LCA tool." ;
+    rdfs:domain lca:UnitProcess ;
+    rdfs:range xsd:double .
+
+lca:hasGeography a owl:DatatypeProperty ;
+    rdfs:label "hasGeography" ;
+    rdfs:comment "ISO 3166-1 alpha-2 country code or ILCD region code for the process geography." ;
+    rdfs:domain lca:UnitProcess ;
+    rdfs:range xsd:string .
+
+lca:hasMass a owl:ObjectProperty ;
+    rdfs:label "hasMass" ;
+    rdfs:comment "Mass of the physical component as a QUDT QuantityValue (SI unit: kg)." ;
+    rdfs:domain sysml:PartDefinition ;
+    rdfs:range qudt:QuantityValue .
+
+lca:hasNominalVoltage a owl:ObjectProperty ;
+    rdfs:label "hasNominalVoltage" ;
+    rdfs:comment "Nominal operating voltage as a QUDT QuantityValue (SI unit: V)." ;
+    rdfs:domain sysml:PartDefinition ;
+    rdfs:range qudt:QuantityValue .
+
+qudt:numericValue a owl:DatatypeProperty ;
+    rdfs:label "numericValue" ;
+    rdfs:range xsd:double .
+
+qudt:symbol a owl:DatatypeProperty ;
+    rdfs:label "symbol" ;
+    rdfs:range xsd:string .
+
+qudt:unit a owl:ObjectProperty ;
+    rdfs:label "unit" .
+
+sysml:partOf a owl:ObjectProperty ;
+    rdfs:label "partOf" ;
+    rdfs:comment "Structural containment relationship between SysML parts." ;
+    rdfs:domain sysml:PartUsage ;
+    rdfs:range sysml:PartDefinition .
+
+ex:solarXSystem a sysml:PartDefinition ;
+    rdfs:label "SolarX Home Energy System" ;
+    lca:hasGeography "DE" ;
+    dcterms:description "Residential photovoltaic and battery storage system for the SustainableTogether project." .
+
+unit:A-HR a qudt:Unit ;
+    rdfs:label "Ampere-hour" ;
+    qudt:symbol "A·h" .
+
+unit:KiloGM a qudt:Unit ;
+    rdfs:label "Kilogram" ;
+    qudt:symbol "kg" .
+
+unit:V a qudt:Unit ;
+    rdfs:label "Volt" ;
+    qudt:symbol "V" .
+
+sysml:PartUsage a owl:Class ;
+    rdfs:label "PartUsage" ;
+    rdfs:comment "A SysML v2 PartUsage — a concrete occurrence or role of a PartDefinition." .
+
+qudt:Unit a owl:Class ;
+    rdfs:label "Unit" .
+
+qudt:QuantityValue a owl:Class ;
+    rdfs:label "QuantityValue" .
+
+sysml:PartDefinition a owl:Class ;
+    rdfs:label "PartDefinition" ;
+    rdfs:comment "A SysML v2 PartDefinition — a classifier whose instances are part usages." ;
+    owl:equivalentClass lca:UnitProcess ;
+    skos:closeMatch lca:UnitProcess .
+
+lca:UnitProcess a owl:Class ;
+    rdfs:label "UnitProcess" ;
+    rdfs:comment "An LCA unit process — the smallest division of an activity for which input/output data are collected." .
+

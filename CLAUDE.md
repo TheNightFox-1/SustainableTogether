@@ -4,49 +4,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Documentation Site
 
-The documentation is built with MkDocs Material and deployed automatically to GitHub Pages on every push to `main`.
+Built with MkDocs Material, deployed automatically to GitHub Pages on every push to `main`.
 
-Install dependencies:
 ```bash
 pip install -r requirements.txt
+mkdocs serve          # local preview with live reload
+mkdocs build          # build static site to site/
 ```
 
-Serve locally with live reload:
-```bash
-mkdocs serve
-```
-
-Build static site:
-```bash
-mkdocs build
-```
-
-All documentation source files are in `docs/` as Markdown. The site navigation is configured in `mkdocs.yml`.
+All documentation source is in `docs/` as Markdown; navigation is configured in `mkdocs.yml`.
 
 ## Repository Architecture
 
-This is a **knowledge repository and MBSE model workspace**, not a traditional software project. It contains:
+This is a **knowledge repository and MBSE model workspace**, not a traditional software project. Two independent workstreams:
 
-- **`docs/`** — Documentation source (MkDocs). Editing these files updates the published site at [thenightfox-1.github.io/SustainableTogether](https://thenightfox-1.github.io/SustainableTogether/).
-- **`System Model/SolarX/`** — MBSE/SysML model of the SolarX PV system (current/AS-IS state). The system architecture is: `PVArray → SolarInverter → BatteryStorage` and `SolarInverter → GridConnection`, all orchestrated by `SystemController`.
-- **`System Model/SolarX/LCA Analysis SolarX/`** — LCA integration work. Contains a PoC SysML v2 ↔ LCA pipeline in `SimpleLCAIntegration/`. See the `CLAUDE.md` files in each subfolder for detailed guidance.
-- **`Our Presentations/`** and **`SustainabilityWebinarSeries/`** — Static assets (PDFs, slides); not built or processed.
+**1. MBSE/SysML v2 Model** (`System Model/SolarX/`)
 
-## Project Context
-
-The project models a transformation from **SolarX** (conventional PV company, current state) to **SustainaSun** (sustainable future state). The MBSE models use SysML. Compatible tooling includes Cameo, Capella, and SysML v2 environments.
-
-The near-term roadmap prioritises: completing the SolarX RFLP (Requirements, Functional, Logical, Physical) model layers; integrating LCA to automate environmental impact assessment; and beginning the SustainaSun model.
-
-## LCA Integration Pipeline
-
-The `SimpleLCAIntegration/` PoC demonstrates a four-layer pipeline:
+The primary artefact is `Solar X System Model/SolarXModel.sysml` — a single growing file containing all SYSMOD steps (1–9) accumulated in order. Never overwrite earlier steps; always extend. The completed physical layer composes eight subsystems:
 
 ```
-motor.sysml → motor_instance.ttl → motor_lca_ontology.ttl → semantic_matching.sparql
+PVArray → SolarInverter → EnergyManagementController
+BatteryStorage ↔ EnergyManagementController
+GridConnection ↔ EnergyManagementController
+MonitoringUnit ← EnergyManagementController
+CommissioningInterface (installer boundary)
+MaintenanceDiagnosticsUnit (technician boundary)
 ```
 
-Run the end-to-end pipeline (requires openLCA 2.x running locally with IPC server on port 8080):
+All port definitions and item flows are in `SolarX_PortDefinitions` and `SolarX_Items` packages inside the model. See `Solar X System Model/CLAUDE.md` for the full step-by-step status, state machine details, and SysML conventions.
+
+**2. LCA Integration PoC** (`System Model/SolarX/LCA Analysis SolarX/SimpleLCAIntegration/`)
+
+Four-layer pipeline: `motor.sysml → motor_instance.ttl → motor_lca_ontology.ttl → semantic_matching.sparql`. Requires openLCA 2.x running locally with IPC on port 8080.
 
 ```bash
 cd "System Model/SolarX/LCA Analysis SolarX/SimpleLCAIntegration"
@@ -54,12 +43,24 @@ pip install rdflib olca-ipc
 python stage4_integration.py
 ```
 
-The script connects to openLCA via IPC, fetches ELCD flows, performs a SPARQL semantic match against the SysML material names, and prints the matched flow's GWP characterisation factor × mass.
+Semantic matching uses substring containment — no hardcoded UUIDs. To extend to the full SolarX model, create one `<Component>_instance.ttl` per physical component, reusing the same ontology and SPARQL query. See `SimpleLCAIntegration/CLAUDE.md` for the design decisions.
 
-To extend to the full SolarX system, create one `<Component>_instance.ttl` file per component (reusing the same ontology and SPARQL query). Component names: `PVArray`, `SolarInverter`, `BatteryStorage`, `SystemController`, `GridConnection`.
+## SysML v2 Tooling
+
+- **Validator:** SysIDE VS Code extension. Open `SolarXModel.sysml` in VS Code; errors appear in the Problems panel (`Ctrl+Shift+M`). Paste errors into chat to diagnose.
+- **Model output rule:** return only raw SysML v2 — no markdown fences, no mixed natural language. First non-whitespace character must be a valid SysML keyword.
+- **Methodology:** SYSMOD step sequence (brainstorm → confirm → generate SysML → validate → next step). The CLAUDE.md in the project root of the Claude for SysML v2 workspace (`Claude for SysML v2/CLAUDE.md`) contains confirmed syntax rules accumulated from SysIDE validation sessions.
+
+## Project Context
+
+Models the transformation from **SolarX** (conventional PV company, AS-IS) to **SustainaSun** (sustainable future state). Near-term roadmap: add views for Steps 3–6b, complete Step 9 internal connections, integrate full LCA workflow, begin SustainaSun model.
+
+- GitHub repo: `TheNightFox-1/SustainableTogether`
+- Project board: `github.com/users/TheNightFox-1/projects/3`
+- Active milestone: **SolarX AS-IS complete** (issues #3–#9)
 
 ## Contribution Workflow
 
-Commit message convention: `Add: ...`, `Fix: ...`, `Update: ...`
+Commit convention: `Add: ...`, `Fix: ...`, `Update: ...`
 
 Issue templates in `.github/ISSUE_TEMPLATE/`: `bug_report.md`, `feature_request.md`, `content_contribution.md`.

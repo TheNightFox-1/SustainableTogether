@@ -1,0 +1,65 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qudt:    <http://qudt.org/schema/qudt/> .
+@prefix unit:    <http://qudt.org/vocab/unit/> .
+@prefix sysml:   <http://www.omg.org/spec/SysML/20230201/SysML#> .
+@prefix lca:     <http://mbse-lca.org/ontology#> .
+@prefix ex:      <http://mbse-lca.org/instance/solarx#> .
+
+# ─────────────────────────────────────────────────────────────────
+#  Parent system (SolarX home energy system)
+# ─────────────────────────────────────────────────────────────────
+ex:solarXSystem
+    a sysml:PartDefinition ;
+    rdfs:label       "SolarX Home Energy System" ;
+    dcterms:description
+        "Residential photovoltaic and battery storage system for the SustainableTogether project." ;
+    lca:hasGeography "DE" .
+
+# ─────────────────────────────────────────────────────────────────
+#  Instance: 48 V / 15 Ah NMC Battery Module
+#
+#  ELCD flow reference (material input):
+#    Flow name  : "Lithium, ion"
+#    Database   : ELCD (European Life Cycle Database)
+#    Geography  : DE
+#
+#  Physical properties:
+#    Nominal voltage : 48 V
+#    Capacity        : 15 Ah   → 0.72 kWh
+#    Total mass      : 4.2 kg  (cells + module housing, without BMS board)
+# ─────────────────────────────────────────────────────────────────
+ex:batteryModule
+    a sysml:PartDefinition, lca:UnitProcess ;
+    rdfs:label       "NMC Battery Module" ;
+    dcterms:description
+        "48 V / 15 Ah NMC battery module for the SolarX home energy storage system." ;
+
+    # ── Physical quantities (QUDT QuantityValue blank nodes) ──────
+    lca:hasNominalVoltage [
+        a qudt:QuantityValue ;
+        qudt:numericValue 48.0 ;
+        qudt:unit unit:V
+    ] ;
+
+    lca:hasCapacity [
+        a qudt:QuantityValue ;
+        qudt:numericValue 15.0 ;
+        qudt:unit unit:A-HR
+    ] ;
+
+    lca:hasMass [
+        a qudt:QuantityValue ;
+        qudt:numericValue 4.2 ;
+        qudt:unit unit:KiloGM
+    ] ;
+
+    # ── LCA metadata ─────────────────────────────────────────────
+    # ELCD flow used: "Lithium, ion" (mass-based material input)
+    lca:hasGeography "DE" ;
+    lca:hasElcdFlowName "Lithium, ion" ;
+
+    # ── Structural context ────────────────────────────────────────
+    sysml:partOf ex:solarXSystem .

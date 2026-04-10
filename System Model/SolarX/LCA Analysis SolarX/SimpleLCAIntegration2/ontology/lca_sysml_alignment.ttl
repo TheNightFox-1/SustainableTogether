@@ -1,0 +1,164 @@
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms:<http://purl.org/dc/terms/> .
+@prefix qudt:   <http://qudt.org/schema/qudt/> .
+@prefix unit:   <http://qudt.org/vocab/unit/> .
+@prefix sysml:  <http://www.omg.org/spec/SysML/20230201/SysML#> .
+@prefix lca:    <http://mbse-lca.org/ontology#> .
+
+# ─────────────────────────────────────────────────────────────────
+#  Ontology metadata
+# ─────────────────────────────────────────────────────────────────
+<http://mbse-lca.org/ontology>
+    a owl:Ontology ;
+    rdfs:label       "MBSE-LCA Alignment Ontology" ;
+    rdfs:comment     "Aligns SysML v2 PartDefinition with LCA UnitProcess, using QUDT for physical quantities." ;
+    dcterms:version  "0.1.0" ;
+    dcterms:creator  "SolarX / SustainableTogether" .
+
+# ─────────────────────────────────────────────────────────────────
+#  SysML v2 classes (mirror of OMG SysML 2023-02-01 namespace)
+# ─────────────────────────────────────────────────────────────────
+sysml:PartDefinition
+    a owl:Class ;
+    rdfs:label   "PartDefinition" ;
+    rdfs:comment "A SysML v2 PartDefinition — a classifier whose instances are part usages." .
+
+sysml:PartUsage
+    a owl:Class ;
+    rdfs:label   "PartUsage" ;
+    rdfs:comment "A SysML v2 PartUsage — a concrete occurrence or role of a PartDefinition." .
+
+sysml:partOf
+    a owl:ObjectProperty ;
+    rdfs:label   "partOf" ;
+    rdfs:comment "Structural containment relationship between SysML parts." ;
+    rdfs:domain  sysml:PartUsage ;
+    rdfs:range   sysml:PartDefinition .
+
+# ─────────────────────────────────────────────────────────────────
+#  LCA classes
+# ─────────────────────────────────────────────────────────────────
+lca:UnitProcess
+    a owl:Class ;
+    rdfs:label   "UnitProcess" ;
+    rdfs:comment "An LCA unit process — the smallest division of an activity for which input/output data are collected." .
+
+lca:ProductSystem
+    a owl:Class ;
+    rdfs:label   "ProductSystem" ;
+    rdfs:comment "An LCA product system composed of linked unit processes." .
+
+lca:ImpactCategory
+    a owl:Class ;
+    rdfs:label   "ImpactCategory" ;
+    rdfs:comment "An environmental impact category (e.g., GWP100, AP, EP)." .
+
+# ─────────────────────────────────────────────────────────────────
+#  Cross-domain alignment
+#  owl:equivalentClass is the strongest OWL 2 alignment; use
+#  skos:closeMatch as the informative weaker counterpart.
+# ─────────────────────────────────────────────────────────────────
+sysml:PartDefinition
+    owl:equivalentClass lca:UnitProcess ;
+    skos:closeMatch     lca:UnitProcess .
+
+# ─────────────────────────────────────────────────────────────────
+#  LCA datatype properties
+# ─────────────────────────────────────────────────────────────────
+lca:hasGeography
+    a owl:DatatypeProperty ;
+    rdfs:label   "hasGeography" ;
+    rdfs:comment "ISO 3166-1 alpha-2 country code or ILCD region code for the process geography." ;
+    rdfs:domain  lca:UnitProcess ;
+    rdfs:range   xsd:string .
+
+lca:hasElcdFlowName
+    a owl:DatatypeProperty ;
+    rdfs:label   "hasElcdFlowName" ;
+    rdfs:comment "Name of the matching flow in the ELCD (European Life Cycle Database) as it appears in openLCA." ;
+    rdfs:domain  lca:UnitProcess ;
+    rdfs:range   xsd:string .
+
+lca:hasGWP100
+    a owl:DatatypeProperty ;
+    rdfs:label   "hasGWP100" ;
+    rdfs:comment "Global Warming Potential over 100 years in kg CO₂-eq, as computed by the linked LCA tool." ;
+    rdfs:domain  lca:UnitProcess ;
+    rdfs:range   xsd:double .
+
+lca:gwpMethod
+    a owl:DatatypeProperty ;
+    rdfs:label   "gwpMethod" ;
+    rdfs:comment "Name of the LCIA method used to calculate the GWP100 result." ;
+    rdfs:domain  lca:UnitProcess ;
+    rdfs:range   xsd:string .
+
+# ─────────────────────────────────────────────────────────────────
+#  Physical quantity object properties (QUDT-backed)
+#  Range is qudt:QuantityValue — a blank-node holding numericValue + unit.
+# ─────────────────────────────────────────────────────────────────
+lca:hasMass
+    a owl:ObjectProperty ;
+    rdfs:label   "hasMass" ;
+    rdfs:comment "Mass of the physical component as a QUDT QuantityValue (SI unit: kg)." ;
+    rdfs:domain  sysml:PartDefinition ;
+    rdfs:range   qudt:QuantityValue .
+
+lca:hasNominalVoltage
+    a owl:ObjectProperty ;
+    rdfs:label   "hasNominalVoltage" ;
+    rdfs:comment "Nominal operating voltage as a QUDT QuantityValue (SI unit: V)." ;
+    rdfs:domain  sysml:PartDefinition ;
+    rdfs:range   qudt:QuantityValue .
+
+lca:hasCapacity
+    a owl:ObjectProperty ;
+    rdfs:label   "hasCapacity" ;
+    rdfs:comment "Electrical energy capacity as a QUDT QuantityValue (unit: A·h)." ;
+    rdfs:domain  sysml:PartDefinition ;
+    rdfs:range   qudt:QuantityValue .
+
+# ─────────────────────────────────────────────────────────────────
+#  QUDT schema stubs (so the graph validates standalone without
+#  fetching the full QUDT vocabulary from the web)
+# ─────────────────────────────────────────────────────────────────
+qudt:QuantityValue
+    a owl:Class ;
+    rdfs:label "QuantityValue" .
+
+qudt:numericValue
+    a owl:DatatypeProperty ;
+    rdfs:label "numericValue" ;
+    rdfs:range xsd:double .
+
+qudt:unit
+    a owl:ObjectProperty ;
+    rdfs:label "unit" .
+
+unit:KiloGM
+    a qudt:Unit ;
+    rdfs:label "Kilogram" ;
+    qudt:symbol "kg" .
+
+unit:V
+    a qudt:Unit ;
+    rdfs:label "Volt" ;
+    qudt:symbol "V" .
+
+unit:A-HR
+    a qudt:Unit ;
+    rdfs:label "Ampere-hour" ;
+    qudt:symbol "A·h" .
+
+qudt:Unit
+    a owl:Class ;
+    rdfs:label "Unit" .
+
+qudt:symbol
+    a owl:DatatypeProperty ;
+    rdfs:label "symbol" ;
+    rdfs:range xsd:string .

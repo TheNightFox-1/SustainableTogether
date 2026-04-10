@@ -1,0 +1,8 @@
+# Core — always required
+rdflib>=6.3.2
+requests>=2.31.0
+
+# openLCA IPC — optional; the pipeline falls back gracefully if absent.
+# Install when openLCA ≥ 2.0 is running with the IPC server enabled.
+olca-ipc>=2.0.0
+olca-schema>=2.0.0

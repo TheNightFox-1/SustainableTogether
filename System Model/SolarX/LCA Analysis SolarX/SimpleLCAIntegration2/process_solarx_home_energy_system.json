@@ -1,0 +1,32 @@
+{
+  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+  "@type": "Process",
+  "@id": "0d34aa62-7294-4c19-ab1d-5026260d7318",
+  "name": "SolarX Home Energy System",
+  "description": "Auto-generated from MBSE-LCA knowledge graph.  SysML URI: http://mbse-lca.org/instance/solarx#solarXSystem.  ELCD material flow: Lithium, ion.",
+  "processType": "UNIT_PROCESS",
+  "location": {
+    "@type": "Location",
+    "name": "DE"
+  },
+  "exchanges": [
+    {
+      "@type": "Exchange",
+      "avoidedProduct": false,
+      "isInput": false,
+      "isQuantitativeReference": true,
+      "amount": 1.0,
+      "flow": {
+        "@type": "Flow",
+        "@id": "557b2163-6b51-45d6-8117-61bd185ddcb6",
+        "name": "SolarX Home Energy System",
+        "flowType": "PRODUCT_FLOW"
+      },
+      "unit": {
+        "@type": "Unit",
+        "@id": "c394f489-8a69-44b0-b815-c83e2d53b966",
+        "name": "Item(s)"
+      }
+    }
+  ]
+}
