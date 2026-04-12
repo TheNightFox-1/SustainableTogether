@@ -33,8 +33,8 @@ package SolarXModel {
                 // internal use: PowerConversion → EnergyManagement, EnergyManagement ↔ GridInterface
             }
             port def GridPort {
-                out item electricity : ACElectricity;
-                // draw direction (grid → SolarX): use ~GridPort
+                inout item electricity : ACElectricity;
+                // bidirectional: one port per side; ~GridPort is also inout
             }
             port def HouseholdPort {
                 out item electricity : ACElectricity;
@@ -265,8 +265,7 @@ package SolarXModel {
                 // The system under design
                 part solarX {
                     port sunPort : SunPort;
-                    port gridFeedInPort : GridPort; // SolarX → grid (surplus feed-in)
-                    port gridDrawPort : ~GridPort; // grid → SolarX (backup draw)
+                    port gridPort : GridPort;       // bidirectional grid connection
                     port householdPort : HouseholdPort;
                     port homeownerPort : HomeownerPort;
                     port installerPort : InstallerPort;
@@ -283,8 +282,7 @@ package SolarXModel {
                 part publicGrid {
                     doc
                     /* Public electricity grid; exchanges power bidirectionally with SolarX. */
-                    port feedInSystemPort : ~GridPort; // receives surplus from SolarX
-                    port drawSystemPort : GridPort; // provides backup to SolarX
+                    port systemPort : ~GridPort;    // single bidirectional conjugate port
                 }
 
                 part household {
@@ -313,8 +311,7 @@ package SolarXModel {
 
                 // Interfaces connecting actors to the system
                 interface connect sun.systemPort to solarX.sunPort;
-                interface connect solarX.gridFeedInPort to publicGrid.feedInSystemPort;
-                interface connect publicGrid.drawSystemPort to solarX.gridDrawPort;
+                interface connect solarX.gridPort to publicGrid.systemPort;
                 interface connect household.systemPort to solarX.householdPort;
                 interface connect homeownerActor.systemPort to solarX.homeownerPort;
                 interface connect installerActor.systemPort to solarX.installerPort;
@@ -326,7 +323,7 @@ package SolarXModel {
         package SolarX_UseCases {
             private import SolarX_Context::*;
             private import SolarX_Requirements::*;
-            private import SolarX_FunctionalArchitecture::*;
+            private import SolarX_FunctionalArchitecture::SolarX_Functions::*;
 
             // ── UC-1 ─────────────────────────────────────────────────────────
             use case def 'supply household electricity' {
@@ -358,8 +355,8 @@ package SolarXModel {
                 first 'monitor and record energy flow' then done;
 
                 flow
-                    from 'select and convert energy to AC'.acPower
-                    to 'route AC electricity to household'.acPower;
+                    from 'select and convert energy to AC'.acElectricity
+                    to 'route AC electricity to household'.acElectricity;
 
                 action 'assess available energy sources' : AssessAvailableEnergySources {}
                 action 'select and convert energy to AC' : SelectAndConvertEnergyToAC {}
@@ -391,8 +388,8 @@ package SolarXModel {
                 first 'monitor feed-in and record' then done;
 
                 flow
-                    from 'prepare AC electricity for export'.acPower
-                    to 'export surplus electricity'.acPower;
+                    from 'prepare AC electricity for export'.acElectricity
+                    to 'export surplus electricity'.acElectricity;
 
                 action 'detect surplus condition' : DetectSurplusCondition {}
                 action 'prepare AC electricity for export' : PrepareACElectricityForExport {}
@@ -524,17 +521,19 @@ package SolarXModel {
         // ── Step 7 — Functional Architecture ─────────────────────────────────
         package SolarX_FunctionalArchitecture {
 
+            package SolarX_Functions {
+
             // ── UC-1 functions ────────────────────────────────────────────────
             action def AssessAvailableEnergySources {
                 doc /* Determines which energy sources (PV, battery, grid) are currently available. */
             }
             action def SelectAndConvertEnergyToAC {
                 doc /* Selects the best available source and converts its output to AC electricity. */
-                out item acPower;
+                out item acElectricity : ACElectricity;
             }
             action def RouteACElectricityToHousehold {
                 doc /* Routes converted AC electricity to the household load. */
-                in item acPower;
+                in item acElectricity : ACElectricity;
             }
             action def MonitorAndRecordEnergyFlow {
                 doc /* Monitors and records the active energy flow during household supply. */
@@ -546,14 +545,14 @@ package SolarXModel {
             }
             action def PrepareACElectricityForExport {
                 doc /* Prepares the surplus AC electricity for export to the public grid. */
-                out item acPower;
+                out item acElectricity : ACElectricity;
             }
             action def OpenGridFeedIn {
                 doc /* Opens the grid feed-in connection to allow surplus export. */
             }
             action def ExportSurplusElectricity {
                 doc /* Exports surplus AC electricity to the public grid. */
-                in item acPower;
+                in item acElectricity : ACElectricity;
             }
             action def MonitorFeedInAndRecord {
                 doc /* Monitors the feed-in session and records export data. */
@@ -620,35 +619,7 @@ package SolarXModel {
                 doc /* Resumes normal energy management operation after maintenance. */
             }
 
-            // ── Functional tree — top-level composition ───────────────────────
-            action def SolarX_Functions {
-                doc /* Functional decomposition of SolarX — one usage per action def. */
-
-                action assessAvailableEnergySources : AssessAvailableEnergySources;
-                action selectAndConvertEnergyToAC : SelectAndConvertEnergyToAC;
-                action routeACElectricityToHousehold : RouteACElectricityToHousehold;
-                action monitorAndRecordEnergyFlow : MonitorAndRecordEnergyFlow;
-                action detectSurplusCondition : DetectSurplusCondition;
-                action prepareACElectricityForExport : PrepareACElectricityForExport;
-                action openGridFeedIn : OpenGridFeedIn;
-                action exportSurplusElectricity : ExportSurplusElectricity;
-                action monitorFeedInAndRecord : MonitorFeedInAndRecord;
-                action collectSensorData : CollectSensorData;
-                action aggregateAndFormatData : AggregateAndFormatData;
-                action transmitMonitoringData : TransmitMonitoringData;
-                action receiveInstallationRequest : ReceiveInstallationRequest;
-                action configureSystemParameters : ConfigureSystemParameters;
-                action runSelfTest : RunSelfTest;
-                action activateSystem : ActivateSystem;
-                action generateCommissioningReport : GenerateCommissioningReport;
-                action transmitReportToInstaller : TransmitReportToInstaller;
-                action detectFaultOrReceiveMaintenanceRequest : DetectFaultOrReceiveMaintenanceRequest;
-                action runDiagnostics : RunDiagnostics;
-                action transmitDiagnosticsToTechnician : TransmitDiagnosticsToTechnician;
-                action repairOrReplaceComponent : RepairOrReplaceComponent;
-                action verifySystemRecovery : VerifySystemRecovery;
-                action resumeNormalOperation : ResumeNormalOperation;
-            }
+            } // end package SolarX_Functions
 
             view functionalArchitectureView {
                 expose SolarXModel::SolarXProject::SolarX_FunctionalArchitecture::SolarX_Functions;
@@ -663,7 +634,7 @@ package SolarXModel {
         // ── Step 8 — Logical Architecture ────────────────────────────────────
         package SolarX_LogicalArchitecture {
             private import SolarX_PortDefinitions::*;
-            private import SolarX_FunctionalArchitecture::*;
+            private import SolarX_FunctionalArchitecture::SolarX_Functions::*;
             private import SysML::*;
 
             part def PVCollectionSubsystem {
@@ -745,8 +716,7 @@ package SolarXModel {
                  */
                 port acFromMgmtPort : ~ACPort;        // AC in ← EnergyManagement (feed-in path)
                 port acToMgmtPort : ACPort;           // AC out → EnergyManagement (draw path)
-                port gridFeedInPort : GridPort;        // AC out → public grid
-                port gridDrawPort : ~GridPort;         // AC in ← public grid
+                port gridPort : GridPort;              // bidirectional grid connection
                 port controlInPort : ~ControlPort;    // control in ← EnergyManagement
 
                 perform action exportSurplusElectricity : ExportSurplusElectricity;
@@ -809,8 +779,7 @@ package SolarXModel {
                  * Ports mirror the system context boundary.
                  */
                 port sunPort : SunPort;
-                port gridFeedInPort : GridPort;
-                port gridDrawPort : ~GridPort;
+                port gridPort : GridPort;
                 port householdPort : HouseholdPort;
                 port homeownerPort : HomeownerPort;
                 port installerPort : InstallerPort;
@@ -852,8 +821,7 @@ package SolarXModel {
                 // Boundary bindings
                 bind sunPort = pvCollection.sunPort;
                 bind householdPort = energyManagement.householdOutPort;
-                bind gridFeedInPort = gridInterface.gridFeedInPort;
-                bind gridDrawPort = gridInterface.gridDrawPort;
+                bind gridPort = gridInterface.gridPort;
             }
 
             view def StructureBreakDown {
@@ -1092,11 +1060,10 @@ package SYSMODLibrary {
         enum high = 3;
         enum medium = 2;
         enum low = 1;
-        enum undefined = 0;
     }
     part def Stakeholder {
         attribute priority = risk * motivation;
-        attribute risk : LevelKind;
-        attribute motivation : LevelKind;
+        attribute risk : LevelKind [0..1];
+        attribute motivation : LevelKind [0..1];
     }
 }
