@@ -1,0 +1,170 @@
+{
+  "incose-suwg-001": {
+    "name": "Sustainability Working Group",
+    "metrics": {
+      "degreeCentrality": 0.4545454545454546,
+      "betweennessCentrality": 0.33636363636363636,
+      "closenessCentrality": 0.5664335664335665,
+      "clusteringCoefficient": 0.1,
+      "communityId": 0,
+      "structuralHoleScore": 0.9,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.33636363636363636
+    }
+  },
+  "ext-wfeo-001": {
+    "name": "World Federation of Engineering Organizations",
+    "metrics": {
+      "degreeCentrality": 0.18181818181818182,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.3875598086124402,
+      "clusteringCoefficient": 0,
+      "communityId": 2,
+      "structuralHoleScore": 1.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-gfse-001": {
+    "name": "Gesellschaft f\u00fcr Systems Engineering (GfSE)",
+    "metrics": {
+      "degreeCentrality": 0.2727272727272727,
+      "betweennessCentrality": 0.11818181818181818,
+      "closenessCentrality": 0.4090909090909091,
+      "clusteringCoefficient": 0.3333333333333333,
+      "communityId": 0,
+      "structuralHoleScore": 0.6666666666666667,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.11818181818181818
+    }
+  },
+  "ext-ieee-001": {
+    "name": "IEEE",
+    "metrics": {
+      "degreeCentrality": 0.18181818181818182,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.3875598086124402,
+      "clusteringCoefficient": 1.0,
+      "communityId": 0,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-incose-global-001": {
+    "name": "INCOSE (Global Organization)",
+    "metrics": {
+      "degreeCentrality": 0.09090909090909091,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.35064935064935066,
+      "clusteringCoefficient": 0,
+      "communityId": 0,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-circ-coop-001": {
+    "name": "Circular Economy - CoOps (Platform)",
+    "metrics": {
+      "degreeCentrality": 0.2727272727272727,
+      "betweennessCentrality": 0.21818181818181817,
+      "closenessCentrality": 0.43315508021390375,
+      "clusteringCoefficient": 0,
+      "communityId": 1,
+      "structuralHoleScore": 1.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.21818181818181817
+    }
+  },
+  "ext-netpos-001": {
+    "name": "Net-Positive Advisory Panel",
+    "metrics": {
+      "degreeCentrality": 0.09090909090909091,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.0,
+      "clusteringCoefficient": 0,
+      "communityId": 3,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-flourish-001": {
+    "name": "Flourishing Business Model Community",
+    "metrics": {
+      "degreeCentrality": 0.09090909090909091,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.0,
+      "clusteringCoefficient": 0,
+      "communityId": 3,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-coop-business-001": {
+    "name": "Cooperative Business Models",
+    "metrics": {
+      "degreeCentrality": 0.09090909090909091,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.29454545454545455,
+      "clusteringCoefficient": 0,
+      "communityId": 1,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-education-001": {
+    "name": "Common Earth Education Initiative",
+    "metrics": {
+      "degreeCentrality": 0.09090909090909091,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.2727272727272727,
+      "clusteringCoefficient": 0,
+      "communityId": 2,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-sarbau-001": {
+    "name": "Sarbau for Solutions",
+    "metrics": {
+      "degreeCentrality": 0.09090909090909091,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.29454545454545455,
+      "clusteringCoefficient": 0,
+      "communityId": 1,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  },
+  "ext-afis-001": {
+    "name": "AFIS",
+    "metrics": {
+      "degreeCentrality": 0.09090909090909091,
+      "betweennessCentrality": 0.0,
+      "closenessCentrality": 0.28321678321678323,
+      "clusteringCoefficient": 0,
+      "communityId": 0,
+      "structuralHoleScore": 0.0,
+      "networkGrowthRate": 0.0,
+      "dormancyScore": 1.0,
+      "brokerPotential": 0.0
+    }
+  }
+}

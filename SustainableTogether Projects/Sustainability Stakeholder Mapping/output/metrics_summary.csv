@@ -1,0 +1,13 @@
+stakeholder_id,name,degree_centrality,betweenness_centrality,closeness_centrality,clustering_coefficient,community_id,structural_hole_score,network_growth_rate,dormancy_score,broker_potential
+incose-suwg-001,Sustainability Working Group,0.4545454545454546,0.33636363636363636,0.5664335664335665,0.1,0,0.9,0.0,1.0,0.33636363636363636
+ext-wfeo-001,World Federation of Engineering Organizations,0.18181818181818182,0.0,0.3875598086124402,0,2,1.0,0.0,1.0,0.0
+ext-gfse-001,Gesellschaft für Systems Engineering (GfSE),0.2727272727272727,0.11818181818181818,0.4090909090909091,0.3333333333333333,0,0.6666666666666667,0.0,1.0,0.11818181818181818
+ext-ieee-001,IEEE,0.18181818181818182,0.0,0.3875598086124402,1.0,0,0.0,0.0,1.0,0.0
+ext-incose-global-001,INCOSE (Global Organization),0.09090909090909091,0.0,0.35064935064935066,0,0,0.0,0.0,1.0,0.0
+ext-circ-coop-001,Circular Economy - CoOps (Platform),0.2727272727272727,0.21818181818181817,0.43315508021390375,0,1,1.0,0.0,1.0,0.21818181818181817
+ext-netpos-001,Net-Positive Advisory Panel,0.09090909090909091,0.0,0.0,0,3,0.0,0.0,1.0,0.0
+ext-flourish-001,Flourishing Business Model Community,0.09090909090909091,0.0,0.0,0,3,0.0,0.0,1.0,0.0
+ext-coop-business-001,Cooperative Business Models,0.09090909090909091,0.0,0.29454545454545455,0,1,0.0,0.0,1.0,0.0
+ext-education-001,Common Earth Education Initiative,0.09090909090909091,0.0,0.2727272727272727,0,2,0.0,0.0,1.0,0.0
+ext-sarbau-001,Sarbau for Solutions,0.09090909090909091,0.0,0.29454545454545455,0,1,0.0,0.0,1.0,0.0
+ext-afis-001,AFIS,0.09090909090909091,0.0,0.28321678321678323,0,0,0.0,0.0,1.0,0.0
