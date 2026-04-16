@@ -20,7 +20,23 @@ Apply network science methods to identify structural synergies in the ecosystem:
 
 ---
 
-## Stakeholder Taxonomy
+## Stakeholder Taxonomy & Categorization
+
+### Organization Classification
+
+The ecosystem can be organized along **multiple meaningful dimensions** — not just Inside/Outside INCOSE. See **CATEGORIZATION.md** for 9 alternative schemas:
+
+1. **Decision-Making Authority** — Who sets the rules? (Policy-Makers, Standards-Setters, Market Leaders, Advocates, Implementers, Learners)
+2. **SE Engagement Level** — How aware of systems engineering? (Unaware, Aware, Engaged, Expert)
+3. **Sector/Domain** — What problems do they solve? (Energy, Transportation, Circular Economy, Finance, IT, etc.)
+4. **Organization Size & Scale** — How large is their reach? (Global Mega, Large Regional, Mid-Market, Small, Startup, Network)
+5. **Sustainability Maturity** — How advanced? (Leader, Committed, Aware, Lagging)
+6. **Collaborative Readiness** — How willing to partner? (Ready to Co-Develop, Open, Cautious, Distant, Resistant)
+7. **Engagement Stage** — Where in our journey? (Identified, Prospect, Engaged, Active, Dormant, Concluded)
+8. **Geographic Focus** — Where do they operate? (Global, Continental, National, Regional, Distributed)
+9. **Flow Contribution** — What do they bring? (Knowledge, Standards, Funding, Audience, Implementation, Advocacy, Talent)
+
+**Recommendation:** Use a **multi-dimensional model** in Airtable with all categorizations. This enables rich filtering and insight discovery (e.g., "Show me Global Mega-Orgs in Energy that are Sustainability Leaders with high Collaborative Readiness").
 
 ### Primary Role Categories
 
