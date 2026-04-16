@@ -1,363 +1,202 @@
 # Sustainability WG — Stakeholder Mapping Project
 
-Welcome to the INCOSE Sustainability Working Group's ecosystem analysis initiative. This project systematically identifies, categorizes, and analyzes the organizations and networks relevant to sustainable systems engineering.
-
-## Project Overview
-
-The stakeholder map serves **three primary goals** and one **exploratory goal** (nice-to-have):
-
-### Goal 1 — Identify Organizations to Learn From
-Find organizations whose expertise in sustainability, systems thinking, standards, or domain knowledge can inform and strengthen the WG's work.
-
-### Goal 2 — Identify Organizations to Collaborate With
-Map organizations and networks with whom the WG can partner to develop and deliver sustainable solutions, joint publications, events, or tools.
-
-### Goal 3 — Understand Target Audience & Industry Needs
-Identify who the WG's primary audience is (SE practitioners, industries, educators, etc.), what they need, and what gaps exist. **This goal feeds directly into the "Understanding Industry Needs" sub-project.**
-
-### Nice to Have — Network Science & Synergy Analysis
-Apply network science methods to identify structural synergies in the ecosystem: broker organizations, emerging clusters, leverage points, and collaboration windows. Requires 30–40 stakeholder nodes and mature relationship data.
+Systematic identification, categorization, and analysis of organizations and networks relevant to sustainable systems engineering within INCOSE.
 
 ---
 
-## Stakeholder Taxonomy & Categorization
+## Project Goals
 
-### Organization Classification
-
-The ecosystem can be organized along **multiple meaningful dimensions** — not just Inside/Outside INCOSE. See **CATEGORIZATION.md** for 9 alternative schemas:
-
-1. **Decision-Making Authority** — Who sets the rules? (Policy-Makers, Standards-Setters, Market Leaders, Advocates, Implementers, Learners)
-2. **SE Engagement Level** — How aware of systems engineering? (Unaware, Aware, Engaged, Expert)
-3. **Sector/Domain** — What problems do they solve? (Energy, Transportation, Circular Economy, Finance, IT, etc.)
-4. **Organization Size & Scale** — How large is their reach? (Global Mega, Large Regional, Mid-Market, Small, Startup, Network)
-5. **Sustainability Maturity** — How advanced? (Leader, Committed, Aware, Lagging)
-6. **Collaborative Readiness** — How willing to partner? (Ready to Co-Develop, Open, Cautious, Distant, Resistant)
-7. **Engagement Stage** — Where in our journey? (Identified, Prospect, Engaged, Active, Dormant, Concluded)
-8. **Geographic Focus** — Where do they operate? (Global, Continental, National, Regional, Distributed)
-9. **Flow Contribution** — What do they bring? (Knowledge, Standards, Funding, Audience, Implementation, Advocacy, Talent)
-
-**Recommendation:** Use a **multi-dimensional model** in Airtable with all categorizations. This enables rich filtering and insight discovery (e.g., "Show me Global Mega-Orgs in Energy that are Sustainability Leaders with high Collaborative Readiness").
-
-### Primary Role Categories
-
-| Role | Description |
-|------|-------------|
-| Working Groups | Other INCOSE or external WGs with overlapping mandates |
-| NGOs | Non-governmental organizations focused on sustainability, environment, or policy |
-| Research Groups / Institutes | Academic and independent research centers |
-| INCOSE Members (SE Practitioners) | Individual practitioners — *to be confirmed whether included as separate nodes* |
-| INCOSE TechOps | INCOSE technical operations function |
-| Other INCOSE Working Groups | Sibling working groups within INCOSE |
-| INCOSE Leadership | Board and executive leadership |
-| INCOSE Chapters | Regional and national INCOSE chapters |
-| Industrial Companies | Private sector organizations applying SE |
-| Industry Consortiums & Sectorial Alliances | Cross-company or cross-sector industry bodies |
-| Consulting Firms | SE or sustainability consultancies |
-| Educators & Academia | Universities, professors, curriculum developers |
-| Early-Career Professionals | Students and early-career SE practitioners |
-| INCOSE Existing Liaisons | Formally established liaison relationships |
-| Standards Bodies | ISO, IEC, IEEE — distinct role for standards producers |
-| Policy Makers / Regulators | Government agencies, ministries, regulatory bodies |
-
-### Suggested Additional Roles
-
-- Think Tanks (research to policy bridge)
-- Funding Bodies / Grant Agencies (EU Horizon, NSF, national research councils)
-- Professional Associations (IEEE, SAE, PMI, AIAA)
-- Corporate Sustainability / ESG Officers
-- Technology Providers / Tool Vendors (Siemens, Dassault, PTC)
-- Systems Engineers in Regulated Industries (aerospace, defense, medical, energy)
-- Project / Program Managers
-- Procurement & Supply Chain Functions
-- Students & University Programs
-- Media & Communication Channels (LinkedIn, newsletters, podcasts)
-
-### Organizational Classification
-
-All stakeholders are categorized as:
-- **Inside INCOSE** — entities part of INCOSE structure
-- **Outside INCOSE** — external organizations, networks, institutions
-
----
-
-## Information Stack
-
-### Inside INCOSE — Core Data Fields
-
-| Field | Description | Type | Applicable Goals |
-|-------|-------------|------|------------------|
-| INCOSE entity type | WG / TechOps / Leadership / Chapter / Member / Liaison | Enum | G1, G2 |
-| Entity full name | Official INCOSE name per governance docs | Text | G1, G2 |
-| Charter / mandate summary | Formal tasks — critical for overlap detection | Text | G1, G2 |
-| Current leadership / contact | President, chair, or primary point of contact | Text | G2 |
-| Geographic scope | Global / Regional / National / Local | Enum | G2, G3 |
-| Active sustainability initiatives | Current projects, papers, activities touching sustainability | Text | G1, G2 |
-| Membership size / reach | Approximate number of members or practitioners reached | Number | G3 |
-| Communication channels | Newsletter, Slack, mailing list, how to reach members | Text | G3 |
-| Formal liaison status | Formal liaison agreement with SuWG | Boolean | G2 |
-
-**Suggested fields** (refine after pilot data):
-- SE maturity level (basic / practitioner / advanced)
-- Budget / resource availability (for co-funding activities)
-- Decision-making speed (how quickly can they commit)
-
-### Outside INCOSE — Core Data Fields
-
-| Field | Description | Type | Applicable Goals |
-|-------|-------------|------|------------------|
-| Organization name | Legal or commonly used name | Text | G1, G2 |
-| Organization type | NGO / Research / Industrial / Consortium / Academia / Policy Body | Enum | G1, G2 |
-| Geographic scope | Global / Regional / National + HQ country | Enum | G2, G3 |
-| Primary domain / focus area | Circular economy, LCA, climate policy, eco-design, social sustainability | Text | G1 |
-| Key publications / outputs | Landmark reports, standards, frameworks produced | Text | G1 |
-| Website / contact | Primary online presence and entry point | URL | G2 |
-| Key contact person | Name and role of best outreach contact | Text | G2 |
-| Audience served | Who does this org speak to — practitioners, policymakers, companies, students | Text | G3 |
-| Funding model | Public / Private / Membership / Grant-funded | Enum | G2 |
-
-**Suggested fields** (synergy & network analysis):
-- Standards or certifications issued
-- Open data / publications policy (CC-licensed, open access, proprietary)
-- Languages of operation
-- SDG alignment (UN Sustainable Development Goals)
-- SE awareness level (awareness / engagement with systems engineering)
-
-### Relationship Fields — Between Any Two Stakeholders
-
-| Field | Description | Type | Purpose |
-|-------|-------------|------|---------|
-| Relationship type | Formal / Informal / Aspirational / Historical | Enum | G2, Network |
-| Direction | Unidirectional (A→B) or Bidirectional (A↔B) | Enum | Network |
-| Strength / frequency | Strong / Weak / Dormant | Enum | Network |
-| Relationship origin | How formed (event, publication, referral, liaison) | Text | G2 |
-| Date established | When first formed — enables temporal analysis | Date | Network |
-| Primary contact each side | Named person holding relationship on each side | Text | G2 |
-
-**Suggested fields** (flow & synergy):
-- Flow type (Knowledge / Funding / Co-authorship / Audience reach / Standards influence / Talent pipeline / Legitimacy / Data)
-- Collaboration potential score (1–5)
-- Blocker / gap (what prevents stronger relationship)
-- Shared goals overlap (which of G1, G2, G3 this relationship serves)
-- Last interaction date (identify dormant relationships)
-
-### Synergy-Specific Fields — For Ecosystem Leverage Analysis
-
-| Field | Description | Type | Notes |
-|-------|-------------|------|-------|
-| Broker potential | Does this org sit between otherwise disconnected clusters? | Computed | Derived from betweenness centrality |
-| Audience overlap index | Estimated % overlap between org's audience and INCOSE SE practitioners | 0–100% | Start as expert estimate; refine with survey |
-| Complementary capability | What does this org have that we lack, and vice versa | Text | Asymmetry = where synergy lives |
-| Co-production readiness | Willingness and capacity to jointly produce content, tools, events | Low/Med/High | Assessed during outreach |
-| Influence reach | Estimated practitioners/orgs this stakeholder can indirectly influence | Number | Proxy for indirect reach |
-| Sustainability maturity | How advanced is their sustainability thinking | Lagging/Emerging/Leading | For targeted engagement strategy |
-| Knowledge gap they have | What do they need that we could provide | Text | Unlocks two-way value exchange |
-| Trigger event / window | Upcoming conference, publication, policy moment creating collaboration window | Date + Text | Time-sensitive catalysts |
-
-### Engagement Tracking Fields
-
-| Field | Description | Type |
-|-------|-------------|------|
-| Engagement status | Prospect / In outreach / Active / Inactive | Enum |
-| Priority level | High / Medium / Low | Enum |
-| Engagement score | 0–100% estimated engagement depth | Number |
-| Notes | Free text — key contacts, context, next steps | Text |
-| Last updated | Date of last data update | Date |
-
----
-
-## Relationship Types & Flow
-
-### Relationship Categories
-
-| Type | Description | Direction |
+| Goal | Description | Feeds Into |
 |------|-------------|-----------|
-| Formal liaison | Officially established INCOSE liaison agreement | Bidirectional |
-| Collaboration (active) | Joint project, publication, or event underway | Bidirectional |
-| Collaboration (planned) | Agreed but not yet started | Bidirectional |
-| Knowledge flow | One org learns from / cites the other | Unidirectional |
-| Audience overlap | Serve overlapping practitioner/stakeholder audiences | Bidirectional |
-| Standards alignment | One org's standards inform or constrain the other | Unidirectional |
-| Funding relationship | One org funds or grants to the other | Unidirectional |
-| Membership / affiliation | One org is member body or affiliate of the other | Unidirectional |
-| Alumni / spin-off | One org originated from or is staffed by alumni | Unidirectional |
-| Competitive / overlapping mandate | Both orgs address similar problems — potential for merger of effort | Bidirectional |
-| Aspirational / target | Relationship that should be created | Unidirectional |
-
-### What Flows Across Relationships
-
-Tagging each relationship with **flow type** enables synergy analysis:
-
-- **Knowledge** — research, expertise, methodologies, frameworks
-- **Funding** — grants, in-kind support, co-investment
-- **Audience reach** — access to practitioners, members, decision-makers
-- **Co-authorship** — joint publications, white papers, standards contributions
-- **Standards influence** — one party shaping or being shaped by standards work
-- **Talent pipeline** — students, early-career professionals, speakers
-- **Legitimacy / endorsement** — association increases credibility
-- **Data / evidence** — research data, survey results, case studies
+| **Goal 1** | Identify organizations whose expertise can inform and strengthen the SuWG's work | Strategic positioning |
+| **Goal 2** | Map organizations and networks for partnership on sustainable solutions, publications, events, tools | Collaboration roadmap |
+| **Goal 3** | Understand target audience (SE practitioners, industries, educators) and their needs | Industry Needs project |
 
 ---
 
-## Network Science — Synergy Analysis
+## Scope & Deliverables
 
-### Minimum Viable Dataset
-
-- At least **30–40 stakeholder nodes** with complete role and goal fields
-- At least **1.5 relationships per node** on average (~50+ edges for 30 nodes)
-- **Relationship direction** and **flow type** tagged on all edges
-
-### Key Metrics to Compute
-
-| Metric | What it tells you | Tool |
-|--------|------------------|------|
-| Degree centrality | Which orgs have most direct connections | Gephi / NetworkX |
-| Betweenness centrality | Which orgs bridge otherwise disconnected clusters (broker potential) | Gephi / NetworkX |
-| Clustering coefficient | How tightly knit are sub-communities | NetworkX |
-| Community detection | Which natural clusters / sub-ecosystems exist | Gephi (modularity) |
-| Ego network analysis | What does immediate neighborhood of key org look like | NetworkX |
-| Temporal analysis | How is network growing / changing over time | Gephi timeline |
-
-### Finding Synergies
-
-1. **Identify brokers** — nodes with high betweenness but low clustering. Engaging them unlocks cross-cluster collaboration.
-2. **Find structural holes** — pairs of clusters with no current bridge. Opportunity for SuWG to become the bridge.
-3. **Map flow asymmetries** — if knowledge flows one-way but not back, there is unexploited reciprocal value exchange.
-4. **Detect emerging clusters** — new clusters around shared topics (circular economy + SE) signal emerging synergies to accelerate.
-5. **Trigger event alignment** — overlay trigger dates with network map to identify which time windows activate high-potential relationships.
+| Phase | Timeline | Key Activities | Output |
+|-------|----------|-----------------|--------|
+| **Phase 1: Definition** | Months 1–2 | Define taxonomy, information stack, relationship types; configure tooling; pilot 5–10 stakeholders | Data schema; Airtable configured; 10-node pilot |
+| **Phase 2: Build & Analyze** | Months 3–6 | Populate 30–40 stakeholders; map relationships; visualize in Kumu; run network metrics (Gephi) | Registry (30–40 nodes); network visualizations; initial metrics |
+| **Phase 3: Strategic Action** | Months 7–9 | Interpret findings; develop outreach roadmap; negotiate partnerships; publish insights | Engagement strategy; partnership agreements; ecosystem report |
 
 ---
 
-## Recommended Tooling
+## Stakeholder Taxonomy
 
-### Full Stack
+### Organization Classification System
 
-| Tool | Purpose | Cost |
-|------|---------|------|
-| Airtable / Notion | Stakeholder registry and information stack | Free tier |
-| Kumu.io | Relationship mapping and ecosystem visualization | Free (public maps) |
-| Gephi | Network analysis and community detection | Open source |
-| NetworkX (Python) | Programmatic graph analysis and metrics | Open source |
-| VOSviewer | Bibliometric co-authorship and keyword maps | Open source |
-| Tally / Google Forms | Audience needs surveys | Free |
-| HubSpot CRM (free) | Outreach and engagement tracking | Free tier |
+Use **9 overlapping categorization dimensions** to analyze stakeholders from multiple angles. See **CATEGORIZATION.md** for full definitions.
 
-### Recommended Starting Stack (Volunteer WG)
+| Dimension | Categories | Use For |
+|-----------|------------|---------|
+| **Decision Authority** | Policy-Maker, Standards-Setter, Market Leader, Ecosystem Builder, Advocate, Implementer, Learner | Who has power to mandate change? |
+| **SE Engagement** | Unaware, Aware, Engaged, Expert | How much SE knowledge do they have? |
+| **Sector/Domain** | Energy, Transportation, Circular Economy, Finance, IT, Governance, Education, Health, etc. | What problems do they solve? |
+| **Scale** | Global Mega, Large Regional, Mid-Market, Small, Startup, Network | How large is their reach? |
+| **Sustainability Maturity** | Leader, Committed, Aware, Lagging | How advanced is their practice? |
+| **Collaborative Readiness** | Ready to Co-Develop, Open, Cautious, Distant, Resistant | How willing to partner? |
+| **Engagement Stage** | Identified, Prospect, Engaged, Active, Dormant, Concluded | Where in our journey? |
+| **Geography** | Global, Continental, National, Regional, Distributed | Where do they operate? |
+| **Flow Contribution** | Knowledge, Standards, Funding, Audience, Implementation, Advocacy, Talent | What do they bring? |
 
-1. **Airtable** — stakeholder registry + relationships
-2. **Kumu.io** — visualization (once 30+ nodes)
-3. **Tally** — audience survey (Goal 3 data)
-4. **Gephi** — network analysis (when dataset mature)
-
----
-
-## Data Model Summary
-
-```
-Stakeholder
-├── id
-├── name
-├── category: Inside INCOSE | Outside INCOSE
-├── role: [primary or suggested role]
-├── geographic_scope
-├── goals_relevant: [G1, G2, G3, Network]
-├── priority: High | Medium | Low
-├── engagement_status: Prospect | Outreach | Active | Inactive
-├── engagement_score: 0–100
-├── expertise / focus_area
-├── audience_served
-├── key_contact
-├── communication_channels
-├── active_sustainability_initiatives
-├── se_awareness_level          # suggested
-├── sdg_alignment               # suggested
-├── sustainability_maturity     # suggested
-├── audience_overlap_index      # synergy
-├── complementary_capability    # synergy
-├── co_production_readiness     # synergy
-├── influence_reach             # synergy
-├── knowledge_gap_they_have     # synergy
-├── trigger_event               # synergy
-├── notes
-└── last_updated
-
-Relationship (edge between two Stakeholders)
-├── id
-├── source_stakeholder_id
-├── target_stakeholder_id
-├── relationship_type
-├── direction: Unidirectional | Bidirectional
-├── strength: Strong | Weak | Dormant
-├── flow_type: [Knowledge, Funding, Audience reach, Co-authorship, ...]
-├── collaboration_potential_score: 1–5
-├── blocker_gap
-├── shared_goals_overlap
-├── origin
-├── date_established
-├── last_interaction_date
-├── primary_contact_source
-├── primary_contact_target
-└── notes
-```
+**Recommended Implementation:** Add all 9 dimensions to Airtable. Use multi-dimensional filtering to identify high-value targets.
 
 ---
 
-## Deliverables & Phases
+## Information Architecture
 
-### Phase 1 — Definition & Structure (Current)
-- [x] Define goals and scope
-- [x] Establish stakeholder role taxonomy
-- [x] Design information stack (core + suggested fields)
-- [x] Define relationship types and flow categories
-- [ ] Select and configure tooling (Airtable + Kumu.io)
-- [ ] Create data entry templates
-- [ ] Validate with 5–10 pilot stakeholders
+### Stakeholder Fields
 
-### Phase 2 — Build & Analyze (30–40 nodes)
-- [ ] Populate stakeholder registry (core data)
-- [ ] Map key relationships and flow types
-- [ ] Visualize in Kumu.io (structural view)
-- [ ] Run initial network metrics (Gephi)
-- [ ] Identify brokers and structural holes
-- [ ] Conduct audience needs survey (Tally)
+| Category | Core Fields | Suggested Fields | Phase |
+|----------|------------|-----------------|-------|
+| **Identification** | name, organization_type, category | — | 1 |
+| **Strategic Context** | charter_mandate, primary_domain, geographic_scope | standards_issued, sdg_alignment | 1, 2 |
+| **Contact** | key_contact_name, key_contact_email, website | — | 1 |
+| **Engagement** | engagement_status, priority_level, engagement_score | collaborative_readiness | 1, 2 |
+| **Reach & Influence** | audience_served, funding_model | audience_overlap_index, influence_reach | 1, 2 |
+| **Sustainability** | active_initiatives | sustainability_maturity, se_awareness_level | 1, 2 |
 
-### Phase 3 — Strategic Application
-- [ ] Produce outreach roadmap based on priority tiers
-- [ ] Develop collaboration playbook (with targeted orgs)
-- [ ] Share findings with SuWG leadership
-- [ ] Publish ecosystem health report (public or internal)
+**Total:** 36 core fields (Phase 1) + 16 suggested fields (Phase 2)
+
+See **FIELDS.md** for complete field reference with types and definitions.
+
+### Relationship Fields
+
+| Type | Core (Phase 1) | Suggested (Phase 2) |
+|------|----------|---------|
+| **Definition** | relationship_type, direction, strength_frequency, date_established | flow_type, collaboration_potential_score |
+| **Contact** | primary_contact_source, primary_contact_target | — |
+| **Classification** | origin_description | blocker_gap, shared_goals_overlap |
+
+### Relationship Types
+
+| Type | Direction | Meaning |
+|------|-----------|---------|
+| Formal Liaison | Bidirectional | Officially established agreement |
+| Collaboration (Active) | Bidirectional | Joint work underway |
+| Collaboration (Planned) | Bidirectional | Agreed but not yet started |
+| Knowledge Flow | Unidirectional | One org learns from the other |
+| Audience Overlap | Bidirectional | Serve overlapping practitioners |
+| Standards Alignment | Unidirectional | One org's standards inform the other |
+| Funding Relationship | Unidirectional | One funds the other |
+| Membership/Affiliation | Unidirectional | Structural relationship |
+| Alumni/Spin-off | Unidirectional | Historical origin |
+| Competitive Overlap | Bidirectional | Both address similar problems |
+| Aspirational Target | Unidirectional | Relationship to be created |
+
+### Flow Types (What Travels on Relationships)
+
+| Flow Type | Description |
+|-----------|-------------|
+| Knowledge | Research, expertise, frameworks, methodologies |
+| Funding | Grants, in-kind support, co-investment |
+| Audience Reach | Access to practitioners, members, communities |
+| Co-authorship | Joint publications, standards contributions |
+| Standards Influence | Shaping compliance and regulatory frameworks |
+| Talent Pipeline | Students, speakers, early-career professionals |
+| Legitimacy/Endorsement | Credibility by association |
+| Data/Evidence | Research data, survey results, case studies |
 
 ---
 
-## Open Questions
+## Network Analysis Metrics
 
-1. **Individual members?** Should individual INCOSE SE practitioners be included as nodes, or only organizations?
-2. **Minimum dataset size?** What constitutes "ready for network analysis"?
-3. **Data ownership?** Who owns entry and maintenance within the WG — dedicated role or shared?
-4. **Privacy?** Should the map be public (shareable with external stakeholders) or private (internal WG)?
-5. **Update cadence?** How frequently should the network be re-analyzed for emerging synergies?
-6. **Integration?** Is there existing INCOSE CRM or database that should be integrated or avoided?
+Apply network science to ecosystem structure at Phase 2 (30–40 nodes). See **NETWORK_SCIENCE.md** for methodology.
+
+| Metric | Definition | Use For |
+|--------|-----------|---------|
+| **Degree Centrality** | Number of direct connections | Identify well-integrated organizations |
+| **Betweenness Centrality** | Frequency on shortest paths between nodes | Find brokers and structural bridges |
+| **Clustering Coefficient** | How densely connected are local neighborhoods | Identify tight sub-communities |
+| **Community Detection** | Natural clusters in the network (modularity) | Segment ecosystem into sectors/clusters |
+| **Ego Network Analysis** | Immediate neighborhood of key organizations | Understand influence sphere and reach |
+| **Temporal Metrics** | Network growth, dormancy, evolution | Track momentum and readiness for scaling |
+
+---
+
+## Tooling
+
+| Tool | Purpose | Cost | Status |
+|------|---------|------|--------|
+| **Airtable** | Stakeholder registry + relationship tracking | Free tier | Configure Phase 1 |
+| **Kumu.io** | Interactive network visualization | Free (public) | Ready at 20+ nodes |
+| **Gephi** | Network analysis & metrics computation | Free (open source) | Ready at 40+ nodes |
+| **Tally/Google Forms** | Audience needs survey | Free | Phase 2 |
+
+---
+
+## Data Entry Checklist
+
+### For Each Stakeholder (Phase 1)
+- [ ] Name, type, geographic scope
+- [ ] Key contact (name, email)
+- [ ] Primary domain/focus area
+- [ ] Charter/mandate (or key initiatives)
+- [ ] Audience served
+- [ ] Funding model
+- [ ] Engagement status, priority level
+- [ ] Notes
+
+### For Each Relationship (Phase 1)
+- [ ] Source & target stakeholder IDs
+- [ ] Relationship type
+- [ ] Direction (uni/bidirectional)
+- [ ] Strength (strong/weak/dormant)
+- [ ] Date established
+- [ ] Primary contacts on each side
+- [ ] Origin description
+
+---
+
+## Key Questions We Can Answer
+
+| Question | Analysis Required |
+|----------|-------------------|
+| Which organizations are most critical to our strategy? | Betweenness centrality + domain expertise |
+| Where are collaboration opportunities we're missing? | Structural hole detection (disconnected clusters) |
+| Who is most ready to partner with us now? | Filter: Collaborative Readiness = Ready + Engagement Stage = Prospect |
+| How do we reach practitioners in Energy sector? | Community detection + sector filtering + degree centrality |
+| What's our geographic coverage? | Group by Geography; identify gaps |
+| Are we representing all decision-making levels? | Filter by Decision Authority; assess distribution |
+| Which relationships have gone dormant? | Filter: Engagement Stage = Dormant + Last Interaction > 6 months |
+
+---
+
+## Documentation Reference
+
+| Document | Purpose |
+|----------|---------|
+| **FIELDS.md** | 61-field catalog (core + suggested + computed); data entry guide |
+| **DATA_MODEL.md** | Technical spec: Airtable schema, SysML patterns, validation rules, queries |
+| **NETWORK_SCIENCE.md** | Methodology guide: 6 key metrics, 7 strategic outputs, prerequisites |
+| **CATEGORIZATION.md** | 9 categorization dimensions; multi-dimensional filtering strategies |
+
+---
+
+## Success Metrics
+
+| Phase | Metric | Target |
+|-------|--------|--------|
+| **Phase 1** | Stakeholders registered | 10 (pilot) → 30 (end) |
+| **Phase 1** | Data completeness (core fields) | 100% |
+| **Phase 2** | Stakeholders registered | 40+ |
+| **Phase 2** | Edges in network | 50+; 1.5+ per node |
+| **Phase 2** | Key relationships mapped | All major connections captured |
+| **Phase 3** | Partnerships initiated | 3+ new active collaborations |
+| **Phase 3** | Outreach roadmap complete | Prioritized, evidence-based plan |
 
 ---
 
 ## Related Projects
 
-- **Understanding Industry Needs** — parallel effort defining what target stakeholders need
-- **SustainableTogether** — parent sustainability initiative and modeling workspace
+- **Understanding Industry Needs** — Parallel effort; feeds Goal 3 data
+- **SustainableTogether** — Parent sustainability initiative
 
 ---
 
-## How to Contribute
-
-This is a collaborative mapping initiative. Contributions include:
-- Stakeholder identification and research
-- Relationship discovery and validation
-- Taxonomy refinement
-- Network analysis and pattern discovery
-- Outreach and engagement
-- Documentation and communication
-
----
-
-**Project Status:** Phase 1 — Definition & Structure  
+**Project Status:** Phase 1 — Foundation & Tooling  
 **Last Updated:** 2026-04-16  
 **Maintained by:** INCOSE Sustainability Working Group
