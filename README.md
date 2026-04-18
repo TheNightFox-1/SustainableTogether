@@ -67,17 +67,91 @@ Topics covered:
 
 ## Getting Involved
 
-We welcome contributions from anyone — you do not need to be a systems engineer.
+We welcome contributions from anyone — you do not need to be a systems engineer or sustainability expert.
 
-| I want to... | How |
-|---|---|
-| Fix a typo or improve docs | Open a PR |
-| Share a presentation or resource | Open a [Content Contribution issue](../../issues/new?template=content_contribution.md) |
-| Propose a new idea | Open a [Feature Request](../../issues/new?template=feature_request.md) |
-| Report an error | Open a [Bug Report](../../issues/new?template=bug_report.md) |
-| Ask a question | Start a [Discussion](../../discussions) |
+### Two Ways to Contribute
 
-Read the full [Contributing Guide](CONTRIBUTING.md) to get started.
+#### **Path A: Work on Deliverables (GitHub Issues)**
+
+Pick a concrete issue from the [GitHub Project Board](https://github.com/users/TheNightFox-1/projects/3) and make a pull request.
+
+**Quick Start (3 Steps):**
+1. **Browse the project board** for issues labeled `good-first-issue` or `help-wanted`
+2. **Claim an issue** by commenting "I'll work on this" — maintainers will assign you
+3. **Follow the workflow:**
+   - Create a branch: `git checkout -b issue-#N-brief-title`
+   - Work locally, validate your changes (SysIDE for SysML, LCA pipeline for LCA)
+   - Open a Pull Request linking to the issue with `Closes #N`
+   - Maintainers review and merge
+
+**Best for:** People who want **focused, bounded tasks** they can complete in 1–2 weeks.
+
+#### **Path B: Join a WG Workstream (Ongoing Research)**
+
+Contribute to one of **18 INCOSE Sustainability WG task groups** — ongoing research and community activities.
+
+**How to Get Involved:**
+1. **Browse the [WG Leadership Tracker](SustainableTogether%20Approach/WG_Leadership_Tracker_csv.csv)** to see all workstreams
+2. **Find an open role** that matches your expertise (Business Models, Digital Engineering, Circular Economy, Risk Analysis, etc.)
+3. **Volunteer** — contact the workstream lead or comment on the tracker "I'd like to volunteer for X"
+4. **Contribute asynchronously** — sync at monthly WG meetings; coordinate smaller deliverables as needed
+
+**Active Workstreams** (with assigned leads):
+- Systems Thinking / System Dynamics
+- Life Cycle Assessment (LCA)
+- Sustainability Requirements
+- INCOSE Connect Moderation
+- Manage Networking
+
+**Open Workstreams** (recruiting volunteers):
+- Business Models & Circular Economy
+- Digital Engineering & MBSE
+- GitHub Management & Repo Structure
+- Enterprise Architecture
+- Enabling Systems & Tools
+- Regeneration & Beyond-Sustainability
+- Risk Analysis & Regulatory Compliance
+- And more — see **[WORKSTREAMS.md](WORKSTREAMS.md)** for all 18 with full descriptions
+
+**Best for:** People who want **deeper, ongoing involvement** in research, strategy, or community building.
+
+---
+
+### Contribution Types (Issue-Based)
+
+| I want to... | Where | Effort |
+|---|---|---|
+| **Work on the SysML model** | Pick an architecture issue (#3–#5) from the project board | Intermediate |
+| **Run LCA analysis** | Pick an LCA issue (#6–#8), use openLCA + SimpleLCAIntegration2 pipeline | Advanced |
+| **Write documentation** | Pick a docs issue (#9, #14), or improve guides in `docs/` | Beginner |
+| **Design SustainaSun strategy** | Join the Business Models workstream or pick issues #10–#13 | Intermediate |
+| **Ask a question** | Start a [Discussion](../../discussions) or comment on an issue | Any |
+| **Report a bug** | Open an issue with error details (SysIDE Problems, LCA validation logs) | Any |
+| **Share resources** | Open an issue or discussion with links/documents | Any |
+
+---
+
+### Full Guides
+
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — Complete contribution workflow, PR checklist, SysIDE validation tips, how to choose your path
+- **[SustainableTogether Approach / COLLABORATION_WORKFLOW.md](./SustainableTogether%20Approach/COLLABORATION_WORKFLOW.md)** — Detailed workflow, issue templates, project board columns, review process
+- **[SustainableTogether Approach / CLAUDE.md](./SustainableTogether%20Approach/CLAUDE.md)** — Generic Approach framework, WG task groups, how milestones map to workstreams
+
+### Current Milestones (Work One at a Time)
+
+1. **SolarX AS-IS Complete** ← **Current focus** (Issues #3–#9)
+   - Full SysML v2 model (all 9 SYSMOD steps)
+   - LCA baseline for all 5 components
+   - Non-engineer documentation
+
+2. **SustainaSun v1** (Issues #10–#12)
+   - Business model transformation (PaaS leasing)
+   - Enterprise architecture (new capabilities)
+   - 9R circular economy strategy alignment
+
+3. **DPP Integration** (Issues #13–#14)
+   - Digital Product Passport (EU ESPR compliance)
+   - Regulatory alignment documentation
 
 ---
 
