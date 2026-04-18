@@ -40,13 +40,38 @@ This repository serves as a shared knowledge base and collaborative workspace fo
 
 ```
 SustainableTogether/
-├── System Model/          # SysML/MBSE models for the SolarX → SustainaSun system
-│   └── SolarX/            # PV system: PVArray, Inverter, Battery, Controller, Grid
-├── Our Presentations/     # Presentations and publications by the working group
-├── SustainabilityWebinarSeries/  # Slides from the INCOSE Sustainability Webinar Series
-├── docs/                  # Full documentation (also published via GitHub Pages)
-└── README.md              # You are here
+├── SustainableTogether Approach/          # Governance, methodology, and framework
+│   ├── README.md                          # Generic Approach Framework (8 layers + holistic topics)
+│   ├── CLAUDE.md                          # Guidance for AI contributors in this workspace
+│   ├── COLLABORATION_WORKFLOW.md          # Detailed issue templates, PR workflow, review process
+│   └── WG_Leadership_Tracker_csv.csv      # All 18 WG task groups: leads, status, time commitment
+│
+├── SustainableTogether Projects/          # Concrete case studies and implementations
+│   ├── System Model/                      # SysML v2/MBSE models for SolarX → SustainaSun
+│   │   ├── SolarX/                        # AS-IS baseline: PVArray, Inverter, Battery, Controller, Grid
+│   │   └── [Future] SustainaSun/          # TO-BE transformation model (Milestone 2)
+│   └── Sustainability Stakeholder Mapping/  # Ecosystem analysis: partners, collaborators, target audiences
+│
+├── Our Presentations/                     # Presentations and publications by the working group
+├── SustainabilityWebinarSeries/           # Slides from the INCOSE Sustainability Webinar Series
+├── docs/                                  # Full documentation (also published via GitHub Pages)
+│
+├── README.md                              # You are here — Vision, contribution paths, milestones
+├── CONTRIBUTING.md                        # How to contribute: issue vs. workstream pathway routing
+├── WORKSTREAMS.md                         # All 18 INCOSE Sustainability WG task groups with descriptions
+├── LICENSE                                # MIT License
+└── On-Boarding Document                   # Introduction to SustainableTogether & INCOSE Sustainability WG
 ```
+
+### Key Directories
+
+| Directory | Purpose | Owner |
+|---|---|---|
+| **SustainableTogether Approach/** | Framework, governance, contribution guidance, WG tracker | Sustainability WG |
+| **SustainableTogether Projects/** | Case studies, SysML models, ecosystem analysis | Contributors |
+| **docs/** | GitHub Pages documentation | Contributors |
+| **Our Presentations/** | Community outreach and thought leadership | Contributors |
+| **SustainabilityWebinarSeries/** | Recorded webinar materials | Content workstream |
 
 ---
 
@@ -131,11 +156,20 @@ Contribute to one of **18 INCOSE Sustainability WG task groups** — ongoing res
 
 ---
 
-### Full Guides
+### Full Guides & Documentation
 
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** — Complete contribution workflow, PR checklist, SysIDE validation tips, how to choose your path
-- **[SustainableTogether Approach / COLLABORATION_WORKFLOW.md](./SustainableTogether%20Approach/COLLABORATION_WORKFLOW.md)** — Detailed workflow, issue templates, project board columns, review process
-- **[SustainableTogether Approach / CLAUDE.md](./SustainableTogether%20Approach/CLAUDE.md)** — Generic Approach framework, WG task groups, how milestones map to workstreams
+**Getting Started:**
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — How to contribute, issue vs. workstream pathway routing, PR checklist
+- **[Onboarding Document](On-Boarding%20SustainableTogether%20and%20INCOSE%20Sustianability%20WG.pdf)** — Full introduction to SustainableTogether and INCOSE Sustainability WG
+
+**Framework & Governance:**
+- **[SustainableTogether Approach / README.md](./SustainableTogether%20Approach/README.md)** — Generic Approach Framework: 8-layer transformation journey with milestone mapping
+- **[WORKSTREAMS.md](WORKSTREAMS.md)** — All 18 INCOSE Sustainability WG task groups with descriptions, leads, and how to participate
+- **[WG_Leadership_Tracker_csv.csv](./SustainableTogether%20Approach/WG_Leadership_Tracker_csv.csv)** — Current leads, co-leads, and open roles
+
+**Detailed Workflows:**
+- **[SustainableTogether Approach / COLLABORATION_WORKFLOW.md](./SustainableTogether%20Approach/COLLABORATION_WORKFLOW.md)** — Issue templates, PR workflow, project board columns, review process
+- **[SustainableTogether Approach / CLAUDE.md](./SustainableTogether%20Approach/CLAUDE.md)** — Guidance for AI contributors and system implementers
 
 ### Current Milestones (Work One at a Time)
 
