@@ -76,7 +76,7 @@ We welcome contributions from anyone — you do not need to be a systems enginee
 Pick a concrete issue from the [GitHub Project Board](https://github.com/users/TheNightFox-1/projects/3) and make a pull request.
 
 **Quick Start (3 Steps):**
-1. **Browse the project board** for issues labeled `good-first-issue` or `help-wanted`
+1. **Browse the issues** for an issue that interest you
 2. **Claim an issue** by commenting "I'll work on this" — maintainers will assign you
 3. **Follow the workflow:**
    - Create a branch: `git checkout -b issue-#N-brief-title`
