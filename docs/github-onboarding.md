@@ -58,33 +58,57 @@ Work through this once. Tick each item as you go.
 - [ ] Know how to leave a **comment** on an issue or PR
 - [ ] Pick one of the three working methods below and get it set up
 
-**Make your first contribution**
+**Make your first contribution** — the onboarding exercise
 
-- [ ] **Raise an issue** describing what you want to add, fix, or ask (see the walkthrough below)
-- [ ] Wait for a maintainer to react or comment — they will confirm the scope
-- [ ] Make your change using one of the three methods below
-- [ ] Open a pull request and link your issue with `Closes #N`
-- [ ] Respond to any review comments — then watch it get merged
+- [ ] **Raise an issue** with the "I'm on board 👋" template to introduce yourself
+- [ ] Wait for a maintainer to say hello and confirm
+- [ ] **Add a row about yourself** to the [onboarding wall](onboarding-roster.md)
+- [ ] **Open a pull request** that closes your issue with `Closes #N`
+- [ ] Respond to any review comments — then watch it get merged and your name appear
 
 If you get stuck at any step, that is normal. Open a [Discussion](https://github.com/TheNightFox-1/SustainableTogether/discussions) and ask. Asking early is welcome here.
 
 ---
 
-## Start by raising an issue
+## Why you raise an issue first
 
 The first thing you do here is not edit a file — it is **raise an issue**. An issue is where you describe what you want to contribute *before* you do the work. It gives the team a chance to point you in the right direction, prevents two people doing the same thing, and gives your later pull request something to link to.
 
-**To raise an issue:**
-
-1. Go to the **[Issues tab](https://github.com/TheNightFox-1/SustainableTogether/issues)** and click **New issue**.
-2. Pick the template that fits (bug report, feature request, or content contribution).
-3. Give it a clear title and describe what you want to do and why. The more specific, the faster the team can help.
-4. Click **Submit new issue**.
-
-A maintainer will respond, confirm the scope, and assign it to you. Now you have a home for your work and a number (`#N`) to reference. From here, you make your change with one of the three methods below and open a pull request that closes the issue.
-
 !!! note "Why raise an issue first?"
     It turns a private idea into a visible, trackable piece of work. Maintainers can guide you before you invest time, and your contribution becomes part of the project's shared history — not a surprise.
+
+---
+
+## Your first contribution: add yourself to the wall
+
+The best way to learn GitHub is to use it on something real and low-stakes. So your first contribution is to **add yourself to the [onboarding wall](onboarding-roster.md)** — a shared list of everyone who has joined. Doing it takes you through the entire workflow once, start to finish.
+
+You can do every step **in your browser** (method A) — no installs needed.
+
+**Step 1 — Raise your onboarding issue**
+
+1. Go to **[New issue](https://github.com/TheNightFox-1/SustainableTogether/issues/new/choose)** and choose the **"I'm on board 👋"** template.
+2. Introduce yourself: your name, a line about your background, and what brings you here.
+3. Click **Submit new issue**. Note its number — that is your `#N`.
+
+A maintainer will say hello and confirm. Now you have an issue to close.
+
+**Step 2 — Add your row to the wall**
+
+1. Open **[docs/onboarding-roster.md](onboarding-roster.md)** and click the **pencil icon** (✏️ Edit this file).
+2. Add one row to the table, just above the `<!-- add your row above this line -->` marker, keeping the same `| Name | Role | Country | What brings me here |` format.
+3. Below the editor, write a commit message like `Add: <your name> to onboarding wall`.
+4. Choose **"Create a new branch for this commit and start a pull request"** and click **Propose changes**.
+
+**Step 3 — Open the pull request**
+
+1. On the next screen, in the description write `Closes #N` (your issue number from Step 1).
+2. Click **Create pull request**.
+
+That is it — you have raised an issue, made a change on a branch, committed it, and opened a PR, entirely in the browser. A maintainer reviews and merges, your issue closes automatically, and your name is on the wall. You now know the core GitHub loop and can repeat it for any real contribution.
+
+!!! tip "Prefer the app or local Git?"
+    You can do the same exercise with **GitHub Desktop** (method B) or a **local clone** (method C) — clone the repo, create a branch, edit `docs/onboarding-roster.md`, commit, push, and open the PR. Same loop, different tool.
 
 ---
 
