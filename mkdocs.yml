@@ -38,6 +38,7 @@ nav:
   - Presentations: presentations.md
   - Webinar Series: webinar-series.md
   - Roadmap: roadmap.md
+  - GitHub Onboarding: github-onboarding.md
   - Contributing: contributing.md
 
 plugins:

@@ -193,6 +193,8 @@ Contribute to one of **18 INCOSE Sustainability WG task groups** — ongoing res
 
 New to the project? Start with the [Onboarding Document](On-Boarding%20SustainableTogether%20and%20INCOSE%20Sustianability%20WG.pdf) for a full introduction to SustainableTogether and the INCOSE Sustainability Working Group.
 
+**Never used GitHub before?** Read the [GitHub Onboarding for Beginners](docs/github-onboarding.md) guide: plain-language basics, a step-by-step checklist, and the three ways to use GitHub (web browser, GitHub Desktop, or a local folder). It also walks you through raising your first issue and turning it into a pull request.
+
 
 
 ---
