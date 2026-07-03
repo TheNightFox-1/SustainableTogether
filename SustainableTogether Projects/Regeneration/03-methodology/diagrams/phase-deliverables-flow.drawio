@@ -1,0 +1,154 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Phase Deliverables Flow" id="deliverables-flow">
+    <mxGraphModel dx="1800" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Phase deliverables flow — what each phase produces, what the next consumes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1720" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Phase nodes (left column) -->
+        <mxCell id="P1" value="Phase 1&#10;Frame ambition" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="100" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P2" value="Phase 2&#10;Read the place" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P3" value="Phase 3&#10;Diagnose state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="340" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P4" value="Phase 4&#10;Map lifecycle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="460" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P5" value="Phase 5&#10;Pick solutions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="580" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P6" value="Phase 6&#10;Synthesize" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="700" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P7" value="Phase 7&#10;Business model" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="820" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P8" value="Phase 8&#10;Implement &amp; learn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="60" y="940" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Deliverables column -->
+        <mxCell id="d1" value="• Ambition Statement (six-capital target table)&#10;• Time horizons per capital&#10;• Reference / comparator per target&#10;• Triple Top Line aggregation justification&#10;• Governance commitments (FPIC, CARE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="80" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="• Story of Place dossier (geology, hydrology, biota, climate, history, Indigenous knowledge, socio-economy)&#10;• Bioregional GIS map&#10;• Stakeholder + knowledge-holder register&#10;• Conventional site-assessment sub-report&#10;• Climate-projection memo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="• Local Doughnut report (12 social + 9 ecological)&#10;• Baseline LCA report (ISO 14040/14044, IEA PVPS T12)&#10;• Baseline ecological/social monitoring data&#10;• Counterfactual specification&#10;• Phase 1 reconciliation note" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="320" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" value="• Populated 8×6 lifecycle×capital matrix&#10;• Mechanism-activation map (M1–M5)&#10;• Gap log (cells without regen vector)&#10;• Crosswalk to ESPR/WEEE/Taxonomy criteria" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="440" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" value="• Solution-instantiated matrix (cells reference taxonomy IDs)&#10;• Per-cell quantitative target deltas with baseline pairings&#10;• Risk register (overclaiming, climate-trajectory)&#10;• Indigenous-knowledge attribution where relevant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="560" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d6" value="• Coherent design specification (cross-phase consistency check)&#10;• Identified SysML v2 hooks (deferred to a later pass)&#10;• Identified openLCA hooks (Hamza's Stage 1–3 pipeline)&#10;• Synthesis dossier hand-off" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="680" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d7" value="• Business model canvas (Performance Economy, EMF archetype)&#10;• Governance &amp; ownership structure (cooperative, REC/CEC)&#10;• EU Taxonomy &amp; CSRD alignment memo&#10;• Decommissioning bond + take-back contracts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="800" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d8" value="• MRV protocol (citizen-science-grade)&#10;• Adaptive management triggers&#10;• Annual public report (capitals, MRV, divergences)&#10;• Year 0 / 1 / 5 / 10 verification reports&#10;• Feedback memo to Phase 1 (next cycle)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="920" width="360" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Consumed-by column -->
+        <mxCell id="c1" value="Consumed by:&#10;Phases 4, 5, 7, 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="120" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="Consumed by:&#10;Phases 3, 4, 5, 7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="240" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="Consumed by:&#10;Phases 4, 5, 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="360" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="Consumed by:&#10;Phase 5 (population),&#10;Phase 8 (verification)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="480" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="Consumed by:&#10;Phase 6 (synthesis),&#10;Phase 7 (business)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="600" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="Consumed by:&#10;Phase 7 + later SysML v2 + openLCA layers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="720" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="Consumed by:&#10;Phase 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="840" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" value="Feeds back to:&#10;Phase 1 (next cycle)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="760" y="960" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- External anchors column -->
+        <mxCell id="x1" value="External anchors used in Phase 1&#10;• C2C Triple Top Line (McDonough &amp; Braungart, 2002)&#10;• Reed (2007) ambition ladder" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="100" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x2" value="External anchors used in Phase 2&#10;• Regenesis Story of Place (Mang &amp; Reed, 2012)&#10;• FPIC + CARE (UNDRIP, GIDA 2019)&#10;• Copernicus / IPCC AR6 regional projections" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="220" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x3" value="External anchors used in Phase 3&#10;• Doughnut Economics (Raworth, 2017)&#10;• ISO 14040/14044&#10;• IEA PVPS Task 12 (Frischknecht et al., 2020)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="340" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x4" value="External anchors used in Phase 4&#10;• Lifecycle thinking + 8 stages aligned to PVPS T12&#10;• 6 capitals (Capitals Coalition)&#10;• 5 mechanisms (taxonomy, Bassam 2026)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="460" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x5" value="External anchors used in Phase 5&#10;• 144-solution taxonomy (Bassam, 2026)&#10;• EMF circular-economy archetypes&#10;• Indigenous knowledge (Domain 8) — first-class" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="580" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x6" value="External anchors used in Phase 6&#10;• MBSE / SysML v2 (textual; deferred here)&#10;• openLCA semantic integration (Hamza, Stage 1–3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="700" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x7" value="External anchors used in Phase 7&#10;• Performance Economy (Stahel, 2010)&#10;• EU Taxonomy &amp; CSRD&#10;• Ostrom (1990) commons design principles&#10;• ReFi caution (taxonomy critique)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="820" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x8" value="External anchors used in Phase 8&#10;• Adaptive management (Holling)&#10;• Citizen science protocols&#10;• Living-lab posture (Wahl, 2016)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="940" width="320" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Edges Phase->Deliverables -->
+        <mxCell id="ed1" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P1" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed2" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P2" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed3" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P3" target="d3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed4" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P4" target="d4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed5" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P5" target="d5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed6" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P6" target="d6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed7" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P7" target="d7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed8" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0" edge="1" parent="1" source="P8" target="d8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Feedback loop -->
+        <mxCell id="fb" value="learning loop" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#B85450;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;fontSize=11;fontColor=#B85450;labelBackgroundColor=#ffffff" edge="1" parent="1" source="P8" target="P1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="980" />
+              <mxPoint x="20" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

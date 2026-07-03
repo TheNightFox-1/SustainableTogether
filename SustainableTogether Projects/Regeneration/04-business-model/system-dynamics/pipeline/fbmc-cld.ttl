@@ -1,0 +1,83 @@
+# fbmc-cld.ttl — TBox: FBMC ⇄ CLD alignment ontology (L2)
+# Per Semantic-Integration-Playbook.md §C3. Source metamodel: FBMC-CLD-Alignment-Ontology.drawio
+# Domain ontology cited: Upward & Jones (2015) SSBMO.
+@prefix :     <https://w3id.org/sustainabletogether/fbmc-cld#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<https://w3id.org/sustainabletogether/fbmc-cld> a owl:Ontology ;
+    rdfs:label "FBMC-CLD Alignment Ontology" ;
+    rdfs:comment "Bridge ontology: Flourishing Business Model Canvas elements to Causal Loop Diagram / System Dynamics variables via MeasurableAttributes." ;
+    rdfs:seeAlso "Upward, A. & Jones, P. (2015). An Ontology for Strongly Sustainable Business Models. Organization & Environment." ;
+    owl:versionInfo "0.1" .
+
+### Classes ####################################################################
+
+:FBMCElement a owl:Class ;
+    rdfs:label "FBMC element" ;
+    rdfs:comment "Any block entry of the canvas (SSBMO). Elements are things; they do not vary." .
+
+:FBMCBlock a owl:Class ;
+    rdfs:label "FBMC block" ;
+    rdfs:comment "One of the canvas blocks (Actors, Needs, ... , Goals) or context layers." .
+
+:MeasurableAttribute a owl:Class ;
+    rdfs:label "measurable attribute" ;
+    rdfs:comment "BRIDGE: a time-varying, measurable attribute of exactly one FBMCElement/Block; exactly what a CLD variable measures." .
+
+:SystemVariable a owl:Class ;
+    rdfs:label "system variable" ;
+    rdfs:comment "A CLD/SD variable. Realizes at most one MeasurableAttribute (cardinality enforced by SHACL, I1)." .
+
+:CausalLink a owl:Class ;
+    rdfs:label "causal link" .
+
+:FeedbackLoop a owl:Class ;
+    rdfs:label "feedback loop" ;
+    rdfs:comment "Loop type (R/B) is DERIVED from link polarities, never asserted independently (I3)." .
+
+:ChangeRecord a owl:Class ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:label "change record" ;
+    rdfs:comment "One ChangeLog row; every registry entity must be generated/modified by one (I7)." .
+
+### Object properties ##########################################################
+
+:isAttributeOf a owl:ObjectProperty ;
+    rdfs:domain :MeasurableAttribute ; rdfs:range :FBMCBlock ;
+    rdfs:comment "Anchor: exactly one per attribute (bridge cardinality rule)." .
+
+:realizes a owl:ObjectProperty ;
+    rdfs:domain :SystemVariable ; rdfs:range :MeasurableAttribute .
+
+:from a owl:ObjectProperty ; rdfs:domain :CausalLink ; rdfs:range :SystemVariable .
+:to   a owl:ObjectProperty ; rdfs:domain :CausalLink ; rdfs:range :SystemVariable .
+
+:hasLink a owl:ObjectProperty ;
+    rdfs:domain :FeedbackLoop ; rdfs:range :CausalLink .
+
+### Datatype properties ########################################################
+
+:canonicalName      a owl:DatatypeProperty ; rdfs:domain :MeasurableAttribute ; rdfs:range xsd:string .
+:definition         a owl:DatatypeProperty ; rdfs:range xsd:string .
+:unit               a owl:DatatypeProperty ; rdfs:range xsd:string ;
+    rdfs:comment "Plain-text for now; link to QUDT units at L4." .
+:dimension          a owl:DatatypeProperty ; rdfs:range xsd:string .
+:sdType             a owl:DatatypeProperty ; rdfs:range xsd:string ;
+    rdfs:comment "Stock | Flow | Auxiliary | Parameter | Output (SKOS scheme at L4)." .
+:inCldBoundary      a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+:exclusionRationale a owl:DatatypeProperty ; rdfs:range xsd:string .
+:variableName       a owl:DatatypeProperty ; rdfs:domain :SystemVariable ; rdfs:range xsd:string .
+:polarity           a owl:DatatypeProperty ; rdfs:domain :CausalLink ; rdfs:range xsd:string .
+:hasDelay           a owl:DatatypeProperty ; rdfs:domain :CausalLink ; rdfs:range xsd:boolean .
+:rationale          a owl:DatatypeProperty ; rdfs:range xsd:string .
+:loopType           a owl:DatatypeProperty ; rdfs:domain :FeedbackLoop ; rdfs:range xsd:string .
+:orderedLinkIds     a owl:DatatypeProperty ; rdfs:domain :FeedbackLoop ; rdfs:range xsd:string .
+:archetype          a owl:DatatypeProperty ; rdfs:domain :FeedbackLoop ; rdfs:range xsd:string .
+:status             a owl:DatatypeProperty ; rdfs:range xsd:string .
+:version            a owl:DatatypeProperty ; rdfs:range xsd:string .
+:nameV1             a owl:DatatypeProperty ; rdfs:comment "Legacy name in paper v1." .
+:nameV2             a owl:DatatypeProperty ; rdfs:comment "Legacy name in paper v2." .

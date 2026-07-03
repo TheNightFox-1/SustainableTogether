@@ -58,6 +58,9 @@ site/
 *.lock
 .metadata/
 
+# draw.io lock/autosave files
+.$*.bkp
+
 # Jupyter
 .ipynb_checkpoints/
 

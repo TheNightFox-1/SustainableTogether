@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Five Recurring Mechanisms" id="five-mech">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Five Recurring Regenerative Mechanisms (M1–M5)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A regenerative PV design should activate at least three of M1–M5 explicitly." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="65" width="1320" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Central concept -->
+        <mxCell id="centre" value="Regenerative PV&#10;design" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=18;fontStyle=1;align=center;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="600" y="380" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- M1: Loop closure -->
+        <mxCell id="m1" value="&lt;b&gt;M1 · Loop closure&lt;/b&gt;&#10;&#10;Material/energy outputs become inputs again." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=0;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="m1ex" value="PV examples:&#10;• Closed-loop module recycling (FRELP, ROSI)&#10;• Reuse of decommissioned modules&#10;• PVT hybrids recovering waste heat&#10;• Returnable transport packaging" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="80" y="245" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- M2: Hydrological retention -->
+        <mxCell id="m2" value="&lt;b&gt;M2 · Hydrological retention&#10;and slow release&lt;/b&gt;&#10;&#10;Keep water in/on the landscape longer." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="120" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="m2ex" value="PV examples:&#10;• Keylines, swales, infiltration trenches at L4&#10;• Agrivoltaic shade reducing ET&#10;• FPV evaporation suppression (suitable sites only)&#10;• Soil-microbiome-supporting mowing regime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="245" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- M3: Photosynthetic carbon transfer -->
+        <mxCell id="m3" value="&lt;b&gt;M3 · Photosynthetic carbon transfer&lt;/b&gt;&#10;&#10;Solar energy captured biologically and routed to recalcitrant pools." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="80" y="640" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="m3ex" value="PV examples:&#10;• Pollinator/species-rich understorey&#10;• Sheep grazing under elevated arrays&#10;• Hedgerow + agroforestry integration&#10;• Soil-organic-carbon accrual targets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="80" y="540" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- M4: Biological self-organisation -->
+        <mxCell id="m4" value="&lt;b&gt;M4 · Biological self-organisation&#10;under managed disturbance&lt;/b&gt;&#10;&#10;Set boundary conditions; let ecology do the work." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="640" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="m4ex" value="PV examples:&#10;• Managed grazing rotations&#10;• Mowing timed to flowering / nesting cycles&#10;• Fire-resilient vegetation strips&#10;• Boundary fencing tuned for fauna passage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1040" y="540" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- M5: Co-evolutionary place-based design -->
+        <mxCell id="m5" value="&lt;b&gt;M5 · Co-evolutionary place-based design&lt;/b&gt;&#10;&#10;Design specific to bioregion + cultures, evolving with them." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;align=center;verticalAlign=middle;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="560" y="780" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="m5ex" value="PV examples:&#10;• Siting around migratory corridors / Indigenous land claims&#10;• Governance fitting local cooperative tradition&#10;• Tech matched to local repair economy&#10;• Story of Place output drives Phase 4 selection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="320" y="780" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="m5ex2" value="Honours Indigenous knowledge as first-class engineering input.&#10;Subject to FPIC + CARE principles." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="840" y="780" width="240" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Connections to centre -->
+        <mxCell id="e1" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#6c8ebf;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.2;entryY=0.2;entryDx=0;entryDy=0" edge="1" parent="1" source="m1" target="centre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#82b366;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.8;entryY=0.2;entryDx=0;entryDy=0" edge="1" parent="1" source="m2" target="centre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#82b366;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.2;entryY=0.8;entryDx=0;entryDy=0" edge="1" parent="1" source="m3" target="centre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#82b366;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.8;entryY=0.8;entryDx=0;entryDy=0" edge="1" parent="1" source="m4" target="centre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#9673a6;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0" edge="1" parent="1" source="m5" target="centre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Note on stage activation -->
+        <mxCell id="note" value="Typical stage activation for a regenerative PV design&#10;• L1, L2, L6, L8: M1 dominant&#10;• L4: M1, M2, M3, M5&#10;• L5: M2, M3, M4, M5 (the operational regenerative core)&#10;• L7: M3 (re-measurement of biota), M5 (return to community)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="500" y="120" width="400" height="180" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

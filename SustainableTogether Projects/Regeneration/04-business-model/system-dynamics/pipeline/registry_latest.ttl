@@ -1,0 +1,840 @@
+@prefix : <https://w3id.org/sustainabletogether/fbmc-cld#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:B1 a :FeedbackLoop ;
+    rdfs:label "Actor pool saturation" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Limits to growth (market)" ;
+    :hasLink :L01,
+        :L02,
+        :L03 ;
+    :loopType "B" ;
+    :orderedLinkIds "L02,L03,L01" .
+
+:B2 a :FeedbackLoop ;
+    rdfs:label "Service overload" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Growth & underinvestment (with R2)" ;
+    :hasLink :L01,
+        :L04,
+        :L05,
+        :L08,
+        :L09,
+        :L12 ;
+    :loopType "B" ;
+    :orderedLinkIds "L09,L12,L08,L05,L04,L01" .
+
+:B3 a :FeedbackLoop ;
+    rdfs:label "Co-destruction drag" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Externality backlash" ;
+    :hasLink :L01,
+        :L04,
+        :L05,
+        :L07,
+        :L09,
+        :L11 ;
+    :loopType "B" ;
+    :orderedLinkIds "L09,L11,L07,L05,L04,L01" .
+
+:B4 a :FeedbackLoop ;
+    rdfs:label "Ecological source limit" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Limits to growth (biophysical)" ;
+    :hasLink :L01,
+        :L04,
+        :L05,
+        :L08,
+        :L09,
+        :L13,
+        :L18,
+        :L19,
+        :L20,
+        :L21 ;
+    :loopType "B" ;
+    :orderedLinkIds "L18,L19,L20,L21,L13,L08,L05,L04,L01,L09" .
+
+:B5 a :FeedbackLoop ;
+    rdfs:label "Governance goal-seeking" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Goal-seeking control" ;
+    :hasLink :L01,
+        :L04,
+        :L05,
+        :L08,
+        :L09,
+        :L10,
+        :L13,
+        :L25,
+        :L28,
+        :L30,
+        :L31 ;
+    :loopType "B" ;
+    :orderedLinkIds "L28,L30,L31,L13,L08,L05,L04,L01,L09,L10,L25" .
+
+:Block_Context_Economy a :FBMCBlock ;
+    rdfs:label "Context: Economy" .
+
+:Block_Context_Environment a :FBMCBlock ;
+    rdfs:label "Context: Environment" .
+
+:L16 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-003-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Engagement strengthens partnerships" ;
+    :status "draft" ;
+    :to :GEN-012-var .
+
+:L17 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-012-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Partnerships give access to resources" ;
+    :status "draft" ;
+    :to :GEN-010-var .
+
+:L24 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-013-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Governance directs regeneration effort" ;
+    :status "draft" ;
+    :to :GEN-016-var .
+
+:L26 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-009-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Activity incurs costs" ;
+    :status "draft" ;
+    :to :GEN-018-var .
+
+:L27 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-007-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Co-destruction adds (external) costs" ;
+    :status "draft" ;
+    :to :GEN-018-var .
+
+:L29 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-018-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Costs widen the goal gap" ;
+    :status "draft" ;
+    :to :GEN-020-var .
+
+:L33 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-007-var ;
+    :hasDelay true ;
+    :polarity "-" ;
+    :rationale "Harm erodes legitimacy" ;
+    :status "draft" ;
+    :to :GEN-021-var .
+
+:R1 a :FeedbackLoop ;
+    rdfs:label "Value engagement engine" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Growth engine" ;
+    :hasLink :L01,
+        :L04,
+        :L05,
+        :L06,
+        :L09,
+        :L10 ;
+    :loopType "R" ;
+    :orderedLinkIds "L09,L10,L06,L05,L04,L01" .
+
+:R2 a :FeedbackLoop ;
+    rdfs:label "Capability reinvestment" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Investment engine" ;
+    :hasLink :L01,
+        :L04,
+        :L05,
+        :L08,
+        :L13,
+        :L14,
+        :L15 ;
+    :loopType "R" ;
+    :orderedLinkIds "L15,L14,L13,L08,L05,L04,L01" .
+
+:R3 a :FeedbackLoop ;
+    rdfs:label "Regenerative reinvestment" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Regeneration engine" ;
+    :hasLink :L01,
+        :L04,
+        :L05,
+        :L08,
+        :L13,
+        :L15,
+        :L20,
+        :L21,
+        :L22,
+        :L23 ;
+    :loopType "R" ;
+    :orderedLinkIds "L23,L22,L20,L21,L13,L08,L05,L04,L01,L15" .
+
+:R4 a :FeedbackLoop ;
+    rdfs:label "Legitimacy engine" ;
+    prov:wasGeneratedBy :change-001 ;
+    :archetype "Reputation engine" ;
+    :hasLink :L01,
+        :L09,
+        :L10,
+        :L25,
+        :L32,
+        :L34 ;
+    :loopType "R" ;
+    :orderedLinkIds "L32,L34,L01,L09,L10,L25" .
+
+:Block_Activities_Process a :FBMCBlock ;
+    rdfs:label "Activities (Process)" .
+
+:Block_Actors_Who a :FBMCBlock ;
+    rdfs:label "Actors (Who)" .
+
+:Block_Benefits_Outcomes a :FBMCBlock ;
+    rdfs:label "Benefits (Outcomes)" .
+
+:Block_Channels_People a :FBMCBlock ;
+    rdfs:label "Channels (People)" .
+
+:Block_Context_Society a :FBMCBlock ;
+    rdfs:label "Context: Society" .
+
+:Block_Costs_Outcomes a :FBMCBlock ;
+    rdfs:label "Costs (Outcomes)" .
+
+:Block_Ecosystem_Services_Environment a :FBMCBlock ;
+    rdfs:label "Ecosystem Services (Environment)" .
+
+:Block_Goals_Outcomes a :FBMCBlock ;
+    rdfs:label "Goals (Outcomes)" .
+
+:Block_Governance_Process a :FBMCBlock ;
+    rdfs:label "Governance (Process)" .
+
+:Block_Needs_Who a :FBMCBlock ;
+    rdfs:label "Needs (Who)" .
+
+:Block_Partnerships_Process a :FBMCBlock ;
+    rdfs:label "Partnerships (Process)" .
+
+:Block_Products_Services_Value a :FBMCBlock ;
+    rdfs:label "Products/Services (Value)" .
+
+:Block_Relationships_People a :FBMCBlock ;
+    rdfs:label "Relationships (People)" .
+
+:Block_Stakeholders_Who a :FBMCBlock ;
+    rdfs:label "Stakeholders (Who)" .
+
+:Block_Value_Co_Creations_Value a :FBMCBlock ;
+    rdfs:label "Value Co-Creations (Value)" .
+
+:Block_Value_Co_Destructions_Value a :FBMCBlock ;
+    rdfs:label "Value Co-Destructions (Value)" .
+
+:GEN-001 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "remaining addressable actor pool" ;
+    :definition "Number of actors who could take a stakeholder role but have not yet engaged" ;
+    :dimension "Econ+Soc" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Actors_Who ;
+    :sdType "Stock" ;
+    :status "draft" ;
+    :unit "actors" ;
+    :version "0.1" .
+
+:GEN-002 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "need satisfaction level" ;
+    :definition "Degree to which the fundamental needs of engaged stakeholders are met" ;
+    :dimension "Soc" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Needs_Who ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "dmnl (0-1)" ;
+    :version "0.1" .
+
+:GEN-003 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "engaged stakeholder base" ;
+    :definition "Number of actors currently holding an active stakeholder role" ;
+    :dimension "Econ+Soc" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Stakeholders_Who ;
+    :sdType "Stock" ;
+    :status "draft" ;
+    :unit "actors" ;
+    :version "0.1" .
+
+:GEN-004 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "relationship strength and trust" ;
+    :definition "Accumulated quality of the firm-stakeholder connection" ;
+    :dimension "Soc" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Relationships_People ;
+    :sdType "Stock" ;
+    :status "draft" ;
+    :unit "dmnl (0-1)" ;
+    :version "0.1" .
+
+:GEN-005 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "engagement rate" ;
+    :definition "Rate at which new actors become engaged stakeholders via channels" ;
+    :dimension "Econ+Soc" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Channels_People ;
+    :sdType "Flow" ;
+    :status "draft" ;
+    :unit "actors/year" ;
+    :version "0.1" .
+
+:GEN-006 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "value co-creation rate" ;
+    :definition "Rate at which positive value is created with and for stakeholders" ;
+    :dimension "Econ+Soc+Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Value_Co_Creations_Value ;
+    :sdType "Flow" ;
+    :status "draft" ;
+    :unit "value/year" ;
+    :version "0.1" .
+
+:GEN-007 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "value co-destruction rate" ;
+    :definition "Rate at which harm / negative value is generated for stakeholders" ;
+    :dimension "Econ+Soc+Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Value_Co_Destructions_Value ;
+    :sdType "Flow" ;
+    :status "draft" ;
+    :unit "value/year" ;
+    :version "0.1" .
+
+:GEN-008 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "offering delivery quality" ;
+    :definition "Quality and availability of the products/services carrying the value propositions" ;
+    :dimension "Econ" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Products_Services_Value ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "dmnl (0-1)" ;
+    :version "0.1" .
+
+:GEN-009 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "activity throughput" ;
+    :definition "Volume of value-creating processes performed per unit time" ;
+    :dimension "Econ" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Activities_Process ;
+    :sdType "Flow" ;
+    :status "draft" ;
+    :unit "units/year" ;
+    :version "0.1" .
+
+:GEN-010 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "resource and capability stock" ;
+    :definition "Accumulated resources, capabilities and capital available to activities" ;
+    :dimension "Econ" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Resources_Process ;
+    :sdType "Stock" ;
+    :status "draft" ;
+    :unit "resource units" ;
+    :version "0.1" .
+
+:GEN-011 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "activity capacity" ;
+    :definition "Maximum activity throughput the current resource stock supports" ;
+    :dimension "Econ" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Resources_Process ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "units/year" ;
+    :version "0.1" .
+
+:GEN-012 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "partnership strength" ;
+    :definition "Strength and coverage of formal agreements with partner organizations" ;
+    :dimension "Econ+Soc" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Partnerships_Process ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "dmnl (0-1)" ;
+    :version "0.1" .
+
+:GEN-013 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "governance response" ;
+    :definition "Intensity and responsiveness of corrective decisions" ;
+    :dimension "Econ+Soc+Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Governance_Process ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "dmnl (0-1)" ;
+    :version "0.1" .
+
+:GEN-014 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "biophysical stock level" ;
+    :definition "Level of the natural material stocks the business draws upon" ;
+    :dimension "Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Biophysical_Stocks_Environment ;
+    :sdType "Stock" ;
+    :status "draft" ;
+    :unit "material units" ;
+    :version "0.1" .
+
+:GEN-015 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "extraction and impact rate" ;
+    :definition "Rate at which activities deplete biophysical stocks / impose impacts" ;
+    :dimension "Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Biophysical_Stocks_Environment ;
+    :sdType "Flow" ;
+    :status "draft" ;
+    :unit "material units/year" ;
+    :version "0.1" .
+
+:GEN-016 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "regeneration rate" ;
+    :definition "Rate at which regenerative activities rebuild biophysical stocks" ;
+    :dimension "Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Biophysical_Stocks_Environment ;
+    :sdType "Flow" ;
+    :status "draft" ;
+    :unit "material units/year" ;
+    :version "0.1" .
+
+:GEN-017 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "ecosystem service capacity" ;
+    :definition "Capacity of ecosystem services the business depends on" ;
+    :dimension "Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Ecosystem_Services_Environment ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "service units" ;
+    :version "0.1" .
+
+:GEN-018 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "incurred tri-profit costs" ;
+    :definition "Negative outcomes incurred, measured per dimension (Econ/Soc/Eco)" ;
+    :dimension "Econ+Soc+Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Costs_Outcomes ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "EUR + soc/eco units" ;
+    :version "0.1" .
+
+:GEN-019 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "realized tri-profit benefits" ;
+    :definition "Positive outcomes realized, measured per dimension (Econ/Soc/Eco)" ;
+    :dimension "Econ+Soc+Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Benefits_Outcomes ;
+    :sdType "Stock" ;
+    :status "draft" ;
+    :unit "EUR + soc/eco units" ;
+    :version "0.1" .
+
+:GEN-020 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "goal attainment gap" ;
+    :definition "Gap between stakeholder-agreed targets and actual outcomes" ;
+    :dimension "Econ+Soc+Eco" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Goals_Outcomes ;
+    :sdType "Output" ;
+    :status "draft" ;
+    :unit "dmnl (0-1)" ;
+    :version "0.1" .
+
+:GEN-021 a :MeasurableAttribute ;
+    prov:wasGeneratedBy :change-001 ;
+    :canonicalName "societal legitimacy" ;
+    :definition "Legitimacy and licence to operate granted by society" ;
+    :dimension "Soc" ;
+    :inCldBoundary true ;
+    :isAttributeOf :Block_Context_Society ;
+    :sdType "Auxiliary" ;
+    :status "draft" ;
+    :unit "dmnl (0-1)" ;
+    :version "0.1" .
+
+:L02 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-003-var ;
+    :hasDelay false ;
+    :polarity "-" ;
+    :rationale "Engaged actors leave the addressable pool" ;
+    :status "draft" ;
+    :to :GEN-001-var .
+
+:L03 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-001-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "A larger pool enables more engagement" ;
+    :status "draft" ;
+    :to :GEN-005-var .
+
+:L06 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-006-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Co-created value satisfies needs" ;
+    :status "draft" ;
+    :to :GEN-002-var .
+
+:L07 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-007-var ;
+    :hasDelay false ;
+    :polarity "-" ;
+    :rationale "Co-destroyed value impedes needs" ;
+    :status "draft" ;
+    :to :GEN-002-var .
+
+:L11 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-009-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Activities also generate unintended harm" ;
+    :status "draft" ;
+    :to :GEN-007-var .
+
+:L12 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-009-var ;
+    :hasDelay false ;
+    :polarity "-" ;
+    :rationale "Load beyond capacity erodes quality" ;
+    :status "draft" ;
+    :to :GEN-008-var .
+
+:L14 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-010-var ;
+    :hasDelay true ;
+    :polarity "+" ;
+    :rationale "Resources build capacity (with delay)" ;
+    :status "draft" ;
+    :to :GEN-011-var .
+
+:L18 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-009-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Activity drives extraction and impact" ;
+    :status "draft" ;
+    :to :GEN-015-var .
+
+:L19 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-015-var ;
+    :hasDelay false ;
+    :polarity "-" ;
+    :rationale "Extraction depletes biophysical stocks" ;
+    :status "draft" ;
+    :to :GEN-014-var .
+
+:L22 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-016-var ;
+    :hasDelay true ;
+    :polarity "+" ;
+    :rationale "Regeneration rebuilds biophysical stocks" ;
+    :status "draft" ;
+    :to :GEN-014-var .
+
+:L23 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-010-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Resources fund regenerative activities" ;
+    :status "draft" ;
+    :to :GEN-016-var .
+
+:L28 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-019-var ;
+    :hasDelay false ;
+    :polarity "-" ;
+    :rationale "Benefits close the goal gap" ;
+    :status "draft" ;
+    :to :GEN-020-var .
+
+:L30 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-020-var ;
+    :hasDelay true ;
+    :polarity "+" ;
+    :rationale "A gap triggers governance response" ;
+    :status "draft" ;
+    :to :GEN-013-var .
+
+:L31 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-013-var ;
+    :hasDelay true ;
+    :polarity "+" ;
+    :rationale "Governance reallocates capacity" ;
+    :status "draft" ;
+    :to :GEN-011-var .
+
+:L32 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-019-var ;
+    :hasDelay true ;
+    :polarity "+" ;
+    :rationale "Benefits build societal legitimacy" ;
+    :status "draft" ;
+    :to :GEN-021-var .
+
+:L34 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-021-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Legitimacy attracts engagement" ;
+    :status "draft" ;
+    :to :GEN-005-var .
+
+:Block_Resources_Process a :FBMCBlock ;
+    rdfs:label "Resources (Process)" .
+
+:GEN-001-var a :SystemVariable ;
+    :realizes :GEN-001 ;
+    :variableName "remaining addressable actor pool" .
+
+:GEN-004-var a :SystemVariable ;
+    :realizes :GEN-004 ;
+    :variableName "relationship strength and trust" .
+
+:GEN-012-var a :SystemVariable ;
+    :realizes :GEN-012 ;
+    :variableName "partnership strength" .
+
+:GEN-015-var a :SystemVariable ;
+    :realizes :GEN-015 ;
+    :variableName "extraction and impact rate" .
+
+:GEN-017-var a :SystemVariable ;
+    :realizes :GEN-017 ;
+    :variableName "ecosystem service capacity" .
+
+:L15 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-003-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Stakeholder exchanges replenish resources" ;
+    :status "draft" ;
+    :to :GEN-010-var .
+
+:L20 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-014-var ;
+    :hasDelay true ;
+    :polarity "+" ;
+    :rationale "Biophysical stocks underpin ecosystem services" ;
+    :status "draft" ;
+    :to :GEN-017-var .
+
+:L21 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-017-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Ecosystem services enable capacity" ;
+    :status "draft" ;
+    :to :GEN-011-var .
+
+:L25 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-006-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Co-creation realizes tri-profit benefits" ;
+    :status "draft" ;
+    :to :GEN-019-var .
+
+:Block_Biophysical_Stocks_Environment a :FBMCBlock ;
+    rdfs:label "Biophysical Stocks (Environment)" .
+
+:GEN-006-var a :SystemVariable ;
+    :realizes :GEN-006 ;
+    :variableName "value co-creation rate" .
+
+:GEN-008-var a :SystemVariable ;
+    :realizes :GEN-008 ;
+    :variableName "offering delivery quality" .
+
+:GEN-013-var a :SystemVariable ;
+    :realizes :GEN-013 ;
+    :variableName "governance response" .
+
+:GEN-014-var a :SystemVariable ;
+    :realizes :GEN-014 ;
+    :variableName "biophysical stock level" .
+
+:GEN-016-var a :SystemVariable ;
+    :realizes :GEN-016 ;
+    :variableName "regeneration rate" .
+
+:GEN-018-var a :SystemVariable ;
+    :realizes :GEN-018 ;
+    :variableName "incurred tri-profit costs" .
+
+:GEN-019-var a :SystemVariable ;
+    :realizes :GEN-019 ;
+    :variableName "realized tri-profit benefits" .
+
+:GEN-020-var a :SystemVariable ;
+    :realizes :GEN-020 ;
+    :variableName "goal attainment gap" .
+
+:GEN-021-var a :SystemVariable ;
+    :realizes :GEN-021 ;
+    :variableName "societal legitimacy" .
+
+:L10 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-009-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Activities create value" ;
+    :status "draft" ;
+    :to :GEN-006-var .
+
+:GEN-002-var a :SystemVariable ;
+    :realizes :GEN-002 ;
+    :variableName "need satisfaction level" .
+
+:GEN-005-var a :SystemVariable ;
+    :realizes :GEN-005 ;
+    :variableName "engagement rate" .
+
+:GEN-007-var a :SystemVariable ;
+    :realizes :GEN-007 ;
+    :variableName "value co-destruction rate" .
+
+:GEN-010-var a :SystemVariable ;
+    :realizes :GEN-010 ;
+    :variableName "resource and capability stock" .
+
+:GEN-011-var a :SystemVariable ;
+    :realizes :GEN-011 ;
+    :variableName "activity capacity" .
+
+:L13 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-011-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Capacity supports delivery quality" ;
+    :status "draft" ;
+    :to :GEN-008-var .
+
+:GEN-003-var a :SystemVariable ;
+    :realizes :GEN-003 ;
+    :variableName "engaged stakeholder base" .
+
+:L08 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-008-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Better delivery quality raises satisfaction" ;
+    :status "draft" ;
+    :to :GEN-002-var .
+
+:GEN-009-var a :SystemVariable ;
+    :realizes :GEN-009 ;
+    :variableName "activity throughput" .
+
+:L09 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-003-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "More stakeholders demand more activity" ;
+    :status "draft" ;
+    :to :GEN-009-var .
+
+:L04 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-004-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "Stronger relationships attract engagement" ;
+    :status "draft" ;
+    :to :GEN-005-var .
+
+:L05 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-002-var ;
+    :hasDelay true ;
+    :polarity "+" ;
+    :rationale "Satisfied needs build trust over time" ;
+    :status "draft" ;
+    :to :GEN-004-var .
+
+:L01 a :CausalLink ;
+    prov:wasGeneratedBy :change-001 ;
+    :from :GEN-005-var ;
+    :hasDelay false ;
+    :polarity "+" ;
+    :rationale "More engagement grows the stakeholder base" ;
+    :status "draft" ;
+    :to :GEN-003-var .
+
+:change-001 a :ChangeRecord ;
+    prov:startedAtTime "2026-07-02"^^xsd:date ;
+    prov:wasAssociatedWith "Hamza / Claude" ;
+    :rationale "Initial generic registry created from the FBMC-CLD alignment ontology (complete-canvas template, no use case)" .
+

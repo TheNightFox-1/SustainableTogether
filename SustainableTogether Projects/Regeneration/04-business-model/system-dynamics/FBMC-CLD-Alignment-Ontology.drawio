@@ -1,0 +1,711 @@
+<mxfile host="Electron" agent="Claude" pages="5">
+  <diagram id="page-fbmc" name="1 - FBMC Metamodel">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" value="FBMC / SSBMO Metamodel (Upward &amp; Jones 2015) — what the canvas talks about: elements and relations, no time behaviour" style="text;html=1;fontSize=15;fontStyle=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="1100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" value="«abstract» FBMCElement" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="560" y="70" width="230" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="a0f1" value="+ id: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a0">
+          <mxGeometry y="26" width="230" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a0f2" value="+ name: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a0">
+          <mxGeometry y="46" width="230" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a0f3" value="+ description: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a0">
+          <mxGeometry y="66" width="230" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a0f4" value="+ zone: Why|Who|What|How|HowMuch|Context" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a0">
+          <mxGeometry y="86" width="230" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="n0" value="All classes on this page specialize FBMCElement. Only representative generalization edges are drawn." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="830" y="80" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="CONTEXT" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="40" y="220" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="ContextLayer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="250" width="180" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="a1f1" value="+ layer: Environment | Society | Economy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a1">
+          <mxGeometry y="26" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a1f2" value="+ nesting: Env ⊃ Soc ⊃ Econ" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a1">
+          <mxGeometry y="46" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="WHO" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="260" y="220" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="Actor" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="260" y="250" width="200" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="a2f1" value="+ actorKind: human | ecological (non-human)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a2">
+          <mxGeometry y="26" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="StakeholderRole" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="260" y="380" width="200" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="a3f1" value="+ roleType: customer|user|beneficiary|ecosystem|governor|..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a3">
+          <mxGeometry y="26" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="Need" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="260" y="510" width="200" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="a4f1" value="+ needCategory (Max-Neef fundamental needs)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a4">
+          <mxGeometry y="26" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" value="WHAT" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="520" y="220" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="ValueProposition" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="520" y="250" width="220" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="a5f1" value="+ valence: coCreation | coDestruction" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a5">
+          <mxGeometry y="26" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a5f2" value="+ dimensions: [Econ, Soc, Eco]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a5">
+          <mxGeometry y="46" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" value="HOW" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="800" y="220" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" value="Activity (Process)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="800" y="250" width="220" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="a6f1" value="+ transforms stocks and creates/destroys value" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a6">
+          <mxGeometry y="26" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" value="Resource" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="800" y="380" width="220" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="a7f1" value="+ kind: capability | biophysicalStock | ecosystemService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a7">
+          <mxGeometry y="26" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a11" value="Channel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="250" width="170" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="a12" value="Relationship" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="320" width="170" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="a13" value="Partnership (Agreement)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="390" width="170" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="a14" value="Governance (Decision)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="460" width="170" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="g5" value="WHY / HOW MUCH (tri-profit)" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="520" y="480" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" value="Goal" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="520" y="510" width="180" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="a8f1" value="+ successDefinition (agreed by stakeholders)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a8">
+          <mxGeometry y="26" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a9" value="Indicator (Measurement)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="520" y="620" width="180" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="a9f1" value="+ unit: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a9">
+          <mxGeometry y="26" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a9f2" value="+ dimension: Econ|Soc|Eco" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a9">
+          <mxGeometry y="46" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a9f3" value="+ currentValue" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a9">
+          <mxGeometry y="66" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a9f4" value="+ targetValue (goal)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a9">
+          <mxGeometry y="86" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a10" value="TriProfitOutcome" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="800" y="620" width="180" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="a10f1" value="+ kind: cost | benefit" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a10">
+          <mxGeometry y="26" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a10f2" value="+ dimension: Econ|Soc|Eco" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="a10">
+          <mxGeometry y="46" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endSize=14;endFill=0;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="a2" target="a0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endSize=14;endFill=0;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="a5" target="a0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endSize=14;endFill=0;exitX=0.5;exitY=0;entryX=1;entryY=0.5;" edge="1" parent="1" source="a6" target="a0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="takes ▸ 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="a2" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="has ▸ 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="a3" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="addresses / impedes ▸ 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0;exitY=0.75;entryX=1;entryY=0.5;fontSize=11;" edge="1" parent="1" source="a5" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5b" value="delivered to ▸ 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0;exitY=0.25;entryX=1;entryY=0.25;fontSize=11;" edge="1" parent="1" source="a5" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="creates / destroys ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0;exitY=0.5;entryX=1;entryY=0.5;fontSize=11;" edge="1" parent="1" source="a6" target="a5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="uses / depletes / regenerates ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="a6" target="a7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="measured by ▸ 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="a8" target="a9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8b" value="aggregates ▸ *" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0.5;exitY=0;entryX=0.5;entryY=1;fontSize=11;" edge="1" parent="1" source="a10" target="a5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n1a" value="KEY POINT for the CLD alignment: FBMC elements are THINGS (actors, resources, activities, value propositions). They do not rise or fall over time — only their measurable attributes do. That distinction is what the bridge layer (page 3) formalizes." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="560" width="270" height="140" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-cld" name="2 - CLD Metamodel">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t2" value="CLD Metamodel (Vensim-ready) — what a causal loop diagram talks about: variables, links, loops" style="text;html=1;fontSize=15;fontStyle=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="1000" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="CLDModel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="440" y="70" width="220" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="c1f1" value="+ name: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c1">
+          <mxGeometry y="26" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c1f2" value="+ version: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c1">
+          <mxGeometry y="46" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c1f3" value="+ problemStatement (reference mode)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c1">
+          <mxGeometry y="66" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="SystemVariable" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="160" y="240" width="280" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="c2f1" value="+ vensimName: String (valid Vensim identifier)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c2">
+          <mxGeometry y="26" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c2f2" value="+ displayName: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c2">
+          <mxGeometry y="46" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c2f3" value="+ sourceAttributeId: String (trace to registry, page 3)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c2">
+          <mxGeometry y="66" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c2f4" value="+ quantifiable: Boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c2">
+          <mxGeometry y="86" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c2f5" value="+ isProblemVariable / isIndicator: Boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c2">
+          <mxGeometry y="106" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="CausalLink" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="660" y="240" width="280" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="c3f1" value="+ polarity: + | − (ceteris paribus)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c3">
+          <mxGeometry y="26" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c3f2" value="+ hasDelay: Boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c3">
+          <mxGeometry y="46" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c3f3" value="+ rationale: String (evidence for causal claim)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c3">
+          <mxGeometry y="66" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c3f4" value="+ sourceFbmcRelation (optional trace)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c3">
+          <mxGeometry y="86" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="FeedbackLoop" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="660" y="450" width="280" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="c4f1" value="+ loopId: String (stable across versions)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c4">
+          <mxGeometry y="26" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c4f2" value="+ loopType: R | B — DERIVED, never asserted" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c4">
+          <mxGeometry y="46" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c4f3" value="+ loopName: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c4">
+          <mxGeometry y="66" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c4f4" value="+ narrative: String (causation chain text)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="c4">
+          <mxGeometry y="86" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="contains *" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;startSize=16;endArrow=none;exitX=0;exitY=0.5;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="c1" target="c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="contains *" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;startSize=16;endArrow=none;exitX=1;exitY=0.5;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="c1" target="c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" value="from 1 / to 1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0;exitY=0.5;entryX=1;entryY=0.5;fontSize=11;" edge="1" parent="1" source="c3" target="c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" value="ordered set of 2..* links (closed walk)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0.5;exitY=0;entryX=0.5;entryY=1;fontSize=11;" edge="1" parent="1" source="c4" target="c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n2a" value="WELL-FORMEDNESS RULES (these catch the v1/v2 defects)&#xa;W1. One concept per variable — no compounds (“financier confidence and ROI confidence” is invalid).&#xa;W2. Direction-neutral noun phrases — no “gain”, “reduction”, “pressure increase” baked into names; direction lives in link polarity.&#xa;W3. loopType = B iff odd number of − links in the loop, else R (v2’s R7 fails this: it is balancing).&#xa;W4. Every variable must in principle be quantifiable (a unit can be stated) — required for the Vensim stage.&#xa;W5. Actual state and perceived state are different variables (environmental benefit ≠ environmental reputation).&#xa;W6. Loop IDs are stable: merging/splitting loops requires a ChangeRecord, not silent renumbering." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="160" y="430" width="440" height="250" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-alignment" name="3 - Alignment (Bridge)">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t3" value="Semantic Alignment FBMC ⇆ CLD — the amber Concept Registry is the single source of truth; both models are projections of it" style="text;html=1;fontSize=15;fontStyle=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="1200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" value="FBMC (page 1)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#4d784e;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="70" width="300" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="BRIDGE — Concept Registry" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#b26b00;align=left;" vertex="1" parent="1">
+          <mxGeometry x="620" y="70" width="360" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" value="CLD (page 2)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#3b6ba5;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="70" width="300" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="x1" value="«abstract» FBMCElement&#xa;(any canvas element)" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=3;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="300" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="x2" value="Indicator (Measurement)&#xa;unit, dimension, target" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="480" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="DerivationRule" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="620" y="110" width="300" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="b1f1" value="+ fbmcElementType → defaultSdType:" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b1">
+          <mxGeometry y="26" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b1f2" value="Resource/BiophysicalStock → Stock  |  Activity → Flow" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b1">
+          <mxGeometry y="46" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b1f3" value="Relationship/Reputation/Need-satisfaction → Auxiliary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b1">
+          <mxGeometry y="66" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b1f4" value="Goal/Indicator → Output  |  Governance choice → Parameter" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b1">
+          <mxGeometry y="86" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="MeasurableAttribute (registry entry)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="620" y="280" width="300" height="186" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f1" value="+ id: String (stable, never reused)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="26" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f2" value="+ canonicalName: single concept, direction-neutral" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="46" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f3" value="+ definition: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="66" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f4" value="+ unit: String (mandatory before SD stage)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="86" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f5" value="+ dimension: Econ | Soc | Eco" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="106" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f6" value="+ sdTypeHint: Stock | Flow | Auxiliary | Parameter" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="126" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f7" value="+ inCldBoundary: Boolean (+ exclusion rationale)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="146" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b2f8" value="+ version: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b2">
+          <mxGeometry y="166" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="ChangeRecord" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="620" y="540" width="300" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="b3f1" value="+ date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3">
+          <mxGeometry y="26" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b3f2" value="+ changeType: add | rename | split | merge | retire" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3">
+          <mxGeometry y="46" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b3f3" value="+ rationale: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3">
+          <mxGeometry y="66" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b3f4" value="+ affectedArtifacts: [FBMC, CLD, SD, Excel]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3">
+          <mxGeometry y="86" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="y1" value="SystemVariable&#xa;(CLD node)" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="300" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="y2" value="Vensim SD model (stage 2)&#xa;Level / Rate / Auxiliary / Constant&#xa;from sdTypeHint + unit" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=middle;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="480" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="y3" value="Excel financial model (stage 3)&#xa;line items bind to Econ attributes;&#xa;KPI rows bind to Indicators" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=middle;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="600" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="is attribute of ▸ exactly 1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0;exitY=0.25;entryX=1;entryY=0.5;fontSize=11;fontStyle=1;" edge="1" parent="1" source="b2" target="x1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="«applies»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="b1" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="* records changes to 1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0.5;exitY=0;entryX=0.5;entryY=1;fontSize=11;" edge="1" parent="1" source="b3" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="«must map to» 1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.75;fontSize=11;" edge="1" parent="1" source="x2" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="realizes ▸ exactly 1 (via sourceAttributeId)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;exitX=0;exitY=0.5;entryX=1;entryY=0.5;fontSize=11;fontStyle=1;" edge="1" parent="1" source="y1" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" value="«derives»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="y1" target="y2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" value="«binds»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=10;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;" edge="1" parent="1" source="y2" target="y3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" value="INFORMATION FLOW  FBMC → CLD (FBMC is the starting point)&#xa;1. Enumerate FBMC elements zone by zone.&#xa;2. For each element ask: which measurable attribute of it varies over time and matters to the problem? (Elements do not vary — their attributes do. “Financier” is an Actor; “financier confidence” is one of its attributes.)&#xa;3. Register the attribute: canonical name, definition, unit, dimension, sdTypeHint (via DerivationRule).&#xa;4. Decide inCldBoundary per attribute; record exclusion rationale.&#xa;5. Generate CLD variables 1:1 from in-boundary attributes — never free-typed.&#xa;6. Draw causal links only between registered variables; derive loop types.&#xa;7. Validate invariants (right) before publishing a CLD version." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="680" width="420" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" value="SYNCHRONIZATION INVARIANTS (check on every change)&#xa;I1. Every SystemVariable realizes exactly one MeasurableAttribute; every attribute anchors to exactly one FBMCElement → full trace: CLD variable → attribute → canvas element.&#xa;I2. Coverage: every FBMC element has ≥1 attribute in the CLD or an explicit out-of-boundary rationale.&#xa;I3. loopType is derived (B iff odd # of − links) — catches v2’s mislabelled R7.&#xa;I4. One concept per variable; direction-neutral names.&#xa;I5. Actual vs. perceived state are separate attributes (environmental benefit ≠ environmental reputation).&#xa;I6. Every Goal/Indicator maps to an attribute present in the CLD, so the model can report tri-profit (Econ, Soc, Eco).&#xa;I7. Renames/splits/merges only via ChangeRecord in the registry; FBMC and CLD are regenerated from it, never edited independently — this prevents the silent v1→v2 vocabulary drift." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="520" y="680" width="480" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="GENERAL PATTERN (any two domains)&#xa;Hub-and-spoke: each domain maps once to the shared registry instead of pairwise domain-to-domain mappings. Adding SD and Excel later reuses the same bridge — no new FBMC→SD or CLD→Excel mappings needed." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="680" width="360" height="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-generic-cld" name="4 - Generic CLD from complete FBMC">
+    <mxGraphModel dx="1600" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t4" value="Generic CLD derived from the COMPLETE FBMC — one variable per canvas block, no use case. Colours = source FBMC block group (legend below). Instantiation = renaming these variables for a concrete business (e.g. PV), never inventing unanchored ones." style="text;html=1;fontSize=14;fontStyle=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="1500" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="v1" value="engaged stakeholder base&#xa;[Stakeholders • Stock]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#3b6ba5;" vertex="1" parent="1">
+          <mxGeometry x="620" y="220" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v2" value="engagement rate&#xa;[Channels • Flow]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#3b6ba5;" vertex="1" parent="1">
+          <mxGeometry x="340" y="220" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v3" value="remaining addressable actor pool&#xa;[Actors+Needs • Stock]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#3b6ba5;" vertex="1" parent="1">
+          <mxGeometry x="80" y="220" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v4" value="relationship strength and trust&#xa;[Relationships • Stock]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#3b6ba5;" vertex="1" parent="1">
+          <mxGeometry x="260" y="390" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v5" value="need satisfaction level&#xa;[Needs • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#3b6ba5;" vertex="1" parent="1">
+          <mxGeometry x="470" y="490" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6" value="societal legitimacy&#xa;[Society context • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="90" y="420" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v7" value="value co-creation rate&#xa;[Value Co-Creations • Flow]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#b26b00;" vertex="1" parent="1">
+          <mxGeometry x="690" y="450" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v8" value="value co-destruction rate&#xa;[Value Co-Destructions • Flow]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#b26b00;" vertex="1" parent="1">
+          <mxGeometry x="880" y="620" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v9" value="offering delivery quality&#xa;[Products/Services • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#b26b00;" vertex="1" parent="1">
+          <mxGeometry x="680" y="580" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v10" value="activity throughput&#xa;[Activities • Flow]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#7b5aa6;" vertex="1" parent="1">
+          <mxGeometry x="800" y="320" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v11" value="activity capacity&#xa;[Resources+Activities • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#7b5aa6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="470" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v12" value="resource and capability stock&#xa;[Resources • Stock]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#7b5aa6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="300" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v13" value="partnership strength&#xa;[Partnerships • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#7b5aa6;" vertex="1" parent="1">
+          <mxGeometry x="990" y="160" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v14" value="extraction and impact rate&#xa;[Activities→Env • Flow]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="540" y="720" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v15" value="biophysical stock level&#xa;[Biophysical Stocks • Stock]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="330" y="790" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v16" value="ecosystem service capacity&#xa;[Ecosystem Services • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="260" y="630" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v17" value="regeneration rate&#xa;[Activities (regenerative) • Flow]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="600" y="880" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v18" value="realized tri-profit benefits&#xa;[Benefits • Stock]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="450" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v19" value="incurred tri-profit costs&#xa;[Costs • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="610" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v20" value="goal attainment gap&#xa;[Goals • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="760" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v21" value="governance response&#xa;[Governance • Auxiliary]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="830" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v2" target="v1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="−" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;fontColor=#cc0000;" edge="1" parent="1" source="v1" target="v3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l3" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v3" target="v2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v4" target="v2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v5" target="v4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l6" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v7" target="v5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l7" value="−" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;fontColor=#cc0000;" edge="1" parent="1" source="v8" target="v5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l8" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v9" target="v5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l9" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v1" target="v10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l10" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v10" target="v7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l11" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v10" target="v8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l12" value="−" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;fontColor=#cc0000;" edge="1" parent="1" source="v10" target="v9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l13" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v11" target="v9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l14" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v12" target="v11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l15" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v1" target="v12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l16" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v1" target="v13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l17" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v13" target="v12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l18" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v10" target="v14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l19" value="−" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;fontColor=#cc0000;" edge="1" parent="1" source="v14" target="v15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l20" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v15" target="v16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l21" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v16" target="v11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l22" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v17" target="v15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l23" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v12" target="v17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1150" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l24" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v21" target="v17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l25" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v7" target="v18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l26" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v10" target="v19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l27" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v8" target="v19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l28" value="−" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;fontColor=#cc0000;" edge="1" parent="1" source="v18" target="v20">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1450" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l29" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v19" target="v20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l30" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v20" target="v21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l31" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v21" target="v11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l32" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v18" target="v6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="130" />
+              <mxPoint x="170" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l33" value="−" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;fontColor=#cc0000;" edge="1" parent="1" source="v8" target="v6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="700" />
+              <mxPoint x="180" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l34" value="+" style="curved=1;html=1;endArrow=classic;endSize=8;strokeColor=#666666;fontSize=14;fontStyle=1;" edge="1" parent="1" source="v6" target="v2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lp1" value="R1" style="ellipse;fillColor=none;strokeColor=#3b6ba5;fontSize=13;fontStyle=1;fontColor=#3b6ba5;" vertex="1" parent="1">
+          <mxGeometry x="540" y="350" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp2" value="B1" style="ellipse;fillColor=none;strokeColor=#a33333;fontSize=13;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="250" y="160" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp3" value="R2" style="ellipse;fillColor=none;strokeColor=#3b6ba5;fontSize=13;fontStyle=1;fontColor=#3b6ba5;" vertex="1" parent="1">
+          <mxGeometry x="920" y="390" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp4" value="B2" style="ellipse;fillColor=none;strokeColor=#a33333;fontSize=13;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="640" y="520" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp5" value="B3" style="ellipse;fillColor=none;strokeColor=#a33333;fontSize=13;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="850" y="550" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp6" value="B4" style="ellipse;fillColor=none;strokeColor=#a33333;fontSize=13;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="450" y="670" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp7" value="R3" style="ellipse;fillColor=none;strokeColor=#4d784e;fontSize=13;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="820" y="800" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp8" value="B5" style="ellipse;fillColor=none;strokeColor=#a33333;fontSize=13;fontStyle=1;fontColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="700" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lp9" value="R4" style="ellipse;fillColor=none;strokeColor=#4d784e;fontSize=13;fontStyle=1;fontColor=#4d784e;" vertex="1" parent="1">
+          <mxGeometry x="130" y="520" width="42" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="GENERIC LOOPS (archetypes, use-case free)&#xa;R1 Value engagement engine: base → throughput → co-creation → need satisfaction → relationship → engagement → base&#xa;B1 Actor pool saturation: base −→ pool → engagement → base&#xa;R2 Capability reinvestment: base → resources → capacity → quality → satisfaction → ... → base&#xa;B2 Service overload: throughput −→ quality → satisfaction → ... → base → throughput&#xa;B3 Co-destruction drag: throughput → co-destruction −→ satisfaction → ... → throughput&#xa;B4 Ecological source limit: throughput → extraction −→ biophysical stock → ecosystem services → capacity → ... → throughput&#xa;R3 Regenerative reinvestment: resources → regeneration → biophysical stock → ecosystem services → capacity → ... → resources&#xa;B5 Governance goal-seeking: benefits −→ goal gap → governance → capacity/regeneration → ... → benefits&#xa;R4 Legitimacy: benefits → societal legitimacy → engagement → base → ... → benefits" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="900" width="560" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="LEGEND (variable colour = source FBMC block group)&#xa;BLUE = People (Actors, Stakeholders, Needs, Relationships, Channels)&#xa;AMBER = Value (Co-Creations, Co-Destructions, Products/Services)&#xa;PURPLE = Process (Resources, Activities, Partnerships)&#xa;GREEN = Environment (Biophysical Stocks, Ecosystem Services, Society context)&#xa;DARK RED = Outcomes &amp; Governance (Costs, Benefits, Goals, Governance)&#xa;[Block • sdTypeHint] shown under each variable. Every FBMC block of the canvas is represented — coverage invariant I2 satisfied by construction." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;spacing=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="120" width="380" height="190" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-sd" name="5 - SD Metamodel &amp; FBMC-SD projection">
+    <mxGraphModel dx="3195" dy="703" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sd-t" parent="1" style="text;html=1;fontSize=14;fontStyle=1;align=left;" value="System Dynamics (stock &amp;amp; flow) metamodel — and how FBMC projects onto it via the registry" vertex="1">
+          <mxGeometry height="30" width="1200" x="40" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-var" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="SDVariable&#xa;—&#xa;vensimName : string&#xa;unit : string&#xa;equation : expr" vertex="1">
+          <mxGeometry height="90" width="210" x="263" y="83" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-level" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="Level (Stock)&#xa;—&#xa;INTEG(inflows − outflows,&#xa;initial value)&#xa;unit: U" vertex="1">
+          <mxGeometry height="90" width="210" x="-111" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-rate" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="Rate (Flow)&#xa;—&#xa;changes exactly the Levels&#xa;it fills / drains&#xa;unit: U/time" vertex="1">
+          <mxGeometry height="90" width="210" x="310" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-aux" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="Auxiliary&#xa;—&#xa;instantaneous function of&#xa;other variables&#xa;unit: any" vertex="1">
+          <mxGeometry height="80" width="210" x="-58" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-const" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="Constant (Parameter)&#xa;—&#xa;no inputs; policy or&#xa;exogenous value" vertex="1">
+          <mxGeometry height="80" width="210" x="540" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-cloud" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="Source / Sink (cloud)&#xa;—&#xa;material crossing the&#xa;model boundary" vertex="1">
+          <mxGeometry height="80" width="190" x="560" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-e1" edge="1" parent="1" source="sd-level" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11" target="sd-var" value="is a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-e2" edge="1" parent="1" source="sd-rate" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11" target="sd-var" value="is a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-e3" edge="1" parent="1" source="sd-aux" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11" target="sd-var" value="is a">
+          <mxGeometry relative="1" x="-0.3903" y="-8" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="194" y="205" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sd-e4" edge="1" parent="1" source="sd-const" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11" target="sd-var" value="is a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-e5" edge="1" parent="1" source="sd-rate" style="html=1;endArrow=classic;strokeColor=#1a1a1a;strokeWidth=2;fontSize=11" target="sd-level" value="fills / drains (material)">
+          <mxGeometry relative="1" x="0.3764" y="-1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sd-e6" edge="1" parent="1" source="sd-aux" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11;dashed=1" target="sd-rate" value="informs (information link)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-ma" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="MeasurableAttribute (bridge)&#xa;—&#xa;id, canonicalName, unit,&#xa;dimension, sdTypeHint,&#xa;inBoundary" vertex="1">
+          <mxGeometry height="100" width="230" x="850" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-sv" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="SystemVariable (CLD)" vertex="1">
+          <mxGeometry height="40" width="230" x="912" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-sde" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;align=center;fontStyle=1" value="SDVariable (Vensim)" vertex="1">
+          <mxGeometry height="40" width="230" x="667" y="378" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-e7" edge="1" parent="1" source="sd-sv" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11" target="sd-ma" value="realizes (0..1)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-e8" edge="1" parent="1" source="sd-sde" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11" target="sd-ma" value="sdImplements (0..1)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-e9" edge="1" parent="1" source="sd-sde" style="html=1;endArrow=block;endFill=0;strokeColor=#666666;fontSize=11;dashed=1" target="sd-sv" value="same registry ID,&#xa;same name">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-n1" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;fontSize=11" value="FBMC → SD TYPE-LEVEL DERIVATION RULES (via sdTypeHint)&#xa;• Resource / BiophysicalStock / accumulating relationship → Level (Stock)&#xa;• Activity / Channel engagement / co-creation, co-destruction → Rate (Flow)&#xa;• Perception / quality / service / capacity → Auxiliary&#xa;• Governance choice / policy lever → Constant (Parameter)&#xa;• Goal + Indicator → Output Auxiliary (MUST appear in the model, I6)&#xa;SDType in the registry IS the sdTypeHint; Vensim kind mapping in Lists!H:I" vertex="1">
+          <mxGeometry height="170" width="430" x="1150" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-n2" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;fontSize=11" value="SD WELL-FORMEDNESS INVARIANT (I8, machine-checked)&#xa;• Unit consistency: for every Flow→Stock causal link,&#xa;  unit(flow) = unit(stock)/time   (e.g. actors/year → actors)&#xa;• Only Rates change Levels: a Stock fed directly by a&#xa;  non-Flow variable needs an intermediating Rate in SD (WARN)&#xa;• Every SDVariable keeps its registry ID and unit — no drift" vertex="1">
+          <mxGeometry height="140" width="430" x="1150" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-n3" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;fontSize=11" value="PROJECTION (deliberately OUT OF SCOPE for now — conceptual + registry level only)&#xa;When needed (backlog P4): a generator projects Concepts+CausalLinks to a Vensim&#xa;.mdl skeleton — Levels as INTEG(Σinflows − Σoutflows, init), units from the Unit&#xa;column. Until then the registry itself is the single SD-ready source of truth." vertex="1">
+          <mxGeometry height="110" width="430" x="1150" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="sd-n4" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9B2;strokeColor=#d6b656;size=14;align=left;verticalAlign=top;fontSize=11" value="MATURITY: CLD (page 2) captures causal structure; SD adds computability&#xa;(equations, units, time). Nothing conceptual changes — the same&#xa;MeasurableAttributes project to CLD variables AND SD variables (page 3 bridge)." vertex="1">
+          <mxGeometry height="130" width="280" x="850" y="450" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,34 @@
+{
+  "registry": "../SustainaSun_Concept_Registry.xlsx",
+  "timestamp": "2026-07-02T16:33:04",
+  "errors": 0,
+  "warnings": 5,
+  "pass": true,
+  "findings": [
+    {
+      "invariant": "I2",
+      "severity": "WARN",
+      "message": "FBMC block 'Context: Environment' has no concept and no documented exclusion"
+    },
+    {
+      "invariant": "I2",
+      "severity": "WARN",
+      "message": "FBMC block 'Context: Economy' has no concept and no documented exclusion"
+    },
+    {
+      "invariant": "I4",
+      "severity": "WARN",
+      "message": "GEN-004 'relationship strength and trust': compound name ('and') — split concept or mark Notes with 'I4-ok' if composite by design"
+    },
+    {
+      "invariant": "I4",
+      "severity": "WARN",
+      "message": "GEN-010 'resource and capability stock': compound name ('and') — split concept or mark Notes with 'I4-ok' if composite by design"
+    },
+    {
+      "invariant": "I4",
+      "severity": "WARN",
+      "message": "GEN-015 'extraction and impact rate': compound name ('and') — split concept or mark Notes with 'I4-ok' if composite by design"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+# shapes.ttl — invariants I1–I7 as SHACL (L2), per Playbook §C5.
+# Run: python3 -m pyshacl -s shapes.ttl -e fbmc-cld.ttl registry.ttl
+# Primary gate remains validate_registry.py (xlsx); these shapes are the
+# machine-readable mirror used once data lives in the knowledge graph.
+@prefix :     <https://w3id.org/sustainabletogether/fbmc-cld#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+### I1 — full trace: variable → attribute → block #############################
+
+:SystemVariableShape a sh:NodeShape ;
+    sh:targetClass :SystemVariable ;
+    sh:property [
+        sh:path :realizes ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class :MeasurableAttribute ;
+        sh:message "I1: variable must realize exactly one MeasurableAttribute." ;
+    ] ;
+    sh:sparql [
+        sh:message "I1: orphan variable — participates in no CausalLink." ;
+        sh:select """
+            PREFIX : <https://w3id.org/sustainabletogether/fbmc-cld#>
+            SELECT $this WHERE {
+                FILTER NOT EXISTS { ?l :from $this }
+                FILTER NOT EXISTS { ?l :to $this }
+            }""" ;
+    ] .
+
+:MeasurableAttributeShape a sh:NodeShape ;
+    sh:targetClass :MeasurableAttribute ;
+    sh:property [
+        sh:path :isAttributeOf ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class :FBMCBlock ;
+        sh:message "I1/bridge: attribute must anchor to exactly one FBMC block." ;
+    ] ;
+    sh:property [
+        sh:path :canonicalName ;
+        sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "I1: attribute must carry a canonical name." ;
+    ] ;
+    # I4 — naming lint: direction words forbidden
+    sh:property [
+        sh:path :canonicalName ;
+        sh:pattern "^(?!.*\\b(gain|reduction|pressure|increase|decrease|loss|improvement|decline|shortfall|surplus)\\b).*$" ;
+        sh:flags "i" ;
+        sh:message "I4: canonical name contains a direction word — names must be direction-neutral." ;
+    ] ;
+    # I7 — provenance required
+    sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:minCount 1 ;
+        sh:message "I7: no ChangeRecord generated this attribute (all change via change records)." ;
+    ] .
+
+:CausalLinkShape a sh:NodeShape ;
+    sh:targetClass :CausalLink ;
+    sh:property [ sh:path :from ; sh:minCount 1 ; sh:maxCount 1 ; sh:class :SystemVariable ;
+                  sh:message "I1: link must have exactly one existing source variable." ] ;
+    sh:property [ sh:path :to   ; sh:minCount 1 ; sh:maxCount 1 ; sh:class :SystemVariable ;
+                  sh:message "I1: link must have exactly one existing target variable." ] ;
+    sh:property [ sh:path :polarity ; sh:minCount 1 ; sh:in ( "+" "-" ) ;
+                  sh:message "S0: polarity must be '+' or '-'." ] .
+
+### I2 — coverage: every FBMC block has an in-boundary attribute or exclusion ##
+
+:FBMCBlockCoverageShape a sh:NodeShape ;
+    sh:targetClass :FBMCBlock ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "I2: FBMC block has no in-boundary attribute and no documented exclusion." ;
+        sh:select """
+            PREFIX : <https://w3id.org/sustainabletogether/fbmc-cld#>
+            SELECT $this WHERE {
+                FILTER NOT EXISTS { ?a :isAttributeOf $this ; :inCldBoundary true }
+                FILTER NOT EXISTS { ?a :isAttributeOf $this ; :exclusionRationale ?r }
+            }""" ;
+    ] .
+
+### I3 — loop type must match parity of negative links #########################
+
+:FeedbackLoopShape a sh:NodeShape ;
+    sh:targetClass :FeedbackLoop ;
+    sh:sparql [
+        sh:message "I3: declared loop type contradicts recomputed polarity parity." ;
+        sh:select """
+            PREFIX : <https://w3id.org/sustainabletogether/fbmc-cld#>
+            SELECT $this WHERE {
+                { SELECT $this (SUM(IF(?p = "-", 1, 0)) AS ?neg) WHERE {
+                      $this :hasLink ?l . ?l :polarity ?p .
+                  } GROUP BY $this }
+                $this :loopType ?t .
+                BIND(IF(?neg - 2 * FLOOR(?neg / 2) = 1, "B", "R") AS ?derived)
+                FILTER(?t != ?derived)
+            }""" ;
+    ] ;
+    sh:property [ sh:path :hasLink ; sh:minCount 2 ;
+                  sh:message "I3: a feedback loop needs at least two links." ] .
+
+### I6 — goal indicators present ###############################################
+
+:GoalCoverageShape a sh:NodeShape ;
+    sh:targetNode :Block_Goals_Outcomes ;
+    sh:sparql [
+        sh:message "I6: Goals block must have an in-boundary Output attribute." ;
+        sh:select """
+            PREFIX : <https://w3id.org/sustainabletogether/fbmc-cld#>
+            SELECT $this WHERE {
+                FILTER NOT EXISTS {
+                    ?a :isAttributeOf $this ; :inCldBoundary true ; :sdType "Output" .
+                }
+            }""" ;
+    ] .
+
+# I5 (actual ≠ perceived) is a name-pair heuristic; kept in validate_registry.py.

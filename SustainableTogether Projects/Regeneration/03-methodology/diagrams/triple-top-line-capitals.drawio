@@ -1,0 +1,65 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Triple Top Line and Six Capitals" id="ttl-capitals">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Triple Top Line — Economy + Ecology + Equity, all positive" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A regenerative project succeeds when all three move positively. Trades between them are forbidden by the framework." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="1320" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Three intersecting circles -->
+        <mxCell id="economy" value="ECONOMY" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=20;fillOpacity=70" vertex="1" parent="1">
+          <mxGeometry x="240" y="120" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="ecology" value="ECOLOGY" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=20;fillOpacity=70" vertex="1" parent="1">
+          <mxGeometry x="660" y="120" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="equity" value="EQUITY" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1;align=center;verticalAlign=bottom;spacingBottom=20;fillOpacity=70" vertex="1" parent="1">
+          <mxGeometry x="450" y="380" width="500" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- Six capitals -->
+        <!-- Natural -->
+        <mxCell id="capN" value="N · Natural&#10;soil, biota, water,&#10;atmosphere" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#82b366;strokeColor=#5a8a40;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;arcSize=8" vertex="1" parent="1">
+          <mxGeometry x="780" y="220" width="180" height="80" as="geometry" />
+        </mxCell>
+        <!-- Manufactured -->
+        <mxCell id="capM" value="M · Manufactured&#10;modules, BoS,&#10;recoverable stock" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d6b656;strokeColor=#a89348;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;arcSize=8" vertex="1" parent="1">
+          <mxGeometry x="350" y="220" width="180" height="80" as="geometry" />
+        </mxCell>
+        <!-- Financial -->
+        <mxCell id="capF" value="F · Financial&#10;cash flow, returns,&#10;dividends" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d6b656;strokeColor=#a89348;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;arcSize=8" vertex="1" parent="1">
+          <mxGeometry x="280" y="380" width="180" height="80" as="geometry" />
+        </mxCell>
+        <!-- Human -->
+        <mxCell id="capH" value="H · Human&#10;skills, OSH,&#10;training" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#4d6a91;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;arcSize=8" vertex="1" parent="1">
+          <mxGeometry x="600" y="700" width="180" height="80" as="geometry" />
+        </mxCell>
+        <!-- Social -->
+        <mxCell id="capS" value="S · Social&#10;trust, cooperatives,&#10;governance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#4d6a91;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;arcSize=8" vertex="1" parent="1">
+          <mxGeometry x="850" y="700" width="180" height="80" as="geometry" />
+        </mxCell>
+        <!-- Cultural -->
+        <mxCell id="capC" value="C · Cultural&#10;place-meaning,&#10;heritage, language" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;strokeColor=#6e5077;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;arcSize=8" vertex="1" parent="1">
+          <mxGeometry x="1010" y="380" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- No-trade-off rule callout -->
+        <mxCell id="rule" value="The no-trade-off rule&#10;&#10;Each phase deliverable identifies its expected effect on each of the six capitals.&#10;Phase 8 measures the realised effects.&#10;A capital below restorative requires a written justification — not a trade." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=0;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="40" y="700" width="240" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Ambition ladder -->
+        <mxCell id="ladder" value="Per-capital ambition ladder&#10;(set in Phase 1)&#10;&#10;1.  Conventional — minimise to legal limit&#10;2.  Sustainable — meet/exceed best practice&#10;3.  Restorative — repair past damage&#10;4.  Regenerative — co-evolve, net-positive&#10;&#10;Aggregation rule: at least one capital&#10;regenerative; no capital below restorative." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=0;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;arcSize=6" vertex="1" parent="1">
+          <mxGeometry x="1120" y="700" width="240" height="200" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
