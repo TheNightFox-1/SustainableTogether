@@ -8,7 +8,7 @@
 
 ## Mission
 
-Make regeneration the operational norm for engineered systems by proving — in a real model — that designing for regenerative outcomes is more commercially viable than extraction. Not just reducing harm: actively healing ecological, social, and economic systems through normal commercial operation.
+Make regeneration the operational norm for engineered systems by proving — in a real model — that designing for regenerative outcomes is commercially viable. Not just reducing harm: actively healing ecological, social, and economic systems through normal commercial operation.
 
 **Pilot case:** SolarX (conventional PV company, AS-IS) → SustainaSun (regenerative future state).
 **Theoretical anchor:** Fischer et al. (2024), "Mainstreaming regenerative dynamics for sustainability", *Nature Sustainability* 7, 964–972 — regeneration as an "upward helix": partly self-perpetuating, but needing ongoing input.
