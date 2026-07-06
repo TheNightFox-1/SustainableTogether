@@ -1,7 +1,32 @@
 {
   "permissions": {
     "allow": [
-      "Skill(update-config)"
+      "Skill(update-config)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(ls -la \"C:\\\\Users\\\\hamzab\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\docx_extract\\\\\" 2>&1 | head -20)",
+      "Bash(powershell -Command \"Expand-Archive -Path 'C:\\\\Users\\\\hamzab\\\\Nextcloud\\\\_Claude\\\\projects\\\\incose-gfse-wg\\\\SustainableTogether\\\\SustainableTogether Projects\\\\Regeneration\\\\_review\\\\SustainableTogether Circular Photovoltaic Leasing Business Model.docx' -DestinationPath 'C:\\\\Users\\\\hamzab\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\docx_temp' -Force\")",
+      "Bash(ls \"C:\\\\Users\\\\hamzab\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\docx_temp\\\\\" 2>&1 | head -20)",
+      "Read(//c/Users/hamzab/AppData/Local/Temp/claude/**)",
+      "Bash(python3 -c \"import zipfile; z = zipfile.ZipFile\\(r'C:\\\\Users\\\\hamzab\\\\Nextcloud\\\\_Claude\\\\projects\\\\incose-gfse-wg\\\\SustainableTogether\\\\SustainableTogether Projects\\\\Regeneration\\\\_review\\\\SustainableTogether Circular Photovoltaic Leasing Business Model.docx'\\); print\\('Files:', len\\(z.namelist\\(\\)\\)\\); z.extractall\\('docx_extract'\\)\")",
+      "Bash(unzip -p B._Sp_rgeskema.docx word/document.xml)",
+      "Bash(unzip -p D._Skabelon_Rapport_1.docx word/document.xml)",
+      "Bash(echo \"=== _review now contains: ===\")",
+      "Bash(ls '/c/Users/hamzab/Nextcloud/_Claude/projects/incose-gfse-wg/SustainableTogether/SustainableTogether Projects/Regeneration/_review/')",
+      "Bash(echo \"=== pv-case-study: ===\")",
+      "Bash(ls '/c/Users/hamzab/Nextcloud/_Claude/projects/incose-gfse-wg/SustainableTogether/SustainableTogether Projects/Regeneration/03-methodology/pv-case-study/')",
+      "Bash(echo \"=== _archive: ===\")",
+      "Bash(mkdir -p /c/Users/hamzab/AppData/Local/Temp/claude/C--Users-hamzab-Nextcloud--Claude-projects-incose-gfse-wg-SustainableTogether/ff7bb077-756e-4e13-b63b-f1b33a3d8759/scratchpad/render)",
+      "Bash(cat)",
+      "Bash(cd /c/Users/hamzab/AppData/Local/Temp/claude/C--Users-hamzab-Nextcloud--Claude-projects-incose-gfse-wg-SustainableTogether/ff7bb077-756e-4e13-b63b-f1b33a3d8759/scratchpad/render)",
+      "Bash(npx -y @mermaid-js/mermaid-cli -i test.mmd -o test.png -b white)",
+      "Bash(cd \"/c/Users/hamzab/Nextcloud/_Claude/projects/incose-gfse-wg/SustainableTogether/SustainableTogether Projects\" && echo \"=== OLD backup files \\(names only\\) ===\" && find Regeneration_OLD_flat_backup -type f -printf '%f\\\\n' | sort > /tmp/old_files.txt && cat /tmp/old_files.txt && echo \"=== NEW structure files \\(names only\\) ===\" && find Regeneration -type f -printf '%f\\\\n' | sort > /tmp/new_files.txt && echo \"=== In OLD but not in NEW \\(by filename\\) ===\" && comm -23 /tmp/old_files.txt /tmp/new_files.txt)",
+      "Bash(mv \"2026-07-02 SustainSun CLD v2.docx\" \"SustainaSun_CLD_v3_leasing.drawio\" \"FBMC-CLD-Alignment-Ontology.drawio\" \"FBMC-CLD-Alignment-WG.pptx\" \"FBMC-CLD-Semantic-Alignment.docx\" \"FBMC-CLD-Semantic-Alignment-Method.md\" \"Semantic-Integration-Playbook.md\" \"SustainaSun_Concept_Registry.xlsx\" pipeline ../system-dynamics/)",
+      "Bash(mv \"Jones_AnOntologyforStronglySustainable_2015.pdf\" ../../01-theory-and-ontology/)",
+      "Bash(mv \"TASK-BRIEF-next-session.md\" ../../)",
+      "Bash(mv '.$FBMC-CLD-Alignment-Ontology.drawio.bkp' ../system-dynamics/)",
+      "Bash(awk '{ print length\\($0\\)+70, $0 }')",
+      "Bash(git fetch *)"
     ]
   }
 }

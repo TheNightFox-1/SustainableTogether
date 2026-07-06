@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ontology — Mainstreaming regenerative dynamics for sustainability (Fischer et al., 2024)</title>
+<style>
+  :root{
+    --bg:#ffffff; --surface:#f7f6f1; --surface2:#f1efe8; --tertiary:#faf9f5;
+    --text:#26251f; --text2:#5f5e5a; --text3:#888780;
+    --border:#dcdacf; --border-strong:#b4b2a9;
+    --reg-bg:#eaf3de; --reg-bd:#639922; --reg-tx:#27500a;
+    --deg-bg:#fcebeb; --deg-bd:#e24b4a; --deg-tx:#791f1f;
+    --drv-bg:#e6f1fb; --drv-bd:#378add; --drv-tx:#0c447c;
+    --str-bg:#f1efe8; --str-bd:#b4b2a9; --str-tx:#5f5e5a;
+    --radius-lg:12px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1f1e1b; --surface:#2a2925; --surface2:#33312c; --tertiary:#26251f;
+      --text:#ecebe4; --text2:#b6b4ab; --text3:#8a8880;
+      --border:#403e38; --border-strong:#56544c;
+      --reg-bg:#1f3010; --reg-bd:#639922; --reg-tx:#c0dd97;
+      --deg-bg:#3a1414; --deg-bd:#e24b4a; --deg-tx:#f7c1c1;
+      --drv-bg:#10283f; --drv-bd:#378add; --drv-tx:#b5d4f4;
+      --str-bg:#33312c; --str-bd:#56544c; --str-tx:#b6b4ab;
+    }
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:var(--font); line-height:1.6; }
+  .page{ max-width:980px; margin:0 auto; padding:32px 20px 56px; }
+  header h1{ font-size:22px; font-weight:600; margin:0 0 4px; }
+  header p.src{ margin:0 0 4px; color:var(--text2); font-size:14px; }
+  header p.hint{ margin:8px 0 0; color:var(--text3); font-size:13px; }
+
+  .legend{ display:flex; flex-wrap:wrap; gap:14px; font-size:13px; color:var(--text2); margin:22px 0 12px; }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .dot{ width:11px; height:11px; border-radius:3px; display:inline-block; border:1px solid; }
+  .dot.reg{ background:var(--reg-bg); border-color:var(--reg-bd); }
+  .dot.deg{ background:var(--deg-bg); border-color:var(--deg-bd); }
+  .dot.drv{ background:var(--drv-bg); border-color:var(--drv-bd); }
+  .dot.str{ background:var(--str-bg); border-color:var(--str-bd); }
+
+  .canvas{ position:relative; width:100%; height:600px; }
+  .edges{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+  .edges line{ stroke:var(--text3); stroke-width:1.4; }
+
+  .node{ position:absolute; transform:translate(-50%,-50%); width:140px; padding:9px 10px;
+    border-radius:var(--radius-lg); border:1px solid; font-size:13.5px; line-height:1.25;
+    text-align:center; cursor:pointer; z-index:2; transition:box-shadow .12s; }
+  .node:hover{ box-shadow:0 0 0 3px var(--border); }
+  .node.sel{ box-shadow:0 0 0 2px var(--text); font-weight:600; }
+  .node.hub{ width:160px; font-size:15px; font-weight:600; padding:12px; }
+  .n-reg{ background:var(--reg-bg); border-color:var(--reg-bd); color:var(--reg-tx); }
+  .n-deg{ background:var(--deg-bg); border-color:var(--deg-bd); color:var(--deg-tx); }
+  .n-drv{ background:var(--drv-bg); border-color:var(--drv-bd); color:var(--drv-tx); }
+  .n-str{ background:var(--str-bg); border-color:var(--str-bd); color:var(--str-tx); }
+
+  .elbl{ position:absolute; transform:translate(-50%,-50%); font-size:11px; color:var(--text3);
+    background:var(--bg); padding:1px 5px; border-radius:4px; z-index:1; white-space:nowrap; }
+
+  .panel{ margin-top:18px; padding:16px 18px; background:var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius-lg); }
+  .panel .tag{ font-size:12px; color:var(--text3); }
+  .panel h3{ margin:4px 0 6px; font-size:17px; font-weight:600; }
+  .panel p{ margin:0; font-size:15px; color:var(--text2); }
+
+  @media (max-width:640px){ .canvas{ height:520px; } .node{ width:104px; font-size:11.5px; padding:7px 6px; } .node.hub{ width:118px; font-size:12.5px; } .elbl{ font-size:9.5px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>An ontology of regenerative dynamics</h1>
+    <p class="src">Concepts and relationships from Fischer, Farny, Abson, Zuin Zeidler, von Salisch, Schaltegger, Martín-López, Temperton &amp; Kümmerer (2024), “Mainstreaming regenerative dynamics for sustainability”, <em>Nature Sustainability</em> 7, 964–972.</p>
+    <p class="hint">Click any concept to read its definition.</p>
+  </header>
+
+  <div class="legend">
+    <span><i class="dot reg"></i>Regenerative (positive)</span>
+    <span><i class="dot deg"></i>Degenerative (negative)</span>
+    <span><i class="dot drv"></i>Drivers &amp; properties</span>
+    <span><i class="dot str"></i>Reference &amp; constraints</span>
+  </div>
+
+  <div class="canvas" id="cv">
+    <svg class="edges" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <marker id="arr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+          <path d="M0,0 L6.5,3 L0,6 z" fill="var(--text3)"></path>
+        </marker>
+      </defs>
+      <g id="edges"></g>
+    </svg>
+
+    <div class="elbl" style="left:50%;top:29%">exhibits</div>
+    <div class="elbl" style="left:33%;top:43%">repeated</div>
+    <div class="elbl" style="left:14%;top:23.5%">renews</div>
+    <div class="elbl" style="left:68%;top:43%">opposite of</div>
+    <div class="elbl" style="left:86%;top:50%">repeated</div>
+    <div class="elbl" style="left:33%;top:58%">prerequisite</div>
+    <div class="elbl" style="left:33%;top:71%">initiate / sustain</div>
+    <div class="elbl" style="left:50%;top:71%">powers</div>
+    <div class="elbl" style="left:67%;top:71%">reinforces</div>
+    <div class="elbl" style="left:69%;top:30%">constrain</div>
+
+    <div class="node n-reg"  style="left:50%;top:8%"  onclick="selNode('regSystem',this)">regenerative system</div>
+    <div class="node n-str"  style="left:14%;top:11%" onclick="selNode('desiredOutcome',this)">desired outcome</div>
+    <div class="node n-str"  style="left:86%;top:11%" onclick="selNode('naturalLimits',this)">natural limits</div>
+    <div class="node n-reg"  style="left:14%;top:36%" onclick="selNode('regeneration',this)">regeneration</div>
+    <div class="node n-deg"  style="left:86%;top:36%" onclick="selNode('degDynamics',this)">degenerative dynamics</div>
+    <div class="node n-str"  style="left:14%;top:64%" onclick="selNode('restoration',this)">restoration / repair</div>
+    <div class="node n-deg"  style="left:86%;top:64%" onclick="selNode('degeneration',this)">degeneration</div>
+    <div class="node hub n-reg" style="left:50%;top:50%" onclick="selNode('regDynamics',this)">regenerative dynamics</div>
+    <div class="node n-drv"  style="left:15%;top:90%" onclick="selNode('regPractices',this)">regenerative practices</div>
+    <div class="node n-drv"  style="left:50%;top:90%" onclick="selNode('energyInput',this)">energy / resource input</div>
+    <div class="node n-drv"  style="left:85%;top:90%" onclick="selNode('regMomentum',this)">regenerative momentum</div>
+  </div>
+
+  <div class="panel" id="panel">
+    <span class="tag" id="p-tag">Process · regenerative</span>
+    <h3 id="p-title">regenerative dynamics</h3>
+    <p id="p-def">Desired outcomes regenerate not once but over and over — an “upward helix”. Partly self-perpetuating and endogenous, yet shaped by context and needing ongoing energy, labour or materials to be sustained. This is the central concept the whole framework is built around. Click any node to explore.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEF = {
+    regDynamics:{t:"regenerative dynamics", c:"Process · regenerative", d:"Desired outcomes regenerate not once but over and over — an “upward helix”. Partly self-perpetuating and endogenous, yet shaped by context and needing ongoing energy, labour or materials to be sustained."},
+    regSystem:{t:"regenerative system", c:"System · the archetype", d:"A partly self-sustaining system with strong endogenous dynamics and inertia that draws on outside energy, raises a desired outcome over time until natural limits are reached, and does so without negative spill-overs onto other systems."},
+    regeneration:{t:"regeneration", c:"State change · positive", d:"The process of renewal or re-creation of a desired outcome (though no outcome is ever recreated exactly) — e.g. a patient regaining vitality after sickness, or an ecosystem recovering after a heavy disturbance."},
+    degeneration:{t:"degeneration", c:"State change · negative", d:"The decline of a desired outcome variable. It sits behind many sustainability problems: degraded ecosystems, soils, mental health, community cohesion and food security."},
+    degDynamics:{t:"degenerative dynamics", c:"Process · degenerative", d:"The mirror image of regenerative dynamics: a “downward helix” in which a desired outcome declines repeatedly through reinforcing feedback toward an undesired state."},
+    regMomentum:{t:"regenerative momentum", c:"Property · inertia", d:"The system’s existing inertia in the direction of regeneration (vs. degenerative momentum toward decline). Strong momentum resists change, so turning a degraded system around demands large, sustained effort."},
+    regPractices:{t:"regenerative practices", c:"Driver · human agency", d:"Intentional, sustained human activities that initiate, sustain or strengthen regenerative dynamics. Defined by practical know-how, guiding principles, a sense of what is desirable, and a shared understanding of regeneration."},
+    energyInput:{t:"energy / resource input", c:"Driver · resources", d:"Outside energy or resources needed to maintain momentum. May be non-anthropogenic (sunlight, nutrients, rainfall) or anthropogenic (regenerative practices)."},
+    desiredOutcome:{t:"desired outcome", c:"Reference variable", d:"The outcome variable whose level matters — e.g. soil health, social well-being, biodiversity. It rises under regeneration and falls under degeneration."},
+    naturalLimits:{t:"natural limits", c:"Constraint", d:"The ceiling where a desired outcome can rise no further (e.g. soil fertility capped by weathering rates). Regenerative dynamics then switch from growing the outcome to maintaining it."},
+    restoration:{t:"restoration / repair", c:"Related · exogenous", d:"Restoration, remediation and repair are exogenous fixes (humans acting on nature). Distinct from endogenous regeneration, but they can be prerequisites for it — and are not themselves regenerative unless the resulting system becomes self-sustaining."}
+  };
+  window.selNode = function(id, el){
+    var d = DEF[id]; if(!d) return;
+    document.getElementById('p-tag').textContent = d.c;
+    document.getElementById('p-title').textContent = d.t;
+    document.getElementById('p-def').textContent = d.d;
+    var ns = document.querySelectorAll('.node'); for(var i=0;i<ns.length;i++) ns[i].classList.remove('sel');
+    if(el) el.classList.add('sel');
+  };
+
+  var E = [
+    [500,48,500,300],[500,300,140,216],[140,216,140,66],[500,300,860,216],
+    [860,216,860,384],[140,384,500,300],[150,540,500,300],[500,540,500,300],
+    [850,540,500,300],[860,66,500,300]
+  ];
+  var g = document.getElementById('edges');
+  var SVGNS = "http://www.w3.org/2000/svg";
+  E.forEach(function(e){
+    var x1=e[0],y1=e[1],x2=e[2],y2=e[3];
+    var dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
+    var sx=x1+ux*46, sy=y1+uy*40, tx=x2-ux*60, ty=y2-uy*46;
+    var ln=document.createElementNS(SVGNS,'line');
+    ln.setAttribute('x1',sx); ln.setAttribute('y1',sy);
+    ln.setAttribute('x2',tx); ln.setAttribute('y2',ty);
+    ln.setAttribute('marker-end','url(#arr)');
+    g.appendChild(ln);
+  });
+})();
+</script>
+</body>
+</html>

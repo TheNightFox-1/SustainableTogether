@@ -1,0 +1,394 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Lifecycle x Capital Matrix" id="lc-matrix">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Phase 4 · Lifecycle × Capital Matrix (template)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1720" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Each cell holds a degeneration vector (top, red) and a regeneration vector (bottom, green) with mechanism tags M1–M5." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="65" width="1720" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Corner -->
+        <mxCell id="corner" value="Lifecycle  ↓  /  Capital  →" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=2;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Capital headers -->
+        <mxCell id="capN" value="N · Natural" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="260" y="110" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="capH" value="H · Human" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="500" y="110" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="capS" value="S · Social" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="740" y="110" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="capM" value="M · Manufactured" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="980" y="110" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="capF" value="F · Financial" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="1220" y="110" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="capC" value="C · Cultural" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="1460" y="110" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Lifecycle stage labels (rows) -->
+        <mxCell id="L1" value="L1 · Raw-material&#10;sourcing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="170" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L2" value="L2 · Cell, module,&#10;BoS manufacturing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="280" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L3" value="L3 · Distribution&#10;and transport" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="390" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L4" value="L4 · Site preparation&#10;and installation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L5" value="L5 · Operation and&#10;maintenance" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="610" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L6" value="L6 · Repair, repowering,&#10;life extension" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L7" value="L7 · Decommissioning" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="830" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L8" value="L8 · Material&#10;reincorporation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="40" y="940" width="220" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Cells: format is "DEG: ... | REG: ... [Mx]" using two stacked subcells per cell.
+             For brevity I render summary text per cell with red top half / green bottom half. -->
+
+        <!-- L1 row -->
+        <mxCell id="c-L1-N-d" value="DEG: silica/Ag/Cu mining; tailings; waste" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="170" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L1-N-r" value="REG: recycled content; IRMA/ASI; Ag-thrifty cells [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="225" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L1-H-d" value="DEG: silicosis, heavy-metal exposure, child labour risk" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="170" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L1-H-r" value="REG: living-wage audits; OSH; supply-chain training" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="225" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L1-S-d" value="DEG: conflict-mineral risk; community displacement" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="170" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L1-S-r" value="REG: OECD due diligence; FPIC sourcing [M5]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="225" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L1-M-d" value="DEG: linear extraction" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="170" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L1-M-r" value="REG: bilateral take-back contracts [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="225" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L1-F-d" value="DEG: value flows to mining centres" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="170" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L1-F-r" value="REG: procurement preference for circular suppliers" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="225" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L1-C-d" value="DEG: erosion of place-meaning at mining sites" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="170" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L1-C-r" value="REG: upstream-impact transparency reporting" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="225" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- L2 row -->
+        <mxCell id="c-L2-N-d" value="DEG: high-electricity manufacturing; PFAS; perovskite Pb" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="280" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L2-N-r" value="REG: low-C grid; PFAS-free; Pb-binding encapsulation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="335" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L2-H-d" value="DEG: clean-room and chemical OSH risks" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="280" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L2-H-r" value="REG: best-practice OSH; chemical disclosures" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="335" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L2-S-d" value="DEG: geopolitical chokepoints" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="280" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L2-S-r" value="REG: diversified supply; cooperative mid-tier" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="335" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L2-M-d" value="DEG: modules designed for disposal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="280" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L2-M-r" value="REG: design-for-disassembly; DPP-ready [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="335" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L2-F-d" value="DEG: value capture in factory regions only" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="280" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L2-F-r" value="REG: take-back warranties; second-life buy-back" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="335" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-L2-C-d" value="DEG: opaque manufacturing origin" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="280" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L2-C-r" value="REG: place-of-manufacture transparency" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="335" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- L3 row (transport) -->
+        <mxCell id="c-L3-N-d" value="DEG: shipping fuel; road particulate; packaging" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="390" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-N-r" value="REG: rail/short-sea; reusable crates [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="445" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-H-d" value="DEG: subcontractor labour cascades" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="390" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-H-r" value="REG: fair-haulage clauses; MLC compliance" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="445" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-S-d" value="DEG: logistics opacity" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="390" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-S-r" value="REG: open route + emissions disclosure" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="445" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-M-d" value="DEG: single-use packaging" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="390" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-M-r" value="REG: returnable pallets/crates [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="445" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-F-d" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="390" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-F-r" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="445" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-C-d" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="390" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L3-C-r" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="445" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- L4 row (site prep) -->
+        <mxCell id="c-L4-N-d" value="DEG: grading destroys soil; concrete; clearance loss" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="500" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-N-r" value="REG: screw-piles; swales; topsoil reseed [M1,M2,M3]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="555" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-H-d" value="DEG: construction-worker injury risk" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="500" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-H-r" value="REG: regenerative-construction training" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="555" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-S-d" value="DEG: community disruption" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="500" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-S-r" value="REG: liaison; local labour; visitor engagement" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="555" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-M-d" value="DEG: built once, demolished at L7" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="500" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-M-r" value="REG: modular reversible structures [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="555" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-F-d" value="DEG: non-local contractor capture" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="500" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-F-r" value="REG: local-contractor preference; apprentices" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="555" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-C-d" value="DEG: visual disruption of cultural landscape" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="500" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L4-C-r" value="REG: co-design with landscape architects [M5]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="555" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- L5 row (operation) -->
+        <mxCell id="c-L5-N-d" value="DEG: monoculture turf; herbicide; bird collisions" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="610" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-N-r" value="REG: pollinator mix; sheep grazing; agrivoltaics [M3,M4]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="665" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-H-d" value="DEG: O&amp;M skills as commodity" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="610" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-H-r" value="REG: long-term high-skill stewardship; field-teaching" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="665" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-S-d" value="DEG: site as private operational asset" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="610" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-S-r" value="REG: visitor/education; community-board" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="665" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-M-d" value="DEG: reactive maintenance" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="610" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-M-r" value="REG: predictive maintenance; spare-parts pool" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="665" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-F-d" value="DEG: external owner extracts revenue" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="610" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-F-r" value="REG: cooperative ownership; benefit-sharing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="665" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-C-d" value="DEG: anonymous infrastructure" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="610" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L5-C-r" value="REG: place-of-meaning; signage; festivals [M5]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="665" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- L6 row (repair) -->
+        <mxCell id="c-L6-N-d" value="DEG: premature replacement multiplies upstream impacts" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="720" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-N-r" value="REG: component-repair; second-life modules [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="775" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-H-d" value="DEG: repair skills concentrated in OEM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="720" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-H-r" value="REG: independent repair training; right-to-repair" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="775" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-S-d" value="DEG: OEM repair monopoly" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="720" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-S-r" value="REG: open docs; cooperative repair networks" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="775" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-M-d" value="DEG: retired by age, not condition" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="720" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-M-r" value="REG: condition-based repowering; BoS reuse [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="775" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-F-d" value="DEG: no reuse credit in finance" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="720" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-F-r" value="REG: avoided-manufacturing accounting" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="775" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-C-d" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="720" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L6-C-r" value="REG: long-life infra becomes cultural landscape" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="775" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- L7 row (decommissioning) -->
+        <mxCell id="c-L7-N-d" value="DEG: soil compaction; hazardous waste leaching" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="830" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-N-r" value="REG: light-disturbance dismantling; biota re-measure [M3]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="885" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-H-d" value="DEG: dismantler exposure to legacy materials" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="830" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-H-r" value="REG: best-practice OSH; legacy-material protocols" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="885" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-S-d" value="DEG: site abandoned/fenced indefinitely" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="830" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-S-r" value="REG: defined post-decom land use (Phase 1)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="885" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-M-d" value="DEG: modules to landfill / downcycling" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="830" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-M-r" value="REG: route to FRELP/ROSI/Veolia high-value [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="885" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-F-d" value="DEG: decommissioning underfunded" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="830" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-F-r" value="REG: decom bond at Phase 1; perf-econ contract" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="885" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-C-d" value="DEG: post-decom land left fenced" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="830" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L7-C-r" value="REG: returned with documented improvements" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="885" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- L8 row (reincorporation) -->
+        <mxCell id="c-L8-N-d" value="DEG: glass downcycled; Si and Ag lost; Pb leaching" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="940" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-N-r" value="REG: high-value Si/Ag recovery; Pb sequestration [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="260" y="995" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-H-d" value="DEG: recycler exposure to chemicals" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="940" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-H-r" value="REG: OSH-compliant recycling; certification" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="500" y="995" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-S-d" value="DEG: recycler treated as waste handler" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="940" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-S-r" value="REG: recycling cooperatives; community-monitor access" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="740" y="995" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-M-d" value="DEG: materials lost from technical cycle" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="940" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-M-r" value="REG: returned to L1 of next-gen; WEEE compliant [M1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="980" y="995" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-F-d" value="DEG: recycling cost externalised" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="940" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-F-r" value="REG: producer-responsibility financing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1220" y="995" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-C-d" value="DEG: recycling invisible to community" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="940" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c-L8-C-r" value="REG: annual EOL reporting back to community" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;verticalAlign=top;spacingLeft=4" vertex="1" parent="1">
+          <mxGeometry x="1460" y="995" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend1" value="Mechanism tags: M1 loop closure · M2 hydrological retention · M3 photosynthetic carbon transfer · M4 biological self-organisation · M5 co-evolutionary place-based design" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="1080" width="1720" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="legend2" value="Empty (—) cells are honest acknowledgements of unspecified vectors, not silent omissions." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="1115" width="1720" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

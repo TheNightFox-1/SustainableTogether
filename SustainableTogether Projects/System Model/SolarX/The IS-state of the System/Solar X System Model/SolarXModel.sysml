@@ -8,7 +8,8 @@ package SolarXModel {
         package SolarX_Items {
             item def SolarIrradiation;
             item def DCElectricity;
-            item def ACElectricity;
+            item def ElectricalEnergy;
+            item def EnergySourceSelection;
             item def MonitoringData;
             item def ControlCommand;
             item def ConfigurationData;
@@ -29,15 +30,15 @@ package SolarXModel {
                 // internal use: PVCollection → PowerConversion
             }
             port def ACPort {
-                out item electricity : ACElectricity;
+                out item electricity : ElectricalEnergy;
                 // internal use: PowerConversion → EnergyManagement, EnergyManagement ↔ GridInterface
             }
             port def GridPort {
-                inout item electricity : ACElectricity;
+                inout item electricity : ElectricalEnergy;
                 // bidirectional: one port per side; ~GridPort is also inout
             }
             port def HouseholdPort {
-                out item electricity : ACElectricity;
+                out item electricity : ElectricalEnergy;
             }
             port def HomeownerPort {
                 in item command : ControlCommand;
@@ -82,15 +83,6 @@ package SolarXModel {
             }
 
             satisfy problemStatement_SolarX by systemIdea_SolarX;
-
-            view problemSpaceView {
-                expose SolarXModel::SolarXProject::SolarX_ProblemSpace;
-                attribute depth = 2;
-                attribute fileName = "step1_2_problem_space";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render asTreeDiagram;
-            }
         }
 
         // ── Step 3 — Stakeholders ────────────────────────────────────────────
@@ -265,7 +257,7 @@ package SolarXModel {
                 // The system under design
                 part solarX {
                     port sunPort : SunPort;
-                    port gridPort : GridPort;       // bidirectional grid connection
+                    port gridPort : GridPort; // bidirectional grid connection
                     port householdPort : HouseholdPort;
                     port homeownerPort : HomeownerPort;
                     port installerPort : InstallerPort;
@@ -282,7 +274,7 @@ package SolarXModel {
                 part publicGrid {
                     doc
                     /* Public electricity grid; exchanges power bidirectionally with SolarX. */
-                    port systemPort : ~GridPort;    // single bidirectional conjugate port
+                    port systemPort : ~GridPort; // single bidirectional conjugate port
                 }
 
                 part household {
@@ -347,16 +339,16 @@ package SolarXModel {
             }
 
             use case <'UC-1'> supplyHouseholdElectricity : 'supply household electricity' {
-                // Controller selects source: solar first, then battery, then grid.
-                first start then 'assess available energy sources';
-                first 'assess available energy sources' then 'select and convert energy to AC';
-                first 'select and convert energy to AC' then 'route AC electricity to household';
-                first 'route AC electricity to household' then 'monitor and record energy flow';
-                first 'monitor and record energy flow' then done;
-
+                // Actions run concurrently — connected by item flows.
+                flow
+                    from 'assess available energy sources'.selection
+                    to 'select and convert energy to AC'.selection;
                 flow
                     from 'select and convert energy to AC'.acElectricity
                     to 'route AC electricity to household'.acElectricity;
+                flow
+                    from 'route AC electricity to household'.monitoringData
+                    to 'monitor and record energy flow'.monitoringData;
 
                 action 'assess available energy sources' : AssessAvailableEnergySources {}
                 action 'select and convert energy to AC' : SelectAndConvertEnergyToAC {}
@@ -379,17 +371,18 @@ package SolarXModel {
                 }
             }
 
-            use case <'UC-2'> feedSurplusSolarElectricityToPublicGrid : 'feed surplus solar electricity to public grid' {
-                first start then 'detect surplus condition';
-                first 'detect surplus condition' then 'prepare AC electricity for export';
-                first 'prepare AC electricity for export' then 'open grid feed-in';
-                first 'open grid feed-in' then 'export surplus electricity';
-                first 'export surplus electricity' then 'monitor feed-in and record';
-                first 'monitor feed-in and record' then done;
-
+            use case <'UC-2'> feedSurplusSolarElectricityToPublicGrid
+                : 'feed surplus solar electricity to public grid' {
+                // Actions run concurrently — connected by item flows.
+                flow
+                    from 'detect surplus condition'.selection
+                    to 'prepare AC electricity for export'.selection;
                 flow
                     from 'prepare AC electricity for export'.acElectricity
                     to 'export surplus electricity'.acElectricity;
+                flow
+                    from 'export surplus electricity'.monitoringData
+                    to 'monitor feed-in and record'.monitoringData;
 
                 action 'detect surplus condition' : DetectSurplusCondition {}
                 action 'prepare AC electricity for export' : PrepareACElectricityForExport {}
@@ -413,7 +406,8 @@ package SolarXModel {
                 }
             }
 
-            use case <'UC-3'> monitorEnergyGenerationAndConsumption : 'monitor energy generation and consumption' {
+            use case <'UC-3'> monitorEnergyGenerationAndConsumption
+                : 'monitor energy generation and consumption' {
                 // Continuous use case — triggered at system start, loops indefinitely.
                 merge continuousLoop;
                 first start then continuousLoop;
@@ -500,135 +494,148 @@ package SolarXModel {
                     from 'run diagnostics'.diagnosticsData
                     to 'transmit diagnostics to technician'.diagnosticsData;
 
-                action 'detect fault or receive maintenance request' : DetectFaultOrReceiveMaintenanceRequest {}
+                action 'detect fault or receive maintenance request'
+                    : DetectFaultOrReceiveMaintenanceRequest {}
                 action 'run diagnostics' : RunDiagnostics {}
                 action 'transmit diagnostics to technician' : TransmitDiagnosticsToTechnician {}
                 action 'repair or replace component' : RepairOrReplaceComponent {}
                 action 'verify system recovery' : VerifySystemRecovery {}
                 action 'resume normal operation' : ResumeNormalOperation {}
             }
-
-            view useCaseView {
-                expose SolarXModel::SolarXProject::SolarX_UseCases;
-                attribute depth = 2;
-                attribute fileName = "step6_use_cases";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render asTreeDiagram;
-            }
         }
 
         // ── Step 7 — Functional Architecture ─────────────────────────────────
         package SolarX_FunctionalArchitecture {
-
+            private import SolarX_Items::*;
             package SolarX_Functions {
+                // ── UC-1 functions ────────────────────────────────────────────────
+                action def AssessAvailableEnergySources {
+                    doc
+                    /* Determines which energy sources (PV, battery, grid) are currently available. */
+                    out item selection : EnergySourceSelection;
+                }
+                action def SelectAndConvertEnergyToAC {
+                    doc
+                    /* Selects the best available source and converts its output to AC electricity. */
+                    in item selection : EnergySourceSelection;
+                    out item acElectricity : ElectricalEnergy;
+                }
+                action def RouteACElectricityToHousehold {
+                    doc
+                    /* Routes converted AC electricity to the household load. */
+                    in item acElectricity : ElectricalEnergy;
+                    out item monitoringData : MonitoringData;
+                }
+                action def MonitorAndRecordEnergyFlow {
+                    doc
+                    /* Monitors and records the active energy flow during household supply. */
+                    in item monitoringData : MonitoringData;
+                }
 
-            // ── UC-1 functions ────────────────────────────────────────────────
-            action def AssessAvailableEnergySources {
-                doc /* Determines which energy sources (PV, battery, grid) are currently available. */
-            }
-            action def SelectAndConvertEnergyToAC {
-                doc /* Selects the best available source and converts its output to AC electricity. */
-                out item acElectricity : ACElectricity;
-            }
-            action def RouteACElectricityToHousehold {
-                doc /* Routes converted AC electricity to the household load. */
-                in item acElectricity : ACElectricity;
-            }
-            action def MonitorAndRecordEnergyFlow {
-                doc /* Monitors and records the active energy flow during household supply. */
-            }
+                // ── UC-2 functions ────────────────────────────────────────────────
+                action def DetectSurplusCondition {
+                    doc
+                    /* Detects when local generation exceeds demand and battery is full. */
+                    out item selection : EnergySourceSelection;
+                }
+                action def PrepareACElectricityForExport {
+                    doc
+                    /* Prepares the surplus AC electricity for export to the public grid. */
+                    in item selection : EnergySourceSelection;
+                    out item acElectricity : ElectricalEnergy;
+                }
+                action def OpenGridFeedIn {
+                    doc
+                    /* Opens the grid feed-in connection to allow surplus export. */
+                }
+                action def ExportSurplusElectricity {
+                    doc
+                    /* Exports surplus AC electricity to the public grid. */
+                    in item acElectricity : ElectricalEnergy;
+                    out item monitoringData : MonitoringData;
+                }
+                action def MonitorFeedInAndRecord {
+                    doc
+                    /* Monitors the feed-in session and records export data. */
+                    in item monitoringData : MonitoringData;
+                }
 
-            // ── UC-2 functions ────────────────────────────────────────────────
-            action def DetectSurplusCondition {
-                doc /* Detects when local generation exceeds demand and battery is full. */
-            }
-            action def PrepareACElectricityForExport {
-                doc /* Prepares the surplus AC electricity for export to the public grid. */
-                out item acElectricity : ACElectricity;
-            }
-            action def OpenGridFeedIn {
-                doc /* Opens the grid feed-in connection to allow surplus export. */
-            }
-            action def ExportSurplusElectricity {
-                doc /* Exports surplus AC electricity to the public grid. */
-                in item acElectricity : ACElectricity;
-            }
-            action def MonitorFeedInAndRecord {
-                doc /* Monitors the feed-in session and records export data. */
-            }
+                // ── UC-3 functions ────────────────────────────────────────────────
+                action def CollectSensorData {
+                    doc
+                    /* Continuously reads sensor data from all subsystems. */
+                }
+                action def AggregateAndFormatData {
+                    doc
+                    /* Aggregates generation, storage and consumption metrics into a report. */
+                    out item monitoringData;
+                }
+                action def TransmitMonitoringData {
+                    doc
+                    /* Transmits the formatted monitoring report to the homeowner interface. */
+                    in item monitoringData;
+                }
 
-            // ── UC-3 functions ────────────────────────────────────────────────
-            action def CollectSensorData {
-                doc /* Continuously reads sensor data from all subsystems. */
-            }
-            action def AggregateAndFormatData {
-                doc /* Aggregates generation, storage and consumption metrics into a report. */
-                out item monitoringData;
-            }
-            action def TransmitMonitoringData {
-                doc /* Transmits the formatted monitoring report to the homeowner interface. */
-                in item monitoringData;
-            }
+                // ── UC-4 functions ────────────────────────────────────────────────
+                action def ReceiveInstallationRequest {
+                    doc
+                    /* Receives and parses the installer's installation request and configuration data. */
+                    out item configurationData;
+                }
+                action def ConfigureSystemParameters {
+                    doc
+                    /* Applies configuration data to system parameters. */
+                    in item configurationData;
+                }
+                action def RunSelfTest {
+                    doc
+                    /* Executes a self-test sequence to verify system integrity before activation. */
+                }
+                action def ActivateSystem {
+                    doc
+                    /* Activates the system and begins normal energy management operation. */
+                }
+                action def GenerateCommissioningReport {
+                    doc
+                    /* Generates a commissioning report summarising installation results. */
+                    out item commissioningReport;
+                }
+                action def TransmitReportToInstaller {
+                    doc
+                    /* Transmits the commissioning report to the installer interface. */
+                    in item commissioningReport;
+                }
 
-            // ── UC-4 functions ────────────────────────────────────────────────
-            action def ReceiveInstallationRequest {
-                doc /* Receives and parses the installer's installation request and configuration data. */
-                out item configurationData;
-            }
-            action def ConfigureSystemParameters {
-                doc /* Applies configuration data to system parameters. */
-                in item configurationData;
-            }
-            action def RunSelfTest {
-                doc /* Executes a self-test sequence to verify system integrity before activation. */
-            }
-            action def ActivateSystem {
-                doc /* Activates the system and begins normal energy management operation. */
-            }
-            action def GenerateCommissioningReport {
-                doc /* Generates a commissioning report summarising installation results. */
-                out item commissioningReport;
-            }
-            action def TransmitReportToInstaller {
-                doc /* Transmits the commissioning report to the installer interface. */
-                in item commissioningReport;
-            }
-
-            // ── UC-5 functions ────────────────────────────────────────────────
-            action def DetectFaultOrReceiveMaintenanceRequest {
-                doc /* Detects a system fault or receives an incoming maintenance request. */
-                out item maintenanceRequest;
-            }
-            action def RunDiagnostics {
-                doc /* Runs diagnostic routines to identify the fault and its location. */
-                in item maintenanceRequest;
-                out item diagnosticsData;
-            }
-            action def TransmitDiagnosticsToTechnician {
-                doc /* Transmits diagnostics data to the maintenance technician interface. */
-                in item diagnosticsData;
-            }
-            action def RepairOrReplaceComponent {
-                doc /* Coordinates repair or replacement of the affected component. */
-            }
-            action def VerifySystemRecovery {
-                doc /* Verifies that the system has recovered and operates correctly after repair. */
-            }
-            action def ResumeNormalOperation {
-                doc /* Resumes normal energy management operation after maintenance. */
-            }
-
+                // ── UC-5 functions ────────────────────────────────────────────────
+                action def DetectFaultOrReceiveMaintenanceRequest {
+                    doc
+                    /* Detects a system fault or receives an incoming maintenance request. */
+                    out item maintenanceRequest;
+                }
+                action def RunDiagnostics {
+                    doc
+                    /* Runs diagnostic routines to identify the fault and its location. */
+                    in item maintenanceRequest;
+                    out item diagnosticsData;
+                }
+                action def TransmitDiagnosticsToTechnician {
+                    doc
+                    /* Transmits diagnostics data to the maintenance technician interface. */
+                    in item diagnosticsData;
+                }
+                action def RepairOrReplaceComponent {
+                    doc
+                    /* Coordinates repair or replacement of the affected component. */
+                }
+                action def VerifySystemRecovery {
+                    doc
+                    /* Verifies that the system has recovered and operates correctly after repair. */
+                }
+                action def ResumeNormalOperation {
+                    doc
+                    /* Resumes normal energy management operation after maintenance. */
+                }
             } // end package SolarX_Functions
-
-            view functionalArchitectureView {
-                expose SolarXModel::SolarXProject::SolarX_FunctionalArchitecture::SolarX_Functions;
-                attribute depth = 2;
-                attribute fileName = "step7_functional_architecture";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render asTreeDiagram;
-            }
         }
 
         // ── Step 8 — Logical Architecture ────────────────────────────────────
@@ -648,7 +655,7 @@ package SolarXModel {
                  * is available.
                  */
                 port sunPort : SunPort;
-                port dcOutPort : DCPort;              // DC out → PowerConversion
+                port dcOutPort : DCPort; // DC out → PowerConversion
             }
 
             part def PowerConversionSubsystem {
@@ -658,9 +665,9 @@ package SolarXModel {
                  * UC-1: select and convert energy to AC.
                  * UC-2: prepare AC electricity for export.
                  */
-                port dcInPort : ~DCPort;              // DC in ← PVCollection
-                port acOutPort : ACPort;              // AC out → EnergyManagement
-                port controlInPort : ~ControlPort;    // control in ← EnergyManagement
+                port dcInPort : ~DCPort; // DC in ← PVCollection
+                port acOutPort : ACPort; // AC out → EnergyManagement
+                port controlInPort : ~ControlPort; // control in ← EnergyManagement
 
                 perform action selectAndConvertEnergyToAC : SelectAndConvertEnergyToAC;
                 perform action prepareACElectricityForExport : PrepareACElectricityForExport;
@@ -677,9 +684,9 @@ package SolarXModel {
                  * reads; the decision of when to charge or discharge belongs to
                  * EnergyManagementSubsystem, not to storage itself.
                  */
-                port acInPort : ~ACPort;              // AC in ← EnergyManagement (charge)
-                port acOutPort : ACPort;              // AC out → EnergyManagement (discharge)
-                port controlInPort : ~ControlPort;    // control in ← EnergyManagement
+                port acInPort : ~ACPort; // AC in ← EnergyManagement (charge)
+                port acOutPort : ACPort; // AC out → EnergyManagement (discharge)
+                port controlInPort : ~ControlPort; // control in ← EnergyManagement
             }
 
             part def EnergyManagementSubsystem {
@@ -689,16 +696,16 @@ package SolarXModel {
                  * UC-1: route AC electricity to household, monitor and record energy flow.
                  * UC-2: detect surplus condition, open grid feed-in.
                  */
-                port acInPort : ~ACPort;              // AC in ← PowerConversion
+                port acInPort : ~ACPort; // AC in ← PowerConversion
                 port householdOutPort : HouseholdPort; // AC out → household boundary
-                port acToGridPort : ACPort;           // AC out → GridInterface (feed-in)
-                port acFromGridPort : ~ACPort;        // AC in ← GridInterface (draw)
-                port acToStoragePort : ACPort;        // AC out → EnergyStorage (charge)
-                port acFromStoragePort : ~ACPort;     // AC in ← EnergyStorage (discharge)
+                port acToGridPort : ACPort; // AC out → GridInterface (feed-in)
+                port acFromGridPort : ~ACPort; // AC in ← GridInterface (draw)
+                port acToStoragePort : ACPort; // AC out → EnergyStorage (charge)
+                port acFromStoragePort : ~ACPort; // AC in ← EnergyStorage (discharge)
                 port monitoringOutPort : MonitoringDataPort; // data out → MonitoringSubsystem
                 port controlToConversionPort : ControlPort; // control out → PowerConversion
-                port controlToStoragePort : ControlPort;    // control out → EnergyStorage
-                port controlToGridPort : ControlPort;       // control out → GridInterface
+                port controlToStoragePort : ControlPort; // control out → EnergyStorage
+                port controlToGridPort : ControlPort; // control out → GridInterface
 
                 perform action assessAvailableEnergySources : AssessAvailableEnergySources;
                 perform action routeACElectricityToHousehold : RouteACElectricityToHousehold;
@@ -714,10 +721,10 @@ package SolarXModel {
                  * UC-2: export surplus electricity, monitor feed-in and record.
                  * UC-1: draw from grid as backup (implicit via bidirectional port).
                  */
-                port acFromMgmtPort : ~ACPort;        // AC in ← EnergyManagement (feed-in path)
-                port acToMgmtPort : ACPort;           // AC out → EnergyManagement (draw path)
-                port gridPort : GridPort;              // bidirectional grid connection
-                port controlInPort : ~ControlPort;    // control in ← EnergyManagement
+                port acFromMgmtPort : ~ACPort; // AC in ← EnergyManagement (feed-in path)
+                port acToMgmtPort : ACPort; // AC out → EnergyManagement (draw path)
+                port gridPort : GridPort; // bidirectional grid connection
+                port controlInPort : ~ControlPort; // control in ← EnergyManagement
 
                 perform action exportSurplusElectricity : ExportSurplusElectricity;
                 perform action monitorFeedInAndRecord : MonitorFeedInAndRecord;
@@ -731,7 +738,7 @@ package SolarXModel {
                  *        transmit monitoring data.
                  */
                 port monitoringInPort : ~MonitoringDataPort; // data in ← EnergyManagement
-                port homeownerPort : HomeownerPort;          // data out → homeowner boundary
+                port homeownerPort : HomeownerPort; // data out → homeowner boundary
 
                 perform action collectSensorData : CollectSensorData;
                 perform action aggregateAndFormatData : AggregateAndFormatData;
@@ -764,7 +771,8 @@ package SolarXModel {
                  */
                 port maintenancePort : MaintenancePort;
 
-                perform action detectFaultOrReceiveMaintenanceRequest : DetectFaultOrReceiveMaintenanceRequest;
+                perform action detectFaultOrReceiveMaintenanceRequest
+                    : DetectFaultOrReceiveMaintenanceRequest;
                 perform action runDiagnostics : RunDiagnostics;
                 perform action transmitDiagnosticsToTechnician : TransmitDiagnosticsToTechnician;
                 perform action repairOrReplaceComponent : RepairOrReplaceComponent;
@@ -795,8 +803,11 @@ package SolarXModel {
                 part maintenance : MaintenanceSubsystem;
 
                 // ── Path 5: control commands ─────────────────────────────────
-                interface connect energyManagement.controlToConversionPort to powerConversion.controlInPort;
-                interface connect energyManagement.controlToStoragePort to energyStorage.controlInPort;
+                interface
+                    connect energyManagement.controlToConversionPort
+                    to powerConversion.controlInPort;
+                interface
+                    connect energyManagement.controlToStoragePort to energyStorage.controlInPort;
                 interface connect energyManagement.controlToGridPort to gridInterface.controlInPort;
 
                 // ── Path 4: commissioning and maintenance boundaries ─────────
@@ -823,35 +834,11 @@ package SolarXModel {
                 bind householdPort = energyManagement.householdOutPort;
                 bind gridPort = gridInterface.gridPort;
             }
-
-            view def StructureBreakDown {
-                filter hastype PartUsage | hastype PartDefinition;
-            }
-
-            view logicalArchitectureView : StructureBreakDown {
-                expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture::SolarX_Logical::**;
-                attribute depth = 2;
-                attribute fileName = "step8_logical_architecture";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render Views::asTreeDiagram;
-            }
-
-            view logicalInterconnectionView : StructureBreakDown {
-                expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture::SolarX_Logical::**;
-                attribute depth = 2;
-                attribute fileName = "step8_logical_interconnection";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render Views::asInterconnectionDiagram;
-            }
         }
 
         // ── Step 8b — Logical Behavior ───────────────────────────────────────
         package SolarX_LogicalBehavior {
-
             package SolarXStates {
-
                 // ── Top-level state triggers ──────────────────────────────────
                 item def InstallerInitiatesCommissioning;
                 item def CommissioningComplete;
@@ -873,7 +860,6 @@ package SolarXModel {
                 item def GridDrawSatisfied;
 
                 state solarXStates {
-
                     first start then off;
 
                     state off;
@@ -884,11 +870,11 @@ package SolarXModel {
                         exit action 'hand over to homeowner';
                     }
 
-                    state operational
-                    parallel {
+                    state operational parallel {
                         // Generation: tracks whether PV panels are actively producing
                         state generationModes {
-                            entry; then standby;
+                            entry;
+                            then standby;
                             state standby { do action 'await solar irradiation'; }
                             transition standby accept IrradiationAvailable then generating;
                             state generating { do action 'convert solar irradiation to DC'; }
@@ -896,7 +882,8 @@ package SolarXModel {
                         }
                         // Storage: tracks battery charge/discharge activity
                         state storageModes {
-                            entry; then idle;
+                            entry;
+                            then idle;
                             state idle;
                             transition idle accept ChargingRequired then charging;
                             transition idle accept DischargingRequired then discharging;
@@ -907,7 +894,8 @@ package SolarXModel {
                         }
                         // Grid: tracks whether SolarX is feeding to or drawing from grid
                         state gridModes {
-                            entry; then disconnected;
+                            entry;
+                            then disconnected;
                             state disconnected;
                             transition disconnected accept SurplusAvailable then feedingIn;
                             transition disconnected accept GridDrawRequired then drawingFromGrid;
@@ -948,62 +936,70 @@ package SolarXModel {
             // ── Physical component definitions ────────────────────────────────
 
             part def PVArray :> PVCollectionSubsystem {
-                doc /* PV panel array — captures solar irradiation and outputs DC. */
-                attribute peakPower : ScalarValues::Real;        // kWp
-                attribute cellEfficiency : ScalarValues::Real;   // %
+                doc
+                /* PV panel array — captures solar irradiation and outputs DC. */
+                attribute peakPower : ScalarValues::Real; // kWp
+                attribute cellEfficiency : ScalarValues::Real; // %
                 attribute panelCount : ScalarValues::Integer;
-                attribute dcOutputVoltage : ScalarValues::Real;  // V
+                attribute dcOutputVoltage : ScalarValues::Real; // V
             }
 
             part def SolarInverter :> PowerConversionSubsystem {
-                doc /* Grid-tied inverter — converts DC from PV array to AC. */
-                attribute ratedPower : ScalarValues::Real;        // kW
-                attribute euroEfficiency : ScalarValues::Real;    // %
-                attribute acOutputVoltage : ScalarValues::Real;   // V
+                doc
+                /* Grid-tied inverter — converts DC from PV array to AC. */
+                attribute ratedPower : ScalarValues::Real; // kW
+                attribute euroEfficiency : ScalarValues::Real; // %
+                attribute acOutputVoltage : ScalarValues::Real; // V
                 attribute acOutputFrequency : ScalarValues::Real; // Hz
                 attribute mpptInputCount : ScalarValues::Integer;
             }
 
             part def BatteryStorage :> EnergyStorageSubsystem {
-                doc /* Battery pack — stores and releases AC electricity. */
-                attribute capacity : ScalarValues::Real;          // kWh
-                attribute nominalVoltage : ScalarValues::Real;    // V
-                attribute maxChargeRate : ScalarValues::Real;     // C
-                attribute maxDischargeRate : ScalarValues::Real;  // C
-                attribute depthOfDischarge : ScalarValues::Real;  // %
-                attribute chemistry : ScalarValues::String;       // e.g. LFP, Li-ion
+                doc
+                /* Battery pack — stores and releases AC electricity. */
+                attribute capacity : ScalarValues::Real; // kWh
+                attribute nominalVoltage : ScalarValues::Real; // V
+                attribute maxChargeRate : ScalarValues::Real; // C
+                attribute maxDischargeRate : ScalarValues::Real; // C
+                attribute depthOfDischarge : ScalarValues::Real; // %
+                attribute chemistry : ScalarValues::String; // e.g. LFP, Li-ion
             }
 
             part def EnergyManagementController :> EnergyManagementSubsystem {
-                doc /* Embedded controller — executes routing and priority logic. */
-                attribute processorSpeed : ScalarValues::Real;    // MHz
+                doc
+                /* Embedded controller — executes routing and priority logic. */
+                attribute processorSpeed : ScalarValues::Real; // MHz
                 attribute ioCount : ScalarValues::Integer;
                 attribute communicationProtocols : ScalarValues::String;
             }
 
             part def GridConnection :> GridInterfaceSubsystem {
-                doc /* Grid interface unit — manages feed-in and draw with protection. */
-                attribute gridVoltage : ScalarValues::Real;       // V
-                attribute gridFrequency : ScalarValues::Real;     // Hz
-                attribute gridStandard : ScalarValues::String;    // e.g. EN50549
-                attribute maxFeedInPower : ScalarValues::Real;    // kW
+                doc
+                /* Grid interface unit — manages feed-in and draw with protection. */
+                attribute gridVoltage : ScalarValues::Real; // V
+                attribute gridFrequency : ScalarValues::Real; // Hz
+                attribute gridStandard : ScalarValues::String; // e.g. EN50549
+                attribute maxFeedInPower : ScalarValues::Real; // kW
             }
 
             part def MonitoringUnit :> MonitoringSubsystem {
-                doc /* Monitoring module — collects, aggregates and reports energy data. */
-                attribute samplingRate : ScalarValues::Real;      // Hz
+                doc
+                /* Monitoring module — collects, aggregates and reports energy data. */
+                attribute samplingRate : ScalarValues::Real; // Hz
                 attribute dataRetentionPeriod : ScalarValues::Real; // days
                 attribute communicationProtocols : ScalarValues::String;
             }
 
             part def CommissioningInterface :> CommissioningSubsystem {
-                doc /* Commissioning interface — installer configuration and activation tool. */
-                attribute interfaceType : ScalarValues::String;   // e.g. RS485, Ethernet
+                doc
+                /* Commissioning interface — installer configuration and activation tool. */
+                attribute interfaceType : ScalarValues::String; // e.g. RS485, Ethernet
                 attribute supportedProtocols : ScalarValues::String;
             }
 
             part def MaintenanceDiagnosticsUnit :> MaintenanceSubsystem {
-                doc /* Diagnostics unit — fault detection and maintenance coordination. */
+                doc
+                /* Diagnostics unit — fault detection and maintenance coordination. */
                 attribute diagnosticsProtocol : ScalarValues::String;
                 attribute faultLogCapacity : ScalarValues::Integer; // entries
             }
@@ -1024,35 +1020,217 @@ package SolarXModel {
                 part commissioningInterface : CommissioningInterface :>> commissioning;
                 part maintenanceDiagnosticsUnit : MaintenanceDiagnosticsUnit :>> maintenance;
             }
-
-            view def StructureBreakDown {
-                filter hastype PartUsage | hastype PartDefinition;
-            }
-
-            view solarXBreakdown : StructureBreakDown {
-                expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX::**;
-                attribute depth = 3;
-                attribute fileName = "step9_physical_breakdown";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render Views::asTreeDiagram;
-            }
-
-            view solarXInterconnection : StructureBreakDown {
-                expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX::**;
-                attribute depth = 2;
-                attribute fileName = "step9_physical_interconnection";
-                attribute fileType = "PNG";
-                attribute zoomLevel = 3.0;
-                render Views::asInterconnectionDiagram;
-            }
         }
 
-        
+        // ── Views ────────────────────────────────────────────────────────────
+        package SolarX_Views {
+            // ── View Definitions (filter + render template, reusable) ────────
+            package SolarX_ViewDefinitions {
+                private import SysML::*;
+                private import KerML::**; // exposes `isLibraryElement` flag
+
+                view def PartBreakdown {
+                    filter (hastype PartUsage | hastype PartDefinition) and not isLibraryElement;
+                }
+
+                view def RequirementBreakdown {
+                    filter (
+                        (hastype RequirementUsage | hastype RequirementDefinition) and
+                        not isLibraryElement
+                    );
+                }
+
+                view def ProblemSpaceBreakdown {
+                    filter (
+                        (hastype PartUsage |
+                            hastype PartDefinition |
+                            (hastype RequirementUsage | hastype RequirementDefinition)) and
+                        not isLibraryElement
+                    );
+                }
+
+                view def UseCaseBreakdown {
+                    filter (
+                        (hastype UseCaseUsage |
+                            hastype UseCaseDefinition |
+                            (hastype ActorMembership | hastype SubjectMembership) |
+                            hastype PartUsage) and
+                        not isLibraryElement
+                    );
+                }
+
+                view def ActionBreakdown {
+                    filter (
+                        (hastype ActionUsage | hastype ActionDefinition) and not isLibraryElement
+                    );
+                }
+
+                view def StateBreakdown {
+                    filter (hastype StateUsage | hastype StateDefinition) and not isLibraryElement;
+                }
+            }
+
+            // ── View Usages (one sub-package per SYSMOD step) ────────────────
+            package SolarX_ViewUsages {
+                // ── Step 1+2 — Problem Space ─────────────────────────────────
+                package Step1_2_ProblemSpaceViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view problemSpaceBreakdownView : ProblemSpaceBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_ProblemSpace::**;
+                        attribute depth = 2;
+                        attribute fileName = "step1_2_problem_space";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+                }
+
+                // ── Step 3 — Stakeholders ────────────────────────────────────
+                package Step3_StakeholderViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view stakeholderBreakdownView : PartBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_Stakeholders::**;
+                        attribute depth = 2;
+                        attribute fileName = "step3_stakeholders";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+                }
+
+                // ── Step 4 — Requirements ────────────────────────────────────
+                package Step4_RequirementsViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view requirementsBreakdownView : RequirementBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_Requirements::**;
+                        attribute depth = 2;
+                        attribute fileName = "step4_requirements";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+                }
+
+                // ── Step 5 — System Context ──────────────────────────────────
+                package Step5_ContextViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view systemContextBreakdownView : PartBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_Context::solarXContext::**;
+                        attribute depth = 2;
+                        attribute fileName = "step5_system_context_breakdown";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+
+                    view systemContextInterconnectionView : PartBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_Context::solarXContext::**;
+                        attribute depth = 2;
+                        attribute fileName = "step5_system_context_interconnection";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asInterconnectionDiagram;
+                    }
+                }
+
+                // ── Step 6 — Use Cases ───────────────────────────────────────
+                package Step6_UseCaseViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view useCaseBreakdownView : UseCaseBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_UseCases::**;
+                        attribute depth = 2;
+                        attribute fileName = "step6_use_cases";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+                }
+
+                // ── Step 7 — Functional Architecture ─────────────────────────
+                package Step7_FunctionalViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view functionalArchitectureView : ActionBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_FunctionalArchitecture
+                                ::SolarX_Functions::**;
+                        attribute depth = 2;
+                        attribute fileName = "step7_functional_architecture";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+                }
+
+                // ── Step 8 — Logical Architecture ────────────────────────────
+                package Step8_LogicalArchViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view logicalArchitectureBreakdownView : PartBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture
+                                ::SolarX_Logical::**;
+                        attribute depth = 2;
+                        attribute fileName = "step8_logical_architecture";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+
+                    view logicalArchitectureInterconnectionView : PartBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_LogicalArchitecture
+                                ::SolarX_Logical::**;
+                        attribute depth = 2;
+                        attribute fileName = "step8_logical_interconnection";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asInterconnectionDiagram;
+                    }
+                }
+
+                // ── Step 8b — Logical Behavior (States) ──────────────────────
+                package Step8b_LogicalBehaviorViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view stateBreakdownView : StateBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_LogicalBehavior::SolarXStates::**;
+                        attribute depth = 3;
+                        attribute fileName = "step8b_state_machine";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+                }
+
+                // ── Step 9 — Physical Architecture ───────────────────────────
+                package Step9_PhysicalArchViews {
+                    private import SolarX_ViewDefinitions::*;
+
+                    view physicalArchitectureBreakdownView : PartBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX::**;
+                        attribute depth = 3;
+                        attribute fileName = "step9_physical_breakdown";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asTreeDiagram;
+                    }
+
+                    view physicalArchitectureInterconnectionView : PartBreakdown {
+                        expose SolarXModel::SolarXProject::SolarX_PhysicalArchitecture::SolarX::**;
+                        attribute depth = 2;
+                        attribute fileName = "step9_physical_interconnection";
+                        attribute fileType = "PNG";
+                        attribute zoomLevel = 3.0;
+                        render Views::asInterconnectionDiagram;
+                    }
+                }
+            }
+        }
     }
 }
-
-
 
 // ── Methodology Library (reusable, not SolarX-specific) ──────────────────────
 package SYSMODLibrary {
