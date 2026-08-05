@@ -1,0 +1,2443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM-Wiki demonstrator — INCOSE Sustainability WG</title>
+<style>
+/* ── tokens ─────────────────────────────────────────────────────────────── */
+:root {
+  --ground:      #eef1f1;
+  --surface:     #ffffff;
+  --raised:      #e3e8e8;
+  --line:        #cbd4d4;
+  --line-soft:   #dde4e4;
+  --ink:         #16262a;
+  --ink-2:       #3c5257;
+  --muted:       #647c81;
+  --accent:      #0b6260;
+  --accent-soft: #d3e6e4;
+  --accent-line: #7fb5b1;
+  --amber:       #8a5a06;
+  --amber-soft:  #f4e6cd;
+  --crimson:     #93292d;
+  --crimson-soft:#f3dcdc;
+  --shadow:      0 1px 2px rgba(22,38,42,.06), 0 8px 24px -14px rgba(22,38,42,.28);
+
+  --serif: "Sitka Text", "Charter", "Iowan Old Style", "Bitstream Charter", Cambria, Georgia, "Times New Roman", serif;
+  --sans: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --mono: "Cascadia Mono", "SF Mono", "JetBrains Mono", ui-monospace, Consolas, "Liberation Mono", monospace;
+
+  --s1: .25rem; --s2: .5rem; --s3: .75rem; --s4: 1rem;
+  --s5: 1.5rem; --s6: 2rem; --s7: 3rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground:      #0b1214;
+    --surface:     #111c1f;
+    --raised:      #172629;
+    --line:        #2a3d41;
+    --line-soft:   #1e3034;
+    --ink:         #dae6e7;
+    --ink-2:       #adc1c3;
+    --muted:       #7d989c;
+    --accent:      #4cbcb1;
+    --accent-soft: #14312f;
+    --accent-line: #2d6f69;
+    --amber:       #e0a747;
+    --amber-soft:  #33270f;
+    --crimson:     #e08b8b;
+    --crimson-soft:#341a1a;
+    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:#0b1214; --surface:#111c1f; --raised:#172629; --line:#2a3d41; --line-soft:#1e3034;
+  --ink:#dae6e7; --ink-2:#adc1c3; --muted:#7d989c;
+  --accent:#4cbcb1; --accent-soft:#14312f; --accent-line:#2d6f69;
+  --amber:#e0a747; --amber-soft:#33270f; --crimson:#e08b8b; --crimson-soft:#341a1a;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+}
+:root[data-theme="light"] {
+  --ground:#eef1f1; --surface:#ffffff; --raised:#e3e8e8; --line:#cbd4d4; --line-soft:#dde4e4;
+  --ink:#16262a; --ink-2:#3c5257; --muted:#647c81;
+  --accent:#0b6260; --accent-soft:#d3e6e4; --accent-line:#7fb5b1;
+  --amber:#8a5a06; --amber-soft:#f4e6cd; --crimson:#93292d; --crimson-soft:#f3dcdc;
+  --shadow: 0 1px 2px rgba(22,38,42,.06), 0 8px 24px -14px rgba(22,38,42,.28);
+}
+
+/* ── base ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--ground); color: var(--ink);
+  font-family: var(--sans); font-size: 15px; line-height: 1.55;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4 { margin: 0; font-weight: 600; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+::selection { background: var(--accent-soft); color: var(--ink); }
+
+.label {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
+}
+.num { font-variant-numeric: tabular-nums; }
+
+/* ── top bar ────────────────────────────────────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4);
+  padding: var(--s3) var(--s5);
+}
+.brand { display: flex; align-items: baseline; gap: var(--s3); margin-right: auto; }
+.brand-mark {
+  font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em;
+  color: var(--surface); background: var(--accent);
+  padding: 3px 7px; border-radius: 2px;
+}
+.brand-title { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
+.brand-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+.counters { display: flex; gap: var(--s5); }
+.counter { display: flex; flex-direction: column; gap: 1px; }
+.counter b { font-family: var(--mono); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.counter.flag b { color: var(--amber); }
+.counter.gate b { color: var(--crimson); }
+
+.themebtn {
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 2px; padding: 4px 8px;
+}
+.themebtn:hover { color: var(--ink); border-color: var(--accent-line); }
+
+.tabs {
+  display: flex; gap: 0; overflow-x: auto; padding: 0 var(--s5);
+  border-top: 1px solid var(--line-soft); scrollbar-width: thin;
+}
+.tab {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); padding: 10px 14px; white-space: nowrap;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.tab .tab-n {
+  display: inline-block; margin-left: 6px; padding: 0 4px; border-radius: 2px;
+  background: var(--raised); color: var(--muted); font-size: 10px;
+}
+.tab[aria-selected="true"] .tab-n { background: var(--accent-soft); color: var(--accent); }
+
+/* ── views ──────────────────────────────────────────────────────────────── */
+.view { display: none; }
+.view.on { display: block; }
+.pad { padding: var(--s6) var(--s5) var(--s7); }
+.wrap { max-width: 60rem; margin: 0 auto; }
+
+.viewhead { max-width: 46rem; display: flex; flex-direction: column; gap: var(--s2); margin-bottom: var(--s6); }
+.viewhead h2 { font-size: 24px; letter-spacing: -.02em; }
+.viewhead p { color: var(--ink-2); max-width: 60ch; }
+
+/* ── wiki shell ─────────────────────────────────────────────────────────── */
+.shell {
+  display: grid; grid-template-columns: 250px minmax(0,1fr) 290px;
+  align-items: start; min-height: calc(100vh - 96px);
+}
+.rail {
+  position: sticky; top: 96px; align-self: start;
+  max-height: calc(100vh - 96px); overflow-y: auto;
+  border-right: 1px solid var(--line); padding: var(--s4) var(--s3) var(--s6);
+  display: flex; flex-direction: column; gap: var(--s4);
+}
+.railgroup { display: flex; flex-direction: column; gap: 1px; }
+.railgroup > .label { padding: 0 var(--s3) var(--s2); }
+.railitem {
+  display: flex; align-items: center; gap: var(--s2); width: 100%; text-align: left;
+  padding: 5px var(--s3); border-radius: 3px; font-size: 13px; color: var(--ink-2);
+  border-left: 2px solid transparent;
+}
+.railitem:hover { background: var(--raised); color: var(--ink); }
+.railitem[aria-current="true"] {
+  background: var(--accent-soft); color: var(--ink); border-left-color: var(--accent); font-weight: 600;
+}
+.railitem .fn { font-family: var(--mono); font-size: 11.5px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; flex: 0 0 6px; }
+.dot.draft { background: var(--muted); }
+.dot.inreview { background: var(--amber); }
+.dot.lintclean { background: var(--accent); }
+.dot.published { background: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+
+.reader { padding: var(--s6) var(--s6) var(--s7); min-width: 0; }
+.aside {
+  position: sticky; top: 96px; align-self: start;
+  max-height: calc(100vh - 96px); overflow-y: auto;
+  border-left: 1px solid var(--line); padding: var(--s6) var(--s4) var(--s6);
+  display: flex; flex-direction: column; gap: var(--s5);
+}
+@media (max-width: 1100px) {
+  .shell { grid-template-columns: 220px minmax(0,1fr); }
+  .aside { display: none; }
+}
+@media (max-width: 760px) {
+  .shell { grid-template-columns: 1fr; }
+  .rail { position: static; max-height: none; border-right: 0; border-bottom: 1px solid var(--line); }
+  .reader { padding: var(--s5) var(--s4) var(--s7); }
+  .topbar-inner { padding: var(--s3) var(--s4); }
+  .tabs { padding: 0 var(--s4); }
+  .counters { order: 3; width: 100%; gap: var(--s4); }
+}
+
+/* ── frontmatter block ──────────────────────────────────────────────────── */
+.fm {
+  font-family: var(--mono); font-size: 12px; line-height: 1.7;
+  background: var(--surface); border: 1px solid var(--line);
+  border-left: 3px solid var(--accent-line);
+  border-radius: 2px; padding: var(--s3) var(--s4); margin-bottom: var(--s5);
+  overflow-x: auto;
+}
+.fm-rule { color: var(--muted); user-select: none; }
+.fm-k { color: var(--muted); }
+.fm-v { color: var(--ink); }
+.fm-v.status-draft { color: var(--muted); }
+.fm-v.status-inreview { color: var(--amber); font-weight: 600; }
+.fm-v.status-lintclean { color: var(--accent); font-weight: 600; }
+.fm-v.empty { color: var(--crimson); }
+
+/* ── prose ──────────────────────────────────────────────────────────────── */
+.prose { font-family: var(--serif); font-size: 17px; line-height: 1.62; color: var(--ink); }
+.prose > * + * { margin-top: var(--s4); }
+.prose h1 {
+  font-family: var(--sans); font-size: 28px; letter-spacing: -.025em; line-height: 1.15;
+  margin-bottom: var(--s2);
+}
+.prose h1 + p { margin-top: var(--s4); }
+.prose h2 {
+  font-family: var(--sans); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted); margin-top: var(--s6);
+  padding-bottom: var(--s2); border-bottom: 1px solid var(--line-soft);
+}
+.prose h3 { font-family: var(--sans); font-size: 16px; margin-top: var(--s5); }
+.prose p { max-width: 66ch; }
+.prose ul, .prose ol { max-width: 66ch; margin-left: 0; padding-left: 1.2em; }
+.prose li + li { margin-top: var(--s2); }
+.prose strong { font-weight: 600; }
+.prose em { font-style: italic; }
+.prose code {
+  font-family: var(--mono); font-size: .82em; background: var(--raised);
+  padding: 1px 4px; border-radius: 2px;
+}
+.prose a.wl {
+  color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid var(--accent-line); padding-bottom: .5px;
+}
+.prose a.wl:hover { background: var(--accent-soft); }
+.prose a.wl.ghost { color: var(--muted); border-bottom-style: dashed; border-bottom-color: var(--line); }
+.prose a.wl.ghost:hover { background: var(--raised); }
+.tablewrap { overflow-x: auto; }
+.prose table { border-collapse: collapse; font-family: var(--sans); font-size: 14px; min-width: 100%; }
+.prose th, .prose td { text-align: left; padding: 7px 14px 7px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.prose th { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+/* citation chips */
+.cite {
+  font-family: var(--mono); font-size: 11.5px; white-space: nowrap;
+  color: var(--accent); background: var(--accent-soft);
+  border: 1px solid transparent; border-radius: 2px; padding: 1px 5px;
+  vertical-align: .08em;
+}
+.cite:hover, .cite.hot { border-color: var(--accent-line); }
+.cite.wg { color: var(--amber); background: var(--amber-soft); }
+
+/* ── panels ─────────────────────────────────────────────────────────────── */
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: var(--s4); display: flex; flex-direction: column; gap: var(--s3);
+}
+.panel h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.srcrow { display: flex; flex-direction: column; gap: 3px; padding: var(--s2) 0; border-top: 1px solid var(--line-soft); }
+.srcrow:first-of-type { border-top: 0; }
+.srcrow .id { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+.srcrow .ti { font-size: 12.5px; line-height: 1.35; }
+.srcrow .pa { font-family: var(--mono); font-size: 10.5px; color: var(--muted); word-break: break-all; }
+.srcrow.flagged .id { color: var(--amber); }
+
+.gatetrack { display: flex; flex-direction: column; gap: 0; }
+.gatestep { display: grid; grid-template-columns: 14px 1fr; gap: var(--s3); padding-bottom: var(--s3); position: relative; }
+.gatestep:not(:last-child)::before {
+  content: ""; position: absolute; left: 6px; top: 14px; bottom: 0; width: 1px; background: var(--line);
+}
+.gatepip { width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--line); background: var(--surface); margin-top: 2px; z-index: 1; }
+.gatestep.done .gatepip { border-color: var(--accent); background: var(--accent); }
+.gatestep.now .gatepip { border-color: var(--amber); background: var(--amber-soft); }
+.gatestep .gname { font-size: 13px; font-weight: 600; }
+.gatestep .gwho { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+.gatestep.todo .gname { color: var(--muted); font-weight: 400; }
+
+/* ── generic cards ──────────────────────────────────────────────────────── */
+.cards { display: grid; gap: var(--s4); }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: var(--s5); display: flex; flex-direction: column; gap: var(--s3);
+  box-shadow: var(--shadow);
+}
+.card.stripe-crimson { border-top: 3px solid var(--crimson); }
+.card.stripe-amber   { border-top: 3px solid var(--amber); }
+.card.stripe-accent  { border-top: 3px solid var(--accent); }
+.card h3 { font-size: 18px; letter-spacing: -.015em; }
+.card p { color: var(--ink-2); max-width: 68ch; }
+.card .serif { font-family: var(--serif); font-size: 16px; color: var(--ink); }
+
+.sidebyside { display: grid; gap: var(--s4); grid-template-columns: 1fr 1fr; }
+@media (max-width: 700px) { .sidebyside { grid-template-columns: 1fr; } }
+.pos {
+  border: 1px solid var(--line); border-radius: 3px; padding: var(--s4);
+  display: flex; flex-direction: column; gap: var(--s2); background: var(--ground);
+}
+.pos.a { border-left: 3px solid var(--crimson); }
+.pos.b { border-left: 3px solid var(--accent); }
+.pos .who { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.pos .claim { font-family: var(--serif); font-size: 15.5px; line-height: 1.5; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 5px; align-self: flex-start;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px; background: var(--raised); color: var(--muted);
+}
+.pill.crimson { background: var(--crimson-soft); color: var(--crimson); }
+.pill.amber   { background: var(--amber-soft); color: var(--amber); }
+.pill.accent  { background: var(--accent-soft); color: var(--accent); }
+.pillrow { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+.resolves {
+  font-family: var(--sans); font-size: 13px; color: var(--ink-2);
+  border-top: 1px solid var(--line-soft); padding-top: var(--s3);
+}
+.resolves b { color: var(--ink); font-weight: 600; }
+
+/* ── ingest ─────────────────────────────────────────────────────────────── */
+.ingest-grid { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: var(--s6); align-items: start; }
+@media (max-width: 900px) { .ingest-grid { grid-template-columns: 1fr; } }
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: grid; grid-template-columns: 30px 1fr; gap: var(--s4);
+  padding: var(--s3) 0; position: relative; opacity: .34;
+  transition: opacity .35s ease;
+}
+.step.live { opacity: 1; }
+.step:not(:last-child)::before {
+  content: ""; position: absolute; left: 14px; top: 26px; bottom: -2px; width: 1px; background: var(--line);
+}
+.stepn {
+  font-family: var(--mono); font-size: 11px; font-variant-numeric: tabular-nums;
+  width: 29px; height: 29px; display: grid; place-items: center; z-index: 1;
+  border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--muted);
+}
+.step.live .stepn { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.step.live.alarm .stepn { border-color: var(--crimson); color: var(--crimson); background: var(--crimson-soft); }
+.stepbody { display: flex; flex-direction: column; gap: 4px; padding-top: 3px; }
+.stepop { font-family: var(--mono); font-size: 11.5px; color: var(--accent); }
+.step.alarm .stepop { color: var(--crimson); }
+.steptx { font-size: 14px; color: var(--ink-2); max-width: 62ch; }
+.step.live .steptx { color: var(--ink); }
+.stepfiles { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
+.chip {
+  font-family: var(--mono); font-size: 10.5px; padding: 2px 6px; border-radius: 2px;
+  background: var(--raised); color: var(--muted);
+}
+.chip.write { background: var(--accent-soft); color: var(--accent); }
+.chip.new { background: var(--accent); color: var(--surface); }
+.chip.alarm { background: var(--crimson-soft); color: var(--crimson); }
+
+.filemap { display: flex; flex-direction: column; gap: 2px; }
+.fmrow {
+  display: flex; align-items: center; gap: var(--s2);
+  font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+  padding: 4px 7px; border-radius: 2px; border-left: 2px solid transparent;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.fmrow.touched { background: var(--accent-soft); color: var(--accent); border-left-color: var(--accent); }
+.fmrow.created { background: var(--accent); color: var(--surface); border-left-color: var(--accent); }
+.fmrow .tag { margin-left: auto; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+
+.ctrl { display: flex; gap: var(--s2); align-items: center; margin-bottom: var(--s5); flex-wrap: wrap; }
+.btn {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase;
+  border: 1px solid var(--accent-line); color: var(--accent); background: var(--accent-soft);
+  padding: 7px 14px; border-radius: 2px;
+}
+.btn:hover { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.btn.ghost { background: none; border-color: var(--line); color: var(--muted); }
+.btn.ghost:hover { color: var(--ink); border-color: var(--accent-line); background: none; }
+
+/* ── lint ───────────────────────────────────────────────────────────────── */
+.lintbar {
+  display: flex; flex-wrap: wrap; gap: var(--s5); align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: var(--s4) var(--s5); margin-bottom: var(--s5);
+}
+.lintstat { display: flex; flex-direction: column; gap: 2px; }
+.lintstat b { font-family: var(--mono); font-size: 22px; font-variant-numeric: tabular-nums; line-height: 1; }
+.lintstat.err b { color: var(--crimson); }
+.lintstat.warn b { color: var(--amber); }
+.lintstat.info b { color: var(--muted); }
+.gateverdict { margin-left: auto; display: flex; flex-direction: column; gap: 3px; text-align: right; }
+.gateverdict b { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+
+.lintgroup { border: 1px solid var(--line); border-radius: 3px; background: var(--surface); margin-bottom: var(--s4); overflow: hidden; }
+.lintgroup > header {
+  display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap;
+  padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line-soft); background: var(--raised);
+}
+.lintgroup .rule { font-family: var(--mono); font-size: 12.5px; font-weight: 600; }
+.lintgroup .cnt { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.lintgroup .why { font-size: 12.5px; color: var(--ink-2); flex-basis: 100%; }
+.lintrow {
+  display: grid; grid-template-columns: 62px minmax(0,1fr); gap: var(--s3);
+  padding: 7px var(--s4); border-top: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: 11.5px; align-items: baseline;
+}
+.lintrow:first-of-type { border-top: 0; }
+.lintrow .lv { font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
+.lintrow .lv.warn { color: var(--amber); }
+.lintrow .lv.info { color: var(--muted); }
+.lintrow .pg { color: var(--ink); word-break: break-all; }
+.lintrow .msg { grid-column: 2; color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+/* ── log ────────────────────────────────────────────────────────────────── */
+.logline { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: var(--s5); padding: var(--s4) 0; border-top: 1px solid var(--line-soft); }
+.logline:first-child { border-top: 0; }
+.logmeta { display: flex; flex-direction: column; gap: 3px; }
+.logmeta .d { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.logmeta .op { font-family: var(--mono); font-size: 12.5px; color: var(--accent); font-weight: 600; }
+.logbody { display: flex; flex-direction: column; gap: var(--s2); min-width: 0; }
+.logbody .t { font-size: 14px; }
+.logbody .r { font-size: 13px; color: var(--ink-2); max-width: 70ch; }
+@media (max-width: 700px) { .logline { grid-template-columns: 1fr; gap: var(--s2); } }
+
+/* ── pattern view ───────────────────────────────────────────────────────── */
+.layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); }
+@media (max-width: 850px) { .layers { grid-template-columns: 1fr; } }
+.layer { background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: var(--s5); display: flex; flex-direction: column; gap: var(--s3); }
+.layer .lno { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.layer .lname { font-family: var(--mono); font-size: 15px; color: var(--accent); }
+.layer h3 { font-size: 17px; }
+.layer p { font-size: 13.5px; color: var(--ink-2); }
+.layer .own { font-family: var(--mono); font-size: 10.5px; color: var(--muted); border-top: 1px solid var(--line-soft); padding-top: var(--s2); margin-top: auto; }
+
+.opsgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s4); }
+@media (max-width: 850px) { .opsgrid { grid-template-columns: 1fr; } }
+
+.riskrow { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+@media (max-width: 700px) { .riskrow { grid-template-columns: 1fr; } }
+
+.notfound { display: flex; flex-direction: column; gap: var(--s3); max-width: 46ch; padding-top: var(--s4); }
+.notfound .fn { font-family: var(--mono); font-size: 13px; color: var(--amber); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+@media print {
+  .topbar, .rail, .aside { display: none; }
+  .view { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">LLM&#8209;WIKI</span>
+      <span>
+        <span class="brand-title">Regeneration definitions compendium</span>
+        <span class="brand-sub">&nbsp;· pilot · INCOSE Sustainability WG</span>
+      </span>
+    </div>
+    <div class="counters">
+      <span class="counter"><b class="num">14</b><span class="label">sources</span></span>
+      <span class="counter"><b class="num">16</b><span class="label">pages</span></span>
+      <span class="counter flag"><b class="num">5</b><span class="label">contested</span></span>
+      <span class="counter gate"><b class="num">0</b><span class="label">published</span></span>
+    </div>
+    <button class="themebtn" id="themebtn" type="button">theme</button>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Demonstrator views">
+    <button class="tab" role="tab" data-view="wiki" aria-selected="true">The wiki</button>
+    <button class="tab" role="tab" data-view="ingest" aria-selected="false">Ingest</button>
+    <button class="tab" role="tab" data-view="contested" aria-selected="false">Contested<span class="tab-n num">5</span></button>
+    <button class="tab" role="tab" data-view="lint" aria-selected="false">Lint<span class="tab-n num">25</span></button>
+    <button class="tab" role="tab" data-view="log" aria-selected="false">Log</button>
+    <button class="tab" role="tab" data-view="pattern" aria-selected="false">How it works</button>
+  </nav>
+</header>
+
+<!-- ══ WIKI ══════════════════════════════════════════════════════════════ -->
+<main class="view on" id="view-wiki">
+  <div class="shell">
+    <nav class="rail" id="rail" aria-label="Wiki pages"></nav>
+    <article class="reader" id="reader"></article>
+    <aside class="aside" id="aside"></aside>
+  </div>
+</main>
+
+<!-- ══ INGEST ════════════════════════════════════════════════════════════ -->
+<section class="view" id="view-ingest">
+  <div class="pad wrap">
+    <div class="viewhead">
+      <span class="label">Operation 1 of 3</span>
+      <h2>Ingest: one source in, six files changed</h2>
+      <p>This is the run that added <b>SWS Ep. 04</b> to the corpus. Nothing was appended to a
+      pile: the agent read the deck, then went back through every page the deck bears on and
+      revised it. The step it cannot do alone is step 7.</p>
+    </div>
+    <div class="ctrl">
+      <button class="btn" id="ing-run" type="button">Run ingest R11</button>
+      <button class="btn ghost" id="ing-reset" type="button">Reset</button>
+      <span class="label" id="ing-state">idle</span>
+    </div>
+    <div class="ingest-grid">
+      <div class="steps" id="ing-steps"></div>
+      <div class="panel">
+        <h4>Files in the wiki</h4>
+        <div class="filemap" id="ing-files"></div>
+        <p class="label" style="line-height:1.6;text-transform:none;letter-spacing:0;font-size:11.5px">
+          One source touched six files. Karpathy's own wiki reports 10–15 pages revised per
+          ingest; that is what stops the knowledge fragmenting back into a pile of summaries.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTESTED ═════════════════════════════════════════════════════════ -->
+<section class="view" id="view-contested">
+  <div class="pad wrap">
+    <div class="viewhead">
+      <span class="label">Found in our own corpus</span>
+      <h2>Five disagreements the wiki refuses to average</h2>
+      <p>Search hands you whichever source ranks highest. RAG hands you a confident synthesis
+      that quietly picks one. A wiki has to write the answer down and keep it, which is exactly
+      why it has to write the disagreement down too. None of these was invented for the demo.</p>
+    </div>
+    <div class="cards" id="contested-cards"></div>
+  </div>
+</section>
+
+<!-- ══ LINT ══════════════════════════════════════════════════════════════ -->
+<section class="view" id="view-lint">
+  <div class="pad wrap">
+    <div class="viewhead">
+      <span class="label">Operation 3 of 3 · scripts, not tokens</span>
+      <h2>Lint: the maintenance humans abandon</h2>
+      <p>Real output of <code>python lint/lint.py</code> over these files. No model call, no
+      network, no randomness: run it again and you get the same 25 findings. That is what makes
+      it usable as a gate.</p>
+    </div>
+    <div class="lintbar">
+      <span class="lintstat err"><b class="num">0</b><span class="label">error</span></span>
+      <span class="lintstat warn"><b class="num">13</b><span class="label">warn</span></span>
+      <span class="lintstat info"><b class="num">12</b><span class="label">info</span></span>
+      <span class="gateverdict">
+        <b>publish gate: open</b>
+        <span class="label">…and still 0 pages published</span>
+      </span>
+    </div>
+    <div id="lint-groups"></div>
+    <div class="card stripe-amber" style="margin-top:var(--s5)">
+      <span class="pill amber">read this one</span>
+      <h3>Six warnings from one typo</h3>
+      <p class="serif">The Mang &amp; Reed PDF prints its own publication year as <b>2112</b>.
+      One wrong field, in one source, and <b>provenance-flag</b> fires on all six pages that
+      depend on it. In a chat that error would be a single wrong answer you close and forget.
+      In a wiki it is a fact six pages cite. Making that propagation visible, cheaply and
+      deterministically, is the argument for the whole gate.</p>
+      <p class="resolves">The agent did not correct the year. <b>It is not allowed to silently
+      change a citation.</b> A WG member clears the note, and the six warnings clear with it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOG ═══════════════════════════════════════════════════════════════ -->
+<section class="view" id="view-log">
+  <div class="pad wrap">
+    <div class="viewhead">
+      <span class="label">wiki/log.md · append-only</span>
+      <h2>Audit trail</h2>
+      <p>Every operation, what it touched, what it raised. Git history is the other half:
+      diffs, blame, and a revert for anything the WG rejects.</p>
+    </div>
+    <div id="log-lines"></div>
+  </div>
+</section>
+
+<!-- ══ PATTERN ═══════════════════════════════════════════════════════════ -->
+<section class="view" id="view-pattern">
+  <div class="pad wrap">
+    <div class="viewhead">
+      <span class="label">Karpathy's pattern · Open Knowledge Format</span>
+      <h2>Three layers, three operations, one gate</h2>
+      <p>Sources are the source code; the wiki is the compiled artifact. Because the sources
+      are immutable, the whole wiki can be rebuilt from them at any time — which is what makes
+      it safe to let an agent own the middle layer.</p>
+    </div>
+
+    <div class="layers">
+      <div class="layer">
+        <span class="lno">Layer 1</span>
+        <span class="lname">raw/</span>
+        <h3>The sources</h3>
+        <p>14 PDFs the WG already holds. The registry points at them in place — nothing was
+        copied, so there is one copy of each and no second thing to keep in sync. The agent
+        reads them and never writes them.</p>
+        <span class="own">owner: a WG member · agent access: read-only</span>
+      </div>
+      <div class="layer">
+        <span class="lno">Layer 2</span>
+        <span class="lname">wiki/</span>
+        <h3>The compiled knowledge</h3>
+        <p>Markdown with YAML frontmatter, per the Open Knowledge Format. Concepts, entities,
+        source pages, open questions, plus an index for routing and a log for audit. Renders in
+        Obsidian, VS Code, GitHub — or nothing at all, it is still readable.</p>
+        <span class="own">owner: the agent · human access: review + publish</span>
+      </div>
+      <div class="layer">
+        <span class="lno">Layer 3</span>
+        <span class="lname">CLAUDE.md</span>
+        <h3>The schema</h3>
+        <p>One file: page types, required frontmatter, citation rules, the ingest / query /
+        lint workflows, and the rule that the agent may never set <code>published</code>. Read
+        at runtime — edit it and behaviour changes on the next run.</p>
+        <span class="own">owner: the WG · 5 minutes to read end to end</span>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--s7);margin-bottom:var(--s4);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">The three operations</h3>
+    <div class="opsgrid">
+      <div class="card stripe-accent">
+        <span class="pill accent">ingest</span>
+        <h3>Compile a source in</h3>
+        <p>Read it, write its source page, then revise every existing page it bears on — R11
+        touched six files here. Contradictions get raised, not smoothed. Every touched page
+        drops back to <code>draft</code>: ingest never preserves a human sign-off.</p>
+      </div>
+      <div class="card stripe-accent">
+        <span class="pill accent">query</span>
+        <h3>Ask the wiki, not the pile</h3>
+        <p>Answers come from the pages, with citations, falling back to <code>raw/</code> only
+        for detail the wiki does not hold. A good answer is filed back as a page — so asking
+        questions compounds too, instead of evaporating with the chat.</p>
+      </div>
+      <div class="card stripe-accent">
+        <span class="pill accent">lint</span>
+        <h3>Health-check on a timer</h3>
+        <p>Schema, unresolved citations, uncited claims, orphans, dangling links, stale
+        freshness dates, provenance flags. Deterministic and cheap, so it can run on every
+        commit and re-open only the pages whose flags trip.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--s7);margin-bottom:var(--s4);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Why the gate is not optional</h3>
+    <div class="riskrow">
+      <div class="card stripe-crimson">
+        <span class="pill crimson">the failure mode</span>
+        <h3>A wiki error does not go away</h3>
+        <p class="serif">A RAG error is one wrong answer, in one place, and it disappears when
+        you close the chat. A wiki error becomes a fact that other pages cite and build on. It
+        persists, it spreads, and it arrives wearing a citation. For a scientific working group
+        that is the whole ballgame.</p>
+      </div>
+      <div class="card stripe-accent">
+        <span class="pill accent">the answer</span>
+        <h3>Curate · draft · review · lint · publish</h3>
+        <p class="serif">A human picks the sources. The agent drafts with one citation per
+        claim. A second model instance, with no memory of drafting, checks each claim against
+        its source. A script enforces what a script can. Then a named WG member publishes —
+        and nothing is trusted knowledge until they do.</p>
+        <p class="resolves">Tsaneva et al. (2025), <i>Information Processing &amp; Management</i>:
+        the hybrid human-in-the-loop plus LLM check gave the best overall validation,
+        <b>about +5% F1 with minimal human effort</b>. Neither alone won.</p>
+      </div>
+    </div>
+
+    <div class="card stripe-amber" style="margin-top:var(--s5)">
+      <span class="pill amber">what this demonstrator is</span>
+      <h3>One afternoon, eleven sources, sixteen pages, nothing published</h3>
+      <p class="serif">Everything here is real: the PDFs are in this repository, the citations
+      carry page and slide numbers, the contradictions were found rather than invented, and the
+      lint report is the script's actual output. What is compressed is the pace — a real pilot
+      accumulates this over weeks, not an afternoon.</p>
+      <p class="resolves">The proposal on slide 12 is unchanged by any of it: <b>pilot on one
+      asset, OKF-conformant from day one, gates wired in, reviewed at the next session.</b>
+      If a page never compresses real work, we stop — and we will know why.</p>
+      <p class="resolves">New to the pattern? <b>GETTING-STARTED.md</b> sits next to this file
+      in the same folder. It assumes no knowledge of git, Obsidian, Python or AI tooling, and
+      walks through what to click, what the coloured dots mean, and how to add a source
+      yourself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WIKI PAGE SOURCES ═════════════════════════════════════════════════ -->
+<script type="text/plain" data-page="index.md">
+---
+type: Index
+title: Wiki index
+status: lint-clean
+sources: []
+tags: [routing]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2026-11-05
+---
+
+# Wiki index
+
+Routing page. 14 sources curated, 11 ingested. 16 knowledge pages written, 5 source pages,
+**0 published.** Nothing here is trusted WG knowledge until a WG member signs it off.
+
+## Start here
+
+- **[Regeneration](concepts/regeneration.md)** — three incompatible definitions, kept apart on purpose.
+- **[Strong sustainability](concepts/strong-sustainability.md)** — the fault line under everything else.
+- **[Q01: which definition of sustainability?](questions/q01-which-sustainability.md)** — the decision the WG owes the compendium.
+
+## Concepts
+
+| Page | Status | Sources |
+|---|---|---|
+| [Regeneration](concepts/regeneration.md) | in-review | R01 R02 R03 R05 |
+| [Regenerative design](concepts/regenerative-design.md) | lint-clean | R01 |
+| [Regenerative development](concepts/regenerative-development.md) | lint-clean | R01 R02 |
+| [Restorative design](concepts/restorative-design.md) | draft | R01 R02 |
+| [Regenerative business model](concepts/regenerative-business-model.md) | draft | R03 R05 R04 |
+| [Strong sustainability](concepts/strong-sustainability.md) | in-review | R04 R10 R11 |
+| [Sustainability context](concepts/sustainability-context.md) | draft | R11 R12 |
+| [Net positive](concepts/net-positive.md) | draft | R03 R12 R11 R04 R09 |
+| [Tri-profit](concepts/tri-profit.md) | lint-clean | R04 |
+| [Rebound effect](concepts/rebound-effect.md) | lint-clean | R09 R02 R07 |
+| [MRV for living-system regeneration](concepts/mrv-living-systems.md) | draft | R02 |
+
+## Entities
+
+| Page | Status | Sources |
+|---|---|---|
+| [Flourishing Business Canvas](entities/flourishing-business-canvas.md) | draft | R08 R04 |
+| [Future-Fit Business Benchmark](entities/future-fit-business-benchmark.md) | draft | R12 R04 |
+| [Regenerative Business Case Database](entities/regenerative-business-case-database.md) | lint-clean | R03 |
+
+## Open questions
+
+| Page | Blocks |
+|---|---|
+| [Q01 — which definition of sustainability?](questions/q01-which-sustainability.md) | strong-sustainability, net-positive, regeneration |
+| [Q02 — what is regeneration the scope of?](questions/q02-regeneration-scope.md) | regeneration, restorative-design |
+
+## Source pages
+
+[R01 Mang &amp; Reed](sources/r01-mang-reed.md) ·
+[R02 Regeneration taxonomy](sources/r02-regeneration-taxonomy.md) ·
+[R03 Das &amp; Bocken 2024](sources/r03-das-bocken-2024.md) ·
+[R09 Bornes 2025](sources/r09-bornes-rebound.md) ·
+[R11 Baue 2025](sources/r11-baue-authentic-sustainability.md)
+
+Not yet written: R04, R05, R07, R08, R10, R12. Queued — see the Log view.
+
+## Not yet written
+
+Pages linked from elsewhere in the wiki that do not exist yet. Under OKF a dangling link is a
+work item, not an error.
+
+`concepts/flourishing.md` · `concepts/planetary-boundaries.md` · `concepts/biomimicry.md` ·
+`concepts/cradle-to-cradle.md` · `concepts/ecological-restoration.md` ·
+`concepts/living-systems-thinking.md` · `concepts/consequential-lca.md`
+</script>
+
+<script type="text/plain" data-page="concepts/regeneration.md">
+---
+type: Concept
+title: Regeneration
+status: in-review
+sources: [R01, R02, R03, R05]
+tags: [definitions, contested, core]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Regeneration
+
+The corpus does not hold one definition of regeneration. It holds three, from three
+communities, and they are not interchangeable. This page keeps them apart on purpose.
+
+**Design tradition.** Regeneration is what a design does when it works with the living
+systems of a specific place rather than on them: designs that "regenerate rather than
+deplete underlying life support systems and resources within socio-ecological wholes"
+[R01 glossary]. The unit of analysis is a place, and the aim is a system that becomes
+self-organizing and self-evolving [R01 glossary].
+
+**Business tradition.** Regeneration is a property of a firm's model: business models that
+"actively restore the natural and social systems they operate in, creating a more holistic
+net positive impact" [R03 p.529]. The unit of analysis is the enterprise, and the test is
+evidenced, continuing activity rather than stated intent [R03 p.533].
+
+**Engineering usage.** In engineering vocabulary the word is mostly efficiency-coded —
+regenerative braking, regenerative thermal oxidizers, waste-heat recovery — recovering
+exergy or extending product life rather than generating anything. Generative function
+proper (net primary production, soil formation, hydrological replenishment) overwhelmingly
+depends on living systems [R02 exec. summary].
+
+## Why the distinction matters to us
+
+A WG document that says "regenerative" without saying which of the three it means will be
+read three different ways by three different readers. It is also the fault line under
+[the sustainability definition question](questions/q01-which-sustainability.md): the design
+tradition treats regeneration as a replacement for sustainability-as-harm-reduction
+[R01 §II], while the business tradition treats it as the next step beyond net zero
+[R03 p.529].
+
+## Contested
+
+- **Scope of the term.** R01 anchors regeneration in place-based, co-evolutionary practice;
+  R03 anchors it in firm-level strategy; R02 records the engineering usage as a third,
+  largely unrelated sense. No source in the corpus reconciles the three. Open as
+  [Q02](questions/q02-regeneration-scope.md).
+- **Whether "regenerative" survives measurement.** R02 reports that regenerative claims
+  "often fail when subjected to dynamic, system-boundary-corrected LCA", naming Zink &amp; Geyer's
+  circular-economy rebound and Chaplot &amp; Smith (2023) [R02 gap analysis §3]. This is the same
+  failure mode [rebound effect](concepts/rebound-effect.md) describes at product level.
+- **Whether regeneration is modellable at all.** R02's own MBSE addendum places "regenerative
+  business models", permaculture, regenerative leadership and story-of-place in its **weak fit**
+  category — essential to the field, resistant to formal modelling — while placing
+  regenerative braking, anaerobic digestion and managed aquifer recharge in **strong fit**
+  [R02 MBSE addendum]. The category the WG most wants to model is the one the review says
+  resists modelling.
+
+## Related
+
+[Regenerative design](concepts/regenerative-design.md) · [Regenerative development](concepts/regenerative-development.md) ·
+[Restorative design](concepts/restorative-design.md) · [Regenerative business model](concepts/regenerative-business-model.md) ·
+[Net positive](concepts/net-positive.md) · [Strong sustainability](concepts/strong-sustainability.md)
+
+## Citations
+
+1. [R01] Mang &amp; Reed, *Regenerative Development and Design*, Encyclopedia of Sustainability Science &amp; Technology ch. 303 — glossary; §II Definition of the Subject.
+2. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — executive summary; gap analysis §3; MBSE/SysML v2 addendum.
+3. [R03] Das &amp; Bocken (2024), *Sustainable Production and Consumption* 49:529–544 — pp. 529, 533.
+4. [R05] Kulp et al. (2026), *Business Strategy and the Environment* — abstract.
+</script>
+
+<script type="text/plain" data-page="concepts/regenerative-design.md">
+---
+type: Concept
+title: Regenerative design
+status: lint-clean
+sources: [R01]
+tags: [definitions, design-tradition]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Regenerative design
+
+"A system of technologies and strategies, based on an understanding of the inner working of
+ecosystems, that generates designs to regenerate rather than deplete underlying life support
+systems and resources within socio-ecological wholes" [R01 glossary].
+
+Two things in that definition do work. *Inner working of ecosystems* makes ecological
+literacy a precondition, not a garnish. *Socio-ecological wholes* makes the boundary of the
+design larger than the artefact — which is where it parts company with green design, whose
+concern R01 characterises as minimising damage and using resources more efficiently, in
+effect slowing degradation rather than reversing it [R01 §II].
+
+Regenerative design is the practice layer. The capability layer that makes it possible is
+[regenerative development](concepts/regenerative-development.md); the two are named separately in R01
+and should stay separate here.
+
+## Contested
+
+None in the corpus. R01 is the only source that defines the term, which is itself a finding:
+a single-source definition should not be treated as settled. R13 and R14 in the registry
+would give the WG a method for testing whether this definition is well-formed, and are not
+yet ingested.
+
+## Related
+
+[Regeneration](concepts/regeneration.md) · [Regenerative development](concepts/regenerative-development.md) ·
+[Restorative design](concepts/restorative-design.md) · [Biomimicry](concepts/biomimicry.md) ·
+[Cradle-to-cradle](concepts/cradle-to-cradle.md)
+
+## Citations
+
+1. [R01] Mang &amp; Reed, *Regenerative Development and Design*, Encyclopedia of Sustainability Science &amp; Technology ch. 303 — glossary; §II.
+</script>
+
+<script type="text/plain" data-page="concepts/regenerative-development.md">
+---
+type: Concept
+title: Regenerative development
+status: lint-clean
+sources: [R01, R02]
+tags: [definitions, design-tradition]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Regenerative development
+
+"A system of technologies and strategies for generating the patterned whole system
+understanding of a place, and developing the strategic systemic thinking capacities, and the
+stakeholder engagement/commitment required to ensure regenerative design processes to achieve
+maximum systemic leverage and support, that is self-organizing and self-evolving"
+[R01 glossary].
+
+Read against [regenerative design](concepts/regenerative-design.md), the division is clean:
+development builds the *understanding and the capacity to act*; design produces the
+*intervention*. R01 makes place the carrier of that understanding — the "unique, multi-layered
+network of ecosystems within a geographic region" — and locational patterns the means of
+reading it [R01 glossary].
+
+The stakeholder-capacity half of this definition is the part with no engineering analogue in
+the corpus. It is also the part R02 classifies as resistant to formal modelling: story-of-place
+methodology and regenerative leadership sit in its **weak fit** category, not because they are
+unimportant but because their essential content is a relation rather than a flux
+[R02 MBSE addendum].
+
+## Contested
+
+None in the corpus. Single-source definition; see the note on
+[regenerative design](concepts/regenerative-design.md).
+
+## Related
+
+[Regeneration](concepts/regeneration.md) · [Regenerative design](concepts/regenerative-design.md) ·
+[Living systems thinking](concepts/living-systems-thinking.md) ·
+[MRV for living systems](concepts/mrv-living-systems.md)
+
+## Citations
+
+1. [R01] Mang &amp; Reed, *Regenerative Development and Design*, Encyclopedia of Sustainability Science &amp; Technology ch. 303 — glossary.
+2. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — MBSE/SysML v2 addendum.
+</script>
+
+<script type="text/plain" data-page="concepts/restorative-design.md">
+---
+type: Concept
+title: Restorative design
+status: draft
+sources: [R01, R02]
+tags: [definitions, design-tradition, boundary-case]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Restorative design
+
+"Sometimes called restorative environmental design; a design system that combines returning
+'polluted, degraded or damaged sites back to a state of acceptable health through human
+intervention' with biophiliac designs that reconnect people to nature" [R01 glossary].
+
+The operative words are *back to* and *acceptable health*. Restoration has a target state
+drawn from the past and a stopping condition; regeneration, in R01's usage, has neither —
+it aims at a system that keeps evolving [R01 glossary].
+
+This is the sharpest usable boundary the corpus offers between the two terms, and it is worth
+holding, because the WG will be asked for it.
+
+## Contested
+
+R02 does not hold the line. It treats "ecological restoration" and regeneration as
+substantially the same field — the UN Decade on Ecosystem Restoration is entry 1.1 of a
+taxonomy titled *Regeneration Across Earth's Systems* [R02 §1.1], and its synonym list for
+that entry runs "Generation Restoration; ecological restoration". Against R01's distinction,
+that is a category merge, not a synonym.
+
+Both readings are defensible; they belong to different literatures. The WG has to pick one
+for its own documents. Open as [Q02](questions/q02-regeneration-scope.md).
+
+## Related
+
+[Regeneration](concepts/regeneration.md) · [Regenerative design](concepts/regenerative-design.md) ·
+[Ecological restoration](concepts/ecological-restoration.md)
+
+## Citations
+
+1. [R01] Mang &amp; Reed, *Regenerative Development and Design*, Encyclopedia of Sustainability Science &amp; Technology ch. 303 — glossary.
+2. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — §1.1 UN Decade Ecosystem Restoration framework.
+</script>
+
+<script type="text/plain" data-page="concepts/strong-sustainability.md">
+---
+type: Concept
+title: Strong sustainability
+status: in-review
+sources: [R04, R10, R11]
+tags: [definitions, contested, core]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Strong sustainability
+
+Strong sustainability treats the "macro-economy as a sub-system of the finite ecosystem",
+a position informed by natural science and by the dependence of basic life-support functions
+on stocks of critical natural capital [R04, citing Neumayer 2013 pp. 26–28]. Weak
+sustainability, by contrast, "can be interpreted as an extension to neoclassical economics",
+in which those containing systems are not considered, and assumes that if investment in
+man-made and human capital is large enough to compensate for the depreciation of natural
+capital, sustainability follows quasi-automatically [R04, citing Neumayer 2013 p. 28].
+
+The distinction is not a nuance. It decides whether substitution between capitals is
+permitted, and therefore whether a business model can trade natural capital for financial
+capital and still call itself sustainable.
+
+R04 places definitions of business success on a continuum from profit-normative at one end to
+strongly sustainable at the other, and locates the "flourishing enterprise" and "future-fit
+business" conceptions near the strong end because both explicitly reference compatibility with
+the relevant scientific knowledge [R04]. That is the link into
+[the Flourishing Business Canvas](entities/flourishing-business-canvas.md) and
+[the Future-Fit Business Benchmark](entities/future-fit-business-benchmark.md).
+
+## Contested
+
+**This is the deepest disagreement in the corpus, and it is not between fringe positions.**
+
+- **Three pillars, no thresholds.** R10 presents sustainability to systems engineers as
+  "the ability to be maintained at a certain rate or level" and as "commonly described as
+  having three dimensions (or pillars): environmental, economic, and social" [R10 slide 7],
+  with INCOSE Vision 2035 framing it as a system characteristic and an enterprise ethic
+  [R10 slides 3–6]. On R04's continuum this is a weak-sustainability framing: no containing
+  system, no critical natural capital, no substitution limit.
+- **Thresholds or it is not sustainability.** R11 argues the opposite from the reporting
+  side: sustainability requires contextualisation within ecological thresholds and carrying
+  capacities, and that mainstream standards abandoned exactly that. It traces GRI's
+  Sustainability Context principle from G2 (2002) through its displacement by materiality in
+  G3 (2006) and G3.1 (2011) to no additional context guidance in G4 (2013), and characterises
+  SASB's 2013 conceptual framework as a "sustainability" standard that rejects sustainability
+  [R11 slides 4–24].
+- **No reconciliation exists in the corpus.** R04 gives the vocabulary to name the split;
+  nothing in the corpus resolves it.
+
+The WG cannot write a definitions compendium without choosing. Open as
+[Q01](questions/q01-which-sustainability.md).
+
+## Related
+
+[Sustainability context](concepts/sustainability-context.md) · [Regeneration](concepts/regeneration.md) ·
+[Tri-profit](concepts/tri-profit.md) · [Net positive](concepts/net-positive.md) ·
+[Flourishing](concepts/flourishing.md)
+
+## Citations
+
+1. [R04] Upward &amp; Jones (2015), *An Ontology for Strongly Sustainable Business Models*, Organization &amp; Environment — continuum of compatibilities; quoting Neumayer (2013) pp. 26–28.
+2. [R10] Wheatcraft (2025), *Defining Needs and Requirements for Sustainable Systems*, INCOSE SWS Ep. 03 — slides 3–7.
+3. [R11] Baue / r3.0 (2025), *Hacking Sustainability Standards to Achieve Authentic Sustainability*, INCOSE SWS Ep. 04 — slides 4–24.
+</script>
+
+<script type="text/plain" data-page="concepts/sustainability-context.md">
+---
+type: Concept
+title: Sustainability context
+status: draft
+sources: [R11, R12]
+tags: [definitions, measurement, reporting]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2026-11-05
+---
+
+# Sustainability context
+
+The principle that a performance figure is meaningless without the ecological or social
+threshold it is measured against. R11 tracks the idea back through Donella Meadows' work on
+indicators, the 1972 *Limits to Growth* treatment of carrying capacity and overshoot, and
+Catton's "phantom carrying capacity" — capacity that exists only while temporarily available
+resources last [R11 slides 8–10]. Its lineage runs further back than the reporting standards
+that dropped it: R11 takes the argument to Plato's *Laws* Book V and the Plimsoll line
+[R11 slide 7].
+
+The measurement consequence, in R11's framing, is that sustainability measurement needs both
+a numerator and a denominator — a quantity of impact *and* the threshold it is set against.
+Reporting that gives only the numerator answers the question "compared to what?" with nothing
+[R11 slides 20–21].
+
+Thresholds research supplies candidate denominators: planetary boundaries [R11 slide 17,
+citing Rockström et al. 2009] and the doughnut's ecological ceiling with a social foundation
+[R11 slide 17, citing Raworth 2012].
+
+[The Future-Fit Business Benchmark](entities/future-fit-business-benchmark.md) is the
+corpus's clearest worked example of the principle applied to a firm: its break-even goals are
+absolute conditions a company must meet to stop hindering progress, not year-on-year
+improvements against its own past [R12].
+
+## Contested
+
+Not contested within the corpus — but see [strong sustainability](concepts/strong-sustainability.md),
+where the same principle collides directly with the three-pillar framing used in R10.
+
+## Related
+
+[Strong sustainability](concepts/strong-sustainability.md) · [Net positive](concepts/net-positive.md) ·
+[Planetary boundaries](concepts/planetary-boundaries.md) · [Rebound effect](concepts/rebound-effect.md)
+
+## Citations
+
+1. [R11] Baue / r3.0 (2025), *Hacking Sustainability Standards to Achieve Authentic Sustainability*, INCOSE SWS Ep. 04 — slides 7–10, 17, 20–21.
+2. [R12] Rich (2026), *Future-Fit Business Benchmark — Introduction for INCOSE* — break-even goals.
+</script>
+
+<script type="text/plain" data-page="concepts/net-positive.md">
+---
+type: Concept
+title: Net positive
+status: draft
+sources: [R03, R12, R11, R04, R09]
+tags: [definitions, measurement]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Net positive
+
+The claim that a firm's total effect on the systems it touches is restorative rather than
+merely less harmful. R03 uses it as the threshold that separates regenerative business models
+from circular ones: circular strategies close, narrow and slow resource loops, but mainly
+address harm reduction, and "can only go so far in creating a sustainable economy"
+[R03 pp. 529–530, citing Bocken et al. 2016 and Allwood 2014].
+
+R12 gives the term operational structure without using the label, splitting business impact
+along two axes — direct/indirect and negative/positive — into four moves: eliminate your own
+negative impact (obligatory), create positive impact yourself, reduce others' negative impact,
+and amplify others' positive impact [R12]. Only the first is a requirement in that scheme;
+the other three are how a firm goes beyond break-even.
+
+## Why the word "net" is the problem
+
+Netting requires a common denominator, and the corpus is explicit that the denominator is the
+open question. [Sustainability context](concepts/sustainability-context.md) records R11's argument that
+a figure without its threshold answers "compared to what?" with nothing [R11 slides 20–21].
+[Tri-profit](concepts/tri-profit.md) records R04's alternative: keep the three contexts in their own
+units and refuse the common currency [R04 FP4]. And [rebound effect](concepts/rebound-effect.md)
+records what happens when the system boundary is drawn tightly enough to make a net figure
+look good [R09 pp. 8–9].
+
+A net-positive claim in a WG document should therefore always be accompanied by its system
+boundary and its threshold. [WG]
+
+## Contested
+
+R03 treats net positive as the goal state; R11's threshold argument implies no net figure is
+interpretable without an absolute reference; R12 makes the absolute reference (break-even
+goals) mandatory and the net-positive part voluntary. These are compatible in principle and
+are stated at different levels of rigour in practice.
+
+## Related
+
+[Regenerative business model](concepts/regenerative-business-model.md) · [Tri-profit](concepts/tri-profit.md) ·
+[Sustainability context](concepts/sustainability-context.md) · [Rebound effect](concepts/rebound-effect.md) ·
+[Future-Fit Business Benchmark](entities/future-fit-business-benchmark.md)
+
+## Citations
+
+1. [R03] Das &amp; Bocken (2024), *Sustainable Production and Consumption* 49:529–544 — pp. 529–530.
+2. [R12] Rich (2026), *Future-Fit Business Benchmark — Introduction for INCOSE* — direct/indirect impact matrix.
+3. [R11] Baue / r3.0 (2025), INCOSE SWS Ep. 04 — slides 20–21.
+4. [R04] Upward &amp; Jones (2015) — FP4, definition of tri-profit.
+5. [R09] Bornes (2025), INCOSE SWS Ep. 01 — pp. 8–9.
+</script>
+
+<script type="text/plain" data-page="concepts/tri-profit.md">
+---
+type: Concept
+title: Tri-profit
+status: lint-clean
+sources: [R04]
+tags: [definitions, measurement, business-tradition]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Tri-profit
+
+R04's replacement for profit as the success metric of a strongly sustainable firm: "the
+conceptual net sum of the costs (harms) and revenues (benefits) arising as a result of a
+firm's activities in each of the environmental, social, and economic contexts in a given time
+period, measured in units appropriate to each" [R04 FP4].
+
+The load-bearing clause is *units appropriate to each*. R04 distinguishes tri-profit from
+triple bottom line accounting explicitly: TBL calculates additional non-economic profits
+using "a measurable common 'currency'", leaving the meaning of profit untouched and merely
+applying it outside the economic field. Tri-profit re-conceptualises profit instead, and
+refuses the common currency [R04 FP4, citing Norman &amp; Macdonald 2004].
+
+A tri-profitable firm creates sufficient financial rewards, social benefits and environmental
+regeneration, with sufficiency defined by the stakeholders holding the governance rights to
+define it [R04 FP4]. Sufficiency is therefore a governance output, not a calculation — which
+is why the metric remains conceptual in R04's ontology rather than implemented as an
+accounting practice.
+
+## Contested
+
+None in the corpus. But note the structural tension with [net positive](concepts/net-positive.md):
+"net" invites a single figure, and tri-profit exists precisely to deny that a single figure
+is available.
+
+## Related
+
+[Strong sustainability](concepts/strong-sustainability.md) · [Net positive](concepts/net-positive.md) ·
+[Flourishing Business Canvas](entities/flourishing-business-canvas.md) ·
+[Flourishing](concepts/flourishing.md)
+
+## Citations
+
+1. [R04] Upward &amp; Jones (2015), *An Ontology for Strongly Sustainable Business Models*, Organization &amp; Environment — foundational proposition FP4.
+</script>
+
+<script type="text/plain" data-page="concepts/rebound-effect.md">
+---
+type: Concept
+title: Rebound effect
+status: lint-clean
+sources: [R09, R02, R07]
+tags: [measurement, systems-thinking, failure-mode]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Rebound effect
+
+An improvement at component level that is cancelled, or reversed, by the response of the
+system it sits in. R09's opening examples are the canonical shape: optimising car engines
+while overall fuel consumption rises, and battery production shifting impact into mining
+[R09 p. 4].
+
+## Why it belongs in a regeneration wiki
+
+Because it is the mechanism by which a regenerative claim fails without anyone lying.
+
+R09's worked case is a second-hand resale platform whose commissioned study reported
+453 ktCO₂eq avoided, or 1.8 kgCO₂eq per purchase [R09 pp. 6–7, citing Vaayu 2021]. Setting the
+system boundary wider changes the picture: additional impacts from impulse buying while
+browsing, from parcel delivery and platform operations, from how sellers spend the money, and
+from the decline in charities' social activity as donations drop. R09 marks these as
+considered, partially considered, and not considered in the original figure [R09 pp. 8–9].
+The conclusion it draws is not that the study is wrong but that the figure "does not help
+designers to improve the socioenvironmental impacts" [R09 p. 9].
+
+R02 records the same failure mode from the LCA side, naming Zink &amp; Geyer's "Circular Economy
+Rebound" alongside Bjørn &amp; Hauschild and Tukker, and concluding that regenerative claims
+"often fail when subjected to dynamic, system-boundary-corrected LCA" [R02 gap analysis §3].
+
+R07 is the constructive answer: guidelines for embedding systems-thinking principles into
+early-stage sustainability assessment tools, for the stage where quantitative data, time and
+competence are all scarce [R07 abstract].
+
+## Contested
+
+None. Three independent sources, three literatures, one mechanism.
+
+## Related
+
+[Regeneration](concepts/regeneration.md) · [Net positive](concepts/net-positive.md) ·
+[Sustainability context](concepts/sustainability-context.md) ·
+[Consequential LCA](concepts/consequential-lca.md)
+
+## Citations
+
+1. [R09] Bornes (2025), *Systemic and concrete methods and tools to address environmental complexity and rebound effects*, INCOSE SWS Ep. 01 — pp. 4, 6–9.
+2. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — gap analysis §3.
+3. [R07] Schlüter et al. (2023), *J. Cleaner Production* 387:135776 — abstract.
+</script>
+
+<script type="text/plain" data-page="concepts/regenerative-business-model.md">
+---
+type: Concept
+title: Regenerative business model
+status: draft
+sources: [R03, R05, R04]
+tags: [definitions, business-tradition, core]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Regenerative business model
+
+A business model whose product or service offering is used to actively regenerate the natural
+and societal spaces the firm operates in, creating value for all of them rather than
+extracting from them [R03 p. 531, drawing on Hahn &amp; Tampe 2021 and Konietzko et al. 2023].
+R03 positions this as going beyond net zero to a net positive impact [R03 p. 529] — see
+[net positive](concepts/net-positive.md).
+
+## The six archetypes
+
+R03's typology, derived from 84 evidenced cases across 15 sectors [R03 p. 529]:
+
+1. regenerative leadership
+2. nature regeneration
+3. social regeneration
+4. responsible sourcing
+5. human health &amp; wellbeing focus
+6. employee level focus
+
+Most firms in the database run several concurrently, usually with local partners [R03 p. 529].
+The evidence base is documented separately as
+[the Regenerative Business Case Database](entities/regenerative-business-case-database.md).
+
+## How a firm gets there
+
+R05 addresses the transformation rather than the end state, using design science research to
+build a three-step process template supported by transformative questions and six design
+requirements. Its three phases are **re-grounding**, **re-wiring** and **re-seizing** the
+business model [R05 abstract].
+
+## The gap R04 identifies
+
+R04's objection predates both and still stands: sustainability measures are feedback on
+outputs, not design parameters. Assessment systems measure the effects of business-model
+decisions; they cannot be used to formulate a coherent sustainable business model in the
+first place [R04 introduction]. R03's typology and R05's process template are both attempts
+at the design side of that gap.
+
+## Contested
+
+- **Whether the label survives assessment.** R02 places regenerative business models in its
+  **weak fit** category for formal modelling [R02 MBSE addendum], and reports that regenerative
+  claims frequently fail under system-boundary-corrected LCA [R02 gap analysis §3]. R03's
+  inclusion criteria answer part of this by requiring evidenced, continuing activity and
+  third-party verification where affordable [R03 p. 533], but verification of *claims* is not
+  verification of *net effect*.
+- **Unit of analysis.** This page uses the firm as the unit. [Regeneration](concepts/regeneration.md)
+  records that R01's design tradition uses place instead. The two are not nested.
+
+## Related
+
+[Regeneration](concepts/regeneration.md) · [Net positive](concepts/net-positive.md) ·
+[Tri-profit](concepts/tri-profit.md) · [Strong sustainability](concepts/strong-sustainability.md) ·
+[Flourishing Business Canvas](entities/flourishing-business-canvas.md)
+
+## Citations
+
+1. [R03] Das &amp; Bocken (2024), *Sustainable Production and Consumption* 49:529–544 — pp. 529, 531, 533.
+2. [R05] Kulp, Remke, Cherraoui &amp; Kickul (2026), *Business Strategy and the Environment* — abstract.
+3. [R04] Upward &amp; Jones (2015), *An Ontology for Strongly Sustainable Business Models* — introduction.
+4. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — gap analysis §3; MBSE addendum.
+</script>
+
+<script type="text/plain" data-page="concepts/mrv-living-systems.md">
+---
+type: Concept
+title: MRV for living-system regeneration
+status: draft
+sources: [R02]
+tags: [gap, measurement, engineering-frontier]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2026-11-05
+---
+
+# MRV for living-system regeneration
+
+Measurement, reporting and verification of regenerative outcomes in living systems. R02 names
+this "the binding constraint" on the whole field: biochar permanence, soil carbon accrual,
+enhanced-weathering dissolution rates, ocean-alkalinity air–sea equilibration, peatland
+CH₄/CO₂ trade-offs, kelp-sinking decomposition and farmer-managed natural regeneration
+additionality all fail in the same place — outcome verification at adequate spatial and
+temporal resolution, at acceptable cost [R02 gap analysis §1].
+
+## Why this is the WG's opening
+
+R02 states that this frontier "is largely absent from MBSE/SysML-friendly engineering
+literature" [R02 gap analysis §1]. That is a gap named by a sustainability review, addressed
+to exactly the competence this WG has.
+
+Two adjacent gaps in the same analysis point the same way: coupled hydro-bio-geochemical
+modelling linking Indigenous-managed flows to formal hydrological and ecological models is
+nascent [R02 gap analysis §2], and governance pathways — secured land and sea tenure above
+all — are "the single most decisive enabler of regenerative outcomes, yet are rarely modelled
+as system parameters" [R02 gap analysis §7].
+
+R02's own modelling triage is the honest constraint on any such programme: solutions amenable
+to MBSE need quantifiable mass/energy/information flows, clear boundaries with definable
+interfaces, and discrete formalisable parts. Anaerobic digestion, managed aquifer recharge and
+constructed wetlands qualify; rewilding trajectories, commons governance and story-of-place
+do not [R02 MBSE addendum].
+
+## Contested
+
+None. Single-source page — R02 is a WG-produced review rather than peer-reviewed literature,
+so every claim above is the review's own framing. It should not be cited externally without
+tracing to the primary references R02 lists.
+
+## Related
+
+[Regeneration](concepts/regeneration.md) · [Sustainability context](concepts/sustainability-context.md) ·
+[Rebound effect](concepts/rebound-effect.md) · [Regenerative development](concepts/regenerative-development.md)
+
+## Citations
+
+1. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — gap analysis §§1, 2, 7; MBSE/SysML v2 addendum.
+</script>
+
+<script type="text/plain" data-page="entities/flourishing-business-canvas.md">
+---
+type: Entity
+title: Flourishing Business Canvas
+status: draft
+sources: [R08, R04]
+tags: [tool, business-tradition]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Flourishing Business Canvas
+
+A business-modelling canvas built on R04's strongly sustainable business model ontology,
+documented for practitioners in R08 (v2.1 canvas, guide v3.0, 2023).
+
+Two structural moves distinguish it from the profit-oriented business model canvas it
+descends from. It sets the business model inside three nested contexts — environment, society
+and economy — rather than treating them as externalities [R08 contents]. And it reads any
+human enterprise through four perspectives: people, value, process and outcome [R08 contents].
+
+The ontology underneath is R04's, whose relevant commitments are recorded on
+[strong sustainability](concepts/strong-sustainability.md) and [tri-profit](concepts/tri-profit.md).
+
+## Use in the WG
+
+The WG holds a filled instance for the PV-as-a-Service case in
+`Regeneration/04-business-model/business-model/`. It is not yet in the raw registry and so is
+not cited here. Curating it would let this page carry a worked example. [WG]
+
+## Contested
+
+None. R08 is practitioner documentation, not a claim about the world.
+
+## Related
+
+[Strong sustainability](concepts/strong-sustainability.md) · [Tri-profit](concepts/tri-profit.md) ·
+[Regenerative business model](concepts/regenerative-business-model.md) ·
+[Flourishing](concepts/flourishing.md)
+
+## Citations
+
+1. [R08] Upward, *Flourishing Business Canvas v2.1 — Interactive Detailed Guide v3.0* (2023) — table of contents; canvas structure sections.
+2. [R04] Upward &amp; Jones (2015), *An Ontology for Strongly Sustainable Business Models*.
+</script>
+
+<script type="text/plain" data-page="entities/future-fit-business-benchmark.md">
+---
+type: Entity
+title: Future-Fit Business Benchmark
+status: draft
+sources: [R12, R04]
+tags: [tool, benchmark, thresholds]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2026-11-05
+---
+
+# Future-Fit Business Benchmark
+
+A threshold-based benchmark from the Future-Fit Foundation, presented to INCOSE in February
+2026 by Martin Rich. Its target state: "A Future-Fit Society will protect the possibility that
+humans and other life can flourish on Earth forever" — environmentally restorative, socially
+just, economically inclusive [R12].
+
+## Structure
+
+**Break-even goals** — what every company must do to avoid slowing society's progress. R12
+lists them across eight areas: energy, water, waste, pollution, natural resources, people,
+presence and drivers. Examples: operations emit no greenhouse gases; operational waste is
+eliminated; employees are paid at least a living wage; the right tax is paid in the right
+place at the right time; lobbying and corporate influence safeguard the pursuit of
+future-fitness [R12].
+
+**Positive pursuits** — optional, and framed as three distinct moves beyond break-even:
+create positive impact yourself, reduce others' negative impact, amplify others' positive
+impact [R12].
+
+R12 sorts corporate responses into defensive (shareholder value), selective (shared value),
+and holistic (system value), and places the benchmark squarely in the third [R12].
+
+## Why it matters here
+
+It is the corpus's cleanest example of [sustainability context](concepts/sustainability-context.md)
+made operational — absolute conditions rather than year-on-year improvement against a firm's
+own past. R04 independently locates "future-fit business" near the strong end of its
+continuum of definitions of business success [R04].
+
+## Contested
+
+Not contested in the corpus. Note the status limit: R12 is a slide deck, so break-even goal
+wording here is as presented, not as specified in the benchmark's own documentation. The
+benchmark specification is not in the raw registry.
+
+## Related
+
+[Sustainability context](concepts/sustainability-context.md) · [Net positive](concepts/net-positive.md) ·
+[Strong sustainability](concepts/strong-sustainability.md) ·
+[Regenerative business model](concepts/regenerative-business-model.md)
+
+## Citations
+
+1. [R12] Rich (2026), *Future-Fit Business Benchmark — Introduction for INCOSE*, INCOSE Sustainability Webinar Series.
+2. [R04] Upward &amp; Jones (2015), *An Ontology for Strongly Sustainable Business Models* — continuum of compatibilities.
+</script>
+
+<script type="text/plain" data-page="entities/regenerative-business-case-database.md">
+---
+type: Entity
+title: Regenerative Business Case Database
+status: lint-clean
+sources: [R03]
+tags: [evidence-base, business-tradition]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# Regenerative Business Case Database
+
+R03's evidence base: 84 regenerative business cases across 15 sectors, built by purposive
+sampling and published as Appendix S2 of the paper [R03 pp. 529, 533].
+
+## How it was built
+
+118 cases collected initially; 44 duplicates removed; 25 removed against the inclusion
+criteria; 36 added on expert recommendation during writing — leaving 84 [R03 p. 533].
+
+Inclusion required three things: the firm communicates the regenerative aspects of its
+business model; the effort is continuing, with proof of concept rather than a stated
+intention; and the firm generates active revenue. Independent third-party verification
+(certification, audit) was required where available, with detailed public reporting accepted
+instead for firms too small to afford it [R03 p. 533].
+
+Coding followed the six core elements of a sufficiency-based business model — purpose,
+networks, governance, ownership, finance, impact — adapted to the regenerative context
+[R03 p. 533, adapting Bocken et al. 2022]. Open coding on regeneration themes and initiatives
+was followed by axial coding in Atlas.ti, producing the six archetypes recorded on
+[regenerative business model](concepts/regenerative-business-model.md) [R03 p. 533].
+
+Predominant sectors: food, consumer goods, fashion. Several cases are long-lived businesses,
+some dating to the 1870s [R03 p. 529].
+
+## Contested
+
+The inclusion criteria verify *claims and continuity*, not *net effect*. Against
+[rebound effect](concepts/rebound-effect.md) and R02's finding on system-boundary-corrected
+LCA, presence in this database is evidence of practice, not evidence of regeneration.
+This reading is the wiki's, not R03's. [WG]
+
+## Related
+
+[Regenerative business model](concepts/regenerative-business-model.md) ·
+[Regeneration](concepts/regeneration.md) · [Rebound effect](concepts/rebound-effect.md)
+
+## Citations
+
+1. [R03] Das &amp; Bocken (2024), *Sustainable Production and Consumption* 49:529–544 — pp. 529, 533, Appendix S2.
+</script>
+
+<script type="text/plain" data-page="questions/q01-which-sustainability.md">
+---
+type: Question
+title: Which definition of sustainability does the WG use?
+status: draft
+sources: [R04, R10, R11]
+tags: [decision-needed, definitions]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2026-09-30
+---
+
+# Which definition of sustainability does the WG use?
+
+Raised automatically during ingest of R11, against claims already carried by
+[strong sustainability](concepts/strong-sustainability.md) from R04 and R10.
+
+## The fork
+
+**(a) Three pillars, no thresholds.** Sustainability as a system characteristic and an
+enterprise ethic, described through environmental, economic and social dimensions
+[R10 slides 3–7]. This is the framing an INCOSE audience already has, and it aligns with
+Vision 2035's language.
+
+**(b) Thresholds required.** Sustainability performance is uninterpretable without the
+ecological ceiling or social floor it is measured against; standards that dropped the
+Sustainability Context principle dropped sustainability with it [R11 slides 4–24].
+
+R04 supplies the vocabulary that names the fork — weak versus strong sustainability, turning
+on whether capitals may be substituted [R04, citing Neumayer 2013 pp. 26–28] — but does not
+settle it for a systems engineering audience.
+
+## Why it cannot be deferred
+
+Every definition in the compendium inherits from this one. [Net positive](concepts/net-positive.md),
+[tri-profit](concepts/tri-profit.md) and [regeneration](concepts/regeneration.md) all
+resolve differently under (a) and (b). Writing them before deciding means writing them twice.
+
+## What would settle it
+
+- A WG position statement, or
+- an explicit two-level compendium: the INCOSE-facing definition and the threshold-based
+  critique of it, held side by side and labelled as such. [WG]
+
+## Blocks
+
+`concepts/strong-sustainability.md` · `concepts/net-positive.md` · `concepts/regeneration.md`
+— all held at `in-review` or `draft` pending this decision.
+
+## Citations
+
+1. [R04] Upward &amp; Jones (2015), *An Ontology for Strongly Sustainable Business Models*.
+2. [R10] Wheatcraft (2025), INCOSE SWS Ep. 03 — slides 3–7.
+3. [R11] Baue / r3.0 (2025), INCOSE SWS Ep. 04 — slides 4–24.
+</script>
+
+<script type="text/plain" data-page="questions/q02-regeneration-scope.md">
+---
+type: Question
+title: Is regeneration a place-based practice, a firm-level strategy, or an efficiency property?
+status: draft
+sources: [R01, R02, R03]
+tags: [decision-needed, definitions]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2026-09-30
+---
+
+# Is regeneration a place-based practice, a firm-level strategy, or an efficiency property?
+
+Raised during ingest of R03, against the definitions already carried from R01.
+
+Three senses are in active use in the corpus, and no source reconciles them:
+
+| Sense | Unit of analysis | Source |
+|---|---|---|
+| Co-evolutionary practice with the living systems of a place | a place | R01 glossary |
+| A property of a firm's business model | an enterprise | R03 p. 531 |
+| Recovery of exergy or product life | a device or process | R02 exec. summary |
+
+R02 observes the third sense directly: engineering "regeneration" is overwhelmingly
+efficiency-coded, while generative function relies on living systems [R02 exec. summary].
+For a systems engineering working group that is the awkward one, because it is the sense our
+own discipline's vocabulary already carries.
+
+## Consequence for the compendium
+
+[Restorative design](concepts/restorative-design.md) is the visible symptom: R01 draws a
+firm line between restoration (target state, stopping condition) and regeneration (no target
+state), and R02 files ecological restoration as entry 1.1 of a regeneration taxonomy
+[R02 §1.1]. Both are defensible inside their own literature.
+
+## What would settle it
+
+Ingesting R13 and R14 would give the WG a method for this rather than a vote — how to scope a
+domain, and how to write definitions that make the distinction testable. Both are in the
+registry, both currently `pending`. [WG]
+
+## Blocks
+
+`concepts/regeneration.md` · `concepts/restorative-design.md`
+
+## Citations
+
+1. [R01] Mang &amp; Reed, Encyclopedia of Sustainability Science &amp; Technology ch. 303 — glossary.
+2. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — executive summary; §1.1.
+3. [R03] Das &amp; Bocken (2024), *Sustainable Production and Consumption* 49:529–544 — p. 531.
+</script>
+
+<script type="text/plain" data-page="sources/r01-mang-reed.md">
+---
+type: Source
+title: R01 — Mang &amp; Reed, Regenerative Development and Design
+status: draft
+sources: [R01]
+tags: [source, foundational, design-tradition, metadata-anomaly]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# R01 — Mang &amp; Reed, *Regenerative Development and Design*
+
+Pamela Mang and Bill Reed, Regenesis Group and Story of Place Institute.
+Chapter 303, *Encyclopedia of Sustainability Science &amp; Technology*.
+
+## What it supplies
+
+The corpus's definitional backbone for the design tradition. Its glossary is the source of
+record for [regenerative design](concepts/regenerative-design.md),
+[regenerative development](concepts/regenerative-development.md) and
+[restorative design](concepts/restorative-design.md), and defines the surrounding
+vocabulary the WG will need: biomimicry, cradle-to-cradle, ecoliteracy, ecological
+sustainability, living systems thinking, permaculture, place, locational patterns, systems
+thinking [R01 glossary].
+
+Its framing claim: green and sustainable design have focused on minimising damage and using
+resources efficiently — slowing degradation — while regenerative approaches seek to reverse
+the degeneration of natural systems through a whole-systems approach [R01 §II].
+
+## Metadata anomaly — needs a human
+
+The PDF's own header prints the publication year as **2112**. Almost certainly a typo for
+2012, but the agent will not silently correct a citation year. Every page citing R01 is held
+below `published` until a WG member confirms the year against the encyclopedia record.
+Raised in the registry and flagged by `lint`.
+
+## Cited by
+
+[Regeneration](concepts/regeneration.md) · [Regenerative design](concepts/regenerative-design.md) ·
+[Regenerative development](concepts/regenerative-development.md) ·
+[Restorative design](concepts/restorative-design.md) · [Q02](questions/q02-regeneration-scope.md)
+
+## Citations
+
+1. [R01] Mang &amp; Reed, *Regenerative Development and Design*, Encyclopedia of Sustainability Science &amp; Technology ch. 303 — glossary; §II Definition of the Subject and its Importance.
+</script>
+
+<script type="text/plain" data-page="sources/r02-regeneration-taxonomy.md">
+---
+type: Source
+title: R02 — Regeneration Across Earth's Systems
+status: lint-clean
+sources: [R02]
+tags: [source, wg-produced, review]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# R02 — Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy
+
+WG-produced review. 144 regeneration solutions across ten domains, each entry carrying
+canonical name, mechanism, scale, TRL/maturity, provenance, primary citations with DOIs,
+quantified impact, and constraints [R02 exec. summary].
+
+## What it is good for
+
+- The only source in the corpus that spans ecological, materials, energy, atmospheric, built,
+  socio-technical, Indigenous, biomimetic and commons-governance regeneration in one frame.
+- Each entry pairs impact with a named critique, so contested claims arrive already contested.
+- Its **gap analysis** is the most directly actionable content for this WG — see
+  [MRV for living systems](concepts/mrv-living-systems.md).
+- Its **MBSE/SysML v2 addendum** triages which solutions are formally modellable, and is
+  explicitly evaluative rather than part of the taxonomy [R02 addendum].
+
+## Three headline findings
+
+1. The most quantitatively validated regenerative solutions are ancient and Indigenous —
+   farmer-managed natural regeneration in Niger (~5–6 Mha, ~200 million trees), West Arnhem
+   Land cultural burning (37.7% wildfire emissions cut, &gt;4.8M carbon credits), Sahel zaï pits
+   (drought yields up to +500%), Tanzanian ngitili (~500,000 ha across 833 villages)
+   [R02 exec. summary].
+2. Engineering "regeneration" is overwhelmingly efficiency-coded; generative function relies
+   on living systems [R02 exec. summary].
+3. The literature contains substantial overclaiming, with peer-reviewed rebuttals for Savory's
+   holistic grazing, the Bastin restoration potential, Rodale's &gt;100% drawdown claim, ReFi
+   token markets, biochar permanence and ocean alkalinity enhancement [R02 exec. summary].
+
+## Handling caution
+
+Not peer-reviewed. Every quantitative claim taken from R02 into a concept page must carry the
+primary reference R02 cites, not R02 alone. Recorded in the registry.
+
+## Cited by
+
+[Regeneration](concepts/regeneration.md) · [Restorative design](concepts/restorative-design.md) ·
+[Rebound effect](concepts/rebound-effect.md) · [MRV for living systems](concepts/mrv-living-systems.md) ·
+[Regenerative development](concepts/regenerative-development.md) ·
+[Regenerative business model](concepts/regenerative-business-model.md)
+
+## Citations
+
+1. [R02] *Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy* — executive summary; cross-cutting analysis; gap analysis; MBSE/SysML v2 addendum.
+</script>
+
+<script type="text/plain" data-page="sources/r03-das-bocken-2024.md">
+---
+type: Source
+title: R03 — Das &amp; Bocken (2024)
+status: lint-clean
+sources: [R03]
+tags: [source, peer-reviewed, business-tradition]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# R03 — Das &amp; Bocken (2024)
+
+*Sustainable Production and Consumption* 49:529–544. Open access, CC BY.
+Maastricht Sustainability Institute and IIIEE Lund.
+
+## Argument
+
+Regenerative business models go beyond net zero to actively restore the natural and social
+systems a firm operates in [R03 p. 529]. Research on the topic is largely conceptual; the
+paper's contribution is empirical — a practice review of 84 evidenced cases, and a typology
+of six archetypal strategies derived from them [R03 p. 529].
+
+It positions regeneration against circular economy explicitly: closing, narrowing and slowing
+loops is harm reduction, and firms in practice favour the loop strategies that also save cost
+[R03 pp. 529–530, citing Bocken et al. 2016, Allwood 2014, Ritala et al. 2018].
+
+Concept history in the paper runs Dias (2018) on regenerative development, through Hawken
+(2021) and Polman &amp; Winston (2021) on regeneration and net positive, to Hahn &amp; Tampe (2021)
+and Konietzko et al. (2023) on regenerative business models [R03 p. 531].
+
+## What it supplies to the wiki
+
+The six archetypes and the method behind them —
+[regenerative business model](concepts/regenerative-business-model.md) and
+[the case database](entities/regenerative-business-case-database.md).
+
+## Handling caution
+
+Case data is secondary: company web pages, public reports, newspaper articles [R03 p. 533].
+The inclusion criteria verify communication, continuity and revenue — not net effect.
+
+## Cited by
+
+[Regeneration](concepts/regeneration.md) ·
+[Regenerative business model](concepts/regenerative-business-model.md) ·
+[Net positive](concepts/net-positive.md) ·
+[Regenerative Business Case Database](entities/regenerative-business-case-database.md) ·
+[Q02](questions/q02-regeneration-scope.md)
+
+## Citations
+
+1. [R03] Das &amp; Bocken (2024), *Sustainable Production and Consumption* 49:529–544 — pp. 529–533.
+</script>
+
+<script type="text/plain" data-page="sources/r09-bornes-rebound.md">
+---
+type: Source
+title: R09 — Bornes (2025), INCOSE SWS Ep. 01
+status: lint-clean
+sources: [R09]
+tags: [source, webinar, sws]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# R09 — Bornes (2025), INCOSE SWS Ep. 01
+
+Laetitia Bornes, from a PhD in computer science at ENAC &amp; ISAE-SUPAERO on socio-digital
+sustainability [R09 p. 1]. Presented in the INCOSE Sustainability Webinar Series, June 2025.
+
+## Argument
+
+Techno-solutionist approaches fail because the improvement and its consequences sit at
+different system levels: optimising car engines while total fuel consumption rises; battery
+production displacing impact into mining [R09 p. 4]. Sustainability and unsustainability are
+properties of a system as a whole [R09 p. 5, quoting Knowles et al. 2018], and sustainable
+HCI/ICT/SE "has often fallen short on practical advice and on suitable techniques that are
+concrete enough to be actionable" [R09 p. 5, quoting Raghavan &amp; Pargman 2017].
+
+The research question follows: can designers take a practical approach to a problem this
+large without being reductive?
+
+## The worked case
+
+A second-hand resale platform, its commissioned avoided-emissions figure, and what a
+consequential rather than attributional frame does to it [R09 pp. 6–9]. Detail on
+[rebound effect](concepts/rebound-effect.md).
+
+## Why it is in the pilot corpus
+
+It is the corpus's clearest demonstration that a defensible number can be useless for design
+decisions — the same failure mode that makes a regenerative claim unfalsifiable.
+
+## Handling caution
+
+Slide deck. Claims arrive without the supporting argument. Pages citing R09 are capped at
+`in-review` until checked against the recording. Recorded in the registry.
+
+## Cited by
+
+[Rebound effect](concepts/rebound-effect.md) · [Net positive](concepts/net-positive.md)
+
+## Citations
+
+1. [R09] Bornes (2025), *Systemic and concrete methods and tools to address environmental complexity and rebound effects within a design or decision-making process*, INCOSE Sustainability Webinar Series Ep. 01 — pp. 1, 4–9.
+</script>
+
+<script type="text/plain" data-page="sources/r11-baue-authentic-sustainability.md">
+---
+type: Source
+title: R11 — Baue / r3.0 (2025), INCOSE SWS Ep. 04
+status: lint-clean
+sources: [R11]
+tags: [source, webinar, sws, reporting]
+timestamp: 2026-08-05
+reviewed_by: ""
+revalidate_after: 2027-02-05
+---
+
+# R11 — Baue / r3.0 (2025), INCOSE SWS Ep. 04
+
+Bill Baue, Senior Director at r3.0, INCOSE Sustainability Webinar Series, 29 October 2025.
+
+## Argument
+
+Sustainability standards abandoned the one principle that made them about sustainability.
+R11 calls the period 2002–2013 "the lost decade" and walks the documentary trail: GRI G2
+(2002) introduces Sustainability Context as limits and demands; G3 (2006) adds materiality
+alongside it and introduces the materiality matrix; G3.1 (2011) displaces context; G4 (2013)
+adds no further guidance despite 66 experts petitioning for it; SASB's 2013 conceptual
+framework rejects thresholds; the IIRC framework retains carrying capacity of the capitals
+[R11 slides 4–25].
+
+The positive claim is a measurement one: sustainability measurement needs numeration *and*
+denomination — a quantity and the threshold it is compared to [R11 slides 20–21].
+
+The lineage of the threshold idea is traced from Plato's *Laws* and the Plimsoll line through
+Meadows, *Limits to Growth*, Catton's phantom carrying capacity, and on to planetary
+boundaries and the doughnut [R11 slides 7–17].
+
+## Why it is in the pilot corpus
+
+It is the strongest counter-position in the corpus to the three-pillar definition of
+sustainability that an INCOSE audience arrives with, and it is the source that forced
+[Q01](questions/q01-which-sustainability.md) open.
+
+## Handling caution
+
+Slide deck, and an advocacy argument rather than a neutral review. The documentary claims
+about GRI/SASB/IIRC wording are checkable against the standards themselves; none of those
+standards is in the raw registry.
+
+## Cited by
+
+[Strong sustainability](concepts/strong-sustainability.md) ·
+[Sustainability context](concepts/sustainability-context.md) ·
+[Net positive](concepts/net-positive.md) · [Q01](questions/q01-which-sustainability.md)
+
+## Citations
+
+1. [R11] Baue / r3.0 (2025), *Hacking Sustainability Standards to Achieve Authentic Sustainability*, INCOSE Sustainability Webinar Series Ep. 04 — slides 4–25.
+</script>
+
+<script>
+"use strict";
+
+/* ── source registry ─────────────────────────────────────────────────────── */
+const SOURCES = {
+  R01: { t: "Mang & Reed — Regenerative Development and Design", p: "Regeneration/00-foundations/EncylopediaSustainabilitySciencearticle.pdf", flag: "year printed as 2112 — unresolved" },
+  R02: { t: "Regeneration Across Earth's Systems: A Comprehensive Solution Taxonomy", p: "Regeneration/00-foundations/Regeneration Across Earth's Systems_ A Comprehensive Solution Taxonomy.pdf" },
+  R03: { t: "Das & Bocken (2024) — Regenerative business strategies", p: "Regeneration/01-theory-and-ontology/DasBocken2024Regenerativebusinessstrategies.pdf" },
+  R04: { t: "Upward & Jones (2015) — Ontology for Strongly Sustainable Business Models", p: "Regeneration/01-theory-and-ontology/Jones_AnOntologyforStronglySustainable_2015.pdf" },
+  R05: { t: "Kulp et al. (2026) — Transforming Resource-Intensive Industries", p: "Regeneration/01-theory-and-ontology/Kulp2026_TransformingResourceIntensiveIndustries.pdf" },
+  R06: { t: "Roome & Louche (2015) — Journeying Toward Business Models for Sustainability", p: "Regeneration/01-theory-and-ontology/Journeying_Toward_Business_Models_for_Sustainabili.pdf" },
+  R07: { t: "Schlüter et al. (2023) — Design guidelines for systems thinking in SBM tools", p: "Regeneration/01-theory-and-ontology/Sustainable business model innovation - Design guidelines for integrating.pdf" },
+  R08: { t: "Flourishing Business Canvas v2.1 — Interactive Detailed Guide v3.0", p: "Regeneration/04-business-model/business-model/Flourishing-Business-Canvas-v2.1-Interactive-Detailed-Guide-v3.pdf" },
+  R09: { t: "Bornes (2025) — Systemic approach for rebound effects (SWS Ep. 01)", p: "SustainabilityWebinarSeries/SWS Ep 01 Laetitia Bornes - Systemic Approach for rebound-effects.pdf" },
+  R10: { t: "Wheatcraft (2025) — Defining Needs and Requirements for Sustainable Systems (SWS Ep. 03)", p: "SustainabilityWebinarSeries/SWS - Ep 03 - Defining Needs and Requirements for SSlides.pdf" },
+  R11: { t: "Baue / r3.0 (2025) — Hacking Sustainability Standards (SWS Ep. 04)", p: "SustainabilityWebinarSeries/SWS Ep 04 - Authentic Sustainability Slides.pdf" },
+  R12: { t: "Rich (2026) — Future-Fit Business Benchmark for INCOSE", p: "SustainabilityWebinarSeries/20260225 Future-Fit Introduction for INCOSE.pdf" },
+  R13: { t: "Noy & McGuinness — Ontology Development 101", p: "Regeneration/01-theory-and-ontology/Ontology Literature/ontology101.pdf" },
+  R14: { t: "Seppälä et al. — Guidelines for writing definitions in ontologies", p: "Regeneration/01-theory-and-ontology/Ontology Literature/Guidelines for writing definitions in ontologies.pdf" }
+};
+
+/* ── load pages from the embedded markdown blocks ────────────────────────── */
+const PAGES = {};
+document.querySelectorAll('script[type="text/plain"][data-page]').forEach(function (el) {
+  const raw = el.textContent.replace(/^\n/, "");
+  const m = raw.match(/^---\n([\s\S]*?)\n---\n?/);
+  const fm = {}, order = [];
+  if (m) {
+    m[1].split("\n").forEach(function (line) {
+      const i = line.indexOf(":");
+      if (i < 0) return;
+      const k = line.slice(0, i).trim();
+      let v = line.slice(i + 1).trim();
+      if (v.startsWith("[") && v.endsWith("]")) {
+        v = v.slice(1, -1).split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+      } else {
+        v = v.replace(/^["']|["']$/g, "");
+      }
+      fm[k] = v; order.push(k);
+    });
+  }
+  PAGES[el.dataset.page] = { fm: fm, order: order, body: m ? raw.slice(m[0].length) : raw };
+});
+
+const STATUS_CLASS = { "draft": "draft", "in-review": "inreview", "lint-clean": "lintclean", "published": "published" };
+
+/* ── minimal markdown renderer ───────────────────────────────────────────── */
+function esc(s) { return s.replace(/&(?![a-zA-Z#][a-zA-Z0-9]*;)/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+function inline(s) {
+  s = esc(s);
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // wiki links
+  s = s.replace(/\[([^\]]+)\]\(([^)]+\.md)\)/g, function (_, label, href) {
+    const key = href.replace(/^(\.\.\/)+/, "");
+    const known = Object.prototype.hasOwnProperty.call(PAGES, key);
+    return '<a class="wl' + (known ? "" : " ghost") + '" href="#' + key + '" data-goto="' + key + '">' + label + "</a>";
+  });
+  // citation chips
+  s = s.replace(/\[(R\d{2})([^\]]*)\]/g, function (_, id, rest) {
+    const title = SOURCES[id] ? SOURCES[id].t : "unregistered source";
+    return '<span class="cite" data-src="' + id + '" title="' + title.replace(/"/g, "&quot;") + '">' + id + rest + "</span>";
+  });
+  s = s.replace(/\[WG\]/g, '<span class="cite wg" title="The working group&#39;s own judgement, not a source claim">WG</span>');
+  s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/(^|[\s(“"])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+  return s;
+}
+
+function renderMarkdown(md) {
+  const lines = md.split("\n");
+  const out = [];
+  let i = 0, buf = [];
+  function flush() {
+    if (buf.length) { out.push("<p>" + inline(buf.join(" ")) + "</p>"); buf = []; }
+  }
+  while (i < lines.length) {
+    const line = lines[i];
+    if (!line.trim()) { flush(); i++; continue; }
+    let h = line.match(/^(#{1,4})\s+(.*)$/);
+    if (h) { flush(); out.push("<h" + h[1].length + ">" + inline(h[2]) + "</h" + h[1].length + ">"); i++; continue; }
+    if (/^\|/.test(line) && /^\|[\s:|-]+\|$/.test(lines[i + 1] || "")) {
+      flush();
+      const head = line.split("|").slice(1, -1).map(function (c) { return "<th>" + inline(c.trim()) + "</th>"; }).join("");
+      i += 2;
+      const rows = [];
+      while (i < lines.length && /^\|/.test(lines[i])) {
+        rows.push("<tr>" + lines[i].split("|").slice(1, -1).map(function (c) { return "<td>" + inline(c.trim()) + "</td>"; }).join("") + "</tr>");
+        i++;
+      }
+      out.push('<div class="tablewrap"><table><thead><tr>' + head + "</tr></thead><tbody>" + rows.join("") + "</tbody></table></div>");
+      continue;
+    }
+    if (/^\s*([-*]|\d+\.)\s+/.test(line)) {
+      flush();
+      const ordered = /^\s*\d+\.\s+/.test(line);
+      const items = [];
+      let cur = null;
+      while (i < lines.length && (/^\s*([-*]|\d+\.)\s+/.test(lines[i]) || (/^\s{2,}\S/.test(lines[i]) && cur !== null))) {
+        if (/^\s*([-*]|\d+\.)\s+/.test(lines[i])) {
+          if (cur !== null) items.push(cur);
+          cur = lines[i].replace(/^\s*([-*]|\d+\.)\s+/, "");
+        } else {
+          cur += " " + lines[i].trim();
+        }
+        i++;
+      }
+      if (cur !== null) items.push(cur);
+      const tag = ordered ? "ol" : "ul";
+      out.push("<" + tag + ">" + items.map(function (t) { return "<li>" + inline(t) + "</li>"; }).join("") + "</" + tag + ">");
+      continue;
+    }
+    buf.push(line.trim()); i++;
+  }
+  flush();
+  return out.join("\n");
+}
+
+/* ── rail ────────────────────────────────────────────────────────────────── */
+const RAIL_GROUPS = [
+  { label: "wiki/", keys: ["index.md"] },
+  { label: "wiki/concepts/", keys: Object.keys(PAGES).filter(function (k) { return k.startsWith("concepts/"); }) },
+  { label: "wiki/entities/", keys: Object.keys(PAGES).filter(function (k) { return k.startsWith("entities/"); }) },
+  { label: "wiki/questions/", keys: Object.keys(PAGES).filter(function (k) { return k.startsWith("questions/"); }) },
+  { label: "wiki/sources/", keys: Object.keys(PAGES).filter(function (k) { return k.startsWith("sources/"); }) }
+];
+
+function buildRail() {
+  const rail = document.getElementById("rail");
+  rail.innerHTML = "";
+  RAIL_GROUPS.forEach(function (g) {
+    const box = document.createElement("div");
+    box.className = "railgroup";
+    const lab = document.createElement("span");
+    lab.className = "label"; lab.textContent = g.label;
+    box.appendChild(lab);
+    g.keys.forEach(function (k) {
+      const p = PAGES[k];
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "railitem"; b.dataset.goto = k;
+      b.innerHTML = '<span class="dot ' + (STATUS_CLASS[p.fm.status] || "draft") + '"></span>' +
+                    '<span class="fn">' + esc(k.split("/").pop()) + "</span>";
+      b.title = p.fm.title + " — " + p.fm.status;
+      box.appendChild(b);
+    });
+    rail.appendChild(box);
+  });
+}
+
+/* ── reader ──────────────────────────────────────────────────────────────── */
+let current = "index.md";
+
+function renderFrontmatter(p) {
+  const rows = p.order.map(function (k) {
+    let v = p.fm[k];
+    let cls = "fm-v";
+    if (Array.isArray(v)) v = "[" + v.join(", ") + "]";
+    if (k === "status") cls += " status-" + (STATUS_CLASS[v] || "draft");
+    if (k === "reviewed_by" && !v) { v = '""   ← nobody has signed this off'; cls += " empty"; }
+    else if (!v) v = '""';
+    return '<div><span class="fm-k">' + k + ':</span> <span class="' + cls + '">' + esc(String(v)) + "</span></div>";
+  }).join("");
+  return '<div class="fm"><div class="fm-rule">---</div>' + rows + '<div class="fm-rule">---</div></div>';
+}
+
+function renderAside(key) {
+  const aside = document.getElementById("aside");
+  const p = PAGES[key];
+  if (!p) { aside.innerHTML = ""; return; }
+  const srcs = Array.isArray(p.fm.sources) ? p.fm.sources : [];
+  const gate = [
+    { n: "Curate", who: "WG member", state: "done" },
+    { n: "Draft", who: "agent · 1 citation per claim", state: "done" },
+    { n: "Review", who: "second model instance", state: p.fm.status === "draft" ? "now" : "done" },
+    { n: "Lint", who: "python lint/lint.py", state: p.fm.status === "lint-clean" ? "done" : (p.fm.status === "in-review" ? "now" : "todo") },
+    { n: "Publish", who: "named WG member — not yet", state: "todo" }
+  ];
+  aside.innerHTML =
+    '<div class="panel"><h4>Compiled from</h4>' +
+      (srcs.length ? srcs.map(function (id) {
+        const s = SOURCES[id] || { t: "unregistered", p: "" };
+        return '<div class="srcrow' + (s.flag ? " flagged" : "") + '">' +
+          '<span class="id">' + id + (s.flag ? " ⚑" : "") + "</span>" +
+          '<span class="ti">' + esc(s.t) + "</span>" +
+          '<span class="pa">' + esc(s.p) + "</span>" +
+          (s.flag ? '<span class="pill amber" style="margin-top:4px">' + esc(s.flag) + "</span>" : "") +
+          "</div>";
+      }).join("") : '<p class="label" style="text-transform:none;letter-spacing:0;font-size:12px">Routing page — carries no claims of its own.</p>') +
+    "</div>" +
+    '<div class="panel"><h4>Publish gate</h4><div class="gatetrack">' +
+      gate.map(function (g) {
+        return '<div class="gatestep ' + g.state + '"><span class="gatepip"></span>' +
+          '<span><span class="gname">' + g.n + '</span><br><span class="gwho">' + esc(g.who) + "</span></span></div>";
+      }).join("") +
+    "</div></div>" +
+    '<div class="panel"><h4>Re-derivable</h4><p class="label" style="text-transform:none;letter-spacing:0;font-size:12px;line-height:1.6">' +
+      "Delete this page and it can be rebuilt from the PDFs above. That is the property that makes it safe to let an agent own this layer." +
+    "</p></div>";
+}
+
+function show(key, scroll) {
+  const reader = document.getElementById("reader");
+  const p = PAGES[key];
+  if (!p) {
+    reader.innerHTML =
+      '<div class="notfound"><span class="label">not yet written</span>' +
+      '<h1 style="font-size:24px;letter-spacing:-.02em">This page does not exist</h1>' +
+      '<span class="fn">' + esc(key) + "</span>" +
+      '<p style="color:var(--ink-2)">Under the Open Knowledge Format a link to a page that has not been written is tolerated. ' +
+      "It is a work item, not an error — lint records it as <code>not-yet-written</code> and moves on.</p>" +
+      '<button class="btn ghost" type="button" data-goto="' + esc(current) + '">Back</button></div>';
+    document.getElementById("aside").innerHTML = "";
+    return;
+  }
+  current = key;
+  reader.innerHTML = renderFrontmatter(p) + '<div class="prose">' + renderMarkdown(p.body) + "</div>";
+  renderAside(key);
+  document.querySelectorAll(".railitem").forEach(function (b) {
+    b.setAttribute("aria-current", b.dataset.goto === key ? "true" : "false");
+  });
+  if (scroll) window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+/* ── contested ───────────────────────────────────────────────────────────── */
+const CONTESTED = [
+  {
+    stripe: "crimson", pill: "the sharpest one", pills: ["between two of our own webinars", "blocks 3 pages"],
+    h: "What does “sustainability” mean?",
+    lead: "Two INCOSE Sustainability Webinar Series episodes, one year apart, give definitions that cannot both be the WG's.",
+    a: { who: "R10 · Wheatcraft, SWS Ep. 03, slides 3–7", claim: "“The ability to be maintained at a certain rate or level.” Three dimensions: environmental, economic, social. Sustainability as a system characteristic and an enterprise ethic, aligned with INCOSE Vision 2035." },
+    b: { who: "R11 · Baue / r3.0, SWS Ep. 04, slides 4–24", claim: "Sustainability requires contextualisation within ecological thresholds and carrying capacities. Standards that dropped the Sustainability Context principle — GRI G3.1, G4, SASB 2013 — dropped sustainability with it." },
+    res: "The wiki did not average them. It cites both, names the fork with R04's weak/strong vocabulary, and opens <b>Q01</b>. Three pages are held below <code>published</code> until the WG decides."
+  },
+  {
+    stripe: "crimson", pill: "unit of analysis", pills: ["3 senses", "blocks 2 pages"],
+    h: "What is regeneration the property of?",
+    lead: "A place, a firm, or a device. Three literatures, three answers, and our own discipline holds the third.",
+    a: { who: "R01 · Mang & Reed, glossary", claim: "Regeneration is co-evolutionary practice with the living systems of a specific place — designs that regenerate rather than deplete life support systems within socio-ecological wholes." },
+    b: { who: "R03 · Das & Bocken 2024, p. 531 · R02 exec. summary", claim: "R03: a property of a firm's business model, actively restoring the systems it operates in. R02: in engineering vocabulary the word is overwhelmingly efficiency-coded — braking, thermal oxidisers, waste-heat recovery." },
+    res: "Held as three named senses on one page rather than one blended definition. Opened as <b>Q02</b>, with a route to settle it: ingest the two ontology-method sources already curated as <code>pending</code>."
+  },
+  {
+    stripe: "amber", pill: "boundary case",
+    h: "Is restoration the same thing as regeneration?",
+    lead: "The distinction the WG will be asked for most often, and the corpus gives two answers.",
+    a: { who: "R01 · Mang & Reed, glossary", claim: "Restoration returns a site “back to a state of acceptable health” — a target state drawn from the past, and a stopping condition. Regeneration has neither." },
+    b: { who: "R02 · §1.1", claim: "The UN Decade on Ecosystem Restoration is entry 1.1 of a taxonomy titled Regeneration Across Earth's Systems, with “ecological restoration” listed as a synonym." },
+    res: "Recorded as a category merge rather than a synonym clash. Both defensible inside their own literature — which is precisely why it needs a WG decision rather than a model's preference."
+  },
+  {
+    stripe: "amber", pill: "does the label survive measurement?",
+    h: "Can a regenerative claim be verified?",
+    lead: "One source verifies that firms are doing it. Two others show that the verification does not reach the thing that matters.",
+    a: { who: "R03 · pp. 529, 533", claim: "84 cases, admitted only with communicated regenerative activity, continuing effort with proof of concept, active revenue, and third-party verification where affordable." },
+    b: { who: "R02 gap analysis §3 · R09 pp. 8–9", claim: "Regenerative claims “often fail when subjected to dynamic, system-boundary-corrected LCA”. R09's worked case shows a defensible avoided-emissions figure that a wider system boundary dismantles." },
+    res: "The wiki states the inference plainly and marks it as the WG's own, not R03's: presence in the database is <b>evidence of practice, not evidence of regeneration</b>. Marked <span class=\"cite wg\">WG</span> in the page text, so review can find it."
+  },
+  {
+    stripe: "accent", pill: "internal to one source",
+    h: "Is regeneration modellable at all?",
+    lead: "R02's MBSE addendum contradicts the WG's own working assumption — and it is worth having in writing.",
+    a: { who: "R02 · MBSE addendum, strong fit", claim: "Regenerative braking, anaerobic digestion, managed aquifer recharge, constructed wetlands, Passivhaus envelopes: quantifiable flows, clear boundaries, discrete parts. Formally modellable today." },
+    b: { who: "R02 · MBSE addendum, weak fit", claim: "Regenerative business models, permaculture design, regenerative leadership, commons governance, story-of-place: essential to the field, resistant to formal modelling. The carbon flux is modelable; the stewardship relation is not." },
+    res: "The category the WG most wants to model sits in the weak-fit column. Carried on three pages rather than buried, because it is a scoping constraint on any MBSE programme we propose."
+  }
+];
+
+function buildContested() {
+  document.getElementById("contested-cards").innerHTML = CONTESTED.map(function (c) {
+    return '<article class="card stripe-' + c.stripe + '">' +
+      '<div class="pillrow"><span class="pill ' + c.stripe + '">' + c.pill + "</span>" +
+      (c.pills || []).map(function (p) { return '<span class="pill">' + p + "</span>"; }).join("") + "</div>" +
+      "<h3>" + c.h + "</h3><p>" + c.lead + "</p>" +
+      '<div class="sidebyside">' +
+        '<div class="pos a"><span class="who">' + c.a.who + '</span><span class="claim">' + c.a.claim + "</span></div>" +
+        '<div class="pos b"><span class="who">' + c.b.who + '</span><span class="claim">' + c.b.claim + "</span></div>" +
+      "</div>" +
+      '<p class="resolves">' + c.res + "</p></article>";
+  }).join("");
+}
+
+/* ── ingest ──────────────────────────────────────────────────────────────── */
+const ING_FILES = [
+  "sources/r11-baue-authentic-sustainability.md",
+  "concepts/strong-sustainability.md",
+  "concepts/sustainability-context.md",
+  "concepts/net-positive.md",
+  "questions/q01-which-sustainability.md",
+  "index.md",
+  "log.md"
+];
+const ING_STEPS = [
+  { op: "read", tx: "Read R11 — Hacking Sustainability Standards to Achieve Authentic Sustainability, 59 slides. Nothing written yet.", files: [] },
+  { op: "write", tx: "Wrote the source page: what R11 argues, what it is good for, and the handling caution that it is a slide deck making an advocacy argument.", files: [["sources/r11-baue-authentic-sustainability.md", "new"]] },
+  { op: "write", tx: "Created a concept page for sustainability context — the principle that a figure without its threshold answers “compared to what?” with nothing.", files: [["concepts/sustainability-context.md", "new"]] },
+  { op: "revise", tx: "Went back to strong sustainability. R11 contradicts a claim already on that page from R10, so the page gained a Contested section carrying both positions with citations.", files: [["concepts/strong-sustainability.md", "touch"]] },
+  { op: "revise", tx: "Went back to net positive. Added R11's denominator problem — netting needs a common unit, and the corpus disputes that one exists.", files: [["concepts/net-positive.md", "touch"]] },
+  { op: "conflict", alarm: true, tx: "Contradiction detected between two INCOSE webinar sources. Not averaged, not silently resolved, not hidden: both positions written down with their slide numbers.", files: [] },
+  { op: "ask", alarm: true, tx: "Opened Q01 as a decision for the WG, listing the three pages it blocks. The agent cannot settle which definition the WG adopts, and does not pretend to.", files: [["questions/q01-which-sustainability.md", "new"]] },
+  { op: "index", tx: "Updated the routing index: new pages, changed statuses, revised counts.", files: [["index.md", "touch"]] },
+  { op: "log", tx: "Appended the audit entry — source, files touched, contradictions raised, question opened.", files: [["log.md", "touch"]] },
+  { op: "status", tx: "Applied the slide-deck rule from CLAUDE.md: every page citing R11 capped at in-review until a WG member checks it against the recording. No page can reach published from here.", files: [] }
+];
+
+let ingTimer = null;
+function buildIngest() {
+  document.getElementById("ing-steps").innerHTML = ING_STEPS.map(function (s, i) {
+    return '<div class="step' + (s.alarm ? " alarm" : "") + '" data-i="' + i + '">' +
+      '<span class="stepn num">' + (i + 1) + "</span>" +
+      '<span class="stepbody"><span class="stepop">' + s.op + "</span>" +
+      '<span class="steptx">' + s.tx + "</span>" +
+      (s.files.length ? '<span class="stepfiles">' + s.files.map(function (f) {
+        return '<span class="chip ' + (f[1] === "new" ? "new" : "write") + '">' + f[0] + "</span>";
+      }).join("") + "</span>" : "") +
+      "</span></div>";
+  }).join("");
+  document.getElementById("ing-files").innerHTML = ING_FILES.map(function (f) {
+    return '<div class="fmrow" data-f="' + f + '"><span>' + f + '</span><span class="tag"></span></div>';
+  }).join("");
+}
+function resetIngest() {
+  if (ingTimer) { clearInterval(ingTimer); ingTimer = null; }
+  document.querySelectorAll("#ing-steps .step").forEach(function (s) { s.classList.remove("live"); });
+  document.querySelectorAll("#ing-files .fmrow").forEach(function (r) {
+    r.classList.remove("touched", "created");
+    r.querySelector(".tag").textContent = "";
+  });
+  document.getElementById("ing-state").textContent = "idle";
+}
+function runIngest() {
+  resetIngest();
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let i = 0;
+  function tick() {
+    if (i >= ING_STEPS.length) {
+      clearInterval(ingTimer); ingTimer = null;
+      document.getElementById("ing-state").textContent = "done · 6 files changed · 1 contradiction · 1 question opened · 0 published";
+      return;
+    }
+    const step = ING_STEPS[i];
+    const el = document.querySelector('#ing-steps .step[data-i="' + i + '"]');
+    if (el) el.classList.add("live");
+    step.files.forEach(function (f) {
+      const row = document.querySelector('#ing-files .fmrow[data-f="' + f[0] + '"]');
+      if (row) {
+        row.classList.add(f[1] === "new" ? "created" : "touched");
+        row.querySelector(".tag").textContent = f[1] === "new" ? "created" : "revised";
+      }
+    });
+    document.getElementById("ing-state").textContent = "step " + (i + 1) + " / " + ING_STEPS.length + " · " + step.op;
+    i++;
+  }
+  if (reduce) { while (i < ING_STEPS.length) tick(); tick(); return; }
+  tick();
+  ingTimer = setInterval(tick, 1250);
+}
+
+/* ── lint ────────────────────────────────────────────────────────────────── */
+const LINT = [
+  { rule: "citation-undeclared", lv: "warn", why: "The page cites a source its frontmatter does not declare. Frontmatter is the machine-readable contract; a reader would never notice, and a consuming agent would.",
+    rows: [["wiki/concepts/regenerative-business-model.md", "cites R02 but it is absent from frontmatter 'sources'"]] },
+  { rule: "provenance-flag", lv: "warn", why: "One source carries an unresolved anomaly, so every page depending on it is held below the publish gate until a human clears it.",
+    rows: [
+      ["wiki/concepts/regeneration.md", "cites R01, unresolved note: publication year printed as 2112"],
+      ["wiki/concepts/regenerative-design.md", "cites R01, unresolved note: publication year printed as 2112"],
+      ["wiki/concepts/regenerative-development.md", "cites R01, unresolved note: publication year printed as 2112"],
+      ["wiki/concepts/restorative-design.md", "cites R01, unresolved note: publication year printed as 2112"],
+      ["wiki/questions/q02-regeneration-scope.md", "cites R01, unresolved note: publication year printed as 2112"],
+      ["wiki/sources/r01-mang-reed.md", "cites R01, unresolved note: publication year printed as 2112"]
+    ] },
+  { rule: "source-page-missing", lv: "warn", why: "Registered as ingested, but no source page was written. The claims are cited; the source's own summary and handling caution are not yet recorded.",
+    rows: [
+      ["raw/registry.md", "R04 is marked ingested but has no wiki/sources page"],
+      ["raw/registry.md", "R05 is marked ingested but has no wiki/sources page"],
+      ["raw/registry.md", "R07 is marked ingested but has no wiki/sources page"],
+      ["raw/registry.md", "R08 is marked ingested but has no wiki/sources page"],
+      ["raw/registry.md", "R10 is marked ingested but has no wiki/sources page"],
+      ["raw/registry.md", "R12 is marked ingested but has no wiki/sources page"]
+    ] },
+  { rule: "not-yet-written", lv: "info", why: "A link to a page that does not exist. Tolerated by OKF and treated as a work item — this is the wiki's own backlog, generated rather than maintained by hand.",
+    rows: [
+      ["wiki/concepts/rebound-effect.md", "consequential-lca.md"],
+      ["wiki/concepts/regenerative-design.md", "biomimicry.md"],
+      ["wiki/concepts/regenerative-design.md", "cradle-to-cradle.md"],
+      ["wiki/concepts/regenerative-development.md", "living-systems-thinking.md"],
+      ["wiki/concepts/restorative-design.md", "ecological-restoration.md"],
+      ["wiki/concepts/strong-sustainability.md", "flourishing.md"],
+      ["wiki/concepts/sustainability-context.md", "planetary-boundaries.md"],
+      ["wiki/concepts/tri-profit.md", "flourishing.md"],
+      ["wiki/entities/flourishing-business-canvas.md", "../concepts/flourishing.md"]
+    ] },
+  { rule: "not-ingested", lv: "info", why: "Curated by a human but not yet read. The agent does not recruit its own sources, so this queue only grows when a WG member adds to it.",
+    rows: [
+      ["raw/registry.md", "R06 — Roome & Louche (2015), Journeying Toward Business Models for Sustainability"],
+      ["raw/registry.md", "R13 — Noy & McGuinness, Ontology Development 101"],
+      ["raw/registry.md", "R14 — Seppälä et al., Guidelines for writing definitions in ontologies"]
+    ] }
+];
+
+function buildLint() {
+  document.getElementById("lint-groups").innerHTML = LINT.map(function (g) {
+    return '<section class="lintgroup"><header>' +
+      '<span class="rule">' + g.rule + "</span>" +
+      '<span class="cnt num">' + g.rows.length + " × " + g.lv + "</span>" +
+      '<span class="why">' + g.why + "</span></header>" +
+      g.rows.map(function (r) {
+        return '<div class="lintrow"><span class="lv ' + g.lv + '">' + g.lv + "</span>" +
+          '<span class="pg">' + esc(r[0]) + "</span>" +
+          '<span class="msg">' + esc(r[1]) + "</span></div>";
+      }).join("") +
+      "</section>";
+  }).join("");
+}
+
+/* ── log ─────────────────────────────────────────────────────────────────── */
+const LOG = [
+  { d: "2026-08-05", op: "ingest R01", t: "Mang & Reed — Regenerative Development and Design",
+    r: "Created 4 concept pages and 1 source page. <b>Flagged</b> the publication year printed as 2112 and did not correct it. 9 further glossary terms noted as work items, out of pilot scope." },
+  { d: "2026-08-05", op: "ingest R02", t: "Regeneration Across Earth's Systems taxonomy",
+    r: "Created 2 pages, revised 3. <b>Contradiction raised:</b> R01 separates restoration from regeneration by target state; R02 files ecological restoration as entry 1.1 of a regeneration taxonomy. → Q02. 144 solution entries read, 3 written up." },
+  { d: "2026-08-05", op: "ingest R03", t: "Das & Bocken (2024)",
+    r: "Created 3 pages, revised 1. <b>Contradiction raised:</b> unit of analysis — place (R01) vs firm (R03) vs device (R02). Opened Q02." },
+  { d: "2026-08-05", op: "ingest R04", t: "Upward & Jones (2015)",
+    r: "Created 3 pages, revised 2. Source page not written — queued, and lint is holding the receipt." },
+  { d: "2026-08-05", op: "ingest R09", t: "Bornes (2025), SWS Ep. 01",
+    r: "Created 2 pages, revised 2. Noted that the consequential-vs-attributional distinction wants its own page; linked it and left it unwritten rather than improvising one." },
+  { d: "2026-08-05", op: "ingest R10 R11 R12", t: "SWS Ep. 03, Ep. 04, Future-Fit",
+    r: "Created 3 pages, revised 2. <b>Contradiction raised:</b> R10 presents sustainability as three pillars; R11 argues sustainability without thresholds is not sustainability. Both are INCOSE webinar sources. Not reconciled, not averaged. → Q01. All pages citing these capped at in-review per the slide-deck rule." },
+  { d: "2026-08-05", op: "ingest R05 R07 R08", t: "Kulp 2026, Schlüter 2023, FBC guide v3.0",
+    r: "Revised 3 pages. Source pages not written — queued." },
+  { d: "2026-08-05", op: "review", t: "Independent pass over all 16 pages",
+    r: "Separate model instance, no drafting memory, given each page plus its cited raw excerpts. <b>5 findings:</b> 1 frontmatter slip left open; 2 confirmations that WG-marked inferences were correctly marked; 1 quotation verified word for word; and no claim found anywhere that is absent from its cited source." },
+  { d: "2026-08-05", op: "lint", t: "python lint/lint.py — 23 files, 14 sources",
+    r: "<b>25 findings: 0 error · 13 warn · 12 info.</b> Publish gate reports open — no error-class finding blocks it. <b>0 pages published.</b> The gate being open is a machine verdict; publishing is a human act, and no WG member has signed anything off." }
+];
+
+function buildLog() {
+  document.getElementById("log-lines").innerHTML = LOG.map(function (l) {
+    return '<div class="logline"><div class="logmeta"><span class="d">' + l.d + '</span><span class="op">' + l.op + "</span></div>" +
+      '<div class="logbody"><span class="t">' + l.t + '</span><span class="r">' + l.r + "</span></div></div>";
+  }).join("");
+}
+
+/* ── wiring ──────────────────────────────────────────────────────────────── */
+function setView(name) {
+  document.querySelectorAll(".tab").forEach(function (t) {
+    t.setAttribute("aria-selected", String(t.dataset.view === name));
+  });
+  document.querySelectorAll(".view").forEach(function (v) {
+    v.classList.toggle("on", v.id === "view-" + name);
+  });
+}
+
+document.addEventListener("click", function (e) {
+  const tab = e.target.closest(".tab");
+  if (tab) {
+    setView(tab.dataset.view);
+    history.replaceState(null, "", "#view=" + tab.dataset.view);
+    window.scrollTo({ top: 0, behavior: "auto" });
+    return;
+  }
+  const goto = e.target.closest("[data-goto]");
+  if (goto) {
+    e.preventDefault();
+    const key = goto.dataset.goto;
+    setView("wiki");
+    history.replaceState(null, "", "#" + key);
+    show(key, true);
+    return;
+  }
+  const cite = e.target.closest(".cite[data-src]");
+  if (cite) {
+    document.querySelectorAll(".cite").forEach(function (c) { c.classList.remove("hot"); });
+    document.querySelectorAll('.cite[data-src="' + cite.dataset.src + '"]').forEach(function (c) { c.classList.add("hot"); });
+    const row = document.querySelector("#aside .srcrow .id");
+    if (row) row.closest(".panel").scrollIntoView({ block: "nearest", behavior: "smooth" });
+    return;
+  }
+  if (e.target.id === "ing-run") { runIngest(); return; }
+  if (e.target.id === "ing-reset") { resetIngest(); return; }
+  if (e.target.id === "themebtn") {
+    const root = document.documentElement;
+    const dark = root.getAttribute("data-theme") === "dark" ||
+      (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    root.setAttribute("data-theme", dark ? "light" : "dark");
+  }
+});
+
+buildRail();
+buildContested();
+buildIngest();
+buildLint();
+buildLog();
+
+/* Deep links: #view=<name> opens a view, #<path>.md opens a wiki page. */
+const hash = decodeURIComponent(location.hash.replace(/^#/, ""));
+if (hash.indexOf("view=") === 0 && document.getElementById("view-" + hash.slice(5))) {
+  setView(hash.slice(5));
+  show("index.md", false);
+} else if (PAGES[hash]) {
+  show(hash, false);
+} else {
+  show("index.md", false);
+}
+</script>
+</body>
+</html>

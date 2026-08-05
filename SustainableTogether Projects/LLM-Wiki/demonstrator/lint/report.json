@@ -1,0 +1,163 @@
+{
+  "generated": "2026-08-05",
+  "pages": 23,
+  "sources_registered": 14,
+  "counts": {
+    "error": 0,
+    "warn": 13,
+    "info": 12
+  },
+  "publish_gate": "open",
+  "findings": [
+    {
+      "level": "warn",
+      "rule": "citation-undeclared",
+      "page": "wiki/concepts/regenerative-business-model.md",
+      "message": "cites R02 but it is absent from frontmatter 'sources' \u2014 frontmatter is the machine-readable contract"
+    },
+    {
+      "level": "warn",
+      "rule": "provenance-flag",
+      "page": "wiki/concepts/regeneration.md",
+      "message": "cites R01, which has an unresolved provenance note: the PDF's own header prints the publication year as `2112`. Almost certainly a typo for 2012, but the agent do\u2026"
+    },
+    {
+      "level": "warn",
+      "rule": "provenance-flag",
+      "page": "wiki/concepts/regenerative-design.md",
+      "message": "cites R01, which has an unresolved provenance note: the PDF's own header prints the publication year as `2112`. Almost certainly a typo for 2012, but the agent do\u2026"
+    },
+    {
+      "level": "warn",
+      "rule": "provenance-flag",
+      "page": "wiki/concepts/regenerative-development.md",
+      "message": "cites R01, which has an unresolved provenance note: the PDF's own header prints the publication year as `2112`. Almost certainly a typo for 2012, but the agent do\u2026"
+    },
+    {
+      "level": "warn",
+      "rule": "provenance-flag",
+      "page": "wiki/concepts/restorative-design.md",
+      "message": "cites R01, which has an unresolved provenance note: the PDF's own header prints the publication year as `2112`. Almost certainly a typo for 2012, but the agent do\u2026"
+    },
+    {
+      "level": "warn",
+      "rule": "provenance-flag",
+      "page": "wiki/questions/q02-regeneration-scope.md",
+      "message": "cites R01, which has an unresolved provenance note: the PDF's own header prints the publication year as `2112`. Almost certainly a typo for 2012, but the agent do\u2026"
+    },
+    {
+      "level": "warn",
+      "rule": "provenance-flag",
+      "page": "wiki/sources/r01-mang-reed.md",
+      "message": "cites R01, which has an unresolved provenance note: the PDF's own header prints the publication year as `2112`. Almost certainly a typo for 2012, but the agent do\u2026"
+    },
+    {
+      "level": "warn",
+      "rule": "source-page-missing",
+      "page": "raw/registry.md",
+      "message": "R04 is marked ingested but has no wiki/sources page"
+    },
+    {
+      "level": "warn",
+      "rule": "source-page-missing",
+      "page": "raw/registry.md",
+      "message": "R05 is marked ingested but has no wiki/sources page"
+    },
+    {
+      "level": "warn",
+      "rule": "source-page-missing",
+      "page": "raw/registry.md",
+      "message": "R07 is marked ingested but has no wiki/sources page"
+    },
+    {
+      "level": "warn",
+      "rule": "source-page-missing",
+      "page": "raw/registry.md",
+      "message": "R08 is marked ingested but has no wiki/sources page"
+    },
+    {
+      "level": "warn",
+      "rule": "source-page-missing",
+      "page": "raw/registry.md",
+      "message": "R10 is marked ingested but has no wiki/sources page"
+    },
+    {
+      "level": "warn",
+      "rule": "source-page-missing",
+      "page": "raw/registry.md",
+      "message": "R12 is marked ingested but has no wiki/sources page"
+    },
+    {
+      "level": "info",
+      "rule": "not-ingested",
+      "page": "raw/registry.md",
+      "message": "R06 is curated but not yet read"
+    },
+    {
+      "level": "info",
+      "rule": "not-ingested",
+      "page": "raw/registry.md",
+      "message": "R13 is curated but not yet read"
+    },
+    {
+      "level": "info",
+      "rule": "not-ingested",
+      "page": "raw/registry.md",
+      "message": "R14 is curated but not yet read"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/rebound-effect.md",
+      "message": "link target consequential-lca.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/regenerative-design.md",
+      "message": "link target biomimicry.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/regenerative-design.md",
+      "message": "link target cradle-to-cradle.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/regenerative-development.md",
+      "message": "link target living-systems-thinking.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/restorative-design.md",
+      "message": "link target ecological-restoration.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/strong-sustainability.md",
+      "message": "link target flourishing.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/sustainability-context.md",
+      "message": "link target planetary-boundaries.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/concepts/tri-profit.md",
+      "message": "link target flourishing.md does not exist \u2014 work item, tolerated by OKF"
+    },
+    {
+      "level": "info",
+      "rule": "not-yet-written",
+      "page": "wiki/entities/flourishing-business-canvas.md",
+      "message": "link target ../concepts/flourishing.md does not exist \u2014 work item, tolerated by OKF"
+    }
+  ]
+}
