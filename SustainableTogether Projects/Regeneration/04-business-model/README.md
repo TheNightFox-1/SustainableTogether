@@ -1,5 +1,7 @@
 # Group 1 — Business Model + System Dynamics
 
+> **⚠️ Structure update (2026-08-09):** This group has been split. **Business Model** and **System Dynamics** are now separate strands with their own task briefs, and the environmental analysis moves to a dedicated **LCA** group. The authoritative brief for the Business Model group is [`TASK-BRIEF.md`](./TASK-BRIEF.md). The chosen business-model direction is **PV-as-a-Service (PVaaS)**. The notes below are retained for reference on the existing assets and the CLD loops (now owned by the System Dynamics group).
+
 **Group mandate:** Demonstrate that regenerative design is commercially viable and model the feedback dynamics that determine under what conditions it outperforms extraction.
 
 ---
