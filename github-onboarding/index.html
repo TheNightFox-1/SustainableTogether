@@ -263,6 +263,25 @@
   
   
     <li class="md-tabs__item">
+      <a href="../projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../project-structure/" class="md-tabs__link">
         
   
@@ -498,6 +517,33 @@
     
   
     Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
   
 
     
@@ -1164,8 +1210,8 @@
 </ul>
 <p><strong>Get to know the project</strong></p>
 <ul>
-<li>[ ] Read the <a href="../On-Boarding%20SustainableTogether%20and%20INCOSE%20Sustianability%20WG.pdf">Onboarding Document</a> — what SustainableTogether and the INCOSE Sustainability WG are about</li>
-<li>[ ] Skim the <a href="../index.md">README</a> — the vision and the two ways to contribute</li>
+<li>[ ] Read the <a href="https://github.com/TheNightFox-1/SustainableTogether/blob/main/On-Boarding%20SustainableTogether%20and%20INCOSE%20Sustianability%20WG.pdf">Onboarding Document</a> — what SustainableTogether and the INCOSE Sustainability WG are about</li>
+<li>[ ] Skim the <a href="../">home page</a> — the vision and the two ways to contribute</li>
 <li>[ ] Open the repo at <a href="https://github.com/TheNightFox-1/SustainableTogether">github.com/TheNightFox-1/SustainableTogether</a> and click <strong>Watch</strong> (top right) to get updates</li>
 <li>[ ] Look at the <a href="https://github.com/users/TheNightFox-1/projects/3">Project Board</a> to see what is being worked on</li>
 </ul>
@@ -1255,20 +1301,20 @@
 <p><strong>Best for:</strong> working on the <strong>SysML v2 model</strong> (needs the SysIDE validator) or the <strong>LCA pipeline</strong> (needs Python + openLCA). The required path for our model contributors.</p>
 <p><strong>What you need:</strong> <a href="https://git-scm.com/downloads">Git</a>, <a href="https://code.visualstudio.com">VS Code</a>, and the <strong>SysIDE</strong> extension for SysML work.</p>
 <p><strong>Typical flow (in the VS Code terminal):</strong></p>
-<pre><code class="language-bash"># One-time: download your own copy
-git clone https://github.com/TheNightFox-1/SustainableTogether.git
-cd SustainableTogether
+<div class="highlight"><pre><span></span><code><span class="c1"># One-time: download your own copy</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/TheNightFox-1/SustainableTogether.git
+<span class="nb">cd</span><span class="w"> </span>SustainableTogether
 
-# Each task: start from a fresh, up-to-date main
-git checkout main &amp;&amp; git pull origin main
-git checkout -b issue-#N-brief-title
+<span class="c1"># Each task: start from a fresh, up-to-date main</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>issue-#N-brief-title
 
-# ...edit files, validate the model in SysIDE (Ctrl+Shift+M)...
+<span class="c1"># ...edit files, validate the model in SysIDE (Ctrl+Shift+M)...</span>
 
-git add .
-git commit -m &quot;Issue #N: what you changed&quot;
-git push origin issue-#N-brief-title
-</code></pre>
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Issue #N: what you changed&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>issue-#N-brief-title
+</code></pre></div>
 <p>Then open the pull request on github.com. The full engineering workflow, validation rules, and PR checklist are in <strong><a href="../contributing/">CONTRIBUTING.md</a></strong>.</p>
 <hr />
 <h2 id="which-method-for-which-task">Which method for which task<a class="headerlink" href="#which-method-for-which-task" title="Permanent link">&para;</a></h2>

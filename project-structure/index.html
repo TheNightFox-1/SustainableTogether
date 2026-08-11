@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://thenightfox-1.github.io/SustainableTogether/project-structure/">
       
       
-        <link rel="prev" href="../vision/">
+        <link rel="prev" href="../projects/">
       
       
         <link rel="next" href="../system-model/">
@@ -251,6 +251,25 @@
     
   
   Vision
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
 
       </a>
     </li>
@@ -514,6 +533,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -600,10 +646,32 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#system-model" class="md-nav__link">
+  <a href="#sustainabletogether-projects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System Model/
+        SustainableTogether Projects/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sustainabletogether-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SustainableTogether Approach/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sustainabletogether-projectssystem-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SustainableTogether Projects/System Model/
       
     </span>
   </a>
@@ -917,10 +985,32 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#system-model" class="md-nav__link">
+  <a href="#sustainabletogether-projects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System Model/
+        SustainableTogether Projects/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sustainabletogether-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SustainableTogether Approach/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sustainabletogether-projectssystem-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SustainableTogether Projects/System Model/
       
     </span>
   </a>
@@ -1015,30 +1105,46 @@
 <h1 id="project-structure">Project Structure<a class="headerlink" href="#project-structure" title="Permanent link">&para;</a></h1>
 <p>This page explains what is in the repository and where to find things.</p>
 <h2 id="repository-overview">Repository Overview<a class="headerlink" href="#repository-overview" title="Permanent link">&para;</a></h2>
-<pre><code>SustainableTogether/
-├── .github/                        # GitHub configuration
-│   ├── ISSUE_TEMPLATE/             # Templates for opening issues
-│   ├── PULL_REQUEST_TEMPLATE.md    # Template for pull requests
-│   └── workflows/                  # GitHub Actions (CI/CD)
-├── docs/                           # Documentation source (this site)
-├── Our Presentations/              # Presentations by the working group
-├── SustainabilityWebinarSeries/    # INCOSE Sustainability Webinar Series slides
-├── System Model/                   # MBSE/SysML system models
-│   └── SolarX/                     # PV system model
-├── .gitignore                      # Git ignore rules
-├── CHANGELOG.md                    # Version history
-├── CODE_OF_CONDUCT.md              # Community standards
-├── CONTRIBUTING.md                 # How to contribute
-├── LICENSE                         # MIT License
-├── README.md                       # Project overview
-├── SECURITY.md                     # Security policy
-├── mkdocs.yml                      # Documentation site config
-└── requirements.txt                # Python dependencies for docs
-</code></pre>
+<div class="highlight"><pre><span></span><code>SustainableTogether/
+├── .github/                          # GitHub configuration
+│   ├── ISSUE_TEMPLATE/               # Templates for opening issues
+│   ├── PULL_REQUEST_TEMPLATE.md      # Template for pull requests
+│   └── workflows/                    # GitHub Actions (CI/CD)
+├── docs/                             # Documentation source (this site)
+│
+├── SustainableTogether Approach/     # Framework, governance, WG leadership tracker
+│
+├── SustainableTogether Projects/     # Where the work happens — see the Projects page
+│   ├── Regeneration/                 # Regeneration Task-Force: 6 groups, RQ1–RQ3
+│   ├── System Model/                 # MBSE/SysML v2 models
+│   │   ├── SolarX/                   # AS-IS PV system model + openLCA pipeline
+│   │   └── MBSE for C2C/             # Cradle-to-Cradle reference material
+│   ├── Business Model/               # SustainaSun canvas, assessment, financial model
+│   ├── Sustainability Stakeholder Mapping/   # Ecosystem and partnership analysis
+│   └── LLM-Wiki/                     # Knowledge-wiki demonstrator over WG documents
+│
+├── Our Presentations/                # Presentations by the working group
+├── SustainabilityWebinarSeries/      # INCOSE Sustainability Webinar Series slides
+│
+├── README.md                         # Project overview
+├── WORKSTREAMS.md                    # The 18 INCOSE Sustainability WG task groups
+├── CONTRIBUTING.md                   # How to contribute
+├── CODE_OF_CONDUCT.md                # Community standards
+├── CHANGELOG.md                      # Version history
+├── SECURITY.md                       # Security policy
+├── LICENSE                           # MIT License
+├── mkdocs.yml                        # Documentation site config
+└── requirements.txt                  # Python dependencies for docs
+</code></pre></div>
 <hr />
 <h2 id="folder-descriptions">Folder Descriptions<a class="headerlink" href="#folder-descriptions" title="Permanent link">&para;</a></h2>
-<h3 id="system-model"><code>System Model/</code><a class="headerlink" href="#system-model" title="Permanent link">&para;</a></h3>
-<p>Contains the MBSE (Model-Based Systems Engineering) models for the SolarX and SustainaSun systems. Currently includes the SolarX PV system model. See the <a href="../system-model/">System Model</a> page for details.</p>
+<h3 id="sustainabletogether-projects"><code>SustainableTogether Projects/</code><a class="headerlink" href="#sustainabletogether-projects" title="Permanent link">&para;</a></h3>
+<p>The working folder — five active projects, each with its own README and issue set. See the <a href="../projects/">Projects</a> page for what each one produces and how they connect.</p>
+<p>The largest is <strong><code>Regeneration/</code></strong>, the Regeneration Task-Force, which tests whether a regenerative PV business is more viable than the extractive one it replaces. Its three research questions break down across six working groups; the tree, the rules for composing sub-answers into answers, and the progress ledger live in that folder's <code>RQ-DECOMPOSITION.md</code>. Every abbreviation used across the Task-Force is defined in its <code>GLOSSARY.md</code>.</p>
+<h3 id="sustainabletogether-approach"><code>SustainableTogether Approach/</code><a class="headerlink" href="#sustainabletogether-approach" title="Permanent link">&para;</a></h3>
+<p>The framework and governance layer: the 8-layer Generic Approach Framework, the collaboration workflow, and the WG Leadership Tracker listing all 18 task groups with their leads and open roles.</p>
+<h3 id="sustainabletogether-projectssystem-model"><code>SustainableTogether Projects/System Model/</code><a class="headerlink" href="#sustainabletogether-projectssystem-model" title="Permanent link">&para;</a></h3>
+<p>The MBSE (Model-Based Systems Engineering) models for the SolarX and SustainaSun systems. Currently the SolarX PV system model plus the openLCA integration pipeline. See the <a href="../system-model/">System Model</a> page for details.</p>
 <h3 id="our-presentations"><code>Our Presentations/</code><a class="headerlink" href="#our-presentations" title="Permanent link">&para;</a></h3>
 <p>Presentations and publications produced by the SustainableTogether working group. These cover topics including AI Agents for MBSE, INCOSE sustainability standards, and the NSWG overview. See the <a href="../presentations/">Presentations</a> page for a full index.</p>
 <h3 id="sustainabilitywebinarseries"><code>SustainabilityWebinarSeries/</code><a class="headerlink" href="#sustainabilitywebinarseries" title="Permanent link">&para;</a></h3>
@@ -1060,6 +1166,10 @@
 <tr>
 <td><code>README.md</code></td>
 <td>Entry point for anyone visiting the GitHub repository</td>
+</tr>
+<tr>
+<td><code>WORKSTREAMS.md</code></td>
+<td>The 18 INCOSE Sustainability WG task groups, their leads, and how to join</td>
 </tr>
 <tr>
 <td><code>CONTRIBUTING.md</code></td>
