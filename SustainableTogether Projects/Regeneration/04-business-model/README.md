@@ -1,57 +1,41 @@
-# Group 1 — Business Model + System Dynamics
+# Group 1 — Business Model
 
-> **⚠️ Structure update (2026-08-09):** This group has been split. **Business Model** and **System Dynamics** are now separate strands with their own task briefs, and the environmental analysis moves to a dedicated **LCA** group. The authoritative brief for the Business Model group is [`TASK-BRIEF.md`](./TASK-BRIEF.md). The chosen business-model direction is **PV-as-a-Service (PVaaS)**. The notes below are retained for reference on the existing assets and the CLD loops (now owned by the System Dynamics group).
+> **⚠️ Structure update (2026-08-09):** Business Model is now a standalone group. The System Dynamics work moved to its own group (`06-system-dynamics/`) under the mandate of analyzing business-model dynamics across economic, social, and environmental perspectives. The semantic integration pipeline moved to `07-digital-engineering/`.
 
-**Group mandate:** Demonstrate that regenerative design is commercially viable and model the feedback dynamics that determine under what conditions it outperforms extraction.
+**Mandate:** Design the regenerative PVaaS business model and prove — with both revenue and cost structure — that it is **viable without subsidy dependency** and **superior under identifiable conditions**.
 
----
-
-## Two workstreams
-
-### `business-model/` — Static reference architecture
-Starting point: `SustainaSun-Regenerative-PV-Business-Model.md` (v0.1)
-
-This document specifies the BM structure, revenue streams, cost structure, capital architecture, and viability conditions for a regenerative PV project. It is parametric and honest about the conditions under which the model works and when it breaks.
-
-Current status: Complete as a reference document. Needs to be adopted by the Task-Force (not treated as Hamza's solo work), validated by the group, and extended where gaps exist.
-
-Key decision: The financial model (Excel) is specified in Output 3 of the BM document. It needs to be verified as actually built.
-
-### `system-dynamics/` — Dynamic model
-The SD model's job: simulate how the BM's variables interact over time. The BM gives you parameter ranges; the SD model shows how those parameters move and interact dynamically across the 30-year lifecycle.
-
-**Done:** A Causal Loop Diagram (CLD) exists (`SustainSun CLD v2.docx`, `SustainaSun_CLD_v3_leasing.drawio`), along with an FBMC⇄CLD semantic alignment method (ontology, playbook, concept registry) and a validation `pipeline/` that checks the CLD against the registry. Not yet done: parameterizing the CLD into an executable SD model.
-
-The key loops the CLD needs to capture:
-
-**Positive (reinforcing) loops:**
-- Soil health → agricultural yield → agrivoltaic revenue → reinvestment in land management → soil health
-- Community trust → reduced permitting time → project scale → community benefit → community trust
-- Low-carbon module sourcing → supplier development investment → lower module carbon intensity → better EPD score → higher low-carbon premium
-- Ecological monitoring quality → biodiversity credit credibility → credit price → monitoring investment
-
-**Balancing loops:**
-- Project scale → fixed compliance overhead per MW → minimum viable scale threshold (economies of scale)
-- Biodiversity premium market formation → more regenerative projects → supply exceeds early demand → price compression
-
-**Tool choice:** Vensim (standard in SD research), InsightMaker (free, browser-based), or Stella Architect. For MBSE integration, InsightMaker's model-sharing approach is simplest.
+**Chosen direction (locked):** **Photovoltaics-as-a-Service (PVaaS).** SustainaSun sells the *outcome* (clean energy + ecological/social value) as an ongoing service while retaining asset ownership.
 
 ---
 
-## Integration with Group 2
+## Workstreams
 
-Group 1 produces the measurable KPIs that Group 2's SysML model must satisfy. The shared interface is a set of 8–10 requirements. The actual target values are not set yet — that is one of the first jobs for the group (see `GAPS-AND-RISKS.md` §3). The numbers below are illustrative placeholders to show the *shape* of the interface, not agreed targets:
-- Soil organic carbon: stable or increasing over the measurement window
-- Species richness: positive vs pre-installation baseline at Year 10 (target TBD)
-- Community revenue retention: a defined minimum share of lifetime revenue (target TBD)
-- Net lifecycle GHG: <15 gCO₂eq/kWh (this one is anchored — it comes from the BM, IEA-PVPS Task 12 baseline)
+### `business-model/` — The complete business model
 
-Group 1 owns the *target values and measurement protocols*. Group 2 owns the *system functions that produce those outcomes*.
+- Revenue architecture (value lines sorted by bankability)
+- **Cost structure** — CAPEX, OPEX, capital structure, cost of capital, cost drivers per value line
+- Financial model (30-year, ≥3 scenarios, NPV, IRR, payback, sensitivity)
+- Risk-adjusted comparison vs. conventional PV baseline
 
 ---
 
-## Integration with `06-lca-and-financial/`
+## Starting assets
 
-The BM uses IEA PVPS Task 12 baseline LCA data. The Task-Force needs a regenerative-scenario LCA — how does agrivoltaic + biodiversity management + regenerative land stewardship change the lifecycle impacts vs conventional ground-mount PV?
+| Asset | Location |
+|---|---|
+| SustainaSun BM v0.1 | `business-model/SustainaSun-Regenerative-PV-Business-Model.md` |
+| Financial model (Excel, 3 scenarios) | `business-model/SustainaSun_PV_Financial_Model.xlsx` |
+| Circular PV leasing BM (CLD sketch) | `business-model/SustainableTogether Circular Photovoltaic Leasing Business Model.docx` |
+| Desired-outcomes interface | `../03-methodology/01-desired-outcomes-interface.md` |
 
-This LCA work feeds back into the financial model (validated GHG performance → low-carbon premium eligibility → revenue) and into Group 2's model (lifecycle capital flows → SysML behavior specs).
+---
+
+## Deliverables
+
+1. **PVaaS business model v1.0** — revenue architecture **and** cost structure, organized around DO-1…DO-8
+2. **Financial model recast for PVaaS** — 30-year, ≥3 scenarios, all revenue and cost lines, outputs NPV, IRR, payback, sensitivity
+3. **Risk-adjusted comparison** — conditions under which regenerative PVaaS wins, matches, or loses vs. conventional baseline
+
+## Task brief
+
+See [`TASK-BRIEF.md`](./TASK-BRIEF.md) for the full brief with research questions, scope, acceptance criteria, and GitHub issues.

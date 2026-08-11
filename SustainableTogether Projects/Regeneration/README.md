@@ -49,13 +49,53 @@ These ecological, social, and economic outcomes can be **co-optimised, not trade
 
 ## The research questions
 
-| RQ | Question | Answered by |
-|---|---|---|
-| **RQ1 — Viability (gate)** | Can a regenerative PV business model reach positive NPV and IRR ≥ 8% over 30 years without subsidy dependency? | Group 1 ([#27](https://github.com/TheNightFox-1/SustainableTogether/issues/27), [#30](https://github.com/TheNightFox-1/SustainableTogether/issues/30)) |
-| **RQ2 — Conditions** | Under which structural, regulatory, and market conditions does regenerative outperform conventional, risk-adjusted? "Better when…", not "always better". | Group 1 ([#28](https://github.com/TheNightFox-1/SustainableTogether/issues/28), [#29](https://github.com/TheNightFox-1/SustainableTogether/issues/29), [#30](https://github.com/TheNightFox-1/SustainableTogether/issues/30)) |
-| **RQ3 — Methodology** | How can ecological, social, and economic outcomes be co-optimised via an integrated method linking BM, product architecture, and dynamic modelling? | Both groups ([#31](https://github.com/TheNightFox-1/SustainableTogether/issues/31), [#32](https://github.com/TheNightFox-1/SustainableTogether/issues/32)) |
+| RQ | Question |
+|---|---|
+| **RQ1 — Viability (gate)** | Can a regenerative PV business model reach positive NPV and IRR ≥ 8% over 30 years without subsidy dependency? |
+| **RQ2 — Conditions** | Under which structural, regulatory, and market conditions does regenerative outperform conventional, risk-adjusted? "Better when…", not "always better". |
+| **RQ3 — Methodology** | How can ecological, social, and economic outcomes be co-optimised via an integrated method linking BM, product architecture, and dynamic modelling? |
 
 **RQ1 is a hard gate.** It is answered first; if regeneration cannot stand on its own financially, RQ2 and RQ3 are moot. Full detail: `00-foundations/RC-research-clarification.md` (DRM: RC ✓ → DS-I → PS → DS-II → writing).
+
+### How the RQs break down across groups
+
+Each top-level RQ is answered by the **combined output** of multiple groups. No single group can answer an RQ alone.
+
+#### RQ1 — Viability (NPV > 0, IRR ≥ 8%, unsubsidised)
+
+| Group | Contribution | Output that feeds RQ1 |
+|---|---|---|
+| **Business Model** (04) | *Leads.* Designs the PVaaS BM with revenue architecture and cost structure; builds the financial model. | NPV, IRR, payback, sensitivity across ≥3 scenarios |
+| **Product** (05) | Defines the regenerative system functions and architecture — what the system physically *is* and what it costs to build. | CAPEX inputs, system boundaries, component list for financial model |
+| **LCA** (06) | Quantifies the lifecycle environmental impact (gCO₂eq/kWh). If low-carbon premium is a revenue line, LCA validates the claim. | Verified emissions figure → validates or invalidates the low-carbon premium revenue line |
+| **Enabling Systems** (08) | Identifies which revenue lines are realistic (e.g., can biodiversity credits actually be sold?) vs. hypothetical. | Filters revenue lines: bankable today / needs enabling system / speculative |
+| **System Dynamics** (06-sd) | Validates that the financial projections are dynamically stable over 30 years — not just an accounting snapshot. | Confirms or flags dynamic instability in revenue/cost assumptions |
+| **Digital Engineering** (07) | Ensures semantic consistency between the BM, CLD, and financial model — no contradictions in the artefacts. | Confidence that all artefacts describe the *same* system |
+
+**The answer to RQ1 =** BM financial model, with inputs validated by Product (CAPEX), LCA (emissions), Enabling Systems (market reality), and SD (dynamic stability).
+
+#### RQ2 — Conditions ("better when…")
+
+| Group | Contribution | Output that feeds RQ2 |
+|---|---|---|
+| **Enabling Systems** (08) | *Leads.* Maps the full landscape of policy, market, supply chain, grid, standards, and governance conditions. | Classification matrix (blocker / enabler / amplifier) + feasibility assessment |
+| **Business Model** (04) | Runs sensitivity analysis on the financial model to identify which conditions change the outcome. | Sensitivity analysis: which parameters make regenerative win or lose? |
+| **System Dynamics** (06-sd) | Identifies which feedback structures create conditions for outperformance (e.g., compounding community trust → lower financing costs). | Conditions revealed by loop structure: which loops tip the balance? |
+| **LCA** (06) | Quantifies the environmental delta under different conditions (e.g., different supply chains, different EOL recovery rates). | Conditional LCA results |
+
+**The answer to RQ2 =** "Regenerative PVaaS outperforms conventional under conditions X, Y, Z" — where the conditions come from Enabling Systems (mapped), BM (validated financially), and SD (validated dynamically).
+
+#### RQ3 — Methodology (integrated co-optimisation)
+
+| Group | Contribution | Output that feeds RQ3 |
+|---|---|---|
+| **Digital Engineering** (07) | *Leads the integration.* Provides the semantic integration pipeline that ensures all artefacts are formally aligned. | Automated FBMC↔CLD↔SysML alignment with machine validation |
+| **Business Model** (04) | Demonstrates that the BM can be designed from DO-1…DO-8 and mapped to a CLD without loss of information. | BM↔CLD↔Finance consistency |
+| **Product** (05) | Demonstrates that DO-1…DO-8 can be formalised as SysML v2 requirements and traced through architecture. | DO→requirement→block→flow traceability |
+| **System Dynamics** (06-sd) | Demonstrates that the same DOs can be modelled dynamically across economic, social, and environmental perspectives. | Three-perspective SD model → unified model |
+| **LCA** (06) | Demonstrates that DO-4 (lifecycle GHG) can be independently quantified and fed back into the BM. | LCA↔BM closed loop |
+
+**The answer to RQ3 =** the 10-step Regenerative Design Approach, demonstrated on a single coherent project where every artefact traces back to DO-1…DO-8 through a formal semantic bridge.
 
 ---
 
@@ -122,19 +162,23 @@ Interactive ontology: `01-theory-and-ontology/regenerative-dynamics-ontology.htm
 
 ## How it all hangs together
 
-> **⚠️ Under revision.** The group structure below is being reworked into per-group task briefs (with a possible split of Business Model and System Dynamics into distinct strands, plus an explicit Evidence/Measurement strand). This section and the diagram will be updated when those briefs land.
-
 ```mermaid
 flowchart TD
-  RQ["Research frame (DRM)<br/>RQ1 viability · RQ2 conditions · RQ3 methodology"] --> APP
+  RQ["Research frame (DRM)<br/>RQ1 viability · RQ2 conditions · RQ3 methodology"] --> ONT
   ONT["Theory & vocabulary<br/>Fischer ontology · definitions · 144-solution taxonomy"] --> APP
   APP["10-step Regenerative Design Approach<br/>Frame 1–3 · Design 4–7 · Prove 8–10"] --> INT
   INT{{"Desired-Outcomes Interface<br/>DO-1 … DO-8 — the shared contract"}}
-  INT --> G1["Group 1 · Business Model + System Dynamics<br/>CLD → SD model → finance (04)"]
-  INT --> G2["Group 2 · Regeneration in the Product<br/>SysML v2 requirements, functions, ecological flows (05)"]
-  G1 --> MRV["MRV — measure, report, verify (06)"]
-  G2 --> MRV
-  MRV -.->|"results feed back"| INT
+  INT --> BM["Business Model<br/>Revenue + cost structure, financial model<br/>(04)"]
+  INT --> PRD["Product / MBSE<br/>SysML v2 requirements & architecture<br/>(05)"]
+  INT --> SD["System Dynamics<br/>Economic + social + environmental perspectives<br/>(06-sd)"]
+  INT --> LCA["LCA + Financial<br/>Lifecycle impact + MRV protocol<br/>(06)"]
+  INT --> ENS["Enabling Systems<br/>Policy, market, supply chain, grid, standards, governance<br/>(08)"]
+  DE["Digital Engineering<br/>Semantic integration pipeline<br/>(07)"] -.->|"alignment layer for all groups"| INT
+  BM --> LCA
+  PRD --> LCA
+  SD -.->|"dynamic validation"| BM
+  ENS -.->|"feasibility filter"| BM
+  LCA -.->|"emissions validated"| BM
 ```
 
 Each desired outcome (soil carbon, biodiversity, water retention, material circularity, lifecycle GHG, community wealth, energy access, supplier decarbonization) is defined **once** in the interface and used **four ways**: as a CLD stock (dynamics), a SysML `requirement def` (product), a financial line (feasibility), and an MRV target (measurement). That single list is what keeps the two groups' artefacts interlocking.
