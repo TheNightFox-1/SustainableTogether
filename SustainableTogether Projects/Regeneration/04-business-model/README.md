@@ -1,10 +1,13 @@
 # Group 1 — Business Model
 
-> **⚠️ Structure update (2026-08-09):** Business Model is now a standalone group. The System Dynamics work moved to its own group (`06-system-dynamics/`) under the mandate of analyzing business-model dynamics across economic, social, and environmental perspectives. The semantic integration pipeline moved to `07-digital-engineering/`.
+**Owns research questions:** RQ1.1 ★ (leads the viability gate) · RQ2.2 (which parameters decide the risk-adjusted outcome) · RQ3.2 (can a business model be derived from the desired outcomes without information loss)
+**Task brief:** [`TASK-BRIEF.md`](./TASK-BRIEF.md) · **Decomposition:** [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md) · **Abbreviations:** [`../GLOSSARY.md`](../GLOSSARY.md)
 
-**Mandate:** Design the regenerative PVaaS business model and prove — with both revenue and cost structure — that it is **viable without subsidy dependency** and **superior under identifiable conditions**.
+> **⚠️ Structure update (2026-08-09):** Business Model is now a standalone group. The System Dynamics work moved to Group 4 (`06-system-dynamics/`) under the mandate of analyzing business-model dynamics across economic, social, and environmental perspectives. The semantic integration pipeline moved to Group 5 (`07-digital-engineering/`).
 
-**Chosen direction (locked):** **Photovoltaics-as-a-Service (PVaaS).** SustainaSun sells the *outcome* (clean energy + ecological/social value) as an ongoing service while retaining asset ownership.
+**Mandate:** Design the regenerative Photovoltaics-as-a-Service (PVaaS) business model and prove — with both revenue and cost structure — that it is **viable without subsidy dependency** and **superior under identifiable conditions**.
+
+**Chosen direction (locked):** **PVaaS.** SustainaSun sells the *outcome* (clean energy plus ecological and social value) as an ongoing service while retaining asset ownership.
 
 ---
 
@@ -13,8 +16,8 @@
 ### `business-model/` — The complete business model
 
 - Revenue architecture (value lines sorted by bankability)
-- **Cost structure** — CAPEX, OPEX, capital structure, cost of capital, cost drivers per value line
-- Financial model (30-year, ≥3 scenarios, NPV, IRR, payback, sensitivity)
+- **Cost structure** — capital expenditure (CAPEX), operating expenditure (OPEX), capital structure, cost of capital, cost drivers per value line
+- Financial model (30-year, ≥3 scenarios, net present value (NPV), internal rate of return (IRR), payback, sensitivity)
 - Risk-adjusted comparison vs. conventional PV baseline
 
 ---

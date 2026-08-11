@@ -1,7 +1,7 @@
 # MRV Protocol — Monitoring, Reporting, Verification
 
 **Version:** 0.1 (2026-07-02) — structure and methods proposed; cadences and thresholds TBD by the group
-**Owner:** Regeneration Task-Force (both groups)
+**Owner:** Group 3 — LCA & Financial Integration, on behalf of the whole Task-Force (it is the evidence standard behind every group's outcome claims)
 **Purpose:** Make the regeneration claim falsifiable and auditable. This is Step 10 of `../03-methodology/00-regenerative-design-approach.md`. It turns each desired outcome in `../03-methodology/01-desired-outcomes-interface.md` into a measurable, verifiable, independently checkable protocol.
 
 ---

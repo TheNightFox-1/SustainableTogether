@@ -1,9 +1,9 @@
-# Task Brief — Enabling Systems Group
+# Task Brief — Group 6, Enabling Systems
 
-**Group:** Enabling Systems
+**Group:** Group 6 — Enabling Systems
 **Part of:** INCOSE / GfSE Sustainability WG · Regeneration Task-Force · SustainableTogether
-**Reads from:** the top-level [`README.md`](../README.md), the [Desired-Outcomes Interface](../03-methodology/01-desired-outcomes-interface.md), and the outputs of the [Business Model group](../04-business-model/), [System Dynamics group](../06-system-dynamics/), and [Product group](../05-product-regeneration/)
-**Owns research questions:** RQ2 (conditions — the "better when…" question) and the practical feasibility assessment
+**Reads from:** the top-level [`README.md`](../README.md), the [RQ decomposition](../RQ-DECOMPOSITION.md), the [Desired-Outcomes Interface](../03-methodology/01-desired-outcomes-interface.md), the [Glossary](../GLOSSARY.md), and the outputs of [Group 1 — Business Model](../04-business-model/), [Group 2 — Product Regeneration](../05-product-regeneration/), and [Group 4 — System Dynamics](../06-system-dynamics/)
+**Owns research questions:** RQ2.1 ★ (leads the conditions question) · RQ1.4 · RQ3.6
 
 ---
 
@@ -28,10 +28,15 @@ This group systematically maps every such dependency, classifies it, and answers
 
 ## 3. Research questions & success criteria owned
 
-| RQ / criterion | What this group must show |
-|---|---|
-| **RQ2 — Conditions (shared)** | The structural, regulatory, and market conditions under which regenerative PVaaS outperforms conventional PV, risk-adjusted — "better when…", not "always better" (C3) |
-| **Feasibility** | A realistic assessment of what enabling systems exist today, what can be adapted, what must be created, and at what cost and time horizon |
+| Sub-RQ | Question | Answering artefact | Acceptance test | Criteria |
+|---|---|---|---|---|
+| **RQ2.1** ★ | Which policy, market, supply-chain, grid, standards and governance conditions must hold, and which are hard blockers, soft enablers, or optional amplifiers? | Enabling-systems map, classification matrix, dependency map, critical path | Every condition is classified, its current state assessed against a **named source**, and its dependencies mapped | C3 |
+| **RQ1.4** | Which revenue lines can actually be transacted in the target market **today**, and which depend on an enabling system that does not yet exist? | Bankability filter per revenue line: bankable now / needs enabling system / speculative | Every revenue line in Group 1's architecture carries a classification with a named market precedent or a named missing enabler | C1 |
+| **RQ3.6** | Does the method surface the external conditions a design depends on, or does it only work in a vacuum? | An enabling-systems step integrated into the 10-step Regenerative Design Approach | The approach contains an explicit step that would have caught a missing enabling system in the PV pilot | C6 |
+
+**RQ1.4 is a gate input.** Group 1 cannot assemble an honest gate case until this classification exists — a positive NPV built on revenue lines that cannot be transacted is not an answer to RQ1. Deliver RQ1.4 before the broader RQ2.1 landscape work if the two compete for time.
+
+**On RQ2.1:** a condition only enters the final "better when…" set if this group names it, Group 1 shows it is financially decisive, **and** Group 4 shows the advantage persists over 30 years. Conditions failing any of the three are published in a second list — *claimed but unverified*. See the roll-up rule in [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md#roll-up-rule-for-rq2).
 
 ## 4. Scope
 
@@ -43,10 +48,10 @@ This group systematically maps every such dependency, classifies it, and answers
 - Identification of **enabling-system feedback loops** — where one enabling system creates conditions for another (e.g., stronger biodiversity credit market → more regenerative projects → stronger biodiversity credit market)
 
 **Out of scope** (owned by other groups — do not do here)
-- Building the business model or financial model → **Business Model group**.
-- Simulating system dynamics / feedback loops → **System Dynamics group**.
-- The lifecycle environmental analysis → **LCA group**.
-- Formalising the product architecture → **Product / MBSE group**.
+- Building the business model or financial model → **Group 1, Business Model**.
+- Formalising the product architecture → **Group 2, Product Regeneration**.
+- The lifecycle environmental analysis → **Group 3, LCA & Financial**.
+- Simulating feedback loops over time → **Group 4, System Dynamics**.
 - Writing policy advocacy or lobbying → this group *identifies* enabling conditions; it does not campaign for them (see top-level "Scope & boundaries").
 
 ## 5. The six categories of enabling systems
@@ -143,8 +148,24 @@ For each enabling system, apply this assessment framework:
 
 | Dependency | From | Impact if missing |
 |---|---|---|
-| PVaaS business model (confirmed) | Group 1 (Business Model) | Cannot assess which enabling systems are needed without knowing what the model requires |
+| PVaaS business model (confirmed) | Group 1 — Business Model | Cannot assess which enabling systems are needed without knowing what the model requires |
 | Numeric DO targets (from [#26](https://github.com/TheNightFox-1/SustainableTogether/issues/26)) | Cross-group | Cannot assess feasibility of specific enabling systems without knowing what we're trying to achieve |
-| Financial model cost structure | Group 1 (Business Model) | Cannot assess supply chain / market infrastructure without knowing cost drivers |
+| Financial model cost structure | Group 1 — Business Model | Cannot assess supply chain and market infrastructure without knowing cost drivers |
+| Architecture and supply-chain choices | Group 2 — Product Regeneration | Determines which manufacturing and recycling systems must exist |
 
 **Critical dependency:** This group should start **after** Group 1 has confirmed the PVaaS revenue and cost architecture, because the enabling systems needed depend on which revenue lines are load-bearing.
+
+## 10. Output to other groups
+
+- To **Group 1 (Business Model)** — the bankability classification per revenue line (RQ1.4), and the conditions its sensitivity analysis must test (RQ2.1).
+- To **Group 2 (Product Regeneration)** — which supply-chain constraints shape the system design.
+- To **Group 4 (System Dynamics)** — which enabling systems sit on reinforcing loops, so the loop catalogue includes them.
+- To **Group 5 (Digital Engineering)** — enabling-system dependencies recorded against registry concepts rather than as free text.
+
+## 11. GitHub issues
+
+No dedicated issues yet — this group was created in the 2026-08-09 restructure. Its work currently sits inside [#30](https://github.com/TheNightFox-1/SustainableTogether/issues/30) (risk-adjusted comparison). **Recommend opening two issues:** one for the revenue-line bankability filter (RQ1.4, gate-blocking) and one for the enabling-systems landscape map (RQ2.1). Flag at the first Task-Force meeting.
+
+---
+
+*Template shared across all group briefs: Purpose · Problem · RQs · Scope · Starting assets · Deliverables · Acceptance · Interfaces · Issues.*

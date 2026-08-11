@@ -1,6 +1,11 @@
-# Digital Engineering
+# Group 5 — Digital Engineering
 
-> **New folder (2026-08-09):** The semantic integration and automation pipeline, previously under `04-business-model/system-dynamics/`. This is the tooling layer — not a research group.
+**Owns research questions:** RQ3.1 ★ (leads the methodology question — can the artefacts be formally aligned and machine-validated?) · RQ1.6 (do all artefacts describe the same system?)
+**Task brief:** [`TASK-BRIEF.md`](./TASK-BRIEF.md) · **Decomposition:** [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md) · **Abbreviations:** [`../GLOSSARY.md`](../GLOSSARY.md)
+
+> **New folder (2026-08-09):** The semantic integration and automation pipeline, previously under `04-business-model/system-dynamics/`.
+>
+> *Status change 2026-08-11: this folder was previously described as "the tooling layer — not a research group". It is now **Group 5**, because it owns and leads RQ3.1 — the claim that artefacts across business model, System Dynamics and MBSE can be formally aligned and machine-validated **is** the methodological contribution, not just infrastructure serving it. It remains the layer every other group depends on.*
 
 ---
 
@@ -54,11 +59,13 @@ See [`pipeline/PROGRESS.md`](pipeline/PROGRESS.md) for the build log and remaini
 
 ## Where the semantic integration fits
 
-This folder provides the **formal infrastructure**. It is **not** a research group. Consumers of its output:
+This group provides the **formal infrastructure** every other group's artefacts pass through. Consumers of its output:
 
-- **Group 1 (Business Model)** — uses the concept registry to ensure the BM and CLD describe the same system
-- **Group 2 (System Dynamics)** — uses the CLD as a starting point for behavioral analysis
-- **Group 3 (Product/MBSE)** — can reuse the method to map SysML v2 ↔ CLD or other domain pairs
+- **Group 1 (Business Model)** — uses the concept registry to ensure the business model and CLD describe the same system
+- **Group 2 (Product Regeneration)** — reuses the method to map SysML v2 ↔ CLD and other domain pairs
+- **Group 3 (LCA & Financial)** — uses the RDF pipeline to carry LCA results back into the model
+- **Group 4 (System Dynamics)** — uses the CLD as a starting point for behavioral analysis
+- **Group 6 (Enabling Systems)** — records enabling-system dependencies against registry concepts rather than free text
 
 ---
 

@@ -46,8 +46,8 @@ Work through this once. Tick each item as you go.
 
 **Get to know the project**
 
-- [ ] Read the [Onboarding Document](../On-Boarding%20SustainableTogether%20and%20INCOSE%20Sustianability%20WG.pdf) — what SustainableTogether and the INCOSE Sustainability WG are about
-- [ ] Skim the [README](../index.md) — the vision and the two ways to contribute
+- [ ] Read the [Onboarding Document](https://github.com/TheNightFox-1/SustainableTogether/blob/main/On-Boarding%20SustainableTogether%20and%20INCOSE%20Sustianability%20WG.pdf) — what SustainableTogether and the INCOSE Sustainability WG are about
+- [ ] Skim the [home page](index.md) — the vision and the two ways to contribute
 - [ ] Open the repo at [github.com/TheNightFox-1/SustainableTogether](https://github.com/TheNightFox-1/SustainableTogether) and click **Watch** (top right) to get updates
 - [ ] Look at the [Project Board](https://github.com/users/TheNightFox-1/projects/3) to see what is being worked on
 

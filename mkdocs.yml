@@ -33,6 +33,7 @@ theme:
 nav:
   - Home: index.md
   - Vision: vision.md
+  - Projects: projects.md
   - Project Structure: project-structure.md
   - System Model: system-model.md
   - Presentations: presentations.md
@@ -50,3 +51,8 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

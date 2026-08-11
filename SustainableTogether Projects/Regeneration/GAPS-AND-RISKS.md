@@ -1,7 +1,11 @@
 # Gaps and Risks — Devil's Advocate
 
-**Date:** 2026-07-01
+**Date:** 2026-07-01 · *Historical record — group references predate the six-group restructure*
 **Purpose:** Honest assessment of what the current picture is missing. Read before the first Task-Force meeting.
+
+> **Reading note (2026-08-11).** This document is kept **as written on 2026-07-01**, when the Task-Force had two groups. "Group 1" here means business model *and* System Dynamics (now Groups 1 and 4); "Group 2" means the product work (now Group 2). The current structure is in [`README.md`](README.md) and [`RQ-DECOMPOSITION.md`](RQ-DECOMPOSITION.md).
+>
+> **What has since been resolved:** §3 (no defined interface between groups) — resolved by `03-methodology/01-desired-outcomes-interface.md`. §9 (the Fischer ontology was not integrated into design work) — resolved by the same file. The rest of the gaps below are **still open**, and the System Dynamics model in §1 remains the highest-priority missing artefact.
 
 ---
 

@@ -1,4 +1,7 @@
-# Group 2 — Regeneration in the Product
+# Group 2 — Product Regeneration
+
+**Owns research questions:** RQ1.2 (what the system physically is and what it costs) · RQ2.5 (which design choices are condition-dependent) · RQ3.3 (can desired outcomes be formalised as SysML v2 requirements and traced through architecture)
+**Task brief:** [`TASK-BRIEF.md`](./TASK-BRIEF.md) · **Decomposition:** [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md) · **Abbreviations:** [`../GLOSSARY.md`](../GLOSSARY.md)
 
 **Group mandate:** Define what it means for a product to be regenerative in engineering terms, and formalize that in SysML v2 — from regenerative requirements through system architecture to ecological functions.
 
@@ -69,9 +72,9 @@ And then traces it to the module sourcing requirement and the EOL recovery syste
 
 ---
 
-## Connection to `06-lca-and-financial/`
+## Connection to Group 3 (LCA & Financial, `06-lca-and-financial/`)
 
-The openLCA integration prototype (`../System Model/SolarX/The IS-state of the System/SimpleLCAIntegration/`) already connects SysML to openLCA via an RDF pipeline. Group 2 should extend this to cover:
+The openLCA integration prototype (`../System Model/SolarX/The IS-state of the System/SimpleLCAIntegration/`) already connects SysML to openLCA via a Resource Description Framework (RDF) pipeline. Group 2 supplies the model content this needs to cover:
 - The regenerative system's ecological functions (not just energy performance)
 - The material recovery pathway at EOL
 - The social capital flows (community energy access)

@@ -1,10 +1,29 @@
 # STATUS — Regeneration Task-Force
 
-*Updated: 2026-07-02 (aligned-approach session; was: Regenerative PV Framework build log, 2026-04-26)*
+*Updated: 2026-08-11 (documentation-alignment session; earlier entries retained below)*
 
 ---
 
 ## Current state
+
+**Phase:** Structure and framing complete; substantive group work not started. Waiting on the first Task-Force meeting to set the numeric desired-outcome targets and confirm the PVaaS business model.
+
+**Done this session (2026-08-11, documentation alignment):**
+- **Glossary** — `GLOSSARY.md` — every abbreviation used in the workspace, in ten categories, with the "expand on first use" rule stated.
+- **RQ decomposition** — `RQ-DECOMPOSITION.md` — RQ1–RQ3 split into 17 sub-questions, each with one owner, one artefact, and one acceptance test; roll-up rules per RQ; evidence ledger; DO × Use matrix.
+- **Group renumbering** — the 2026-08-09 restructure had left two groups labelled "Group 2" and two labelled "Group 3". Groups are now uniquely numbered 1–6 and referenced by number *and* name everywhere.
+- **Task briefs for all six groups** — Groups 2, 3, 4 and 5 had none; they now use the same template as Groups 1 and 6, each stating its sub-RQs.
+- **Stale paths corrected** — references to `04-business-model/system-dynamics/` now point at `07-digital-engineering/`.
+
+**Open flags raised this session:**
+- **Success criterion C5** (social value) has no owning sub-RQ. It is currently carried inside RQ3.2 and RQ3.5. If social value is to be evidenced as strongly as financial value, C5 needs its own sub-question and owner.
+- **C6 requires ≥ 2 contexts**, but validating the method beyond PV is explicitly out of scope this cycle. RQ3's answer must be stated as "demonstrated in one context" — claiming C6 on the PV pilot alone would be overclaiming.
+- **Groups 5 and 6 have no GitHub issues.** Recommended: two issues each (SysML bridge + standing consistency report for Group 5; bankability filter + landscape map for Group 6).
+- **Folder prefixes `06-` are duplicated** across Groups 3 and 4. Group numbers are authoritative; renaming a folder was not done to avoid churning the just-completed restructure.
+
+---
+
+## Earlier: 2026-07-02 (aligned-approach session)
 
 **Phase:** Aligned approach drafted. The three connective artefacts that `GAPS-AND-RISKS.md` found missing now exist in draft. Ready for the first Task-Force meeting to set target values and confirm the new business model.
 
@@ -14,7 +33,7 @@
 - **The MRV protocol** — `06-lca-and-financial/mrv-protocol.md` — baseline → repeat → attribution logic, verification tiers, financial-ecological reconciliation.
 - **Folder cleanse** — see "Folder changes" below.
 
-**Location note:** Migration into the git repo is complete; the folder lives at `SustainableTogether Projects/Regeneration/`. The CLD doc is in `04-business-model/system-dynamics/`. `Regeneration_OLD_flat_backup/` is retained until verified.
+**Location note:** Migration into the git repo is complete; the folder lives at `SustainableTogether Projects/Regeneration/`. *(Superseded 2026-08-09: the CLD and the semantic-integration pipeline moved to `07-digital-engineering/`.)*
 
 ---
 
@@ -69,9 +88,10 @@
 
 | Decision | Stakes |
 |---|---|
-| Set numeric targets + baselines in the desired-outcomes interface | Unblocks Steps 5–10 for both groups |
-| Reconcile CLD (leasing) with the new BM before parameterizing SD | Step 8 blocked until CLD and BM describe the same system |
-| Confirm revenue architecture of the new regenerative-dynamics BM | Group 1 core work |
+| Set numeric targets + baselines in the desired-outcomes interface | Unblocks Steps 5–10 across all six groups |
+| Reconcile CLD (leasing) with the new business model before parameterizing System Dynamics | Step 8 blocked until CLD and business model describe the same system |
+| Confirm revenue architecture of the regenerative PVaaS business model | Group 1 core work; front of the pipeline |
+| Does success criterion C5 (social value) get its own sub-RQ and owner? | Otherwise social value is evidenced more weakly than financial value |
 | PhD relationship to the Task-Force (action-research framing) | WG governance |
 
 ---
@@ -80,15 +100,17 @@
 
 | Item | Owner | Priority |
 |---|---|---|
-| First Task-Force meeting | Hamza | High — many decisions require the group |
-| System Dynamics CLD | Group 1 | High — highest-priority missing artifact |
-| Group 2 scope definition (5 regenerative system functions) | Group 2 | High — unblocks SysML work |
-| Shared KPI set (Group 1 → Group 2 interface) | Both groups | High |
-| Financial model verification (is the Excel built?) | Hamza | Medium |
-| MRV protocol | Task-Force | Medium |
-| Task-Force governance doc | Hamza | Medium |
-| Regenerative-scenario LCA | Group 1 + openLCA | Low (depends on scope decision) |
-| Resume 8-phase methodology (Phases 5–8) | Claude (after scope decision) | Blocked |
+| First Task-Force meeting — set numeric DO targets ([#26](https://github.com/TheNightFox-1/SustainableTogether/issues/26)) | Hamza | **High** — gates RQ1.1 pricing, RQ3.4 parameterisation, RQ3.5 MRV thresholds simultaneously |
+| Confirm PVaaS revenue architecture ([#27](https://github.com/TheNightFox-1/SustainableTogether/issues/27)) | Group 1 — Business Model | High — front of the pipeline; several groups wait on it |
+| System Dynamics CLDs and model ([#29](https://github.com/TheNightFox-1/SustainableTogether/issues/29)) | Group 4 — System Dynamics | High — highest-priority missing artefact; structural work not blocked |
+| Scope definition: ~5 regenerative system functions ([#31](https://github.com/TheNightFox-1/SustainableTogether/issues/31)) | Group 2 — Product Regeneration | High — unblocks SysML work and gives other groups a concrete interface |
+| Revenue-line bankability filter (RQ1.4) | Group 6 — Enabling Systems | High — the RQ1 gate cannot be assembled honestly without it |
+| Financial model verification (what is built vs. spec?) | Group 3 — LCA & Financial | Medium |
+| MRV protocol ([#35](https://github.com/TheNightFox-1/SustainableTogether/issues/35)) | Group 3 — LCA & Financial | Medium — **not blocked, can start now** |
+| SysML v2 extension of the semantic bridge | Group 5 — Digital Engineering | Medium — start once Group 2 produces its first `requirement def` elements |
+| Open GitHub issues for Groups 5 and 6 | Hamza | Medium |
+| Task-Force governance doc ([#37](https://github.com/TheNightFox-1/SustainableTogether/issues/37)) | Hamza | Medium |
+| Regenerative-scenario LCA ([#34](https://github.com/TheNightFox-1/SustainableTogether/issues/34)) | Group 3 — LCA & Financial | Blocked on Group 2's material definitions |
 
 ---
 

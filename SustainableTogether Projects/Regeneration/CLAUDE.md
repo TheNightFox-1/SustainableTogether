@@ -1,6 +1,6 @@
 # CLAUDE.md — Regeneration Task-Force Context
 
-*Updated: 2026-07-01 — Expanded from PV-methodology solo project to WG Task-Force*
+*Updated: 2026-08-11 — Six-group structure, RQ decomposition, glossary*
 
 ---
 
@@ -10,11 +10,22 @@
 **Owner:** Hamza Bassam (oose eG, Hamburg)
 **Goal:** Demonstrate — in a real MBSE model with a working business model and LCA — that designing engineered systems for regenerative outcomes is more commercially viable than extractive design. Pilot case: SolarX → SustainaSun (regenerative PV).
 
-**Two working groups:**
-- **Group 1 — Business Model + SD:** Commercial viability; System Dynamics feedback loops; financial model; LCA integration
-- **Group 2 — Product Regeneration:** What regeneration means in SysML v2; regenerative requirements; ecological functions in the system model
+**Six working groups** (restructured 2026-08-09; numbers are unique and authoritative — folder prefixes are not):
+
+| Group | Name | Folder | Owns |
+|---|---|---|---|
+| Group 1 | Business Model | `04-business-model/` | RQ1.1 ★ · RQ2.2 · RQ3.2 |
+| Group 2 | Product Regeneration | `05-product-regeneration/` | RQ1.2 · RQ2.5 · RQ3.3 |
+| Group 3 | LCA & Financial Integration | `06-lca-and-financial/` | RQ1.3 · RQ2.4 · RQ3.5 |
+| Group 4 | System Dynamics | `06-system-dynamics/` | RQ1.5 · RQ2.3 · RQ3.4 |
+| Group 5 | Digital Engineering | `07-digital-engineering/` | RQ1.6 · RQ3.1 ★ |
+| Group 6 | Enabling Systems | `08-enabling-systems/` | RQ1.4 · RQ2.1 ★ · RQ3.6 |
 
 **Theoretical anchor:** Fischer et al. (2024), "Mainstreaming regenerative dynamics for sustainability", *Nature Sustainability* 7, 964–972. Open `01-theory-and-ontology/regenerative-dynamics-ontology.html` for the interactive ontology.
+
+**Two documents to read before writing anything in this folder:**
+- `GLOSSARY.md` — every abbreviation. **Expand each abbreviation on first use in each document**, then use the short form. Add any new abbreviation to the glossary in the same commit.
+- `RQ-DECOMPOSITION.md` — the RQ tree, roll-up rules, evidence ledger. When you edit a group's task brief, keep its sub-RQs consistent with this file.
 
 ---
 
@@ -22,11 +33,13 @@
 
 ```
 Regeneration/
-├── README.md                 Task-Force overview
+├── README.md                 Task-Force overview and map
+├── GLOSSARY.md               Every abbreviation used in this workspace
+├── RQ-DECOMPOSITION.md       RQ tree, roll-up rules, evidence ledger, DO × Use matrix
 ├── CLAUDE.md                 This file
 ├── STATUS.md                 Session state
 ├── GAPS-AND-RISKS.md         Devil's advocate — critical gaps
-├── 00-foundations/           Solution taxonomy, definitions compendium
+├── 00-foundations/           Research clarification (RQs), REFERENCE/IMPACT, solution taxonomy, definitions
 ├── 01-theory-and-ontology/   Ontology HTML + general regeneration literature
 ├── 02-strategic-framework/   "From Extraction to Regeneration" framework doc
 ├── 03-methodology/           Aligned approach + interface + PV case study
@@ -34,15 +47,19 @@ Regeneration/
 │   ├── 01-desired-outcomes-interface.md     the spine (CLD/SysML/finance/MRV)
 │   ├── diagrams/             5 draw.io files
 │   └── pv-case-study/        PV framework (Phases 1–5) + 9-topic research dossier
-├── 04-business-model/        BM + SD (Group 1)
-│   ├── business-model/       SustainaSun BM, built financial model, leasing model doc, BM visual
-│   └── system-dynamics/      CLD (v2 docx + v3 drawio), FBMC-CLD alignment ontology/playbook, concept registry, validation pipeline
-├── 05-product-regeneration/  SysML v2 integration (Group 2)
-├── 06-lca-and-financial/     LCA + financial integration + mrv-protocol.md (cross-group)
-├── PhD/                      Hamza's doctoral materials (Schaltegger corpus, Fischer, proposal)
-├── _research/                Survey instruments (Danish templates → repurposed for MRV)
+├── 04-business-model/        Group 1 — SustainaSun BM, financial model, IVIO ontology work
+├── 05-product-regeneration/  Group 2 — SysML v2 integration
+├── 06-lca-and-financial/     Group 3 — LCA integration + mrv-protocol.md
+├── 06-system-dynamics/       Group 4 — perspective CLDs, integrated CLD, loop analysis
+├── 07-digital-engineering/   Group 5 — semantic integration method, concept registry, validation pipeline, ontology
+├── 08-enabling-systems/      Group 6 — policy, market, supply chain, grid, standards, governance
+├── _research/                PRISMA strategy, literature-review logs, survey instruments (repurposed for MRV)
 └── _archive/                 Superseded docs (handoff brief, resolved review notes)
 ```
+
+Each group folder holds a `README.md` (what the group is) and a `TASK-BRIEF.md` (what it delivers and which sub-RQs it owns).
+
+**Note:** `PhD/` was removed from this repository (commit 7e7aafe) — doctoral materials are kept out of the public repo.
 
 ---
 
@@ -81,10 +98,12 @@ Regeneration/
 - **SolarX MBSE model** — in SustainableTogether git repo — physical architecture complete; regenerative layer not started.
 
 ### Not started
-- New regenerative-dynamics business model (Group 1) — ownership + leasing models are the inputs
-- System Dynamics model, parameterized from the reconciled CLD (Group 1)
+- New regenerative PVaaS business model (Group 1) — ownership + leasing models are the inputs
+- System Dynamics model, parameterized from the reconciled CLD (Group 4) — highest-priority missing artefact
 - Regenerative requirements and system functions in SysML v2 (Group 2)
-- Regenerative-scenario LCA (06-lca-and-financial)
+- Regenerative-scenario LCA (Group 3)
+- Enabling-systems map and revenue-line bankability filter (Group 6)
+- SysML v2 extension of the semantic bridge (Group 5)
 - Task-Force governance structure
 
 ---
@@ -114,8 +133,10 @@ Regeneration/
 To resume Task-Force work in a new session, read:
 1. This file (`CLAUDE.md`)
 2. `README.md` — overall structure and mission
-3. `GAPS-AND-RISKS.md` — what's missing
-4. The relevant group README (`04-business-model/README.md` or `05-product-regeneration/README.md`)
-5. `STATUS.md` — session-level progress
+3. `GLOSSARY.md` — the abbreviations
+4. `RQ-DECOMPOSITION.md` — what counts as an answer, and how far each RQ is from one
+5. `GAPS-AND-RISKS.md` — what's missing
+6. The relevant group's `README.md` **and** `TASK-BRIEF.md`
+7. `STATUS.md` — session-level progress
 
 Then continue from the open task.

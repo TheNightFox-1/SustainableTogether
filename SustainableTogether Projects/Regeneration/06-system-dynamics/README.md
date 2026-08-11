@@ -1,6 +1,11 @@
-# Group 2 — System Dynamics
+# Group 4 — System Dynamics
 
-> **New mandate (2026-08-09):** Analyze the dynamics of the PVaaS business model across economic, social, and environmental perspectives. Uncover interdependencies, negative reinforcing loops (rebound effects), and positive reinforcing loops.
+**Owns research questions:** RQ1.5 (dynamic stability of the financial assumptions) · RQ2.3 (which feedback structures create or destroy the advantage) · RQ3.4 (the compounding proof, success criterion C7)
+**Task brief:** [`TASK-BRIEF.md`](./TASK-BRIEF.md) · **Decomposition:** [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md) · **Abbreviations:** [`../GLOSSARY.md`](../GLOSSARY.md)
+
+> **New mandate (2026-08-09):** Analyze the dynamics of the Photovoltaics-as-a-Service (PVaaS) business model across economic, social, and environmental perspectives. Uncover interdependencies, negative reinforcing loops (rebound effects), and positive reinforcing loops.
+>
+> *Renumbered 2026-08-11: this group was briefly labelled "Group 2", which collided with Product Regeneration. It is **Group 4**.*
 
 ---
 
@@ -25,18 +30,19 @@ The System Dynamics group studies **how the business model behaves over time** �
 
 ---
 
-## Input from Group 1
+## Input from Group 1 (Business Model)
 
-Group 1 (Business Model) provides:
+Group 1 provides:
 - The confirmed PVaaS business model with revenue architecture and cost structure
 - The financial model parameters (CAPEX, OPEX, cost of capital, scenarios)
 - The desired-outcomes interface (DO-1…DO-8) with numeric targets (when set)
 
 ## Output to other groups
 
-- **To Group 1:** insights on which assumptions in the financial model are dynamically unstable or create hidden risks
-- **To Group 3 (Product):** which system-level feedbacks need to be designed into the product architecture
-- **To LCA (06):** which dynamic scenarios need environmental quantification
+- **To Group 1 (Business Model):** which assumptions in the financial model are dynamically unstable or create hidden risks — this is the RQ1.5 answer
+- **To Group 2 (Product Regeneration):** which system-level feedbacks need to be designed into the product architecture
+- **To Group 3 (LCA & Financial):** which dynamic scenarios need environmental quantification
+- **To Group 6 (Enabling Systems):** which enabling systems sit on reinforcing loops, and therefore compound
 
 ---
 
@@ -49,7 +55,7 @@ Group 1 (Business Model) provides:
 | Concept registry (21 generic + 21 PV instance) | `../07-digital-engineering/SustainaSun_Concept_Registry.xlsx` |
 | FBMC↔CLD alignment ontology | `../07-digital-engineering/FBMC-CLD-Alignment-Ontology.drawio` |
 
-**Note:** The semantic integration pipeline lives in `07-digital-engineering/` and provides the formal mapping infrastructure. This group uses its outputs (concept registry, CLD) as a starting point but focuses on **behavioral analysis**, not semantic correctness.
+**Note:** The semantic integration pipeline lives in `07-digital-engineering/` (Group 5 — Digital Engineering) and provides the formal mapping infrastructure. This group uses its outputs (concept registry, CLD) as a starting point but focuses on **behavioral analysis**, not semantic correctness.
 
 ---
 

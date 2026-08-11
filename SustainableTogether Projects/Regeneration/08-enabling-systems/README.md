@@ -1,6 +1,11 @@
-# Group 3 — Enabling Systems
+# Group 6 — Enabling Systems
 
-> **New group (2026-08-09):** Study the systems, infrastructure, and conditions that *enable* the regenerative PV system and business model to function in practice.
+**Owns research questions:** RQ2.1 ★ (leads the conditions question) · RQ1.4 (which revenue lines are actually transactable) · RQ3.6 (does the method surface external conditions at all)
+**Task brief:** [`TASK-BRIEF.md`](./TASK-BRIEF.md) · **Decomposition:** [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md) · **Abbreviations:** [`../GLOSSARY.md`](../GLOSSARY.md)
+
+> **New group (2026-08-09):** Study the systems, infrastructure, and conditions that *enable* the regenerative photovoltaic (PV) system and business model to function in practice.
+>
+> *Renumbered 2026-08-11: this group was briefly labelled "Group 3", which collided with LCA & Financial Integration. It is **Group 6**.*
 
 ---
 
@@ -100,9 +105,9 @@ For each enabling system:
 
 ## Output to other groups
 
-- **To Group 1 (Business Model):** which revenue lines depend on which enabling systems (so the BM doesn't assume something that doesn't exist)
-- **To Group 2 (System Dynamics):** which enabling systems create reinforcing loops (e.g., more regenerative projects → stronger biodiversity credit market → more regenerative projects)
-- **To Group 3 (Product):** which supply chain constraints shape the system design
+- **To Group 1 (Business Model):** which revenue lines depend on which enabling systems, so the business model doesn't assume something that doesn't exist — this is the RQ1.4 answer
+- **To Group 2 (Product Regeneration):** which supply-chain constraints shape the system design
+- **To Group 4 (System Dynamics):** which enabling systems create reinforcing loops (e.g., more regenerative projects → stronger biodiversity credit market → more regenerative projects)
 
 ---
 

@@ -1,30 +1,34 @@
 # Desired-Outcomes Interface
 
-**Version:** 0.1 (2026-07-02) — structure proposed, target values TBD by the group
-**Owner:** Regeneration Task-Force (jointly held by Group 1 and Group 2)
-**Purpose:** The single shared list of what this system must regenerate. This is the contract between the two groups and the spine of the whole approach (Step 4 of `00-regenerative-design-approach.md`).
+**Version:** 0.2 (2026-08-11) — structure proposed, target values TBD by the Task-Force. *Column ownership updated for the six-group structure.*
+**Owner:** Regeneration Task-Force (jointly held — see column ownership below)
+**Purpose:** The single shared list of what this system must regenerate. This is the contract between all six groups and the spine of the whole approach (Step 4 of `00-regenerative-design-approach.md`).
+**Abbreviations:** [`../GLOSSARY.md`](../GLOSSARY.md) · **How this feeds the research questions:** [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md)
 
 ---
 
 ## How to read this
 
-Each row is one **desired outcome** in Fischer et al.'s sense — something the system makes improve, repeatedly, over its life. Each outcome is used four ways, one per column block:
+Each row is one **desired outcome** in Fischer et al.'s sense — something the system makes improve, repeatedly, over its life. Each outcome is used four ways, one per column block, and each way is owned by a different group:
 
-- **Dynamics (Group 1):** the stock it becomes in the System Dynamics model, and the dominant feedback loop that drives it.
-- **Product (Group 2):** the SysML v2 `requirement def` that the model must satisfy, and the system function that produces it.
-- **Feasibility (Group 1):** whether the outcome is bankable today, optionality, or a cost — and the financial line it touches.
-- **Measurement (both):** the MRV method and verification standard (detailed in `../06-lca-and-financial/mrv-protocol.md`).
+- **① Dynamics — Group 4, System Dynamics:** the stock it becomes in the System Dynamics model, and the dominant feedback loop that drives it.
+- **② Product — Group 2, Product Regeneration:** the SysML v2 `requirement def` that the model must satisfy, and the system function that produces it.
+- **③ Feasibility — Group 1, Business Model:** whether the outcome is bankable today, optionality, or a cost — and the financial line it touches. Group 6 (Enabling Systems) supplies the reality check behind each classification.
+- **④ Measurement — Group 3, LCA & Financial:** the Monitoring, Reporting and Verification (MRV) method and its external verification standard (detailed in `../06-lca-and-financial/mrv-protocol.md`).
 
 ```mermaid
 flowchart TD
   DO(["A desired outcome<br/>e.g. DO-1 Soil organic carbon"])
-  DO --> DYN["① Dynamics<br/>CLD stock + feedback loop<br/>→ Group 1 SD model"]
-  DO --> PROD["② Product<br/>SysML requirement def<br/>→ Group 2 model"]
-  DO --> FIN["③ Feasibility<br/>financial line-item<br/>→ Group 1 finance"]
-  DO --> MEAS["④ Measurement<br/>MRV method + standard<br/>→ both groups"]
+  DO --> DYN["① Dynamics<br/>CLD stock + feedback loop<br/>→ Group 4 System Dynamics"]
+  DO --> PROD["② Product<br/>SysML requirement def<br/>→ Group 2 Product Regeneration"]
+  DO --> FIN["③ Feasibility<br/>financial line-item<br/>→ Group 1 Business Model"]
+  DO --> MEAS["④ Measurement<br/>MRV method + standard<br/>→ Group 3 LCA & Financial"]
+  DYN & PROD & FIN & MEAS -.->|"links validated by"| DE["Group 5<br/>Digital Engineering"]
 ```
 
 *One outcome, defined once, used four ways. This is why the list is the shared contract: change a row and all four uses must stay consistent.*
+
+**This grid is also the evidence for RQ3.** The methodology question is answered when all eight outcomes traverse all four uses with every link machine-validated — the DO × Use matrix in [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md#the-do--use-matrix--the-evidence-for-rq3). Filling in this file *is* the RQ3 deliverable, not documentation of it.
 
 **The rule (from `CLAUDE.md`):** no outcome is traded off against another. All move in the positive direction, or the design is not regenerative.
 
@@ -117,14 +121,19 @@ flowchart LR
 
 ## Interface change control
 
-- This file is **jointly owned**. A change to any row must be visible to both groups before it lands.
-- Group 1 owns the **target values, dynamics mapping, and feasibility columns**.
-- Group 2 owns the **SysML requirement defs and functions columns**.
-- The MRV columns are agreed jointly and detailed in `../06-lca-and-financial/mrv-protocol.md`.
-- When a target value is set, replace "TBD" and note the source and date.
+- This file is **jointly owned**. A change to any row must be visible to all six groups before it lands.
+- **Group 1 (Business Model)** owns the **feasibility column** and, with the Task-Force, the target values.
+- **Group 2 (Product Regeneration)** owns the **SysML `requirement def` and system-function columns**.
+- **Group 3 (LCA & Financial)** owns the **measurement column**, detailed in `../06-lca-and-financial/mrv-protocol.md`.
+- **Group 4 (System Dynamics)** owns the **dynamics column** — stocks and dominant loops.
+- **Group 5 (Digital Engineering)** owns nothing here but **validates every link** between the columns.
+- **Group 6 (Enabling Systems)** supplies the reality check behind each feasibility classification.
+- **Numeric targets are set by the Task-Force**, not by any single group ([#26](https://github.com/TheNightFox-1/SustainableTogether/issues/26)). When a target is set, replace "TBD" and note the source and date.
 
 ---
 
 ## Why this is the load-bearing artefact
 
-`GAPS-AND-RISKS.md` §3 identified that the two groups had no defined interface, and §9 that the Fischer ontology was not integrated into the design work. This file resolves both: it is the interface, and it is organised by Fischer's "desired outcome" concept, so the ontology becomes the operating vocabulary rather than a diagram in a folder.
+`GAPS-AND-RISKS.md` §3 identified that the groups had no defined interface, and §9 that the Fischer ontology was not integrated into the design work. This file resolves both: it is the interface, and it is organised by Fischer's "desired outcome" concept, so the ontology becomes the operating vocabulary rather than a diagram in a folder.
+
+Since the 2026-08-09 restructure it carries a second load: it is the **evidence base for RQ3**. Each of the four uses is now owned by a different group, so a completed grid demonstrates that five disciplines designed against one shared definition of success. That demonstration is the methodological contribution.

@@ -47,10 +47,14 @@ SustainableTogether/
 │   └── WG_Leadership_Tracker_csv.csv      # All 18 WG task groups: leads, status, time commitment
 │
 ├── SustainableTogether Projects/          # Concrete case studies and implementations
+│   ├── Regeneration/                      # Regeneration Task-Force: 6 groups, RQ1 viability · RQ2 conditions · RQ3 methodology
 │   ├── System Model/                      # SysML v2/MBSE models for SolarX → SustainaSun
-│   │   ├── SolarX/                        # AS-IS baseline: PVArray, Inverter, Battery, Controller, Grid
+│   │   ├── SolarX/                        # AS-IS baseline: PVArray, Inverter, Battery, Controller, Grid + openLCA pipeline
+│   │   ├── MBSE for C2C/                  # Cradle-to-Cradle reference material
 │   │   └── [Future] SustainaSun/          # TO-BE transformation model (Milestone 2)
-│   └── Sustainability Stakeholder Mapping/  # Ecosystem analysis: partners, collaborators, target audiences
+│   ├── Business Model/                    # SustainaSun canvas, flourishing assessment, financial model
+│   ├── Sustainability Stakeholder Mapping/  # Ecosystem analysis: partners, collaborators, target audiences
+│   └── LLM-Wiki/                          # Knowledge-wiki demonstrator built over the WG's own documents
 │
 ├── Our Presentations/                     # Presentations and publications by the working group
 ├── SustainabilityWebinarSeries/           # Slides from the INCOSE Sustainability Webinar Series
@@ -68,10 +72,36 @@ SustainableTogether/
 | Directory | Purpose | Owner |
 |---|---|---|
 | **SustainableTogether Approach/** | Framework, governance, contribution guidance, WG tracker | Sustainability WG |
-| **SustainableTogether Projects/** | Case studies, SysML models, ecosystem analysis | Contributors |
+| **SustainableTogether Projects/** | The five active projects: Regeneration, System Model, Business Model, Stakeholder Mapping, LLM-Wiki | Contributors |
 | **docs/** | GitHub Pages documentation | Contributors |
 | **Our Presentations/** | Community outreach and thought leadership | Contributors |
 | **SustainabilityWebinarSeries/** | Recorded webinar materials | Content workstream |
+
+---
+
+## The Projects
+
+Five projects are running under `SustainableTogether Projects/`. Full detail on the [Projects page](https://thenightfox-1.github.io/SustainableTogether/projects/).
+
+| Project | What it produces | State |
+|---|---|---|
+| **Regeneration Task-Force** | Proof that a regenerative PV business is more viable than the extractive one it replaces | Framing complete, group work starting |
+| **System Model** | The SysML v2 / MBSE model of SolarX and, later, SustainaSun | SolarX physical architecture complete |
+| **Business Model** | The SustainaSun business and financial model | Financial model built, being recast as a service model |
+| **Stakeholder Mapping** | Who the WG should partner with, and how the ecosystem connects | Phase 2 — expanding past the 12-node pilot |
+| **LLM-Wiki demonstrator** | A working knowledge wiki built over the WG's own documents | Complete |
+
+### Regeneration Task-Force
+
+The largest project, and the one that tests the SolarX → SustainaSun thesis with numbers rather than argument. It runs on three research questions:
+
+- **RQ1 — Viability (the gate).** Can a regenerative PV business model reach positive Net Present Value and an Internal Rate of Return ≥ 8% over 30 years without subsidy dependency? If not, the rest is moot.
+- **RQ2 — Conditions.** Under which structural, regulatory and market conditions does regenerative outperform conventional, risk-adjusted? "Better when…", not "always better".
+- **RQ3 — Methodology.** How can ecological, social and economic outcomes be co-optimised through an integrated method linking business model, product architecture and dynamic modelling?
+
+Six working groups answer them between them — Business Model, Product Regeneration, LCA & Financial Integration, System Dynamics, Digital Engineering, and Enabling Systems. No group answers a question alone, so each question is split into sub-questions with a single owner and an acceptance test, and each has a written **roll-up rule** for when the partial answers actually add up to an answer. A missing input means *unanswered*, never *no*.
+
+Start at [`SustainableTogether Projects/Regeneration/README.md`](./SustainableTogether%20Projects/Regeneration/README.md); the decomposition is in `RQ-DECOMPOSITION.md` and every abbreviation is in `GLOSSARY.md`.
 
 ---
 
@@ -83,6 +113,7 @@ Full documentation is available at:
 
 Topics covered:
 - [Vision & Mission](https://thenightfox-1.github.io/SustainableTogether/vision/)
+- [Projects](https://thenightfox-1.github.io/SustainableTogether/projects/)
 - [System Model](https://thenightfox-1.github.io/SustainableTogether/system-model/)
 - [Presentations](https://thenightfox-1.github.io/SustainableTogether/presentations/)
 - [Webinar Series](https://thenightfox-1.github.io/SustainableTogether/webinar-series/)

@@ -1,6 +1,9 @@
-# LCA + Financial Integration
+# Group 3 — LCA & Financial Integration
 
-**Purpose:** Cross-group integration point. The LCA connects ecological performance to financial performance. This is where the "regeneration is more profitable than extraction" thesis is actually tested with numbers.
+**Owns research questions:** RQ1.3 (the verified lifecycle emissions figure that validates or kills the low-carbon premium) · RQ2.4 (how the environmental delta changes under different conditions) · RQ3.5 (can an outcome be measured independently and fed back into the business model)
+**Task brief:** [`TASK-BRIEF.md`](./TASK-BRIEF.md) · **Decomposition:** [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md) · **Abbreviations:** [`../GLOSSARY.md`](../GLOSSARY.md)
+
+**Purpose:** Life Cycle Assessment (LCA) connects ecological performance to financial performance. This is where the "regeneration is more profitable than extraction" thesis is actually tested with numbers. The group also owns the Monitoring, Reporting and Verification (MRV) protocol — the evidence standard behind every claimed outcome.
 
 ---
 
@@ -31,14 +34,14 @@
 ## Integration path
 
 ```
-Group 2 (SysML model)
+Group 2 — Product Regeneration (SysML model)
     → material definitions, lifecycle stages, system functions
-        → openLCA pipeline
+        → openLCA pipeline (Group 5 — Digital Engineering provides the bridge)
             → regenerative LCA scenario
                 → verified gCO2eq/kWh figure
-                    → Group 1 financial model
+                    → Group 1 — Business Model (financial model)
                         → low-carbon premium eligibility confirmed
                             → IRR recalculated
 ```
 
-This loop, once closed, is the technical proof of the Task-Force's central claim.
+This loop, once closed, is the technical proof of the Task-Force's central claim — and it is the artefact that answers RQ3.5.

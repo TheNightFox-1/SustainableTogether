@@ -22,6 +22,8 @@
 
 ## 2. Research Questions
 
+The three questions below are **locked**. How each one breaks down into sub-questions owned by the six working groups — and the roll-up rules that determine when a sub-set of answers actually answers the parent — is in [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md). Abbreviations: [`../GLOSSARY.md`](../GLOSSARY.md).
+
 ### RQ1 — Viability (Gate Question)
 > *To what extent can a regenerative PV business model achieve financial viability (positive NPV, acceptable IRR) over a 30-year project lifecycle without dependency on external subsidy?*
 
@@ -82,7 +84,7 @@ This is the methodological contribution. The 10-step Regenerative Design Approac
 |-------|-----------|-----------|----------|
 | 1 | RC (this doc) | Lock RQs, criteria, plan | Done ✓ |
 | 2 | DS-I | Literature review (regenerative BM, LCA baselines, SD in SE), empirical study (existing SolarX/SustainaSun data) | 4-6 weeks |
-| 3 | PS | Develop design support: extend BM (Group 1), build SD/CLD (Group 1), design SysML model (Group 2), integrate via desired-outcomes interface | 8-12 weeks |
+| 3 | PS | Develop design support: business model (Group 1), SysML model (Group 2), LCA + MRV (Group 3), CLD and System Dynamics (Group 4), semantic bridge (Group 5), enabling-systems map (Group 6) — integrated via the desired-outcomes interface | 8-12 weeks |
 | 4 | DS-II | Evaluate: financial model sensitivity, SD model validation, MRV protocol field-test, compare vs. SolarX baseline | 4-6 weeks |
 | 5 | Writing | Structure, draft, refine thesis/paper | 4-6 weeks |
 
@@ -111,7 +113,7 @@ The following materials already exist and partially satisfy DS-I requirements:
 - **Be transparent:** document all assumptions, especially financial assumptions
 - **Be honest about conditions:** if regeneration doesn't win under current conditions, that's a valid finding
 - **Maintain the desired-outcomes interface as the spine** connecting all artefacts
-- **Engage stakeholders:** Group 1 (business/dynamics), Group 2 (product/SysML)
+- **Engage stakeholders:** all six groups — see `../RQ-DECOMPOSITION.md` for who owns which sub-question
 - **Iterate:** RC can be refined as evidence accumulates
 
 ---
@@ -119,6 +121,6 @@ The following materials already exist and partially satisfy DS-I requirements:
 ## 9. References
 
 - Blessing, L. & Chakrabarti, A. (2009). *Design Research Methodology*. Springer
-- Fischer, S. et al. (2024). Regenerative dynamics in engineered systems
+- Fischer, J., Farny, S., Abson, D. J. et al. (2024). Mainstreaming regenerative dynamics for sustainability. *Nature Sustainability* 7, 964–972
 - IEA-PVPS Task 12 (solar PV LCA baselines)
 - SustainableTogether project documentation (00-foundations through 06-lca-and-financial)

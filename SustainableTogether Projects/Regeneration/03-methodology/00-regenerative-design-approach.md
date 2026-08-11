@@ -18,7 +18,9 @@ Fischer et al. (2024) define regenerative dynamics as an *upward helix* — a de
 2. **Regeneration is a behaviour over time, so it must be modelled dynamically.** A static business case cannot show an upward helix. Feedback loops (System Dynamics) can.
 3. **Restoration is not regeneration.** Fixing damage once (exogenous) is a *prerequisite*; regeneration means the system then sustains and renews the outcome through normal operation (endogenous).
 
-From this, one artefact ties everything together: the **desired-outcomes interface** (`01-desired-outcomes-interface.md`). Each desired outcome appears there once and is used four ways — as a **CLD stock** (dynamics), a **financial line-item** (feasibility), a **SysML requirement** (product), and an **MRV target** (measurement). That single list is what keeps the two working groups from producing artefacts that don't interlock.
+From this, one artefact ties everything together: the **desired-outcomes interface** (`01-desired-outcomes-interface.md`). Each desired outcome appears there once and is used four ways — as a **CLD stock** (dynamics), a **financial line-item** (feasibility), a **SysML requirement** (product), and an **MRV target** (measurement). That single list is what keeps the six working groups from producing artefacts that don't interlock.
+
+*Abbreviations used throughout: see [`../GLOSSARY.md`](../GLOSSARY.md).*
 
 ---
 
@@ -28,10 +30,12 @@ The Task-Force's goal has three parts. The method is organised so each part owns
 
 | Goal | Part | Steps | Owner |
 |---|---|---|---|
-| Integrate regenerative dynamics into the system | **B · Design** | 4–7 | Group 2 (with Group 1 on step 4) |
-| Have measures to assess regeneration | **C · Prove** | 10 (MRV) | Both groups |
-| Make it economically feasible | **C · Prove** | 8–9 | Group 1 |
-| (Set the direction first) | **A · Frame** | 1–3 | Both groups |
+| (Set the direction first) | **A · Frame** | 1–3 | All groups |
+| Integrate regenerative dynamics into the system | **B · Design** | 4–7 | Group 2 — Product Regeneration (step 4 jointly with Groups 1, 3 and 4) |
+| Model how it behaves over time | **C · Prove** | 8 | Group 4 — System Dynamics |
+| Make it economically feasible | **C · Prove** | 9 | Group 1 — Business Model, with Group 6 — Enabling Systems on real-world conditions |
+| Have measures to assess regeneration | **C · Prove** | 10 (MRV) | Group 3 — LCA & Financial |
+| (Keep every artefact describing one system) | **all steps** | — | Group 5 — Digital Engineering |
 
 ---
 
@@ -133,7 +137,7 @@ Once the generic process is agreed, instantiate it for the pilot case. The PV-sp
 - **Step 4:** candidate desired outcomes for PV — soil organic carbon, on-site species richness, community wealth retention, module material circularity, lifecycle GHG intensity, local energy access, water retention, supplier decarbonization. (These populate the interface; targets set by the group.)
 - **Step 5–6:** 8 PV lifecycle stages × 6 capitals; mechanisms drawn from agrivoltaics (M1 co-production), design-for-disassembly and recovery (M3), pollinator/soil management (M3/M4), community ownership (M5).
 - **Step 7:** extend the existing SolarX SysML v2 model (`../../System Model/SolarX/`) with the regenerative requirement defs and ecological flows.
-- **Step 8:** the SustainSun CLD (in `../04-business-model/system-dynamics/`) is the starting causal structure. Note: it must be reconciled to the new regenerative-dynamics business model before parameterization (see §6).
+- **Step 8:** the SustainaSun CLD (in `../07-digital-engineering/`) is the starting causal structure, owned for analysis by Group 4 — System Dynamics. Note: it must be reconciled to the PVaaS business model before parameterization (see §6).
 - **Step 9:** the existing SustainaSun financial model and the circular-leasing CLD both become **inputs** to the new business model, not the model itself. The new BM is organised around the desired outcomes, and may combine ownership and Performance-Economy (leasing) elements.
 - **Step 10:** PV MRV — soil sampling protocol, TNFD-aligned biodiversity monitoring, verified EPDs for GHG, community wealth tracking. The Danish survey/report templates in `../_research/` are repurposed as the baseline→repeat→attribution skeleton.
 
@@ -154,11 +158,15 @@ Once the generic process is agreed, instantiate it for the pilot case. The PV-sp
 flowchart LR
   ONT["Fischer ontology<br/>01-theory-and-ontology"] --> APP["The approach<br/>00-regenerative-design-approach"]
   APP --> INT{{"Desired-outcomes interface<br/>01-desired-outcomes-interface"}}
-  INT --> G1["Group 1 · Business Model + SD<br/>CLD, SD, finance (04)"]
-  INT --> G2["Group 2 · Product<br/>SysML requirements + flows (05)"]
-  G1 --> MRV["MRV protocol<br/>06-lca-and-financial"]
-  G2 --> MRV
+  INT --> G1["Group 1 · Business Model<br/>revenue, cost, finance (04)"]
+  INT --> G2["Group 2 · Product Regeneration<br/>SysML requirements + flows (05)"]
+  INT --> G4["Group 4 · System Dynamics<br/>CLDs, loops, behaviour (06-sd)"]
+  INT --> G6["Group 6 · Enabling Systems<br/>external conditions (08)"]
+  G1 & G2 & G4 & G6 --> MRV["Group 3 · MRV + LCA<br/>06-lca-and-financial"]
   MRV -.->|"measured results feed back"| INT
+  G5["Group 5 · Digital Engineering<br/>semantic bridge (07)"] -.->|"validates every link"| INT
 ```
 
-*The ontology gives the vocabulary; the interface is the hub every other artefact reads from; MRV closes the loop back to it.*
+*The ontology gives the vocabulary; the interface is the hub every other artefact reads from; MRV closes the loop back to it; Digital Engineering keeps every artefact describing the same system.*
+
+**How this maps to the research questions:** steps 1–7 produce the artefacts that answer RQ3, step 8 answers RQ1.5 and RQ3.4, step 9 answers RQ1.1, step 10 answers RQ3.5, and the enabling-conditions work running alongside steps 9–10 answers RQ2. The full mapping is in [`../RQ-DECOMPOSITION.md`](../RQ-DECOMPOSITION.md).
