@@ -8,12 +8,7 @@
 
 ## §0 Scope decision (settle before running)
 
-The prompt below is written for **Option A**. If you want Option B, change §2 and §4 only.
-
-| | Unit of analysis | Expected corpus | Trade-off |
-|---|---|---|---|
-| **A (recommended)** | Regenerative business models in any sector, with an energy/PV subset flagged at extraction | 60 to 120 included | Supports the gap claim; produces a publishable WG output |
-| **B** | Regenerative business models in energy systems only | 10 to 25 included | Fast, but too thin to claim a gap, and too thin for a WG paper |
+Regenerative business models in any sector
 
 ---
 
